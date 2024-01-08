@@ -2,7 +2,7 @@ import ProjectDetailPage from "~/islands/ProjectDetailPage.tsx";
 import { serverShell } from "~/server/server_shell.ts";
 
 export default async function Home() {
-  const project = await serverShell.loadProjectDetail("__proj1");
+  const project = await serverShell.getProjectDetail("__proj1");
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
