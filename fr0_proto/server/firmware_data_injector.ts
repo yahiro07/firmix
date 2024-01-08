@@ -3,6 +3,7 @@ import { ConfigurationEditItem } from "~/base/dto_types.ts";
 import { CustomDataItem, ProjectEntity } from "~/base/entity_types.ts";
 import { FirmwarePatchingBlob } from "~/base/internal_dto_types.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
+import { firmwareBinaryModifier_patchUf2FileContent } from "~/server/firmware_binary_modifier_uf2.ts";
 
 export const firmwareDataInjector = {
   patchFirmwareBinary(
@@ -11,21 +12,20 @@ export const firmwareDataInjector = {
     editItems: ConfigurationEditItem[],
   ): Uint8Array {
     const patchingBlob = local.buildPatchingBlob(project, editItems);
-    return local.applyFirmwarePatching(originalFirmwareBytes, patchingBlob);
+    return firmwareBinaryModifier_patchUf2FileContent(
+      originalFirmwareBytes,
+      (firmwareBytes) =>
+        local.applyFirmwarePatching(firmwareBytes, patchingBlob),
+    );
   },
 };
 
 const local = {
   applyFirmwarePatching(
-    originalFirmwareBytes: Uint8Array,
+    firmwareBytes: Uint8Array,
     patchingBlob: FirmwarePatchingBlob,
-  ): Uint8Array {
-    const firmwareBytes = originalFirmwareBytes.slice();
+  ) {
     const firmwareText = new TextDecoder("ascii").decode(firmwareBytes);
-    console.log({
-      len0: originalFirmwareBytes.byteLength,
-      len1: firmwareText.length,
-    });
     for (const patchingEntry of patchingBlob.entries) {
       const { marker, dataBytes } = patchingEntry;
       const pos = firmwareText.indexOf(marker);
@@ -34,12 +34,10 @@ const local = {
         raiseError(`more than two markers found in firmware binary: ${marker}`);
       }
       const offset = pos + marker.length + 1;
-      console.log({ pos, offset });
       for (let i = 0; i < dataBytes.length; i++) {
         firmwareBytes[offset + i] = dataBytes[i];
       }
     }
-    return firmwareBytes;
   },
   serializeEditData(
     customDataItem: CustomDataItem,
