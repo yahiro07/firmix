@@ -16,8 +16,7 @@ export type ConfigurationSourceItem =
 
 export type ConfigurationEditItem = {
   key: string;
-  dataKind: "pin";
-  pins: string[];
+  values: string[];
 };
 
 export type ProjectDetailDto = {

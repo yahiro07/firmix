@@ -5,18 +5,20 @@ import {
   ProjectDetailDto,
 } from "~/base/dto_types.ts";
 import { ProjectEntity } from "~/base/entity_types.ts";
+import { firmwareDataInjector } from "~/server/firmware_data_injector.ts";
 
 const debugDummyProject: ProjectEntity = {
   projectId: "__proj1",
   projectName: "スイッチでLEDが光るだけ",
   introduction: `
 スイッチを押すとLEDが光ります
-LEDが2個あり、スイッチを押すと点灯パターンが変わります。
+LED1 点滅します
+LED2 スイッチの状態をオン状態に反映します。
 `,
   targetMcu: "RP2040",
   primaryTargetBoard: "WaveShare RP2040 Zero",
   dataEntries: [{
-    marker: "PINS",
+    marker: "pindefs",
     items: [
       { key: "pin_leds", dataKind: "pin", dataCount: 2 },
       { key: "pin_button", dataKind: "pin", dataCount: 1 },
@@ -31,7 +33,7 @@ LEDが2個あり、スイッチを押すと点灯パターンが変わります�
     {
       key: "pin_button",
       label: "ボタンのピン",
-      instruction: "",
+      instruction: "スイッチを介してGNDにつないでください",
     },
   ],
 };
@@ -41,17 +43,23 @@ export const serverShell = {
   async getProjectDetail(_projectId: string): Promise<ProjectDetailDto> {
     return local.mapProjectEntityToDetailDto(debugDummyProject);
   },
-  async downloadPatchedFirmware(
+  async generatePatchedFirmware(
     _projectId: string,
-    _configurationEditItems: ConfigurationEditItem[],
+    editItems: ConfigurationEditItem[],
   ): Promise<{ fileName: string; fileContentBytes: Uint8Array }> {
+    const project = debugDummyProject;
     const firmwareBinary = await serverFetchHelper.fetchBinary(
       "http://localhost:3000/gadget1/firmware.uf2",
       {},
     );
+    const modFirmwareBinary = firmwareDataInjector.patchFirmwareBinary(
+      firmwareBinary,
+      project,
+      editItems,
+    );
     return {
       fileName: "firmware.uf2",
-      fileContentBytes: new Uint8Array(firmwareBinary),
+      fileContentBytes: modFirmwareBinary,
     };
   },
 };

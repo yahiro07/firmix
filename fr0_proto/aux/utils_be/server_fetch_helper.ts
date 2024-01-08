@@ -12,12 +12,13 @@ export const serverFetchHelper = {
   async fetchBinary(
     url: string,
     init: RequestInit,
-  ): Promise<ArrayBuffer> {
+  ): Promise<Uint8Array> {
     const response = await fetch(url, init);
     if (!response.ok) {
       throw new Error(await response.text());
     }
-    return (await response.arrayBuffer());
+    const arrayBuffer = await response.arrayBuffer();
+    return new Uint8Array(arrayBuffer);
   },
   async postJson<TRequestBody, TResponseBody>(
     url: string,
