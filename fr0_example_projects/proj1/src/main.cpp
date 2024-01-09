@@ -7,7 +7,7 @@ typedef struct {
 } Bucket;
 
 Bucket bucket = {
-    .marker = "pindefs",
+    .marker = "PINDEFS",
     .pin_leds = {0, 0},
     .pin_button = {0},
 };

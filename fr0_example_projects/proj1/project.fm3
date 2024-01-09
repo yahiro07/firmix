@@ -1,0 +1,26 @@
+💎app-info
+@guid 8a23b7fd-c462-43ca-9a31-263c4764991a
+@name スイッチオンオフでLEDが光るだけ
+@introduction
+スイッチを押すとLEDが光ります
+LED1 点滅します
+LED2 スイッチの状態をオン状態に反映します。
+@target-mcu RP2040
+@primary-target-board WaveShare RP2040 Zero
+
+💎data-layout
+@marker PINDEFS
+@pins pin_leds 2
+@pins pin_button 1
+
+💎edit-ui
+@pins-edit pin_leds
+-label LEDピン
+-instruction LEDのピンを入力します
+@pins-edit pin_button
+-label スイッチのピン
+-instruction スイッチのピンを入力します
+#comment line
+#@pins-edit pin_button
+#-label LEDピン
+#-instruction LEDのピンを入力します
