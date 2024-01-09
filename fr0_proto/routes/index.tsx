@@ -1,3 +1,4 @@
+import LocalProjectDevelopmentPage from "~/islands/LocalProjectDevelopmentPage.tsx";
 import ProjectDetailPage from "~/islands/ProjectDetailPage.tsx";
 import { serverShell } from "~/server/server_shell.ts";
 
@@ -20,6 +21,7 @@ export default async function Home() {
         </p>
       </div>
       <ProjectDetailPage project={project} />
+      <LocalProjectDevelopmentPage />
     </div>
   );
 }
