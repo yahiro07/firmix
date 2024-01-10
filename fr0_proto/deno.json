@@ -15,7 +15,12 @@
         "fresh",
         "recommended"
       ],
-      "exclude": ["no-namespace", "ban-types", "no-explicit-any"]
+      "exclude": [
+        "no-namespace",
+        "ban-types",
+        "no-explicit-any",
+        "no-constant-condition"
+      ]
     }
   },
   "exclude": [
