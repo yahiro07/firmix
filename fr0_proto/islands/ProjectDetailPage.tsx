@@ -1,3 +1,4 @@
+import { css } from "~/aux/resin/resin_css.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import {
   ConfigurationEditItem,
@@ -82,7 +83,7 @@ export default function ProjectDetailPage({ project }: Props) {
   };
 
   return (
-    <div>
+    <div q={style}>
       <div>
         project name: {project.projectName}
       </div>
@@ -112,3 +113,9 @@ export default function ProjectDetailPage({ project }: Props) {
     </div>
   );
 }
+
+const style = css`
+  border: solid 1px #888;
+  padding: 10px;
+  background: #fff;
+`;

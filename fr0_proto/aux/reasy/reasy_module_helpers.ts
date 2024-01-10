@@ -1,6 +1,4 @@
-// deno-lint-ignore no-namespace
 export namespace reasyModuleHelpers {
-  // deno-lint-ignore ban-types
   export function getObjectKeys<T extends {}>(
     obj: T,
   ): Extract<keyof T, string>[] {
