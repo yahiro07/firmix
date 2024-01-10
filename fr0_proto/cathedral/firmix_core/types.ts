@@ -8,7 +8,7 @@ export type PatchingManifest = {
 };
 
 export type PatchingDataBlob = {
-  items: ConfigurationEditItem[];
+  editItems: ConfigurationEditItem[];
 };
 
 export type ProjectMetadataInput = {
