@@ -1,7 +1,11 @@
 {
   "projectGuid": "8a23b7fd-c462-43ca-9a31-263c4764991a",
   "projectName": "スイッチでLEDが光るだけ",
-  "introduction": "スイッチを押すとLEDが光ります\nLED1 点滅します\nLED2 スイッチの状態をオン状態に反映します。",
+  "introductionLines": [
+    "スイッチを押すとLEDが光ります",
+    "LED1 点滅します",
+    "LED2 スイッチの状態をオン状態に反映します。"
+  ],
   "targetMcu": "RP2040",
   "primaryTargetBoard": "WaveShare RP2040 Zero",
   "dataEntries": [

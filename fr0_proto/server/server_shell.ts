@@ -5,7 +5,7 @@ import {
   ProjectDetailDto,
 } from "~/base/dto_types.ts";
 import { ProjectEntity } from "~/base/entity_types.ts";
-import { firmwareDataInjector } from "~/server/firmware_data_injector.ts";
+import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
 
 const debugDummyProject: ProjectEntity = {
   projectId: "__proj1",
