@@ -1,3 +1,4 @@
+import { ProjectMetadataJsonFileContent } from "~/base/internal_dto_types.ts";
 import {
   FirmixCore,
   FirmwareContainer,
@@ -10,10 +11,14 @@ export const firmixCore: FirmixCore = {
   loadProjectMetadataFile_json(
     fileContentText: string,
   ): ProjectMetadataInput {
-    throw new Error("Function not implemented.");
+    const metadata = JSON.parse(
+      fileContentText,
+    ) as ProjectMetadataJsonFileContent;
+    const { targetMcu, dataEntries, editUiItems } = metadata;
+    return { patchingManifest: { targetMcu, dataEntries, editUiItems } };
   },
-  checkPatchingManifestValidity(manifest: PatchingManifest): string {
-    throw new Error("Function not implemented.");
+  checkPatchingManifestValidity(_manifest: PatchingManifest): string {
+    return "";
   },
   checkPatchingDataBlobValidity(
     manifest: PatchingManifest,

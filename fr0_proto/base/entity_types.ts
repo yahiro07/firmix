@@ -17,6 +17,7 @@ export type EditUiItem = {
 
 export type ProjectEntity = {
   projectId: string;
+  projectGuid: string;
   projectName: string;
   introduction: string;
   targetMcu: string;
