@@ -1,4 +1,8 @@
 import {
+  ConfigurationEditItem,
+  ConfigurationSourceItem,
+} from "~/base/dto_types.ts";
+import {
   FirmwareContainer,
   PatchingManifest,
 } from "~/cathedral/firmix_core/types.ts";
@@ -16,6 +20,10 @@ export type BinaryFileEntry = {
 };
 
 export type LocalDevelopmentProject = {
+  assetFilePaths: {
+    metadata: string;
+    firmware: string;
+  };
   firmwareContainer: FirmwareContainer;
   patchingManifest: PatchingManifest;
 };
@@ -33,4 +41,11 @@ export type FirmixPresenter = {
     metadataFile: TextFileEntry;
     firmwareFile: BinaryFileEntry;
   }): LocalDevelopmentProject;
+  buildConfigurationSourceItems(
+    patchingManifest: PatchingManifest,
+  ): ConfigurationSourceItem[];
+  patchLocalProjectFirmware(
+    project: LocalDevelopmentProject,
+    editItems: ConfigurationEditItem[],
+  ): FirmwareContainer;
 };

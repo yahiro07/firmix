@@ -1,4 +1,6 @@
+import { raiseError } from "~/aux/utils/error_util.ts";
 import { ProjectMetadataJsonFileContent } from "~/base/internal_dto_types.ts";
+import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
 import {
   FirmixCore,
   FirmwareContainer,
@@ -21,16 +23,30 @@ export const firmixCore: FirmixCore = {
     return "";
   },
   checkPatchingDataBlobValidity(
-    manifest: PatchingManifest,
-    blob: PatchingDataBlob,
+    _manifest: PatchingManifest,
+    _blob: PatchingDataBlob,
   ): string {
-    throw new Error("Function not implemented.");
+    return "";
   },
   fabricateFirmware(
     firmware: FirmwareContainer,
-    manifest: PatchingManifest,
-    blob: PatchingDataBlob,
+    patchingManifest: PatchingManifest,
+    patchingDataBlob: PatchingDataBlob,
   ): FirmwareContainer {
-    throw new Error("Function not implemented.");
+    if (firmware.kind !== "uf2") {
+      raiseError(`unsupported firmware type ${firmware.kind}`);
+    }
+    const modFirmwareBytes = firmwareDataInjector.patchFirmwareBinary(
+      firmware.binaryBytes,
+      patchingManifest,
+      patchingDataBlob.editItems,
+    );
+    const firmwareName = firmware.fileName.split(".")[0];
+    const outputFileName = `${firmwareName}_patched.uf2`;
+    return {
+      kind: "uf2",
+      fileName: outputFileName,
+      binaryBytes: modFirmwareBytes,
+    };
   },
 };

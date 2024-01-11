@@ -1,17 +1,18 @@
 import { firmwareBinaryModifier_patchUf2FileContent } from "~/aux/firmware_manipulation_helper/firmware_binary_modifier_uf2.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { ConfigurationEditItem } from "~/base/dto_types.ts";
-import { CustomDataItem, ProjectEntity } from "~/base/entity_types.ts";
+import { CustomDataItem } from "~/base/entity_types.ts";
 import { FirmwarePatchingBlob } from "~/base/internal_dto_types.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
+import { PatchingManifest } from "~/cathedral/firmix_core/types.ts";
 
 export const firmwareDataInjector = {
   patchFirmwareBinary(
     originalFirmwareBytes: Uint8Array,
-    project: ProjectEntity,
+    patchingManifest: PatchingManifest,
     editItems: ConfigurationEditItem[],
   ): Uint8Array {
-    const patchingBlob = local.buildPatchingBlob(project, editItems);
+    const patchingBlob = local.buildPatchingBlob(patchingManifest, editItems);
     return firmwareBinaryModifier_patchUf2FileContent(
       originalFirmwareBytes,
       (firmwareBytes) =>
@@ -61,23 +62,24 @@ const local = {
     }
   },
   buildPatchingBlob(
-    project: ProjectEntity,
+    patchingManifest: PatchingManifest,
     editItems: ConfigurationEditItem[],
   ): FirmwarePatchingBlob {
-    const entries: FirmwarePatchingBlob["entries"] = project.dataEntries.map(
-      (dataEntry) => {
-        const dataBytes = dataEntry.items.map((customDataItem) => {
-          const editItem = editItems.find((it) =>
-            it.key === customDataItem.key
-          );
-          if (!editItem) {
-            raiseError(`edit item not found for ${customDataItem.key}`);
-          }
-          return local.serializeEditData(customDataItem, editItem.values);
-        }).flat();
-        return { marker: dataEntry.marker, dataBytes };
-      },
-    );
+    const entries: FirmwarePatchingBlob["entries"] = patchingManifest
+      .dataEntries.map(
+        (dataEntry) => {
+          const dataBytes = dataEntry.items.map((customDataItem) => {
+            const editItem = editItems.find((it) =>
+              it.key === customDataItem.key
+            );
+            if (!editItem) {
+              raiseError(`edit item not found for ${customDataItem.key}`);
+            }
+            return local.serializeEditData(customDataItem, editItem.values);
+          }).flat();
+          return { marker: dataEntry.marker, dataBytes };
+        },
+      );
     return { entries };
   },
 };

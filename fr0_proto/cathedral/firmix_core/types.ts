@@ -30,7 +30,7 @@ export type FirmixCore = {
   ): string;
   fabricateFirmware(
     firmware: FirmwareContainer,
-    manifest: PatchingManifest,
-    blob: PatchingDataBlob,
+    patchingManifest: PatchingManifest,
+    patchingDataBlob: PatchingDataBlob,
   ): FirmwareContainer;
 };

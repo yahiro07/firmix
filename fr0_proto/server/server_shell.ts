@@ -1,14 +1,12 @@
 import { serverFetchHelper } from "~/aux/utils_be/server_fetch_helper.ts";
-import {
-  ConfigurationEditItem,
-  ConfigurationSourceItem,
-  ProjectDetailDto,
-} from "~/base/dto_types.ts";
+import { ConfigurationEditItem, ProjectDetailDto } from "~/base/dto_types.ts";
 import { ProjectEntity } from "~/base/entity_types.ts";
 import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
+import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 
 const debugDummyProject: ProjectEntity = {
   projectId: "__proj1",
+  projectGuid: "909019bf-9ac2-4f4a-8ef9-6ecf8854db6a",
   projectName: "スイッチでLEDが光るだけ",
   introduction: `
 スイッチを押すとLEDが光ります
@@ -65,26 +63,6 @@ export const serverShell = {
 };
 
 const local = {
-  buildProjectConfigurationSourceItems(
-    project: ProjectEntity,
-  ): ConfigurationSourceItem[] {
-    const dataItems = project.dataEntries.map((it) => it.items).flat();
-    return project.editUiItems.map((editUiItem) => {
-      const { key, label, instruction } = editUiItem;
-      const dataItem = dataItems.find((it) => it.key === key);
-      if (!dataItem) {
-        return { key, dataKind: "error" };
-      }
-      const { dataKind, dataCount } = dataItem;
-      return {
-        key,
-        dataKind,
-        dataCount,
-        label,
-        instruction,
-      };
-    });
-  },
   mapProjectEntityToDetailDto(project: ProjectEntity): ProjectDetailDto {
     return {
       projectId: project.projectId,
@@ -92,7 +70,7 @@ const local = {
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
-      configurationSourceItems: local.buildProjectConfigurationSourceItems(
+      configurationSourceItems: firmixPresenter.buildConfigurationSourceItems(
         project,
       ),
     };
