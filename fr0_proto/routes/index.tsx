@@ -1,9 +1,7 @@
-import LocalProjectDevelopmentPage from "~/islands/LocalProjectDevelopmentPage.tsx";
-import ProjectDetailPage from "~/islands/ProjectDetailPage.tsx";
-import { serverShell } from "~/server/server_shell.ts";
+import { css } from "~/aux/resin/resin_css.ts";
+import { flexVertical } from "~/common/utility_styles.ts";
 
-export default async function Home() {
-  const project = await serverShell.getProjectDetail("__proj1");
+export default function Home() {
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
@@ -20,8 +18,14 @@ export default async function Home() {
           <code class="mx-2">./routes/index.tsx</code> file, and refresh.
         </p>
       </div>
-      <ProjectDetailPage project={project} />
-      <LocalProjectDevelopmentPage />
+      <div q={styleLinks}>
+        <a href="/project/foo">プロジェクト詳細画面</a>
+        <a href="/local-work">ローカルワーク</a>
+      </div>
     </div>
   );
 }
+
+const styleLinks = css`
+  ${flexVertical()};
+`;
