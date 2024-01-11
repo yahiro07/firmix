@@ -21,21 +21,26 @@ export default function LocalProjectDevelopmentPage() {
     undefined;
   const errorMessage = work?.state === "error" && work.message || undefined;
 
-  const submitEditItems = async (editItems: ConfigurationEditItem[]) => {
+  const submitEditItems = (editItems: ConfigurationEditItem[]) => {
     if (!project) return;
     const modFirmware = firmixPresenter.patchLocalProjectFirmware(
       project,
       editItems,
     );
-    if (0) {
-      const newWork = await firmixWorkBuilder.workEmitModifiedFirmware(
-        work as LocalDevelopmentWork_Loaded,
-        modFirmware,
-      );
-      setWork(newWork);
-    } else {
-      downloadBinaryFileBlob(modFirmware.fileName, modFirmware.binaryBytes);
-    }
+    downloadBinaryFileBlob(modFirmware.fileName, modFirmware.binaryBytes);
+  };
+
+  const submitEditItems2 = async (editItems: ConfigurationEditItem[]) => {
+    if (!project) return;
+    const modFirmware = firmixPresenter.patchLocalProjectFirmware(
+      project,
+      editItems,
+    );
+    const newWork = await firmixWorkBuilder.workEmitModifiedFirmware(
+      work as LocalDevelopmentWork_Loaded,
+      modFirmware,
+    );
+    setWork(newWork);
   };
 
   const configurationsSourceItems = useMemo(() =>
@@ -53,6 +58,8 @@ export default function LocalProjectDevelopmentPage() {
           configurationSourceItems={configurationsSourceItems!}
           submitEditItems={submitEditItems}
           submitButtonLabel="ダウンロード"
+          submit2={submitEditItems2}
+          submit2Label="出力"
           if={configurationsSourceItems}
         />
         <div if={errorMessage}>{errorMessage}</div>

@@ -12,6 +12,8 @@ type Props = {
   configurationSourceItems: ConfigurationSourceItem[];
   submitEditItems(editItems: ConfigurationEditItem[]): void;
   submitButtonLabel: string;
+  submit2?(editItems: ConfigurationEditItem[]): void;
+  submit2Label?: string;
 };
 
 export const ParametersConfigurationArea = createFC<Props>(
@@ -20,6 +22,8 @@ export const ParametersConfigurationArea = createFC<Props>(
       configurationSourceItems: configurationSourceItemsRaw,
       submitEditItems,
       submitButtonLabel,
+      submit2,
+      submit2Label,
     },
   ) => {
     const hasError = configurationSourceItemsRaw.some((it) =>
@@ -30,7 +34,7 @@ export const ParametersConfigurationArea = createFC<Props>(
 
     const inputIdPrefix = `config-input-`;
 
-    const handleDownload = () => {
+    const handleDownload = (destFn: 1 | 2) => {
       try {
         const configurationEditItems: (ConfigurationEditItem)[] =
           configurationSourceItems.map(
@@ -74,7 +78,11 @@ export const ParametersConfigurationArea = createFC<Props>(
               return { key, values };
             },
           );
-        submitEditItems(configurationEditItems);
+        if (destFn === 1) {
+          submitEditItems(configurationEditItems);
+        } else {
+          submit2?.(configurationEditItems);
+        }
       } catch (error) {
         alert(error.message ?? error.toString());
       }
@@ -98,7 +106,14 @@ export const ParametersConfigurationArea = createFC<Props>(
             ))}
           </div>
         )}
-        <button onClick={handleDownload} disabled={hasError}>
+        <button
+          onClick={() => handleDownload(2)}
+          disabled={hasError}
+          if={submit2}
+        >
+          {submit2Label}
+        </button>
+        <button onClick={() => handleDownload(1)} disabled={hasError}>
           {submitButtonLabel}
         </button>
       </div>
