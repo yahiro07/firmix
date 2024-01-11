@@ -4,17 +4,20 @@ import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 import { LocalDevelopmentWork } from "~/cathedral/firmix_presenter/types.ts";
 
-export const LocalProjectWorkBox = createFC(() => {
+type Props = {
+  setWork(work: LocalDevelopmentWork): void;
+};
+
+export const LocalProjectLoadingArea = createFC<Props>(({ setWork }) => {
   const [v, m] = useReasyState({
     dirHandle: undefined as FileSystemDirectoryHandle | undefined,
-    work: undefined as (LocalDevelopmentWork | undefined),
   });
 
   const loadDirectory = useCallback(
     async (dirHandle: FileSystemDirectoryHandle) => {
       m.setDirHandle(dirHandle);
       const loadedWork = await local.loadLocalDevelopmentWork(dirHandle);
-      m.setWork(loadedWork);
+      setWork(loadedWork);
     },
     [],
   );
@@ -32,17 +35,16 @@ export const LocalProjectWorkBox = createFC(() => {
     const dirHandle = v.dirHandle;
     if (dirHandle) {
       const loadedWork = await local.loadLocalDevelopmentWork(dirHandle);
-      m.setWork(loadedWork);
+      setWork(loadedWork);
     }
   };
 
   return (
     <div>
       <div>
-        {v.work}
+        <button onClick={handleLoadFolder}>フォルダ選択</button>
+        <button onClick={handleReload} disabled={!v.dirHandle}>リロード</button>
       </div>
-      <button onClick={handleLoadFolder}>フォルダ選択</button>
-      <button onClick={handleReload} disabled={!v.dirHandle}>リロード</button>
     </div>
   );
 });
