@@ -11,11 +11,16 @@ import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 type Props = {
   configurationSourceItems: ConfigurationSourceItem[];
   submitEditItems(editItems: ConfigurationEditItem[]): void;
+  submitButtonLabel: string;
 };
 
 export const ParametersConfigurationArea = createFC<Props>(
   (
-    { configurationSourceItems: configurationSourceItemsRaw, submitEditItems },
+    {
+      configurationSourceItems: configurationSourceItemsRaw,
+      submitEditItems,
+      submitButtonLabel,
+    },
   ) => {
     const hasError = configurationSourceItemsRaw.some((it) =>
       it.dataKind === "error"
@@ -93,7 +98,9 @@ export const ParametersConfigurationArea = createFC<Props>(
             ))}
           </div>
         )}
-        <button onClick={handleDownload} disabled={hasError}>download</button>
+        <button onClick={handleDownload} disabled={hasError}>
+          {submitButtonLabel}
+        </button>
       </div>
     );
   },

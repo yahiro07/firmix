@@ -12,8 +12,14 @@ import {
 
 export const firmixPresenter: FirmixPresenter = {
   buildLocalDevelopmentProject(inputResources): LocalDevelopmentProject {
+    const {
+      metadataFile,
+      firmwareFile,
+      projectRootDirectoryHandle,
+      firmwareDirectoryHandle,
+    } = inputResources;
     const { patchingManifest } = firmixCore.loadProjectMetadataFile_json(
-      inputResources.metadataFile.contentText,
+      metadataFile.contentText,
     );
     const validationResult = firmixCore.checkPatchingManifestValidity(
       patchingManifest,
@@ -21,17 +27,17 @@ export const firmixPresenter: FirmixPresenter = {
     if (validationResult) raiseError(validationResult);
     const firmwareContainer: FirmwareContainer = {
       kind: "uf2",
-      fileName: filePathHelper.getFileNameFromFilePath(
-        inputResources.firmwareFile.filePath,
-      ),
-      binaryBytes: inputResources.firmwareFile.contentBytes,
+      fileName: filePathHelper.getFileNameFromFilePath(firmwareFile.filePath),
+      binaryBytes: firmwareFile.contentBytes,
     };
     return {
+      projectRootDirectoryHandle,
+      firmwareDirectoryHandle,
       firmwareContainer,
       patchingManifest,
       assetFilePaths: {
-        firmware: inputResources.firmwareFile.filePath,
-        metadata: inputResources.metadataFile.filePath,
+        firmware: firmwareFile.filePath,
+        metadata: metadataFile.filePath,
       },
     };
   },

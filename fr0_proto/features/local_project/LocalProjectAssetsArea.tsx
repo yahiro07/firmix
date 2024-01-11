@@ -6,11 +6,15 @@ type Props = {
 };
 
 export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
+  const { patchingManifest, assetFilePaths } = project;
   return (
     <div>
-      <div>ターゲットMCU:{project.patchingManifest.targetMcu}</div>
-      <div>メタデータ: {project.assetFilePaths.metadata}</div>
-      <div>ファームウェア: {project.assetFilePaths.firmware}</div>
+      <div>ターゲットMCU:{patchingManifest.targetMcu}</div>
+      <div>メタデータファイル: {assetFilePaths.metadata}</div>
+      <div>ファームウェア: {assetFilePaths.firmware}</div>
+      <div if={assetFilePaths.modFirmware}>
+        パッチ適用済ファームウェア: {assetFilePaths.modFirmware}
+      </div>
     </div>
   );
 });

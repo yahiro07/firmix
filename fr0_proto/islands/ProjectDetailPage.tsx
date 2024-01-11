@@ -1,5 +1,6 @@
 import { css } from "~/aux/resin/resin_css.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
+import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import {
   ConfigurationEditItem,
   ConfigurationSourceItem_Valid,
@@ -70,13 +71,7 @@ export default function ProjectDetailPage({ project }: Props) {
           project.projectId,
           configurationEditItems,
         );
-      const blob = new Blob([fileContentBytes.buffer], {
-        type: "application-octet-binary",
-      });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = fileName;
-      link.click();
+      downloadBinaryFileBlob(fileName, fileContentBytes);
     } catch (error) {
       alert(error.message ?? error.toString());
     }
