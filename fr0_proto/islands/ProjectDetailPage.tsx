@@ -42,17 +42,17 @@ export default function ProjectDetailPage({ project }: Props) {
               );
             }
             const values = text.split(",").map((it) => it.trim());
-            if (values.length !== sourceItem.dataCount) {
-              if (values.length === 1 && sourceItem.dataCount >= 2) {
-                raiseError(
-                  `${label}: ピンの数が定義と一致しません ${values.length}/${sourceItem.dataCount} ピン名をコンマ区切りで入力してください`,
-                );
-              } else {
-                raiseError(
-                  `${label}: ピンの数が定義と一致しません ${values.length}/${sourceItem.dataCount}`,
-                );
-              }
-            }
+            // if (values.length !== sourceItem.dataCount) {
+            //   if (values.length === 1 && sourceItem.dataCount >= 2) {
+            //     raiseError(
+            //       `${label}: ピンの数が定義と一致しません ${values.length}/${sourceItem.dataCount} ピン名をコンマ区切りで入力してください`,
+            //     );
+            //   } else {
+            //     raiseError(
+            //       `${label}: ピンの数が定義と一致しません ${values.length}/${sourceItem.dataCount}`,
+            //     );
+            //   }
+            // }
             if (sourceItem.dataKind === "pin") {
               for (const pinName of values) {
                 const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
@@ -97,7 +97,7 @@ export default function ProjectDetailPage({ project }: Props) {
         <div>
           {configurationSourceItems.map((item) => (
             <div key={item.key}>
-              <label>{item.label} (gpio x{item.dataCount})</label>
+              {/* <label>{item.label} (gpio x{item.dataCount})</label> */}
               <span>{item.instruction}</span>
               <input id={`${inputIdPrefix}${item.key}`}></input>
             </div>

@@ -44,11 +44,12 @@ const local = {
     customDataItem: CustomDataItem,
     values: string[],
   ): number[] {
-    const { key, dataKind, dataCount } = customDataItem;
-    if (values.length !== dataCount) {
-      raiseError(`invalid data count for ${key}`);
-    }
+    const { key, dataKind } = customDataItem;
     if (dataKind === "pin") {
+      const { dataCount } = customDataItem;
+      if (values.length !== dataCount) {
+        raiseError(`invalid pin count for ${key}`);
+      }
       const pinNumbers = values.map((pinName) => {
         const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
         if (pinNumber === undefined) {
@@ -57,6 +58,19 @@ const local = {
         return pinNumber;
       });
       return pinNumbers;
+    } else if (dataKind === "vl_pins") {
+      const { maxPinCount } = customDataItem;
+      if (values.length > maxPinCount) {
+        raiseError(`too many pins for ${key}`);
+      }
+      const pinNumbers = values.map((pinName) => {
+        const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
+        if (pinNumber === undefined) {
+          raiseError(`invalid pin name ${pinName}`);
+        }
+        return pinNumber;
+      });
+      return [pinNumbers.length, ...pinNumbers];
     } else {
       raiseError(`unsupported data kind ${dataKind}`);
     }

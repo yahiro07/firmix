@@ -4,7 +4,14 @@ export type ConfigurationSourceItem_Valid = {
   dataCount: number;
   label: string;
   instruction: string;
+} | {
+  key: string;
+  dataKind: "vl_pins";
+  maxPinCount: number;
+  label: string;
+  instruction: string;
 };
+
 export type ConfigurationSourceItem_Error = {
   key: string;
   dataKind: "error";

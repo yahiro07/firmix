@@ -49,14 +49,28 @@ export const firmixPresenter: FirmixPresenter = {
       if (!dataItem) {
         return { key, dataKind: "error" };
       }
-      const { dataKind, dataCount } = dataItem;
-      return {
-        key,
-        dataKind,
-        dataCount,
-        label,
-        instruction,
-      };
+      const { dataKind } = dataItem;
+      if (dataKind === "pin") {
+        const { dataCount } = dataItem;
+        return {
+          key,
+          dataKind,
+          dataCount,
+          label,
+          instruction,
+        };
+      } else if (dataKind === "vl_pins") {
+        const { maxPinCount } = dataItem;
+        return {
+          key,
+          dataKind,
+          maxPinCount,
+          label,
+          instruction,
+        };
+      } else {
+        raiseError(`unsupported data kind ${dataKind}`);
+      }
     });
   },
   patchLocalProjectFirmware(project, editItems) {

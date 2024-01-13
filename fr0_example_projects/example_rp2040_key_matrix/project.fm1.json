@@ -1,0 +1,23 @@
+{
+  "projectGuid": "DBB02917-6B1A-4357-BA71-2FCB80AFF5A1",
+  "projectName": "Basic Keyboard Example",
+  "introductionLines": [
+    "一体型のキーボードファームウェアのサンプルです",
+    "Kermiteに対応しています"
+  ],
+  "targetMcu": "RP2040",
+  "primaryTargetBoard": "KB2040",
+  "dataEntries": [
+    {
+      "marker": "PINDEFS",
+      "items": [
+        { "key": "vl_pin_columns", "dataKind": "vl_pins", "maxPinCount": 16 },
+        { "key": "vl_pin_rows", "dataKind": "vl_pins", "maxPinCount": 16 }
+      ]
+    }
+  ],
+  "editUiItems": [
+    { "key": "vl_pin_columns", "label": "column", "instruction": "" },
+    { "key": "vl_pin_rows", "label": "row", "instruction": "" }
+  ]
+}

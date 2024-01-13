@@ -2,6 +2,10 @@ export type CustomDataItem = {
   key: string;
   dataKind: "pin";
   dataCount: number;
+} | {
+  key: string;
+  dataKind: "vl_pins";
+  maxPinCount: number;
 };
 
 export type CustomDataEntry = {
