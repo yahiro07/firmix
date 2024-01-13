@@ -6,15 +6,15 @@ typedef struct {
   int8_t pin_button;
 } Bucket;
 
-Bucket bucket = {
+volatile static const Bucket bucket = {
     .marker = "PINDEFS",
     .pin_leds = {0, 0},
     .pin_button = {0},
 };
 
-int pinLed0 = bucket.pin_leds[0];
-int pinLed1 = bucket.pin_leds[1];
-int pinButton = bucket.pin_button;
+static const int pinLed0 = bucket.pin_leds[0];
+static const int pinLed1 = bucket.pin_leds[1];
+static const int pinButton = bucket.pin_button;
 
 void setup() {
   pinMode(pinLed0, OUTPUT);
