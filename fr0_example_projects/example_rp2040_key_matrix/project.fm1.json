@@ -11,13 +11,27 @@
     {
       "marker": "PINDEFS",
       "items": [
+        { "key": "board_led_type", "dataKind": "u8", "dataCount": 1 },
         { "key": "vl_pin_columns", "dataKind": "vl_pins", "maxPinCount": 16 },
         { "key": "vl_pin_rows", "dataKind": "vl_pins", "maxPinCount": 16 }
       ]
     }
   ],
   "editUiItems": [
-    { "key": "vl_pin_columns", "label": "column", "instruction": "" },
-    { "key": "vl_pin_rows", "label": "row", "instruction": "" }
+    {
+      "key": "board_led_type",
+      "label": "ボードLED",
+      "instructionLines": [
+        "0:なし",
+        "1:RPiPico",
+        "2:KB2040",
+        "3:Xiao RP2040",
+        "4:RP2040-Zero",
+        "5:Tiny2040",
+        "6:ProMicro RP2040"
+      ]
+    },
+    { "key": "vl_pin_columns", "label": "キーマトリクス列", "instruction": "" },
+    { "key": "vl_pin_rows", "label": "キーマトリクス行", "instruction": "" }
   ]
 }

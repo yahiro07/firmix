@@ -22,8 +22,8 @@ KeyMatrix::KeyMatrix(const int *_columnPins, const int *_rowPins,
 
 KeyMatrix::KeyMatrix(const uint8_t *_columnPins, const uint8_t *_rowPins,
                      int _numColumns, int _numRows) {
-  columnPins = allocatePins_i32(_columnPins, numColumns);
-  rowPins = allocatePins_i32(_rowPins, numColumns);
+  columnPins = allocatePins_i32(_columnPins, _numColumns);
+  rowPins = allocatePins_i32(_rowPins, _numRows);
   numColumns = _numColumns;
   numRows = _numRows;
   keyStateListener = nullptr;
