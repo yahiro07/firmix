@@ -14,5 +14,5 @@ export type ProjectMetadataJsonFileContent = {
   targetMcu: string;
   primaryTargetBoard: string;
   dataEntries: CustomDataEntry[];
-  editUiItemsInput: EditUiItemInput[];
+  editUiItems: EditUiItemInput[];
 };

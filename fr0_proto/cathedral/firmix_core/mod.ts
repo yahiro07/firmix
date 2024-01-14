@@ -16,7 +16,7 @@ export const firmixCore: FirmixCore = {
     const metadata = JSON.parse(
       fileContentText,
     ) as ProjectMetadataJsonFileContent;
-    const { targetMcu, dataEntries, editUiItemsInput } = metadata;
+    const { targetMcu, dataEntries, editUiItems: editUiItemsInput } = metadata;
     const editUiItems = editUiItemsInput.map((it) => ({
       ...it,
       instruction: it.instruction ?? it.instructionLines?.join("\n") ?? "",

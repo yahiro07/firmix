@@ -49,6 +49,7 @@ export const firmixWorkBuilder = {
       return { state: "loaded", project };
     } catch (error) {
       const message = error.message ?? error.toString();
+      console.error(error);
       return { state: "error", message };
     }
   },
