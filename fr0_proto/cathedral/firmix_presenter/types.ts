@@ -6,6 +6,7 @@ import {
 import {
   FirmwareContainer,
   PatchingManifest,
+  ProjectMetadataInput,
 } from "~/cathedral/firmix_core/types.ts";
 
 export type TextFileEntry = {
@@ -29,6 +30,7 @@ export type LocalDevelopmentProject = {
     modFirmware?: string;
   };
   firmwareContainer: FirmwareContainer;
+  metadataInput: ProjectMetadataInput;
   patchingManifest: PatchingManifest;
 };
 

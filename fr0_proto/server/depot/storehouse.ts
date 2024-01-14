@@ -17,9 +17,11 @@ async function createStoreHouse() {
   const projectCabinet = createMongoGeneralCabinet(colProject, "projectId");
 
   // await colProject.createIndex({ projectId: -1 }, { unique: true });
+  // await colProject.dropIndexes({ index: "projectId_-1" });
   await colProject.createIndexes({
     indexes: [
-      { key: { projectId: 1 }, name: "project_id", unique: true },
+      { key: { projectId: -1 }, name: "project_id", unique: true },
+      { key: { projectGuid: 1 }, name: "project_guid", unique: true },
     ],
   });
 

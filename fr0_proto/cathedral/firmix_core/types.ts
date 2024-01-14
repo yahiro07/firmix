@@ -12,7 +12,13 @@ export type PatchingDataBlob = {
 };
 
 export type ProjectMetadataInput = {
-  patchingManifest: PatchingManifest;
+  projectGuid: string;
+  projectName: string;
+  introduction: string;
+  targetMcu: string;
+  primaryTargetBoard: string;
+  dataEntries: CustomDataEntry[];
+  editUiItems: EditUiItem[];
 };
 
 export type FirmwareContainer = {

@@ -1,5 +1,6 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
+import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 import { firmixCore } from "~/cathedral/firmix_core/mod.ts";
 import {
@@ -19,9 +20,15 @@ export const firmixPresenter: FirmixPresenter = {
       projectRootDirectoryHandle,
       firmwareDirectoryHandle,
     } = inputResources;
-    const { patchingManifest } = firmixCore.loadProjectMetadataFile_json(
-      metadataFile.contentText,
-    );
+    const metadataInput = firmixCore
+      .loadProjectMetadataFile_json(
+        metadataFile.contentText,
+      );
+    const patchingManifest = pickObjectMembers(metadataInput, [
+      "targetMcu",
+      "dataEntries",
+      "editUiItems",
+    ]);
     const validationResult = firmixCore.checkPatchingManifestValidity(
       patchingManifest,
     );
@@ -35,6 +42,7 @@ export const firmixPresenter: FirmixPresenter = {
       projectRootDirectoryHandle,
       firmwareDirectoryHandle,
       firmwareContainer,
+      metadataInput,
       patchingManifest,
       assetFilePaths: {
         firmware: firmwareFile.filePath,

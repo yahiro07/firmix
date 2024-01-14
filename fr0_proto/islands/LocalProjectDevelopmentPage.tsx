@@ -50,9 +50,10 @@ export default function LocalProjectDevelopmentPage() {
         project.patchingManifest,
       ) || undefined, [project]);
 
-  const handleGreet = async () => {
-    const res = await rpcClient.greet({ message: "hello" });
-    alert(res.resMessage);
+  const handleSubmit = async () => {
+    if (!project) return;
+    const projectInput = project.metadataInput;
+    await rpcClient.createProjectFromLocal({ projectInput });
   };
 
   return (
@@ -70,7 +71,7 @@ export default function LocalProjectDevelopmentPage() {
         />
         <div if={errorMessage}>{errorMessage}</div>
       </div>
-      <button onClick={handleGreet}>greet</button>
+      <button onClick={handleSubmit} disabled={!project}>投稿</button>
     </div>
   );
 }

@@ -1,8 +1,14 @@
+import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
 import { serverFetchHelper } from "~/aux/utils_be/server_fetch_helper.ts";
-import { ConfigurationEditItem, ProjectDetailDto } from "~/base/dto_types.ts";
+import {
+  ConfigurationEditItem,
+  LocalProjectSubmissionInputDto,
+  ProjectDetailDto,
+} from "~/base/dto_types.ts";
 import { ProjectEntity } from "~/base/entity_types.ts";
 import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
+import { storehouse } from "~/server/depot/storehouse.ts";
 
 const debugDummyProject: ProjectEntity = {
   projectId: "__proj1",
@@ -59,6 +65,10 @@ export const serverShell = {
       fileName: "firmware.uf2",
       fileContentBytes: modFirmwareBinary,
     };
+  },
+  async createProjectFromLocal(projectInput: LocalProjectSubmissionInputDto) {
+    const projectId = generateIdTimeSequential();
+    await storehouse.projectCabinet.insert({ projectId, ...projectInput });
   },
 };
 

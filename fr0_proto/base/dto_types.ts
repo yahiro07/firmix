@@ -1,4 +1,8 @@
-import { CustomDataItemCore } from "~/base/entity_types.ts";
+import {
+  CustomDataEntry,
+  CustomDataItemCore,
+  EditUiItem,
+} from "~/base/entity_types.ts";
 
 export type ConfigurationSourceItem_Valid = {
   key: string;
@@ -27,4 +31,14 @@ export type ProjectDetailDto = {
   targetMcu: string;
   primaryTargetBoard: string;
   configurationSourceItems: ConfigurationSourceItem[];
+};
+
+export type LocalProjectSubmissionInputDto = {
+  projectGuid: string;
+  projectName: string;
+  introduction: string;
+  targetMcu: string;
+  primaryTargetBoard: string;
+  dataEntries: CustomDataEntry[];
+  editUiItems: EditUiItem[];
 };

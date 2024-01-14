@@ -16,12 +16,29 @@ export const firmixCore: FirmixCore = {
     const metadata = JSON.parse(
       fileContentText,
     ) as ProjectMetadataJsonFileContent;
-    const { targetMcu, dataEntries, editUiItems: editUiItemsInput } = metadata;
+    const {
+      projectGuid,
+      projectName,
+      introductionLines,
+      targetMcu,
+      primaryTargetBoard,
+      dataEntries,
+      editUiItems: editUiItemsInput,
+    } = metadata;
+    const introduction = introductionLines.join("\n");
     const editUiItems = editUiItemsInput.map((it) => ({
       ...it,
       instruction: it.instruction ?? it.instructionLines?.join("\n") ?? "",
     }));
-    return { patchingManifest: { targetMcu, dataEntries, editUiItems } };
+    return {
+      projectGuid,
+      projectName,
+      introduction,
+      targetMcu,
+      primaryTargetBoard,
+      dataEntries,
+      editUiItems,
+    };
   },
   checkPatchingManifestValidity(_manifest: PatchingManifest): string {
     return "";
