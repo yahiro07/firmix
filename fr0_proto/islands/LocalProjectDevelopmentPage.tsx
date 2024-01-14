@@ -8,6 +8,7 @@ import {
   LocalDevelopmentWork_Loaded,
 } from "~/cathedral/firmix_presenter/types.ts";
 import { firmixWorkBuilder } from "~/cathedral/firmix_work/mod.ts";
+import { rpcClient } from "~/common/rpc_client.ts";
 import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAssetsArea.tsx";
 import { LocalProjectLoadingArea } from "~/features/local_project/LocalProjectLoadingArea.tsx";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
@@ -49,6 +50,11 @@ export default function LocalProjectDevelopmentPage() {
         project.patchingManifest,
       ) || undefined, [project]);
 
+  const handleGreet = async () => {
+    const res = await rpcClient.greet({ message: "hello" });
+    alert(res.resMessage);
+  };
+
   return (
     <div>
       <LocalProjectLoadingArea setWork={setWork} />
@@ -64,6 +70,7 @@ export default function LocalProjectDevelopmentPage() {
         />
         <div if={errorMessage}>{errorMessage}</div>
       </div>
+      <button onClick={handleGreet}>greet</button>
     </div>
   );
 }

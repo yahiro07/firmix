@@ -1,5 +1,6 @@
-import { storeHouse } from "~/server/depot/storehouse.ts";
+import { storehouse } from "~/server/depot/storehouse.ts";
 
-storeHouse;
+//connect to db
+storehouse;
 
 export const handler = [];
