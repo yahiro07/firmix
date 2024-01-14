@@ -2,7 +2,7 @@ export type CustomDataItemCore =
   | { dataKind: "u8"; dataCount: number }
   | { dataKind: "i8"; dataCount: number }
   | { dataKind: "pins"; pinCount: number }
-  | { dataKind: "vl_pins"; maxPinCount: number };
+  | { dataKind: "vl_pins"; pinsCapacity: number };
 
 export type CustomDataItem =
   & { key: string }

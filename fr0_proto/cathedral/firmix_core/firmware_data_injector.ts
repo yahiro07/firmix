@@ -79,8 +79,8 @@ const local = {
       });
       return pinNumbers;
     } else if (dataKind === "vl_pins") {
-      const { maxPinCount } = customDataItem;
-      if (textValues.length > maxPinCount) {
+      const { pinsCapacity } = customDataItem;
+      if (textValues.length > pinsCapacity) {
         raiseError(`too many pins for ${key}`);
       }
       const pinNumbers = textValues.map((pinName) => {
@@ -90,7 +90,7 @@ const local = {
         }
         return pinNumber;
       });
-      return [pinNumbers.length, ...padZeros(pinNumbers, maxPinCount)];
+      return [pinNumbers.length, ...padZeros(pinNumbers, pinsCapacity)];
     } else {
       raiseError(`unsupported data kind ${dataKind}`);
     }

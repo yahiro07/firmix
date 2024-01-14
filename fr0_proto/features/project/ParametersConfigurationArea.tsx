@@ -114,7 +114,7 @@ const local = {
     if (item.dataKind === "pins") {
       return `(gpio x${item.pinCount})`;
     } else if (item.dataKind === "vl_pins") {
-      return `(gpio max${item.maxPinCount})`;
+      return `(gpio max${item.pinsCapacity})`;
     } else {
       if (item.dataCount === 1) return "";
       return `(x${item.dataCount})`;

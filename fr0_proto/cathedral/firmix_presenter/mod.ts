@@ -70,11 +70,11 @@ export const firmixPresenter: FirmixPresenter = {
           instruction,
         };
       } else if (dataKind === "vl_pins") {
-        const { maxPinCount } = dataItem;
+        const { pinsCapacity } = dataItem;
         return {
           key,
           dataKind,
-          maxPinCount,
+          pinsCapacity,
           label,
           instruction,
         };
@@ -125,9 +125,9 @@ export const firmixPresenter: FirmixPresenter = {
       }
     }
     if (dataKind === "vl_pins") {
-      if (values.length > sourceItem.maxPinCount) {
+      if (values.length > sourceItem.pinsCapacity) {
         raiseError(
-          `${label}: ピンの数が多すぎます ${values.length}/${sourceItem.maxPinCount}`,
+          `${label}: ピンの数が多すぎます ${values.length}/${sourceItem.pinsCapacity}`,
         );
       }
     }
