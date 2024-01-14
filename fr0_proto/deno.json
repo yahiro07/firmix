@@ -35,7 +35,8 @@
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "$std/": "https://deno.land/std@0.208.0/",
     "xjsx/jsx-runtime": "./aux/xjsx/jsx-runtime.ts",
-    "immer": "https://esm.sh/immer@v10.0.2"
+    "immer": "https://esm.sh/immer@v10.0.2",
+    "mongodb": "npm:mongodb"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
