@@ -18,8 +18,8 @@ LED2 スイッチの状態をオン状態に反映します。
   dataEntries: [{
     marker: "pindefs",
     items: [
-      { key: "pin_leds", dataKind: "pin", dataCount: 2 },
-      { key: "pin_button", dataKind: "pin", dataCount: 1 },
+      { key: "pin_leds", dataKind: "pins", pinCount: 2 },
+      { key: "pin_button", dataKind: "pins", pinCount: 1 },
     ],
   }],
   editUiItems: [
