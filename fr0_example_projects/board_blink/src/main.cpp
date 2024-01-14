@@ -18,6 +18,7 @@ volatile static const Stencil stencil = {
 static IBoardLED *boardLED;
 
 void setup() {
+  rp2040.enableDoubleResetBootloader();
   int boardLedType = stencil.board_led_type;
   if (boardLedType == 1) {
     boardLED = new BoardLED(25, 25); // pico
