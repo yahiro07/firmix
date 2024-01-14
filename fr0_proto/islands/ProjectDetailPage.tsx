@@ -6,7 +6,7 @@ import {
   ConfigurationSourceItem_Valid,
   ProjectDetailDto,
 } from "~/base/dto_types.ts";
-import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
+import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 import { serverShell } from "~/server/server_shell.ts";
 
 type Props = {
@@ -27,7 +27,7 @@ export default function ProjectDetailPage({ project }: Props) {
       const configurationEditItems: (ConfigurationEditItem)[] =
         configurationSourceItems.map(
           (sourceItem) => {
-            const { key, label } = sourceItem;
+            const { key } = sourceItem;
             const inputElementId = `${inputIdPrefix}${key}`;
             const element = document.getElementById(
               inputElementId,
@@ -36,33 +36,10 @@ export default function ProjectDetailPage({ project }: Props) {
               raiseError(`target element not found for ${inputElementId}`);
             }
             const text = element.value;
-            if (!text) {
-              raiseError(
-                `${label}: 値を入力してください`,
-              );
-            }
-            const values = text.split(",").map((it) => it.trim());
-            // if (values.length !== sourceItem.dataCount) {
-            //   if (values.length === 1 && sourceItem.dataCount >= 2) {
-            //     raiseError(
-            //       `${label}: ピンの数が定義と一致しません ${values.length}/${sourceItem.dataCount} ピン名をコンマ区切りで入力してください`,
-            //     );
-            //   } else {
-            //     raiseError(
-            //       `${label}: ピンの数が定義と一致しません ${values.length}/${sourceItem.dataCount}`,
-            //     );
-            //   }
-            // }
-            if (sourceItem.dataKind === "pin") {
-              for (const pinName of values) {
-                const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
-                if (pinNumber === undefined) {
-                  raiseError(
-                    `${label}: ${pinName}はピンの名前として正しくありません。gp0,gp1などの形式で入力してください。`,
-                  );
-                }
-              }
-            }
+            const values = firmixPresenter.splitSourceItemEditTextValues(
+              sourceItem,
+              text,
+            );
             return { key, values };
           },
         );

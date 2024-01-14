@@ -1,5 +1,5 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
-import { ProjectMetadataJsonFileContent } from "~/base/internal_dto_types.ts";
+import { ProjectMetadataJsonFileContent } from "~/base/project_metadata_types.ts";
 import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
 import {
   FirmixCore,
@@ -16,7 +16,11 @@ export const firmixCore: FirmixCore = {
     const metadata = JSON.parse(
       fileContentText,
     ) as ProjectMetadataJsonFileContent;
-    const { targetMcu, dataEntries, editUiItems } = metadata;
+    const { targetMcu, dataEntries, editUiItemsInput } = metadata;
+    const editUiItems = editUiItemsInput.map((it) => ({
+      ...it,
+      instruction: it.instruction ?? it.instructionLines?.join("\n") ?? "",
+    }));
     return { patchingManifest: { targetMcu, dataEntries, editUiItems } };
   },
   checkPatchingManifestValidity(_manifest: PatchingManifest): string {

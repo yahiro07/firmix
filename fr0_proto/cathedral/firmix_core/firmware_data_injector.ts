@@ -1,5 +1,6 @@
 import { firmwareBinaryModifier_patchUf2FileContent } from "~/aux/firmware_manipulation_helper/firmware_binary_modifier_uf2.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
+import { padZeros } from "~/aux/utils/utils_array.ts";
 import { ConfigurationEditItem } from "~/base/dto_types.ts";
 import { CustomDataItem } from "~/base/entity_types.ts";
 import { FirmwarePatchingBlob } from "~/base/internal_dto_types.ts";
@@ -42,15 +43,34 @@ const local = {
   },
   serializeEditData(
     customDataItem: CustomDataItem,
-    values: string[],
+    textValues: string[],
   ): number[] {
     const { key, dataKind } = customDataItem;
-    if (dataKind === "pin") {
+    if (dataKind === "u8" || dataKind === "i8") {
       const { dataCount } = customDataItem;
-      if (values.length !== dataCount) {
+      if (textValues.length !== dataCount) {
+        raiseError(`invalid data count for ${key}`);
+      }
+      const byteValues = textValues.map((text) => {
+        const value = parseInt(text);
+        if (!isFinite(value)) {
+          raiseError(`invalid value ${value}`);
+        }
+        if (dataKind === "u8" && !(0 <= value && value <= 255)) {
+          raiseError(`invalid value ${value}, it must be in range 0~255`);
+        }
+        if (dataKind === "i8" && !(-128 <= value && value <= 127)) {
+          raiseError(`invalid value ${value}, it must be in range -128~127`);
+        }
+        return value < 0 ? (128 + value) : value;
+      });
+      return byteValues;
+    } else if (dataKind === "pins") {
+      const { pinCount } = customDataItem;
+      if (textValues.length !== pinCount) {
         raiseError(`invalid pin count for ${key}`);
       }
-      const pinNumbers = values.map((pinName) => {
+      const pinNumbers = textValues.map((pinName) => {
         const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
         if (pinNumber === undefined) {
           raiseError(`invalid pin name ${pinName}`);
@@ -60,17 +80,17 @@ const local = {
       return pinNumbers;
     } else if (dataKind === "vl_pins") {
       const { maxPinCount } = customDataItem;
-      if (values.length > maxPinCount) {
+      if (textValues.length > maxPinCount) {
         raiseError(`too many pins for ${key}`);
       }
-      const pinNumbers = values.map((pinName) => {
+      const pinNumbers = textValues.map((pinName) => {
         const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
         if (pinNumber === undefined) {
           raiseError(`invalid pin name ${pinName}`);
         }
         return pinNumber;
       });
-      return [pinNumbers.length, ...pinNumbers];
+      return [pinNumbers.length, ...padZeros(pinNumbers, maxPinCount)];
     } else {
       raiseError(`unsupported data kind ${dataKind}`);
     }
@@ -91,6 +111,7 @@ const local = {
             }
             return local.serializeEditData(customDataItem, editItem.values);
           }).flat();
+          console.log({ dataBytes });
           return { marker: dataEntry.marker, dataBytes };
         },
       );

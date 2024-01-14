@@ -1,6 +1,7 @@
 import {
   ConfigurationEditItem,
   ConfigurationSourceItem,
+  ConfigurationSourceItem_Valid,
 } from "~/base/dto_types.ts";
 import {
   FirmwareContainer,
@@ -58,4 +59,8 @@ export type FirmixPresenter = {
     project: LocalDevelopmentProject,
     editItems: ConfigurationEditItem[],
   ): FirmwareContainer;
+  splitSourceItemEditTextValues(
+    sourceItem: ConfigurationSourceItem_Valid,
+    text: string,
+  ): string[];
 };

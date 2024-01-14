@@ -6,7 +6,7 @@ import {
   ConfigurationSourceItem,
   ConfigurationSourceItem_Valid,
 } from "~/base/dto_types.ts";
-import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
+import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 
 type Props = {
   configurationSourceItems: ConfigurationSourceItem[];
@@ -39,7 +39,7 @@ export const ParametersConfigurationArea = createFC<Props>(
         const configurationEditItems: (ConfigurationEditItem)[] =
           configurationSourceItems.map(
             (sourceItem) => {
-              const { key, label } = sourceItem;
+              const { key } = sourceItem;
               const inputElementId = `${inputIdPrefix}${key}`;
               const element = document.getElementById(
                 inputElementId,
@@ -48,41 +48,10 @@ export const ParametersConfigurationArea = createFC<Props>(
                 raiseError(`target element not found for ${inputElementId}`);
               }
               const text = element.value;
-              if (!text) {
-                raiseError(
-                  `${label}: 値を入力してください`,
-                );
-              }
-              const values = text.split(",").map((it) => it.trim());
-              if (sourceItem.dataKind === "pin") {
-                if (values.length !== sourceItem.dataCount) {
-                  const addNote = values.length === 1 &&
-                    sourceItem.dataCount >= 2;
-                  raiseError(
-                    `${label}: ピンの数が定義と一致しません ${values.length}/${sourceItem.dataCount}${
-                      addNote && " ピン名をコンマ区切りで入力してください"
-                    }`,
-                  );
-                }
-              }
-              if (sourceItem.dataKind === "vl_pins") {
-                if (values.length > sourceItem.maxPinCount) {
-                  raiseError(
-                    `${label}: ピンの数が多すぎます ${values.length}/${sourceItem.maxPinCount}`,
-                  );
-                }
-              }
-
-              if (sourceItem.dataKind === "pin") {
-                for (const pinName of values) {
-                  const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
-                  if (pinNumber === undefined) {
-                    raiseError(
-                      `${label}: ${pinName}はピンの名前として正しくありません。gp0,gp1などの形式で入力してください。`,
-                    );
-                  }
-                }
-              }
+              const values = firmixPresenter.splitSourceItemEditTextValues(
+                sourceItem,
+                text,
+              );
               return { key, values };
             },
           );
@@ -108,9 +77,8 @@ export const ParametersConfigurationArea = createFC<Props>(
             {configurationSourceItems.map((item) => (
               <div key={item.key}>
                 <label>
-                  {item.label} (gpio {item.dataKind === "pin"
-                    ? `x ${item.dataCount}`
-                    : `max ${item.maxPinCount}`})
+                  {item.label}
+                  {local.configurationSourceItem_getCountsText(item)}
                 </label>
                 <input id={`${inputIdPrefix}${item.key}`} />
                 <span>{item.instruction}</span>
@@ -138,3 +106,18 @@ const style = css`
   padding: 10px;
   background: #fff;
 `;
+
+const local = {
+  configurationSourceItem_getCountsText(
+    item: ConfigurationSourceItem_Valid,
+  ): string {
+    if (item.dataKind === "pins") {
+      return `(gpio x${item.pinCount})`;
+    } else if (item.dataKind === "vl_pins") {
+      return `(gpio max${item.maxPinCount})`;
+    } else {
+      if (item.dataCount === 1) return "";
+      return `(x${item.dataCount})`;
+    }
+  },
+};

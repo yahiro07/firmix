@@ -1,16 +1,10 @@
+import { CustomDataItemCore } from "~/base/entity_types.ts";
+
 export type ConfigurationSourceItem_Valid = {
   key: string;
-  dataKind: "pin";
-  dataCount: number;
   label: string;
   instruction: string;
-} | {
-  key: string;
-  dataKind: "vl_pins";
-  maxPinCount: number;
-  label: string;
-  instruction: string;
-};
+} & CustomDataItemCore;
 
 export type ConfigurationSourceItem_Error = {
   key: string;

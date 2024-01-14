@@ -1,12 +1,12 @@
-export type CustomDataItem = {
-  key: string;
-  dataKind: "pin";
-  dataCount: number;
-} | {
-  key: string;
-  dataKind: "vl_pins";
-  maxPinCount: number;
-};
+export type CustomDataItemCore =
+  | { dataKind: "u8"; dataCount: number }
+  | { dataKind: "i8"; dataCount: number }
+  | { dataKind: "pins"; pinCount: number }
+  | { dataKind: "vl_pins"; maxPinCount: number };
+
+export type CustomDataItem =
+  & { key: string }
+  & CustomDataItemCore;
 
 export type CustomDataEntry = {
   marker: string;
