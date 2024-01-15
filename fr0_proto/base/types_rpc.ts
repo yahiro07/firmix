@@ -1,4 +1,4 @@
-import { LocalProjectSubmissionInputDto } from "~/base/dto_types.ts";
+import { LocalProjectSubmissionInputDto } from "~/base/types_dto.ts";
 
 type AsyncFn<P, R> = (payload: P) => Promise<R>;
 

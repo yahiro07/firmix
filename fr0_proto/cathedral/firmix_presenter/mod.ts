@@ -2,15 +2,13 @@ import { raiseError } from "~/aux/utils/error_util.ts";
 import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
 import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
-import { firmixCore } from "~/cathedral/firmix_core/mod.ts";
+import { FirmixPresenter } from "~/base/types_firmix_domain_modules.ts";
+import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import {
   FirmwareContainer,
   PatchingDataBlob,
-} from "~/cathedral/firmix_core/types.ts";
-import {
-  FirmixPresenter,
-  LocalDevelopmentProject,
-} from "~/cathedral/firmix_presenter/types.ts";
+} from "~/base/types_project_edit.ts";
+import { firmixCore } from "~/cathedral/firmix_core/mod.ts";
 
 export const firmixPresenter: FirmixPresenter = {
   buildLocalDevelopmentProject(inputResources): LocalDevelopmentProject {

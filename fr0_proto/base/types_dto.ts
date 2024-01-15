@@ -2,9 +2,9 @@ import {
   CustomDataEntry,
   CustomDataItemCore,
   EditUiItem,
-} from "~/base/entity_types.ts";
+} from "~/base/types_core_entity.ts";
 
-export type ConfigurationSourceItem_Valid = {
+export type ConfigurationSourceItem = {
   key: string;
   label: string;
   instruction: string;
@@ -15,14 +15,9 @@ export type ConfigurationSourceItem_Error = {
   dataKind: "error";
 };
 
-export type ConfigurationSourceItem =
-  | ConfigurationSourceItem_Valid
+export type ConfigurationSourceItemWrapper =
+  | ConfigurationSourceItem
   | ConfigurationSourceItem_Error;
-
-export type ConfigurationEditItem = {
-  key: string;
-  values: string[];
-};
 
 export type ProjectDetailDto = {
   projectId: string;
@@ -30,7 +25,7 @@ export type ProjectDetailDto = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
-  configurationSourceItems: ConfigurationSourceItem[];
+  configurationSourceItemWrappers: ConfigurationSourceItemWrapper[];
 };
 
 export type LocalProjectSubmissionInputDto = {

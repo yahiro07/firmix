@@ -1,10 +1,10 @@
 import { produce } from "immer";
-import { FirmwareContainer } from "~/cathedral/firmix_core/types.ts";
-import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 import {
   LocalDevelopmentWork,
   LocalDevelopmentWork_Loaded,
-} from "~/cathedral/firmix_presenter/types.ts";
+} from "~/base/types_local_project.ts";
+import { FirmwareContainer } from "~/base/types_project_edit.ts";
+import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 
 export const firmixWorkBuilder = {
   async loadLocalDevelopmentWork(

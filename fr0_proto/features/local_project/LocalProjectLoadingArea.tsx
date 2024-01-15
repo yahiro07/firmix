@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "preact/hooks";
 import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
-import { LocalDevelopmentWork } from "~/cathedral/firmix_presenter/types.ts";
+import { LocalDevelopmentWork } from "~/base/types_local_project.ts";
 import { firmixWorkBuilder } from "~/cathedral/firmix_work/mod.ts";
 
 type Props = {

@@ -1,11 +1,13 @@
 import { firmwareBinaryModifier_patchUf2FileContent } from "~/aux/firmware_manipulation_helper/firmware_binary_modifier_uf2.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { padZeros } from "~/aux/utils/utils_array.ts";
-import { ConfigurationEditItem } from "~/base/dto_types.ts";
-import { CustomDataItem } from "~/base/entity_types.ts";
-import { FirmwarePatchingBlob } from "~/base/internal_dto_types.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
-import { PatchingManifest } from "~/cathedral/firmix_core/types.ts";
+import { CustomDataItem } from "~/base/types_core_entity.ts";
+import {
+  ConfigurationEditItem,
+  FirmwarePatchingBlob,
+  PatchingManifest,
+} from "~/base/types_project_edit.ts";
 
 export const firmwareDataInjector = {
   patchFirmwareBinary(

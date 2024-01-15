@@ -1,11 +1,8 @@
 import { css } from "~/aux/resin/resin_css.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
-import {
-  ConfigurationEditItem,
-  ConfigurationSourceItem_Valid,
-  ProjectDetailDto,
-} from "~/base/dto_types.ts";
+import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
+import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 import { serverShell } from "~/server/server_shell.ts";
 
@@ -14,17 +11,17 @@ type Props = {
 };
 
 export default function ProjectDetailPage({ project }: Props) {
-  const hasError = project.configurationSourceItems.some((it) =>
+  const hasError = project.configurationSourceItemWrappers.some((it) =>
     it.dataKind === "error"
   );
   const configurationSourceItems = project
-    .configurationSourceItems as ConfigurationSourceItem_Valid[];
+    .configurationSourceItemWrappers as ConfigurationSourceItem[];
 
   const inputIdPrefix = `config-input-`;
 
   const handleDownload = async () => {
     try {
-      const configurationEditItems: (ConfigurationEditItem)[] =
+      const configurationEditItems: ConfigurationEditItem[] =
         configurationSourceItems.map(
           (sourceItem) => {
             const { key } = sourceItem;

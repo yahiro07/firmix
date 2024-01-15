@@ -1,5 +1,5 @@
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
-import { LocalDevelopmentProject } from "~/cathedral/firmix_presenter/types.ts";
+import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 
 type Props = {
   project: LocalDevelopmentProject;

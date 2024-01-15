@@ -1,0 +1,50 @@
+import {
+  ConfigurationSourceItem,
+  ConfigurationSourceItemWrapper,
+} from "~/base/types_dto.ts";
+import {
+  BinaryFileEntry,
+  LocalDevelopmentProject,
+  TextFileEntry,
+} from "~/base/types_local_project.ts";
+import {
+  ConfigurationEditItem,
+  FirmwareContainer,
+  PatchingDataBlob,
+  PatchingManifest,
+} from "~/base/types_project_edit.ts";
+import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
+
+export type FirmixCore = {
+  loadProjectMetadataFile_json(fileContentText: string): ProjectMetadataInput;
+  checkPatchingManifestValidity(manifest: PatchingManifest): string;
+  checkPatchingDataBlobValidity(
+    manifest: PatchingManifest,
+    blob: PatchingDataBlob,
+  ): string;
+  fabricateFirmware(
+    firmware: FirmwareContainer,
+    patchingManifest: PatchingManifest,
+    patchingDataBlob: PatchingDataBlob,
+  ): FirmwareContainer;
+};
+
+export type FirmixPresenter = {
+  buildLocalDevelopmentProject(inputResources: {
+    projectRootDirectoryHandle: FileSystemDirectoryHandle;
+    firmwareDirectoryHandle: FileSystemDirectoryHandle;
+    metadataFile: TextFileEntry;
+    firmwareFile: BinaryFileEntry;
+  }): LocalDevelopmentProject;
+  buildConfigurationSourceItems(
+    patchingManifest: PatchingManifest,
+  ): ConfigurationSourceItemWrapper[];
+  patchLocalProjectFirmware(
+    project: LocalDevelopmentProject,
+    editItems: ConfigurationEditItem[],
+  ): FirmwareContainer;
+  splitSourceItemEditTextValues(
+    sourceItem: ConfigurationSourceItem,
+    text: string,
+  ): string[];
+};

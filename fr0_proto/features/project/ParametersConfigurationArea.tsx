@@ -1,15 +1,16 @@
 import { css } from "~/aux/resin/resin_css.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
+
 import {
-  ConfigurationEditItem,
   ConfigurationSourceItem,
-  ConfigurationSourceItem_Valid,
-} from "~/base/dto_types.ts";
+  ConfigurationSourceItemWrapper,
+} from "~/base/types_dto.ts";
+import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 
 type Props = {
-  configurationSourceItems: ConfigurationSourceItem[];
+  configurationSourceItems: ConfigurationSourceItemWrapper[];
   submitEditItems(editItems: ConfigurationEditItem[]): void;
   submitButtonLabel: string;
   submit2?(editItems: ConfigurationEditItem[]): void;
@@ -30,7 +31,7 @@ export const ParametersConfigurationArea = createFC<Props>(
       it.dataKind === "error"
     );
     const configurationSourceItems =
-      configurationSourceItemsRaw as ConfigurationSourceItem_Valid[];
+      configurationSourceItemsRaw as ConfigurationSourceItem[];
 
     const inputIdPrefix = `config-input-`;
 
@@ -109,7 +110,7 @@ const style = css`
 
 const local = {
   configurationSourceItem_getCountsText(
-    item: ConfigurationSourceItem_Valid,
+    item: ConfigurationSourceItem,
   ): string {
     if (item.dataKind === "pins") {
       return `(gpio x${item.pinCount})`;

@@ -1,13 +1,8 @@
 import {
-  ConfigurationEditItem,
-  ConfigurationSourceItem,
-  ConfigurationSourceItem_Valid,
-} from "~/base/dto_types.ts";
-import {
   FirmwareContainer,
   PatchingManifest,
-  ProjectMetadataInput,
-} from "~/cathedral/firmix_core/types.ts";
+} from "~/base/types_project_edit.ts";
+import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 
 export type TextFileEntry = {
   // type: "text";
@@ -46,23 +41,3 @@ export type LocalDevelopmentWork_Error = {
 export type LocalDevelopmentWork =
   | LocalDevelopmentWork_Loaded
   | LocalDevelopmentWork_Error;
-
-export type FirmixPresenter = {
-  buildLocalDevelopmentProject(inputResources: {
-    projectRootDirectoryHandle: FileSystemDirectoryHandle;
-    firmwareDirectoryHandle: FileSystemDirectoryHandle;
-    metadataFile: TextFileEntry;
-    firmwareFile: BinaryFileEntry;
-  }): LocalDevelopmentProject;
-  buildConfigurationSourceItems(
-    patchingManifest: PatchingManifest,
-  ): ConfigurationSourceItem[];
-  patchLocalProjectFirmware(
-    project: LocalDevelopmentProject,
-    editItems: ConfigurationEditItem[],
-  ): FirmwareContainer;
-  splitSourceItemEditTextValues(
-    sourceItem: ConfigurationSourceItem_Valid,
-    text: string,
-  ): string[];
-};

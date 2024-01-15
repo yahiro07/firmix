@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { raiseError } from "~/aux/utils/error_util.ts";
-import { ProjectEntity } from "~/base/entity_types.ts";
+import { ProjectEntity } from "~/base/types_db_entity.ts";
 import { createMongoGeneralCabinet } from "~/server/depot/mongo_general_cabinet.ts";
 
 async function createStoreHouse() {

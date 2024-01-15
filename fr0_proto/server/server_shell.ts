@@ -1,11 +1,12 @@
 import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
 import { serverFetchHelper } from "~/aux/utils_be/server_fetch_helper.ts";
+
+import { ProjectEntity } from "~/base/types_db_entity.ts";
 import {
-  ConfigurationEditItem,
   LocalProjectSubmissionInputDto,
   ProjectDetailDto,
-} from "~/base/dto_types.ts";
-import { ProjectEntity } from "~/base/entity_types.ts";
+} from "~/base/types_dto.ts";
+import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 import { storehouse } from "~/server/depot/storehouse.ts";
@@ -80,9 +81,10 @@ const local = {
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
-      configurationSourceItems: firmixPresenter.buildConfigurationSourceItems(
-        project,
-      ),
+      configurationSourceItemWrappers: firmixPresenter
+        .buildConfigurationSourceItems(
+          project,
+        ),
     };
   },
 };

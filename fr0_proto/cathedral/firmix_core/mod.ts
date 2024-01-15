@@ -1,13 +1,15 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
-import { ProjectMetadataJsonFileContent } from "~/base/project_metadata_types.ts";
-import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
+import { FirmixCore } from "~/base/types_firmix_domain_modules.ts";
 import {
-  FirmixCore,
   FirmwareContainer,
   PatchingDataBlob,
   PatchingManifest,
+} from "~/base/types_project_edit.ts";
+import {
   ProjectMetadataInput,
-} from "~/cathedral/firmix_core/types.ts";
+  ProjectMetadataJsonFileContent,
+} from "~/base/types_project_metadata.ts";
+import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
 
 export const firmixCore: FirmixCore = {
   loadProjectMetadataFile_json(

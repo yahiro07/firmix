@@ -1,6 +1,6 @@
 import { css } from "~/aux/resin/resin_css.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
-import { ProjectDetailDto } from "~/base/dto_types.ts";
+import { ProjectDetailDto } from "~/base/types_dto.ts";
 
 type Props = {
   project: ProjectDetailDto;

@@ -1,12 +1,13 @@
 import { useMemo } from "preact/hooks";
 import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
-import { ConfigurationEditItem } from "~/base/dto_types.ts";
+import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
+
 import {
   LocalDevelopmentWork,
   LocalDevelopmentWork_Loaded,
-} from "~/cathedral/firmix_presenter/types.ts";
+} from "~/base/types_local_project.ts";
 import { firmixWorkBuilder } from "~/cathedral/firmix_work/mod.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAssetsArea.tsx";
