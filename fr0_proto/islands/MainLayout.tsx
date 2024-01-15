@@ -1,16 +1,16 @@
-import { ComponentChildren } from "preact";
 import { css } from "~/aux/resin/resin_css.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
-import { flexVertical } from "~/common/utility_styles.ts";
-
-type Props = {
-  children: ComponentChildren;
-};
+import {
+  flexHorizontalAligned,
+  flexVertical,
+} from "~/common/utility_styles.ts";
+import { IconIconify } from "~/components/IconIconify.tsx";
 
 export const MainLayout = createFC(({ children }) => {
   return (
     <div q={style}>
       <div q="header-bar">
+        <IconIconify spec="mdi:chip" q="icon" />
         <h1>Firmix</h1>
       </div>
       <div q="main-row">
@@ -37,16 +37,21 @@ const style = css`
     color: #fff;
     padding: 0 12px;
     flex-shrink: 0;
+    ${flexHorizontalAligned(2)};
+    > .icon {
+      font-size: 38px;
+    }
   }
   > .main-row {
     background: #eee;
     flex-grow: 1;
     display: flex;
     > .side-bar {
-      width: 200px;
+      width: 180px;
       background: #ccc;
       border-right: solid 1px #aaa;
       padding: 20px 12px;
+      flex-shrink: 0;
       > nav {
         ${flexVertical(12)};
       }
