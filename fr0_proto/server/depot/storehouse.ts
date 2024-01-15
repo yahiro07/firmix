@@ -1,17 +1,15 @@
 import { MongoClient } from "mongodb";
-import { raiseError } from "~/aux/utils/error_util.ts";
+import { getEnvVariable } from "~/aux/utils_be/env_helper.ts";
 import { ProjectEntity } from "~/base/types_db_entity.ts";
 import { createMongoGeneralCabinet } from "~/server/depot/mongo_general_cabinet.ts";
 
 async function createStoreHouse() {
-  const mongoSpec = Deno.env.get("MONGO_SPEC");
-  if (!mongoSpec) raiseError("env variable MONGO_SPEC undefined");
-  const [uri, dbName] = mongoSpec.split("|");
-  if (!dbName) raiseError("invalid MONGO_SPEC format.");
+  const mongoUrl = getEnvVariable("MONGO_URL");
+  const mongoDatabaseName = getEnvVariable("MONGO_DATABASE_NAME");
   const client = new MongoClient();
-  await client.connect(uri);
+  await client.connect(mongoUrl);
   console.log("connected to db");
-  const db = client.database(dbName);
+  const db = client.database(mongoDatabaseName);
 
   const colProject = db.collection<ProjectEntity>("project");
   const projectCabinet = createMongoGeneralCabinet(colProject, "projectId");
