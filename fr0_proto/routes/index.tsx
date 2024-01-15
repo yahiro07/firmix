@@ -1,6 +1,3 @@
-import { css } from "~/aux/resin/resin_css.ts";
-import { flexVertical } from "~/common/utility_styles.ts";
-
 export default function Home() {
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
@@ -18,14 +15,6 @@ export default function Home() {
           <code class="mx-2">./routes/index.tsx</code> file, and refresh.
         </p>
       </div>
-      <div q={styleLinks}>
-        <a href="/project/foo">プロジェクト詳細画面</a>
-        <a href="/local-work">ローカルワーク</a>
-      </div>
     </div>
   );
 }
-
-const styleLinks = css`
-  ${flexVertical()};
-`;

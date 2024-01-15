@@ -15,8 +15,7 @@ export const globalStyle = css`
     }
   }
 
-  body{
-    background: #68a;
+  body {
   }
 
   ul,

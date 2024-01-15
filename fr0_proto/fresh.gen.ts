@@ -4,6 +4,7 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $_layout from "./routes/_layout.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $api_rpc_op_ from "./routes/api/rpc/[op].ts";
@@ -13,6 +14,7 @@ import * as $local_work from "./routes/local-work.tsx";
 import * as $project_projectId_ from "./routes/project/[projectId].tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $LocalProjectDevelopmentPage from "./islands/LocalProjectDevelopmentPage.tsx";
+import * as $MainLayout from "./islands/MainLayout.tsx";
 import * as $ProjectDetailPage from "./islands/ProjectDetailPage.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
@@ -20,6 +22,7 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/_layout.tsx": $_layout,
     "./routes/_middleware.ts": $_middleware,
     "./routes/api/joke.ts": $api_joke,
     "./routes/api/rpc/[op].ts": $api_rpc_op_,
@@ -31,6 +34,7 @@ const manifest = {
   islands: {
     "./islands/Counter.tsx": $Counter,
     "./islands/LocalProjectDevelopmentPage.tsx": $LocalProjectDevelopmentPage,
+    "./islands/MainLayout.tsx": $MainLayout,
     "./islands/ProjectDetailPage.tsx": $ProjectDetailPage,
   },
   baseUrl: import.meta.url,
