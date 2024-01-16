@@ -9,4 +9,7 @@ export type ProjectEntity = {
   primaryTargetBoard: string;
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
+  readmeFileContent: string;
+  firmwareFileName: string;
+  thumbnailFileName: string;
 };

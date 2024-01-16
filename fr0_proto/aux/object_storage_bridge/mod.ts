@@ -9,6 +9,7 @@ type ObjectStorageBridge = {
     bytes: Uint8Array,
     mimeType: string
   ): Promise<void>;
+  listItemPathsWithPrefix(prefix: string): Promise<string[]>;
   deleteItem(path: string): Promise<void>;
 };
 
@@ -41,10 +42,10 @@ export function createObjectStorageBridge(spec: {
       );
     },
     async retrieveBinaryFile(path) {
-      const result = await s3_client.send(
+      const res = await s3_client.send(
         new s3.GetObjectCommand({ Bucket: bucketName, Key: path })
       );
-      const arr = await result.Body?.transformToByteArray();
+      const arr = await res.Body?.transformToByteArray();
       if (!arr) {
         raiseError(`failed to read binary from object storage item: ${path}`);
       }
@@ -60,6 +61,12 @@ export function createObjectStorageBridge(spec: {
           ACL: "public-read",
         })
       );
+    },
+    async listItemPathsWithPrefix(prefix) {
+      const res = await s3_client.send(
+        new s3.ListObjectsV2Command({ Bucket: bucketName, Prefix: prefix })
+      );
+      return res.Contents?.map((it) => it.Key!) ?? [];
     },
     async deleteItem(path) {
       await s3_client.send(

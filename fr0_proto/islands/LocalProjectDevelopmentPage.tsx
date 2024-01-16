@@ -2,6 +2,7 @@ import { useMemo } from "preact/hooks";
 import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
 import { css } from "~/aux/resin/resin_css.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
+import { LocalProjectSubmissionInputDto } from "~/base/types_dto.ts";
 import {
   LocalDevelopmentWork,
   LocalDevelopmentWork_Loaded,
@@ -58,7 +59,19 @@ export default function LocalProjectDevelopmentPage() {
 
   const handleSubmit = async () => {
     if (!project) return;
-    const projectInput = project.metadataInput;
+    const projectInput: LocalProjectSubmissionInputDto = {
+      ...project.metadataInput,
+      firmwareObject: {
+        fileName: project.firmwareContainer.fileName,
+        binaryBytes: project.firmwareContainer.binaryBytes,
+      },
+      thumbnailObject: {
+        fileName: project.thumbnailImageContainer.fileName,
+        binaryBytes: project.thumbnailImageContainer.binaryBytes,
+        mimeType: project.thumbnailImageContainer.mimeType,
+      },
+      readmeFileContent: project.readmeFileContent,
+    };
     await rpcClient.createProjectFromLocal({ projectInput });
   };
 

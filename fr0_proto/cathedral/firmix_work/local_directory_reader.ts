@@ -1,3 +1,4 @@
+import "~/aux/typings/file_system_access.d.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { BinaryFileEntry, TextFileEntry } from "~/base/types_local_project.ts";
 

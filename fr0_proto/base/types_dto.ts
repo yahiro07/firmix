@@ -36,4 +36,11 @@ export type LocalProjectSubmissionInputDto = {
   primaryTargetBoard: string;
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
+  readmeFileContent: string;
+  thumbnailObject: {
+    fileName: string;
+    binaryBytes: Uint8Array;
+    mimeType: string;
+  };
+  firmwareObject: { fileName: string; binaryBytes: Uint8Array };
 };
