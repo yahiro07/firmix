@@ -25,10 +25,8 @@ export function createMongoGeneralCabinet<T extends object>(
       const id = entity[idFieldName];
       await collection.updateOne(
         { [idFieldName]: id } as any,
-        { $set: entity },
-        {
-          upsert: true,
-        }
+        { $set: entity } as any,
+        { upsert: true }
       );
     },
     async get(id) {
@@ -48,12 +46,16 @@ export function createMongoGeneralCabinet<T extends object>(
       );
     },
     async patch(id, attrs) {
-      await collection.updateOne({ [idFieldName]: id } as any, { $set: attrs });
+      await collection.updateOne(
+        { [idFieldName]: id } as any,
+        { $set: attrs } as any
+      );
     },
     async patchMany(ids, attrs) {
-      await collection.updateMany({ [idFieldName]: { $in: ids } } as any, {
-        $set: attrs,
-      });
+      await collection.updateMany(
+        { [idFieldName]: { $in: ids } } as any,
+        { $set: attrs } as any
+      );
     },
     async delete(id) {
       await collection.deleteOne({ [idFieldName]: id } as any);
