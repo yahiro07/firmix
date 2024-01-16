@@ -31,7 +31,8 @@
     "$std/": "https://deno.land/std@0.208.0/",
     "xjsx/jsx-runtime": "./aux/xjsx/jsx-runtime.ts",
     "immer": "https://esm.sh/immer@v10.0.2",
-    "mongodb": "https://deno.land/x/mongo@v0.32.0/mod.ts"
+    "mongodb": "https://deno.land/x/mongo@v0.32.0/mod.ts",
+    "@aws-sdk/client-s3": "https://esm.sh/@aws-sdk/client-s3@3.490.0"
     // "mongodb": "npm:mongodb"
   },
   "compilerOptions": {

@@ -1,4 +1,4 @@
-import * as s3 from "npm:@aws-sdk/client-s3";
+import * as s3 from "@aws-sdk/client-s3";
 import { raiseError } from "~/aux/utils/error_util.ts";
 
 type ObjectStorageBridge = {
