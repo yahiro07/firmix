@@ -1,5 +1,6 @@
 import {
   FirmwareContainer,
+  ImageFileContainer,
   PatchingManifest,
 } from "~/base/types_project_edit.ts";
 import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
@@ -22,9 +23,13 @@ export type LocalDevelopmentProject = {
   assetFilePaths: {
     metadata: string;
     firmware: string;
+    thumbnail: string;
+    readme: string;
     modFirmware?: string;
   };
   firmwareContainer: FirmwareContainer;
+  thumbnailImageContainer: ImageFileContainer;
+  readmeFileContent: string;
   metadataInput: ProjectMetadataInput;
   patchingManifest: PatchingManifest;
 };

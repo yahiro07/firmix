@@ -80,6 +80,7 @@ export default function LocalProjectDevelopmentPage() {
       <button onClick={handleSubmit} disabled={!project}>
         投稿
       </button>
+      <div if={project}>{project?.readmeFileContent}</div>
       <div q="blank-filler" if={!work}>
         <IconIconify spec="ph:folder-thin" q="folder-icon" />
         <div q="text">

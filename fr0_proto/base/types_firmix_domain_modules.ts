@@ -20,12 +20,12 @@ export type FirmixCore = {
   checkPatchingManifestValidity(manifest: PatchingManifest): string;
   checkPatchingDataBlobValidity(
     manifest: PatchingManifest,
-    blob: PatchingDataBlob,
+    blob: PatchingDataBlob
   ): string;
   fabricateFirmware(
     firmware: FirmwareContainer,
     patchingManifest: PatchingManifest,
-    patchingDataBlob: PatchingDataBlob,
+    patchingDataBlob: PatchingDataBlob
   ): FirmwareContainer;
 };
 
@@ -35,16 +35,18 @@ export type FirmixPresenter = {
     firmwareDirectoryHandle: FileSystemDirectoryHandle;
     metadataFile: TextFileEntry;
     firmwareFile: BinaryFileEntry;
-  }): LocalDevelopmentProject;
+    readmeFile: TextFileEntry;
+    thumbnailFile: BinaryFileEntry;
+  }): Promise<LocalDevelopmentProject>;
   buildConfigurationSourceItems(
-    patchingManifest: PatchingManifest,
+    patchingManifest: PatchingManifest
   ): ConfigurationSourceItemWrapper[];
   patchLocalProjectFirmware(
     project: LocalDevelopmentProject,
-    editItems: ConfigurationEditItem[],
+    editItems: ConfigurationEditItem[]
   ): FirmwareContainer;
   splitSourceItemEditTextValues(
     sourceItem: ConfigurationSourceItem,
-    text: string,
+    text: string
   ): string[];
 };

@@ -24,3 +24,13 @@ export type FirmwareContainer = {
   fileName: string;
   binaryBytes: Uint8Array;
 };
+
+export type ImageFileContainer = {
+  fileName: string;
+  mimeType: string;
+  fileSize: number;
+  width: number;
+  height: number;
+  binaryBytes: Uint8Array;
+  imageDataUrl: string;
+};
