@@ -1,3 +1,5 @@
+import { DevelopmentPage } from "~/islands/DevelopmentPage.tsx";
+
 export default function Home() {
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
@@ -15,6 +17,7 @@ export default function Home() {
           <code class="mx-2">./routes/index.tsx</code> file, and refresh.
         </p>
       </div>
+      <DevelopmentPage />
     </div>
   );
 }
