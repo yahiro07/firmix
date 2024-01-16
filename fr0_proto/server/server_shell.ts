@@ -37,7 +37,10 @@ export const serverShell = {
     };
   },
   async createProjectFromLocal(projectInput: LocalProjectSubmissionInputDto) {
-    const projectId = generateIdTimeSequential();
+    const existingProject = await storehouse.colProject.findOne({
+      projectGuid: projectInput.projectGuid,
+    });
+    const projectId = existingProject?.projectId ?? generateIdTimeSequential();
     const {
       projectGuid,
       projectName,
@@ -72,7 +75,7 @@ export const serverShell = {
       firmwareFileName: firmwareObject.fileName,
       thumbnailFileName: thumbnailObject.fileName,
     };
-    await storehouse.projectCabinet.insert(projectEntity);
+    await storehouse.projectCabinet.upsert(projectEntity);
   },
   async deleteProject(projectId: string) {
     await storehouse.projectCabinet.delete(projectId);
