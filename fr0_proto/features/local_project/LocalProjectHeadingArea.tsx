@@ -128,7 +128,7 @@ const style = css`
       border: solid 1px #888;
       border-radius: 3px;
       &.--active {
-        background: #8ce;
+        background: #8db;
       }
     }
   }
