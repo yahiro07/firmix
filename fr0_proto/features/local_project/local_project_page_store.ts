@@ -57,6 +57,8 @@ export function useLocalProjectPageStore() {
     [project]
   );
 
+  const canSubmitProject = !!project;
+
   useEffectAsync(async () => {
     const tmpWork = localProjectWorkStorage.read();
     if (tmpWork) {
@@ -129,13 +131,16 @@ export function useLocalProjectPageStore() {
       );
       coreActions.wrapSetWork(newWork);
     },
-    async handleSubmit() {
+    async submitProject() {
       if (!project) return;
-      const projectInput =
-        local.mapLocalDevelopmentProjectToLocalProjectSubmissionInputDto(
-          project
-        );
-      await rpcClient.createProjectFromLocal({ projectInput });
+      const proceed = window.confirm(`プロジェクトを投稿します。`);
+      if (proceed) {
+        const projectInput =
+          local.mapLocalDevelopmentProjectToLocalProjectSubmissionInputDto(
+            project
+          );
+        await rpcClient.createProjectFromLocal({ projectInput });
+      }
     },
   };
 
@@ -146,6 +151,7 @@ export function useLocalProjectPageStore() {
     repositoryInfo,
     configurationsSourceItems,
     errorMessage,
+    canSubmitProject,
     ...actions,
   };
 }

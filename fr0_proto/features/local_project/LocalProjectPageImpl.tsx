@@ -24,7 +24,8 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
     submitEditItems,
     submitEditItems2,
     errorMessage,
-    handleSubmit,
+    canSubmitProject,
+    submitProject,
   } = store;
 
   return (
@@ -34,6 +35,8 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
         loadFolder={loadProjectFolder}
         reloadFolder={reloadProjectFolder}
         closeFolder={closeProjectFolder}
+        canSubmitProject={canSubmitProject}
+        submitProject={submitProject}
       />
       {repositoryInfo && (
         <div>
@@ -59,9 +62,6 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
         />
         <div if={errorMessage}>{errorMessage}</div>
       </div>
-      <button onClick={handleSubmit} if={project}>
-        投稿
-      </button>
       <div if={project}>{project?.readmeFileContent}</div>
       <div q="blank-filler" if={!work}>
         <IconIconify spec="ph:folder-thin" q="folder-icon" />

@@ -9,10 +9,19 @@ type Props = {
   loadFolder(dirHandle: FileSystemDirectoryHandle): void;
   reloadFolder(): void;
   closeFolder(): void;
+  canSubmitProject: boolean;
+  submitProject(): void;
 };
 
 export const LocalProjectLoadingArea = createFC<Props>(
-  ({ loadedFolderName, loadFolder, reloadFolder, closeFolder }) => {
+  ({
+    loadedFolderName,
+    loadFolder,
+    reloadFolder,
+    closeFolder,
+    canSubmitProject,
+    submitProject,
+  }) => {
     useEffect(() => local.setupFolderDrop(loadFolder), []);
 
     const loaded = !!loadedFolderName;
@@ -32,6 +41,9 @@ export const LocalProjectLoadingArea = createFC<Props>(
           <span>{loadedFolderName}</span>
         </div>
         <div q="spacer" />
+        <button onClick={submitProject} if={canSubmitProject}>
+          投稿
+        </button>
         <button onClick={reloadFolder} if={loaded}>
           再読み込み
         </button>
@@ -47,7 +59,7 @@ const style = css`
   padding: 8px;
   ${flexHorizontalAligned(8)};
   > button {
-    padding: 1px 4px;
+    padding: 1px 6px;
   }
   > .folder {
     ${flexHorizontalAligned(4)};
