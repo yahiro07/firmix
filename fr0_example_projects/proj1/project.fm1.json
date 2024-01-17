@@ -1,6 +1,6 @@
 {
   "projectGuid": "8a23b7fd-c462-43ca-9a31-263c4764991a",
-  "projectName": "スイッチでLEDが光るだけ",
+  "projectName": "LED出力サンプル",
   "introductionLines": [
     "スイッチを押すとLEDが光ります",
     "LED1 点滅します",
@@ -8,6 +8,8 @@
   ],
   "targetMcu": "RP2040",
   "primaryTargetBoard": "WaveShare RP2040 Zero",
+  "sourceCodeUrl": "https://github.com/kermite-org/kermite_platformio_projects/tree/main/example_rp2040_basic",
+  "tags": ["RP2040", "サンプル"],
   "dataEntries": [
     {
       "marker": "PINDEFS",

@@ -12,11 +12,9 @@ import {
 import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
 
 export const firmixCore: FirmixCore = {
-  loadProjectMetadataFile_json(
-    fileContentText: string,
-  ): ProjectMetadataInput {
+  loadProjectMetadataFile_json(fileContentText: string): ProjectMetadataInput {
     const metadata = JSON.parse(
-      fileContentText,
+      fileContentText
     ) as ProjectMetadataJsonFileContent;
     const {
       projectGuid,
@@ -24,6 +22,8 @@ export const firmixCore: FirmixCore = {
       introductionLines,
       targetMcu,
       primaryTargetBoard,
+      sourceCodeUrl,
+      tags,
       dataEntries,
       editUiItems: editUiItemsInput,
     } = metadata;
@@ -38,6 +38,8 @@ export const firmixCore: FirmixCore = {
       introduction,
       targetMcu,
       primaryTargetBoard,
+      sourceCodeUrl,
+      tags,
       dataEntries,
       editUiItems,
     };
@@ -47,14 +49,14 @@ export const firmixCore: FirmixCore = {
   },
   checkPatchingDataBlobValidity(
     _manifest: PatchingManifest,
-    _blob: PatchingDataBlob,
+    _blob: PatchingDataBlob
   ): string {
     return "";
   },
   fabricateFirmware(
     firmware: FirmwareContainer,
     patchingManifest: PatchingManifest,
-    patchingDataBlob: PatchingDataBlob,
+    patchingDataBlob: PatchingDataBlob
   ): FirmwareContainer {
     if (firmware.kind !== "uf2") {
       raiseError(`unsupported firmware type ${firmware.kind}`);
@@ -62,7 +64,7 @@ export const firmixCore: FirmixCore = {
     const modFirmwareBytes = firmwareDataInjector.patchFirmwareBinary(
       firmware.binaryBytes,
       patchingManifest,
-      patchingDataBlob.editItems,
+      patchingDataBlob.editItems
     );
     const firmwareName = firmware.fileName.split(".")[0];
     const outputFileName = `${firmwareName}_patched.uf2`;
