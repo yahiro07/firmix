@@ -1,4 +1,4 @@
-import * as idb_key_val from "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js";
+import * as idb_keyval from "idb-keyval";
 import { useState } from "preact/hooks";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 
@@ -13,7 +13,7 @@ export const DevelopmentPage = createFC(() => {
   };
 
   const restoreLoadedContent = async () => {
-    const dirHandle = (await idb_key_val.get("dirHandle")) as
+    const dirHandle = (await idb_keyval.get("dirHandle")) as
       | FileSystemDirectoryHandle
       | undefined;
     if (dirHandle) {
@@ -31,7 +31,7 @@ export const DevelopmentPage = createFC(() => {
 
   const handleClick = async () => {
     const dirHandle = await window.showDirectoryPicker();
-    await idb_key_val.set("dirHandle", dirHandle);
+    await idb_keyval.set("dirHandle", dirHandle);
     setText(`Stored file handle for "${dirHandle.name}" in IndexedDB.`);
     await showReadmeFile(dirHandle);
   };
@@ -41,7 +41,7 @@ export const DevelopmentPage = createFC(() => {
   };
 
   const handleClick2 = async () => {
-    await idb_key_val.set("dirHandle", undefined);
+    await idb_keyval.set("dirHandle", undefined);
     setText("");
   };
 

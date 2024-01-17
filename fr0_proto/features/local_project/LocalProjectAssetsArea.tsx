@@ -53,8 +53,8 @@ const style = css`
     right: 0;
     top: 0;
     margin: 8px;
-    width: 100px;
-    height: 100px;
+    width: 160px;
+    height: 120px;
 
     > img {
       width: 100%;

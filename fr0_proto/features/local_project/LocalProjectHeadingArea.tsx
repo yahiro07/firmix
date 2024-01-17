@@ -2,12 +2,12 @@ import { css } from "~/aux/resin/resin_css.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
-import { useRepositoryDisplayInfo } from "~/common/repository_info_helper.ts";
 import {
   flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
 import { IconIconify } from "~/components/IconIconify.tsx";
+import { useRepositoryDisplayInfo } from "~/fe_modules/repository_info_helper.ts";
 
 type Props = {
   project: LocalDevelopmentProject;
@@ -85,7 +85,7 @@ const style = css`
   > .repository-info {
     margin-top: 4px;
     font-size: 16px;
-    min-height: 70px;
+    min-height: 60px;
     ${flexVertical(2)};
     align-items: flex-start;
     > .repository {

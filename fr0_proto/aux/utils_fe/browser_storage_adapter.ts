@@ -1,4 +1,4 @@
-import * as idb_key_val from "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js";
+import * as idb_keyval from "idb-keyval";
 
 export function createLocalStorageAdapter<T>(key: string) {
   return {
@@ -27,10 +27,10 @@ export function createLocalStorageAdapter<T>(key: string) {
 export function createIndexedDbStorageAdapter<T>(key: string) {
   return {
     async write(data: T | undefined) {
-      await idb_key_val.set(key, data);
+      await idb_keyval.set(key, data);
     },
     async read(): Promise<T | undefined> {
-      return await idb_key_val.get(key);
+      return await idb_keyval.get(key);
     },
   };
 }

@@ -5,6 +5,7 @@ import { IconIconify } from "~/components/IconIconify.tsx";
 import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAssetsArea.tsx";
 import { LocalProjectHeadingArea } from "~/features/local_project/LocalProjectHeadingArea.tsx";
 import { LocalProjectLoadingArea } from "~/features/local_project/LocalProjectLoadingArea.tsx";
+import { LocalProjectReadmeArea } from "~/features/local_project/LocalProjectReadmeArea.tsx";
 import { LocalProjectPageStore } from "~/features/local_project/local_project_page_store.ts";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
 
@@ -28,6 +29,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
     submitProject,
     projectTab,
     setProjectTab,
+    markdownSourceText,
   } = store;
 
   return (
@@ -56,9 +58,11 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
         submit2Label="出力"
         if={configurationsSourceItems && projectTab === "editor"}
       />
-      <div if={project && projectTab === "info"} q="readme">
-        {project?.readmeFileContent}
-      </div>
+      <LocalProjectReadmeArea
+        q="readme"
+        project={project!}
+        if={project && projectTab === "info"}
+      />
       <div q="blank-filler" if={!work}>
         <IconIconify spec="ph:folder-thin" q="folder-icon" />
         <div q="text">

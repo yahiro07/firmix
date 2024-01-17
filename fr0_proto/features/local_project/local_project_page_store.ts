@@ -56,6 +56,8 @@ export function useLocalProjectPageStore() {
 
   const canSubmitProject = !!project;
 
+  const markdownSourceText = project?.readmeFileContent;
+
   useEffectAsync(async () => {
     const tmpWork = localProjectWorkStorage.read();
     if (tmpWork) {
@@ -150,6 +152,7 @@ export function useLocalProjectPageStore() {
     canSubmitProject,
     projectTab,
     setProjectTab,
+    markdownSourceText,
     ...actions,
   };
 }

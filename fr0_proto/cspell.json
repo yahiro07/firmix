@@ -1,3 +1,12 @@
 {
-  "words": ["preact", "firmix", "reasy", "xjsx", "immer", "chibi", "iconify"]
+  "words": [
+    "preact",
+    "firmix",
+    "reasy",
+    "xjsx",
+    "immer",
+    "chibi",
+    "iconify",
+    "keyval"
+  ]
 }
