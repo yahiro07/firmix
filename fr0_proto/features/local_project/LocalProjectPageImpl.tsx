@@ -19,6 +19,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
     closeProjectFolder,
     work,
     project,
+    repositoryInfo,
     configurationsSourceItems,
     submitEditItems,
     submitEditItems2,
@@ -34,6 +35,18 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
         reloadFolder={reloadProjectFolder}
         closeFolder={closeProjectFolder}
       />
+      {repositoryInfo && (
+        <div>
+          <img src={repositoryInfo.ownerIconUrl} />
+          <div>{repositoryInfo.ownerName}</div>
+          <a href={repositoryInfo.sourceCodeUrl} target="_blank">
+            <IconIconify spec="mdi:github" />
+            <span>
+              {repositoryInfo.ownerName}/{repositoryInfo.repositoryName}
+            </span>
+          </a>
+        </div>
+      )}
       <div>
         <LocalProjectAssetsArea project={project!} if={project} />
         <ParametersConfigurationArea

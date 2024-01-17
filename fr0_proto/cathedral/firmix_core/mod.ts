@@ -5,14 +5,11 @@ import {
   PatchingDataBlob,
   PatchingManifest,
 } from "~/base/types_project_edit.ts";
-import {
-  ProjectMetadataInput,
-  ProjectMetadataJsonFileContent,
-} from "~/base/types_project_metadata.ts";
+import { ProjectMetadataJsonFileContent } from "~/base/types_project_metadata.ts";
 import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
 
 export const firmixCore: FirmixCore = {
-  loadProjectMetadataFile_json(fileContentText: string): ProjectMetadataInput {
+  loadProjectMetadataFile_json(fileContentText) {
     const metadata = JSON.parse(
       fileContentText
     ) as ProjectMetadataJsonFileContent;
@@ -38,8 +35,8 @@ export const firmixCore: FirmixCore = {
       introduction,
       targetMcu,
       primaryTargetBoard,
-      sourceCodeUrl,
       tags,
+      sourceCodeUrl,
       dataEntries,
       editUiItems,
     };

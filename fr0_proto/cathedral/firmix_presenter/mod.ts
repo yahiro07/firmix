@@ -44,10 +44,10 @@ export const firmixPresenter: FirmixPresenter = {
       projectRootDirectoryHandle,
       firmwareDirectoryHandle,
       firmwareContainer,
-      metadataInput,
-      patchingManifest,
       thumbnailImageContainer,
       readmeFileContent,
+      metadataInput,
+      patchingManifest,
       assetFilePaths: {
         firmware: firmwareFile.filePath,
         metadata: metadataFile.filePath,

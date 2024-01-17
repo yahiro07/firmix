@@ -20,6 +20,11 @@ export type BinaryFileEntry = {
 export type LocalDevelopmentProject = {
   projectRootDirectoryHandle: FileSystemDirectoryHandle;
   firmwareDirectoryHandle: FileSystemDirectoryHandle;
+  firmwareContainer: FirmwareContainer;
+  thumbnailImageContainer: ImageFileContainer;
+  readmeFileContent: string;
+  metadataInput: ProjectMetadataInput;
+  patchingManifest: PatchingManifest;
   assetFilePaths: {
     metadata: string;
     firmware: string;
@@ -27,11 +32,6 @@ export type LocalDevelopmentProject = {
     readme: string;
     modFirmware?: string;
   };
-  firmwareContainer: FirmwareContainer;
-  thumbnailImageContainer: ImageFileContainer;
-  readmeFileContent: string;
-  metadataInput: ProjectMetadataInput;
-  patchingManifest: PatchingManifest;
 };
 
 export type LocalDevelopmentWork_Loaded = {

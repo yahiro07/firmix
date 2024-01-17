@@ -25,8 +25,8 @@ export type ProjectMetadataInput = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
-  sourceCodeUrl: string;
   tags: string[];
+  sourceCodeUrl: string;
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
 };

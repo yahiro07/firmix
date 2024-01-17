@@ -16,6 +16,7 @@ import {
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 import { firmixWorkBuilder } from "~/cathedral/firmix_work/mod.ts";
+import { useRepositoryDisplayInfo } from "~/common/repository_info_helper.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 
 const localProjectWorkStorage = createLocalStorageAdapter<LocalDevelopmentWork>(
@@ -41,6 +42,10 @@ export function useLocalProjectPageStore() {
 
   const project = (work?.state === "loaded" && work.project) || undefined;
   const errorMessage = (work?.state === "error" && work.message) || undefined;
+
+  const repositoryInfo = useRepositoryDisplayInfo(
+    project?.metadataInput.sourceCodeUrl
+  );
 
   const configurationsSourceItems = useMemo(
     () =>
@@ -138,6 +143,7 @@ export function useLocalProjectPageStore() {
     loadedFolderName,
     work,
     project,
+    repositoryInfo,
     configurationsSourceItems,
     errorMessage,
     ...actions,

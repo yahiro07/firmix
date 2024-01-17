@@ -4,9 +4,7 @@ export type CustomDataItemCore =
   | { dataKind: "pins"; pinCount: number }
   | { dataKind: "vl_pins"; pinsCapacity: number };
 
-export type CustomDataItem =
-  & { key: string }
-  & CustomDataItemCore;
+export type CustomDataItem = { key: string } & CustomDataItemCore;
 
 export type CustomDataEntry = {
   marker: string;
@@ -17,4 +15,11 @@ export type EditUiItem = {
   key: string;
   label: string;
   instruction: string;
+};
+
+export type ProjectRepositoryInfo = {
+  sourceCodeUrl: string;
+  repositoryName: string;
+  ownerName: string;
+  ownerIconUrl: string;
 };
