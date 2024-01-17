@@ -7,6 +7,7 @@ import {
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { useEffectAsync } from "~/aux/utils_fe/hooks.ts";
 import { ensureFileHandlePermission } from "~/aux/utils_fe/local_filesystem_helper.ts";
+import { ProjectTab } from "~/base/types_app_common.ts";
 import { LocalProjectSubmissionInputDto } from "~/base/types_dto.ts";
 import {
   LocalDevelopmentProject,
@@ -16,7 +17,6 @@ import {
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 import { firmixWorkBuilder } from "~/cathedral/firmix_work/mod.ts";
-import { useRepositoryDisplayInfo } from "~/common/repository_info_helper.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 
 const localProjectWorkStorage = createLocalStorageAdapter<LocalDevelopmentWork>(
@@ -31,9 +31,10 @@ export type LocalProjectPageStore = ReturnType<typeof useLocalProjectPageStore>;
 
 export function useLocalProjectPageStore() {
   const [
-    { work, projectDirectoryHandle },
-    { setWork, setProjectDirectoryHandle },
+    { projectTab, work, projectDirectoryHandle },
+    { setProjectTab, setWork, setProjectDirectoryHandle },
   ] = useReasyState({
+    projectTab: "info" as ProjectTab,
     projectDirectoryHandle: undefined as FileSystemDirectoryHandle | undefined,
     work: undefined as LocalDevelopmentWork | undefined,
   });
@@ -42,10 +43,6 @@ export function useLocalProjectPageStore() {
 
   const project = (work?.state === "loaded" && work.project) || undefined;
   const errorMessage = (work?.state === "error" && work.message) || undefined;
-
-  const repositoryInfo = useRepositoryDisplayInfo(
-    project?.metadataInput.sourceCodeUrl
-  );
 
   const configurationsSourceItems = useMemo(
     () =>
@@ -148,10 +145,11 @@ export function useLocalProjectPageStore() {
     loadedFolderName,
     work,
     project,
-    repositoryInfo,
     configurationsSourceItems,
     errorMessage,
     canSubmitProject,
+    projectTab,
+    setProjectTab,
     ...actions,
   };
 }

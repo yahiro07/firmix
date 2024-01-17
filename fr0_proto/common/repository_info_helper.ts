@@ -1,5 +1,5 @@
 import { useMemo } from "preact/hooks";
-import { ProjectRepositoryInfo } from "~/base/types_core_entity.ts";
+import { ProjectRepositoryInfo } from "~/base/types_app_common.ts";
 
 export function useRepositoryDisplayInfo(
   sourceCodeUrl: string | undefined

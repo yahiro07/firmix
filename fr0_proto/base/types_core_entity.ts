@@ -16,10 +16,3 @@ export type EditUiItem = {
   label: string;
   instruction: string;
 };
-
-export type ProjectRepositoryInfo = {
-  sourceCodeUrl: string;
-  repositoryName: string;
-  ownerName: string;
-  ownerIconUrl: string;
-};
