@@ -1,4 +1,4 @@
-import { useMemo } from "preact/hooks";
+import { useCallback, useMemo } from "preact/hooks";
 import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
 import { css } from "~/aux/resin/resin_css.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
@@ -17,35 +17,19 @@ import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAss
 import { LocalProjectLoadingArea } from "~/features/local_project/LocalProjectLoadingArea.tsx";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
 
-export default function LocalProjectDevelopmentPage() {
-  const [{ work }, { setWork }] = useReasyState({
+function useLocalDevelopmentPageStore() {
+  const [
+    { work, projectDirectoryHandle },
+    { setWork, setProjectDirectoryHandle },
+  ] = useReasyState({
+    projectDirectoryHandle: undefined as FileSystemDirectoryHandle | undefined,
     work: undefined as LocalDevelopmentWork | undefined,
   });
 
+  const folderLoaded = !!projectDirectoryHandle;
+
   const project = (work?.state === "loaded" && work.project) || undefined;
   const errorMessage = (work?.state === "error" && work.message) || undefined;
-
-  const submitEditItems = (editItems: ConfigurationEditItem[]) => {
-    if (!project) return;
-    const modFirmware = firmixPresenter.patchLocalProjectFirmware(
-      project,
-      editItems
-    );
-    downloadBinaryFileBlob(modFirmware.fileName, modFirmware.binaryBytes);
-  };
-
-  const submitEditItems2 = async (editItems: ConfigurationEditItem[]) => {
-    if (!project) return;
-    const modFirmware = firmixPresenter.patchLocalProjectFirmware(
-      project,
-      editItems
-    );
-    const newWork = await firmixWorkBuilder.workEmitModifiedFirmware(
-      work as LocalDevelopmentWork_Loaded,
-      modFirmware
-    );
-    setWork(newWork);
-  };
 
   const configurationsSourceItems = useMemo(
     () =>
@@ -57,27 +41,100 @@ export default function LocalProjectDevelopmentPage() {
     [project]
   );
 
-  const handleSubmit = async () => {
-    if (!project) return;
-    const projectInput: LocalProjectSubmissionInputDto = {
-      ...project.metadataInput,
-      firmwareObject: {
-        fileName: project.firmwareContainer.fileName,
-        binaryBytes: project.firmwareContainer.binaryBytes,
+  const actions = {
+    loadProjectFolder: useCallback(
+      async (dirHandle: FileSystemDirectoryHandle) => {
+        setProjectDirectoryHandle(dirHandle);
+        const loadedWork = await firmixWorkBuilder.loadLocalDevelopmentWork(
+          dirHandle
+        );
+        setWork(loadedWork);
       },
-      thumbnailObject: {
-        fileName: project.thumbnailImageContainer.fileName,
-        binaryBytes: project.thumbnailImageContainer.binaryBytes,
-        mimeType: project.thumbnailImageContainer.mimeType,
-      },
-      readmeFileContent: project.readmeFileContent,
-    };
-    await rpcClient.createProjectFromLocal({ projectInput });
+      []
+    ),
+    async reloadProjectFolder() {
+      if (projectDirectoryHandle) {
+        const loadedWork = await firmixWorkBuilder.loadLocalDevelopmentWork(
+          projectDirectoryHandle
+        );
+        setWork(loadedWork);
+      }
+    },
+    closeProjectFolder() {
+      setProjectDirectoryHandle(undefined);
+      setWork(undefined);
+    },
+    submitEditItems(editItems: ConfigurationEditItem[]) {
+      if (!project) return;
+      const modFirmware = firmixPresenter.patchLocalProjectFirmware(
+        project,
+        editItems
+      );
+      downloadBinaryFileBlob(modFirmware.fileName, modFirmware.binaryBytes);
+    },
+    async submitEditItems2(editItems: ConfigurationEditItem[]) {
+      if (!project) return;
+      const modFirmware = firmixPresenter.patchLocalProjectFirmware(
+        project,
+        editItems
+      );
+      const newWork = await firmixWorkBuilder.workEmitModifiedFirmware(
+        work as LocalDevelopmentWork_Loaded,
+        modFirmware
+      );
+      setWork(newWork);
+    },
+    async handleSubmit() {
+      if (!project) return;
+      const projectInput: LocalProjectSubmissionInputDto = {
+        ...project.metadataInput,
+        firmwareObject: {
+          fileName: project.firmwareContainer.fileName,
+          binaryBytes: project.firmwareContainer.binaryBytes,
+        },
+        thumbnailObject: {
+          fileName: project.thumbnailImageContainer.fileName,
+          binaryBytes: project.thumbnailImageContainer.binaryBytes,
+          mimeType: project.thumbnailImageContainer.mimeType,
+        },
+        readmeFileContent: project.readmeFileContent,
+      };
+      await rpcClient.createProjectFromLocal({ projectInput });
+    },
   };
+
+  return {
+    folderLoaded,
+    work,
+    project,
+    configurationsSourceItems,
+    errorMessage,
+    ...actions,
+  };
+}
+export default function LocalProjectDevelopmentPage() {
+  const {
+    folderLoaded,
+    loadProjectFolder,
+    reloadProjectFolder,
+    closeProjectFolder,
+    work,
+    project,
+    configurationsSourceItems,
+    submitEditItems,
+    submitEditItems2,
+    errorMessage,
+    handleSubmit,
+  } = useLocalDevelopmentPageStore();
 
   return (
     <div q={style}>
-      <LocalProjectLoadingArea setWork={setWork} />
+      <LocalProjectLoadingArea
+        folderLoaded={folderLoaded}
+        loadFolder={loadProjectFolder}
+        reloadFolder={reloadProjectFolder}
+        closeFolder={closeProjectFolder}
+      />
       <div>
         <LocalProjectAssetsArea project={project!} if={project} />
         <ParametersConfigurationArea
