@@ -13,7 +13,7 @@ type Props = {
 
 export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
   const {
-    folderLoaded,
+    loadedFolderName,
     loadProjectFolder,
     reloadProjectFolder,
     closeProjectFolder,
@@ -29,7 +29,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
   return (
     <div q={style}>
       <LocalProjectLoadingArea
-        folderLoaded={folderLoaded}
+        loadedFolderName={loadedFolderName}
         loadFolder={loadProjectFolder}
         reloadFolder={reloadProjectFolder}
         closeFolder={closeProjectFolder}
@@ -46,7 +46,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
         />
         <div if={errorMessage}>{errorMessage}</div>
       </div>
-      <button onClick={handleSubmit} disabled={!project}>
+      <button onClick={handleSubmit} if={project}>
         投稿
       </button>
       <div if={project}>{project?.readmeFileContent}</div>

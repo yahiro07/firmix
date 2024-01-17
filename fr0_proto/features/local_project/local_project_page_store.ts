@@ -37,7 +37,7 @@ export function useLocalProjectPageStore() {
     work: undefined as LocalDevelopmentWork | undefined,
   });
 
-  const folderLoaded = !!projectDirectoryHandle;
+  const loadedFolderName = projectDirectoryHandle?.name;
 
   const project = (work?.state === "loaded" && work.project) || undefined;
   const errorMessage = (work?.state === "error" && work.message) || undefined;
@@ -135,7 +135,7 @@ export function useLocalProjectPageStore() {
   };
 
   return {
-    folderLoaded,
+    loadedFolderName,
     work,
     project,
     configurationsSourceItems,

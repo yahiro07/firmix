@@ -1,16 +1,21 @@
 import { useEffect } from "preact/hooks";
+import { css } from "~/aux/resin/resin_css.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { flexHorizontalAligned } from "~/common/utility_styles.ts";
+import { IconIconify } from "~/components/IconIconify.tsx";
 
 type Props = {
-  folderLoaded: boolean;
+  loadedFolderName: string | undefined;
   loadFolder(dirHandle: FileSystemDirectoryHandle): void;
   reloadFolder(): void;
   closeFolder(): void;
 };
 
 export const LocalProjectLoadingArea = createFC<Props>(
-  ({ folderLoaded, loadFolder, reloadFolder, closeFolder }) => {
+  ({ loadedFolderName, loadFolder, reloadFolder, closeFolder }) => {
     useEffect(() => local.setupFolderDrop(loadFolder), []);
+
+    const loaded = !!loadedFolderName;
 
     const handleSelectFolder = async () => {
       const dirHandle = await window.showDirectoryPicker();
@@ -20,20 +25,37 @@ export const LocalProjectLoadingArea = createFC<Props>(
     };
 
     return (
-      <div>
-        <div>
-          <button onClick={handleSelectFolder}>フォルダ選択</button>
-          <button onClick={reloadFolder} disabled={!folderLoaded}>
-            再読み込み
-          </button>
-          <button onClick={closeFolder} disabled={!folderLoaded}>
-            閉じる
-          </button>
+      <div q={style}>
+        <button onClick={handleSelectFolder}>フォルダ選択</button>
+        <div if={loaded} q="folder">
+          <IconIconify spec="mdi:folder" />
+          <span>{loadedFolderName}</span>
         </div>
+        <div q="spacer" />
+        <button onClick={reloadFolder} if={loaded}>
+          再読み込み
+        </button>
+        <button onClick={closeFolder} if={loaded}>
+          閉じる
+        </button>
       </div>
     );
   }
 );
+
+const style = css`
+  padding: 8px;
+  ${flexHorizontalAligned(8)};
+  > button {
+    padding: 1px 4px;
+  }
+  > .folder {
+    ${flexHorizontalAligned(4)};
+  }
+  > .spacer {
+    margin-left: auto;
+  }
+`;
 
 const local = {
   setupFolderDrop(
