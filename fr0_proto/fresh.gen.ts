@@ -14,7 +14,7 @@ import * as $local_work from "./routes/local-work.tsx";
 import * as $project_projectId_ from "./routes/project/[projectId].tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $DevelopmentPage from "./islands/DevelopmentPage.tsx";
-import * as $LocalProjectDevelopmentPage from "./islands/LocalProjectDevelopmentPage.tsx";
+import * as $LocalProjectPage from "./islands/LocalProjectPage.tsx";
 import * as $MainLayout from "./islands/MainLayout.tsx";
 import * as $ProjectDetailPage from "./islands/ProjectDetailPage.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -35,7 +35,7 @@ const manifest = {
   islands: {
     "./islands/Counter.tsx": $Counter,
     "./islands/DevelopmentPage.tsx": $DevelopmentPage,
-    "./islands/LocalProjectDevelopmentPage.tsx": $LocalProjectDevelopmentPage,
+    "./islands/LocalProjectPage.tsx": $LocalProjectPage,
     "./islands/MainLayout.tsx": $MainLayout,
     "./islands/ProjectDetailPage.tsx": $ProjectDetailPage,
   },
