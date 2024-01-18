@@ -1,9 +1,7 @@
 #include <Arduino.h>
-#include <KermiteCore.h>
 #include <kpm/BoardLED.h>
 #include <kpm/BoardLED_Dummy.h>
 #include <kpm/BoardLED_NeoPixel.h>
-#include <kpm/KeyMatrix.h>
 
 typedef struct {
   const char marker[8];
