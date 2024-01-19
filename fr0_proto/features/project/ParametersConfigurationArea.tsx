@@ -7,7 +7,7 @@ import {
   ConfigurationSourceItemWrapper,
 } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
+import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
 
 type Props = {
   configurationSourceItems: ConfigurationSourceItemWrapper[];
@@ -18,17 +18,15 @@ type Props = {
 };
 
 export const ParametersConfigurationArea = createFC<Props>(
-  (
-    {
-      configurationSourceItems: configurationSourceItemsRaw,
-      submitEditItems,
-      submitButtonLabel,
-      submit2,
-      submit2Label,
-    },
-  ) => {
-    const hasError = configurationSourceItemsRaw.some((it) =>
-      it.dataKind === "error"
+  ({
+    configurationSourceItems: configurationSourceItemsRaw,
+    submitEditItems,
+    submitButtonLabel,
+    submit2,
+    submit2Label,
+  }) => {
+    const hasError = configurationSourceItemsRaw.some(
+      (it) => it.dataKind === "error"
     );
     const configurationSourceItems =
       configurationSourceItemsRaw as ConfigurationSourceItem[];
@@ -37,25 +35,24 @@ export const ParametersConfigurationArea = createFC<Props>(
 
     const handleDownload = (destFn: 1 | 2) => {
       try {
-        const configurationEditItems: (ConfigurationEditItem)[] =
-          configurationSourceItems.map(
-            (sourceItem) => {
-              const { key } = sourceItem;
-              const inputElementId = `${inputIdPrefix}${key}`;
-              const element = document.getElementById(
-                inputElementId,
-              ) as HTMLInputElement;
-              if (!element) {
-                raiseError(`target element not found for ${inputElementId}`);
-              }
-              const text = element.value;
-              const values = firmixPresenter.splitSourceItemEditTextValues(
+        const configurationEditItems: ConfigurationEditItem[] =
+          configurationSourceItems.map((sourceItem) => {
+            const { key } = sourceItem;
+            const inputElementId = `${inputIdPrefix}${key}`;
+            const element = document.getElementById(
+              inputElementId
+            ) as HTMLInputElement;
+            if (!element) {
+              raiseError(`target element not found for ${inputElementId}`);
+            }
+            const text = element.value;
+            const values =
+              firmixCore_firmwareConfiguration.splitSourceItemEditTextValues(
                 sourceItem,
-                text,
+                text
               );
-              return { key, values };
-            },
-          );
+            return { key, values };
+          });
         if (destFn === 1) {
           submitEditItems(configurationEditItems);
         } else {
@@ -68,11 +65,7 @@ export const ParametersConfigurationArea = createFC<Props>(
 
     return (
       <div q={style}>
-        {hasError && (
-          <div>
-            カスタムデータの定義にエラーがあります
-          </div>
-        )}
+        {hasError && <div>カスタムデータの定義にエラーがあります</div>}
         {!hasError && (
           <div>
             {configurationSourceItems.map((item) => (
@@ -99,7 +92,7 @@ export const ParametersConfigurationArea = createFC<Props>(
         </button>
       </div>
     );
-  },
+  }
 );
 
 const style = css`
@@ -109,9 +102,7 @@ const style = css`
 `;
 
 const local = {
-  configurationSourceItem_getCountsText(
-    item: ConfigurationSourceItem,
-  ): string {
+  configurationSourceItem_getCountsText(item: ConfigurationSourceItem): string {
     if (item.dataKind === "pins") {
       return `(gpio x${item.pinCount})`;
     } else if (item.dataKind === "vl_pins") {

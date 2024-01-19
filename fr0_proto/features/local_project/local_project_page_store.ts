@@ -15,8 +15,8 @@ import {
 } from "~/base/types_dto.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
-import { firmixWorkBuilder } from "~/cathedral/firmix_work/mod.ts";
+import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
+import { firmixPresenter_localProjectEdit } from "~/cathedral/firmix_presenter_local_project_edit/mod.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 
 const localProjectStorage =
@@ -55,7 +55,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
 
   const configurationsSourceItems = useMemo(() => {
     if (project?.assetMetadata.metadataInput) {
-      return firmixPresenter.buildConfigurationSourceItems(
+      return firmixCore_firmwareConfiguration.buildConfigurationSourceItems(
         project.assetMetadata.metadataInput
       );
     }
@@ -93,7 +93,9 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
       async (dirHandle: FileSystemDirectoryHandle) => {
         try {
           const loadedProject =
-            await firmixWorkBuilder.loadLocalDevelopmentProject(dirHandle);
+            await firmixPresenter_localProjectEdit.loadLocalDevelopmentProject(
+              dirHandle
+            );
           coreActions.wrapSetProject(loadedProject);
           coreActions.wrapSetProjectDirectoryHandle(dirHandle);
         } catch (error) {
@@ -109,7 +111,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
         );
         if (permitted) {
           const loadedProject =
-            await firmixWorkBuilder.loadLocalDevelopmentProject(
+            await firmixPresenter_localProjectEdit.loadLocalDevelopmentProject(
               projectDirectoryHandle
             );
           coreActions.wrapSetProject(loadedProject);
@@ -122,22 +124,25 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
     },
     submitEditItems(editItems: ConfigurationEditItem[]) {
       if (!project) return;
-      const modFirmware = firmixPresenter.patchLocalProjectFirmware(
-        project,
-        editItems
-      );
+      const modFirmware =
+        firmixPresenter_localProjectEdit.patchLocalProjectFirmware(
+          project,
+          editItems
+        );
       downloadBinaryFileBlob(modFirmware.fileName, modFirmware.binaryBytes);
     },
     async submitEditItems2(editItems: ConfigurationEditItem[]) {
       if (!project) return;
-      const modFirmware = firmixPresenter.patchLocalProjectFirmware(
-        project,
-        editItems
-      );
-      const newProject = await firmixWorkBuilder.projectEmitModifiedFirmware(
-        project,
-        modFirmware
-      );
+      const modFirmware =
+        firmixPresenter_localProjectEdit.patchLocalProjectFirmware(
+          project,
+          editItems
+        );
+      const newProject =
+        await firmixPresenter_localProjectEdit.projectEmitModifiedFirmware(
+          project,
+          modFirmware
+        );
       coreActions.wrapSetProject(newProject);
     },
     async submitProject() {

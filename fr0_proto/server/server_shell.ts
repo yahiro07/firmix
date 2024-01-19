@@ -7,8 +7,8 @@ import {
   ProjectDetailDto,
 } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmwareDataInjector } from "~/cathedral/firmix_core/firmware_data_injector.ts";
-import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
+import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
+import { firmwareDataInjector } from "~/cathedral/firmix_core_firmware_patching/firmware_data_injector.ts";
 import { objectStorageBridge } from "~/server/depot/object_storage_bridge_instance.ts";
 import { storehouse } from "~/server/depot/storehouse.ts";
 
@@ -97,7 +97,7 @@ const local = {
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
       configurationSourceItemWrappers:
-        firmixPresenter.buildConfigurationSourceItems(project),
+        firmixCore_firmwareConfiguration.buildConfigurationSourceItems(project),
     };
   },
 };

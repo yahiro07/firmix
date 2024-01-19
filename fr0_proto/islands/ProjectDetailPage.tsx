@@ -3,7 +3,7 @@ import { raiseError } from "~/aux/utils/error_util.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
+import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
 import { serverShell } from "~/server/server_shell.ts";
 
 type Props = {
@@ -11,39 +11,38 @@ type Props = {
 };
 
 export default function ProjectDetailPage({ project }: Props) {
-  const hasError = project.configurationSourceItemWrappers.some((it) =>
-    it.dataKind === "error"
+  const hasError = project.configurationSourceItemWrappers.some(
+    (it) => it.dataKind === "error"
   );
-  const configurationSourceItems = project
-    .configurationSourceItemWrappers as ConfigurationSourceItem[];
+  const configurationSourceItems =
+    project.configurationSourceItemWrappers as ConfigurationSourceItem[];
 
   const inputIdPrefix = `config-input-`;
 
   const handleDownload = async () => {
     try {
       const configurationEditItems: ConfigurationEditItem[] =
-        configurationSourceItems.map(
-          (sourceItem) => {
-            const { key } = sourceItem;
-            const inputElementId = `${inputIdPrefix}${key}`;
-            const element = document.getElementById(
-              inputElementId,
-            ) as HTMLInputElement;
-            if (!element) {
-              raiseError(`target element not found for ${inputElementId}`);
-            }
-            const text = element.value;
-            const values = firmixPresenter.splitSourceItemEditTextValues(
+        configurationSourceItems.map((sourceItem) => {
+          const { key } = sourceItem;
+          const inputElementId = `${inputIdPrefix}${key}`;
+          const element = document.getElementById(
+            inputElementId
+          ) as HTMLInputElement;
+          if (!element) {
+            raiseError(`target element not found for ${inputElementId}`);
+          }
+          const text = element.value;
+          const values =
+            firmixCore_firmwareConfiguration.splitSourceItemEditTextValues(
               sourceItem,
-              text,
+              text
             );
-            return { key, values };
-          },
-        );
-      const { fileName, fileContentBytes } = await serverShell
-        .generatePatchedFirmware(
+          return { key, values };
+        });
+      const { fileName, fileContentBytes } =
+        await serverShell.generatePatchedFirmware(
           project.projectId,
-          configurationEditItems,
+          configurationEditItems
         );
       downloadBinaryFileBlob(fileName, fileContentBytes);
     } catch (error) {
@@ -53,20 +52,10 @@ export default function ProjectDetailPage({ project }: Props) {
 
   return (
     <div q={style}>
-      <div>
-        project name: {project.projectName}
-      </div>
-      <div>
-        introduction: {project.introduction}
-      </div>
-      <div>
-        target mcu: {project.targetMcu}
-      </div>
-      {hasError && (
-        <div>
-          カスタムデータの定義にエラーがあります
-        </div>
-      )}
+      <div>project name: {project.projectName}</div>
+      <div>introduction: {project.introduction}</div>
+      <div>target mcu: {project.targetMcu}</div>
+      {hasError && <div>カスタムデータの定義にエラーがあります</div>}
       {!hasError && (
         <div>
           {configurationSourceItems.map((item) => (
@@ -78,7 +67,9 @@ export default function ProjectDetailPage({ project }: Props) {
           ))}
         </div>
       )}
-      <button onClick={handleDownload} disabled={hasError}>download</button>
+      <button onClick={handleDownload} disabled={hasError}>
+        download
+      </button>
     </div>
   );
 }
