@@ -19,17 +19,14 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
     loadProjectFolder,
     reloadProjectFolder,
     closeProjectFolder,
-    work,
     project,
     configurationsSourceItems,
     submitEditItems,
     submitEditItems2,
-    errorMessage,
     canSubmitProject,
     submitProject,
     projectTab,
     setProjectTab,
-    markdownSourceText,
   } = store;
 
   return (
@@ -49,7 +46,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
         setProjectTab={setProjectTab}
       />
       <LocalProjectAssetsArea project={project!} if={project} />
-      <div if={errorMessage}>{errorMessage}</div>
+      {/* <div if={errorMessage}>{errorMessage}</div> */}
       <ParametersConfigurationArea
         configurationSourceItems={configurationsSourceItems!}
         submitEditItems={submitEditItems}
@@ -63,7 +60,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
         project={project!}
         if={project && projectTab === "info"}
       />
-      <div q="blank-filler" if={!work}>
+      <div q="blank-filler" if={!project}>
         <IconIconify spec="ph:folder-thin" q="folder-icon" />
         <div q="text">
           ローカルプロジェクトのフォルダを

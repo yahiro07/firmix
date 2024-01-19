@@ -12,19 +12,14 @@ import {
   ConfigurationSourceItemWrapper,
   LocalProjectSubmissionInputDto,
 } from "~/base/types_dto.ts";
-import {
-  LocalDevelopmentProject,
-  LocalDevelopmentWork,
-  LocalDevelopmentWork_Loaded,
-} from "~/base/types_local_project.ts";
+import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
 import { firmixWorkBuilder } from "~/cathedral/firmix_work/mod.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 
-const localProjectWorkStorage = createLocalStorageAdapter<LocalDevelopmentWork>(
-  "fr0_local_project_work"
-);
+const localProjectStorage =
+  createLocalStorageAdapter<LocalDevelopmentProject>("fr0_local_project");
 const projectDirectoryHandleStorage =
   createIndexedDbStorageAdapter<FileSystemDirectoryHandle>(
     "fr0_local_project_directory_handle"
@@ -32,11 +27,10 @@ const projectDirectoryHandleStorage =
 
 export type LocalProjectPageStore = {
   loadedFolderName?: string;
-  work?: LocalDevelopmentWork;
+  // work?: LocalDevelopmentWork;
   project?: LocalDevelopmentProject;
   configurationsSourceItems?: ConfigurationSourceItemWrapper[];
-  errorMessage?: string;
-  markdownSourceText?: string;
+  // errorMessage?: string;
   canSubmitProject: boolean;
   projectTab: ProjectTab;
   loadProjectFolder: (dirHandle: FileSystemDirectoryHandle) => Promise<void>;
@@ -48,20 +42,21 @@ export type LocalProjectPageStore = {
   setProjectTab: (value: ProjectTab) => void;
 };
 
-export function useLocalProjectPageStore() {
+export function useLocalProjectPageStore(): LocalProjectPageStore {
   const [
-    { projectTab, work, projectDirectoryHandle },
-    { setProjectTab, setWork, setProjectDirectoryHandle },
+    { projectTab, project, projectDirectoryHandle },
+    { setProjectTab, setProject, setProjectDirectoryHandle },
   ] = useReasyState({
     projectTab: "info" as ProjectTab,
     projectDirectoryHandle: undefined as FileSystemDirectoryHandle | undefined,
-    work: undefined as LocalDevelopmentWork | undefined,
+    // work: undefined as LocalDevelopmentWork | undefined,
+    project: undefined as LocalDevelopmentProject | undefined,
   });
 
   const loadedFolderName = projectDirectoryHandle?.name;
 
-  const project = (work?.state === "loaded" && work.project) || undefined;
-  const errorMessage = (work?.state === "error" && work.message) || undefined;
+  // const project = (work?.state === "loaded" && work.project) || undefined;
+  // const errorMessage = (work?.state === "error" && work.message) || undefined;
 
   const configurationsSourceItems = useMemo(
     () =>
@@ -75,12 +70,12 @@ export function useLocalProjectPageStore() {
 
   const canSubmitProject = !!project;
 
-  const markdownSourceText = project?.readmeFileContent;
+  // const markdownSourceText = project?.readmeFileContent;
 
   useEffectAsync(async () => {
-    const tmpWork = localProjectWorkStorage.read();
-    if (tmpWork) {
-      setWork(tmpWork);
+    const tmpProject = localProjectStorage.read();
+    if (tmpProject) {
+      setProject(tmpProject);
     }
     const tmpHandle = await projectDirectoryHandleStorage.read();
     if (tmpHandle) {
@@ -89,9 +84,9 @@ export function useLocalProjectPageStore() {
   }, []);
 
   const coreActions = {
-    wrapSetWork(newWork: LocalDevelopmentWork | undefined) {
-      setWork(newWork);
-      localProjectWorkStorage.write(newWork);
+    wrapSetProject(newProject: LocalDevelopmentProject | undefined) {
+      setProject(newProject);
+      localProjectStorage.write(newProject);
     },
     wrapSetProjectDirectoryHandle(
       newDirHandle: FileSystemDirectoryHandle | undefined
@@ -104,11 +99,14 @@ export function useLocalProjectPageStore() {
   const actions = {
     loadProjectFolder: useCallback(
       async (dirHandle: FileSystemDirectoryHandle) => {
-        coreActions.wrapSetProjectDirectoryHandle(dirHandle);
-        const loadedWork = await firmixWorkBuilder.loadLocalDevelopmentWork(
-          dirHandle
-        );
-        coreActions.wrapSetWork(loadedWork);
+        try {
+          const loadedProject =
+            await firmixWorkBuilder.loadLocalDevelopmentProject(dirHandle);
+          coreActions.wrapSetProject(loadedProject);
+          coreActions.wrapSetProjectDirectoryHandle(dirHandle);
+        } catch (error) {
+          alert(error.message ?? error);
+        }
       },
       []
     ),
@@ -118,16 +116,17 @@ export function useLocalProjectPageStore() {
           projectDirectoryHandle
         );
         if (permitted) {
-          const loadedWork = await firmixWorkBuilder.loadLocalDevelopmentWork(
-            projectDirectoryHandle
-          );
-          coreActions.wrapSetWork(loadedWork);
+          const loadedProject =
+            await firmixWorkBuilder.loadLocalDevelopmentProject(
+              projectDirectoryHandle
+            );
+          coreActions.wrapSetProject(loadedProject);
         }
       }
     },
     closeProjectFolder() {
       coreActions.wrapSetProjectDirectoryHandle(undefined);
-      coreActions.wrapSetWork(undefined);
+      coreActions.wrapSetProject(undefined);
     },
     submitEditItems(editItems: ConfigurationEditItem[]) {
       if (!project) return;
@@ -143,11 +142,11 @@ export function useLocalProjectPageStore() {
         project,
         editItems
       );
-      const newWork = await firmixWorkBuilder.workEmitModifiedFirmware(
-        work as LocalDevelopmentWork_Loaded,
+      const newProject = await firmixWorkBuilder.projectEmitModifiedFirmware(
+        project,
         modFirmware
       );
-      coreActions.wrapSetWork(newWork);
+      coreActions.wrapSetProject(newProject);
     },
     async submitProject() {
       if (!project) return;
@@ -164,14 +163,11 @@ export function useLocalProjectPageStore() {
 
   return {
     loadedFolderName,
-    work,
     project,
     configurationsSourceItems,
-    errorMessage,
     canSubmitProject,
     projectTab,
     setProjectTab,
-    markdownSourceText,
     ...actions,
   };
 }
