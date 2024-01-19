@@ -1,4 +1,4 @@
-import { css } from "~/aux/resin/resin_css.ts";
+import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";

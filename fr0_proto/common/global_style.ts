@@ -1,4 +1,4 @@
-import { css } from "~/aux/resin/resin_css.ts";
+import { css } from "resin";
 
 export const globalStyle = css`
   * {

@@ -35,7 +35,8 @@
     "@aws-sdk/client-s3": "https://esm.sh/@aws-sdk/client-s3@3.490.0",
     // "mongodb": "npm:mongodb",
     "gfm": "https://deno.land/x/gfm@0.5.0/mod.ts",
-    "idb-keyval": "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js"
+    "idb-keyval": "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js",
+    "resin": "https://deno.land/x/resin@v0.1.7/mod.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

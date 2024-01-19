@@ -1,5 +1,5 @@
 import { useEffect } from "preact/hooks";
-import { css } from "~/aux/resin/resin_css.ts";
+import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
 import { IconIconify } from "~/components/IconIconify.tsx";

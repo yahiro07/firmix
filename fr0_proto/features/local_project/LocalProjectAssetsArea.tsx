@@ -1,4 +1,4 @@
-import { css, domStyled } from "~/aux/resin/resin_css.ts";
+import { css, domStyled } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import {
   LocalAssetBase,
@@ -105,6 +105,7 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
       <div q="thumbnail-box" if={thumbnailImageDataUrl}>
         <img src={thumbnailImageDataUrl} />
       </div>
+      <div q="foo" />
     </div>
   );
 });

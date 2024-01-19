@@ -1,5 +1,5 @@
 import { type PageProps } from "$fresh/server.ts";
-import { ResinCssEmitter, ResinCssGlobalStyle } from "~/aux/resin/resin_css.ts";
+import { ResinCssEmitter, ResinCssGlobalStyle } from "resin";
 import { globalStyle } from "~/common/global_style.ts";
 
 export default function App({ Component }: PageProps) {

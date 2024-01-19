@@ -1,4 +1,4 @@
-import { css } from "~/aux/resin/resin_css.ts";
+import { css } from "resin";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
