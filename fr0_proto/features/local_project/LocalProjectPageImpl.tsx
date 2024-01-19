@@ -6,14 +6,10 @@ import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAss
 import { LocalProjectHeadingArea } from "~/features/local_project/LocalProjectHeadingArea.tsx";
 import { LocalProjectLoadingArea } from "~/features/local_project/LocalProjectLoadingArea.tsx";
 import { LocalProjectReadmeArea } from "~/features/local_project/LocalProjectReadmeArea.tsx";
-import { LocalProjectPageStore } from "~/features/local_project/local_project_page_store.ts";
+import { useLocalProjectPageStore } from "~/features/local_project/local_project_page_store.ts";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
 
-type Props = {
-  store: LocalProjectPageStore;
-};
-
-export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
+export const LocalProjectPageImpl = createFC(() => {
   const {
     loadedFolderName,
     loadProjectFolder,
@@ -27,8 +23,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ store }) => {
     submitProject,
     projectTab,
     setProjectTab,
-  } = store;
-
+  } = useLocalProjectPageStore();
   return (
     <div q={style}>
       <LocalProjectLoadingArea

@@ -1,8 +1,6 @@
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { LocalProjectPageImpl } from "~/features/local_project/LocalProjectPageImpl.tsx";
-import { useLocalProjectPageStore } from "~/features/local_project/local_project_page_store.ts";
 
 export const LocalProjectPage = createFC(() => {
-  const store = useLocalProjectPageStore();
-  return <LocalProjectPageImpl store={store} />;
+  return <LocalProjectPageImpl />;
 });
