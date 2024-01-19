@@ -26,7 +26,7 @@ export const firmixWorkBuilder = {
     const project = await firmixPresenter.buildLocalDevelopmentProject({
       projectRootDirectoryHandle: dirHandle,
       firmwareDirectoryHandle,
-      metadataFile: metadataFile!,
+      metadataFile,
       firmwareFile,
       thumbnailFile,
       readmeFile,

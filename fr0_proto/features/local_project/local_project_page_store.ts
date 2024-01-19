@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from "preact/hooks";
 import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
+import { raiseError } from "~/aux/utils/error_util.ts";
 import {
   createIndexedDbStorageAdapter,
   createLocalStorageAdapter,
@@ -27,10 +28,8 @@ const projectDirectoryHandleStorage =
 
 export type LocalProjectPageStore = {
   loadedFolderName?: string;
-  // work?: LocalDevelopmentWork;
   project?: LocalDevelopmentProject;
   configurationsSourceItems?: ConfigurationSourceItemWrapper[];
-  // errorMessage?: string;
   canSubmitProject: boolean;
   projectTab: ProjectTab;
   loadProjectFolder: (dirHandle: FileSystemDirectoryHandle) => Promise<void>;
@@ -49,28 +48,21 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
   ] = useReasyState({
     projectTab: "info" as ProjectTab,
     projectDirectoryHandle: undefined as FileSystemDirectoryHandle | undefined,
-    // work: undefined as LocalDevelopmentWork | undefined,
     project: undefined as LocalDevelopmentProject | undefined,
   });
 
   const loadedFolderName = projectDirectoryHandle?.name;
 
-  // const project = (work?.state === "loaded" && work.project) || undefined;
-  // const errorMessage = (work?.state === "error" && work.message) || undefined;
-
-  const configurationsSourceItems = useMemo(
-    () =>
-      (project &&
-        firmixPresenter.buildConfigurationSourceItems(
-          project.patchingManifest
-        )) ||
-      undefined,
-    [project]
-  );
+  const configurationsSourceItems = useMemo(() => {
+    if (project?.assetMetadata.metadataInput) {
+      return firmixPresenter.buildConfigurationSourceItems(
+        project.assetMetadata.metadataInput
+      );
+    }
+    return undefined;
+  }, [project]);
 
   const canSubmitProject = !!project;
-
-  // const markdownSourceText = project?.readmeFileContent;
 
   useEffectAsync(async () => {
     const tmpProject = localProjectStorage.read();
@@ -176,8 +168,11 @@ const local = {
   mapLocalDevelopmentProjectToLocalProjectSubmissionInputDto(
     project: LocalDevelopmentProject
   ): LocalProjectSubmissionInputDto {
+    if (!project.assetMetadata.metadataInput) {
+      raiseError(`invalid project to submit`);
+    }
     return {
-      ...project.metadataInput,
+      ...project.assetMetadata.metadataInput,
       firmwareObject: {
         fileName: project.firmwareContainer.fileName,
         binaryBytes: project.firmwareContainer.binaryBytes,

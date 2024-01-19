@@ -17,8 +17,18 @@ type Props = {
 
 export const LocalProjectHeadingArea = createFC<Props>(
   ({ project, projectTab, setProjectTab }) => {
+    const {
+      assetMetadata: { metadataInput },
+    } = project;
+    if (!metadataInput) {
+      return (
+        <div q={style}>
+          メタデータファイルが存在しないか、内容にエラーがあります。
+        </div>
+      );
+    }
     const repositoryInfo = useRepositoryDisplayInfo(
-      project.metadataInput.sourceCodeUrl
+      metadataInput.sourceCodeUrl
     );
 
     const toggleProjectTab = () => {
@@ -29,7 +39,7 @@ export const LocalProjectHeadingArea = createFC<Props>(
       <div q={style}>
         <h2>
           <IconIconify spec="icon-park-twotone:chip" q="icon" />
-          <span>{project.metadataInput.projectName}</span>
+          <span>{metadataInput.projectName}</span>
         </h2>
         {repositoryInfo && (
           <div q="repository-info">
@@ -51,7 +61,7 @@ export const LocalProjectHeadingArea = createFC<Props>(
         )}
         <div q="repository-info" if={!repositoryInfo} />
         <div q="tags">
-          {project.metadataInput.tags.map((tag) => (
+          {metadataInput.tags.map((tag) => (
             <div key={tag} q="tag">
               {tag}
             </div>

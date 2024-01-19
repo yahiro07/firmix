@@ -19,7 +19,7 @@ const AssetEntry = createFC<{
   const iconSpec = {
     valid: "mdi:check",
     warning: "mdi:warning",
-    error: "mdi:error",
+    error: "mdi:error-outline",
   }[asset.validity];
   return domStyled(
     <div>
@@ -48,7 +48,7 @@ const AssetEntry = createFC<{
 
 export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
   const {
-    patchingManifest,
+    // patchingManifest,
     assetFilePaths,
     thumbnailImageContainer: thumb,
   } = project;
@@ -61,7 +61,7 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
       </h3>
       {/* <div>ターゲットMCU:{patchingManifest.targetMcu}</div> */}
       <AssetEntry title="Readmeファイル" asset={project.assetReadme} />
-      <div>メタデータファイル: {assetFilePaths.metadata}</div>
+      <AssetEntry title="メタデータファイル" asset={project.assetMetadata} />
       <div>
         サムネイルファイル: {assetFilePaths.thumbnail} ({imageSizeText})
       </div>

@@ -3,7 +3,11 @@ import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
 import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 import { FirmixPresenter } from "~/base/types_firmix_domain_modules.ts";
-import { LocalAsset_Readme } from "~/base/types_local_project.ts";
+import {
+  LocalAsset_Metadata,
+  LocalAsset_Readme,
+  TextFileEntry,
+} from "~/base/types_local_project.ts";
 import {
   FirmwareContainer,
   PatchingDataBlob,
@@ -11,16 +15,26 @@ import {
 import { firmixCore } from "~/cathedral/firmix_core/mod.ts";
 import { imageFileLoader } from "~/cathedral/firmix_presenter/image_file_loader.ts";
 
-export const firmixPresenter: FirmixPresenter = {
-  async buildLocalDevelopmentProject(inputResources) {
-    const {
-      metadataFile,
-      firmwareFile,
-      thumbnailFile,
-      readmeFile,
-      projectRootDirectoryHandle,
-      firmwareDirectoryHandle,
-    } = inputResources;
+const local = {
+  buildAssetReadme(readmeFile: TextFileEntry | undefined): LocalAsset_Readme {
+    return {
+      validity: readmeFile ? "valid" : "warning",
+      filePath: readmeFile?.filePath ?? "readme.md",
+      fileContent: readmeFile?.contentText ?? "",
+      errorLines: readmeFile ? [] : ["ファイルがありません。"],
+    };
+  },
+  buildAssetMetadata(
+    metadataFile: TextFileEntry | undefined
+  ): LocalAsset_Metadata {
+    if (!metadataFile) {
+      return {
+        validity: "error",
+        filePath: "metadata.fm1.json",
+        metadataInput: undefined,
+        errorLines: ["ファイルがありません。"],
+      };
+    }
     const metadataInput = firmixCore.loadProjectMetadataFile_json(
       metadataFile.contentText
     );
@@ -31,7 +45,28 @@ export const firmixPresenter: FirmixPresenter = {
     ]);
     const validationResult =
       firmixCore.checkPatchingManifestValidity(patchingManifest);
-    if (validationResult) raiseError(validationResult);
+
+    const errorLines = validationResult ? [validationResult] : [];
+    const validity = errorLines.length === 0 ? "valid" : "error";
+    return {
+      validity,
+      filePath: metadataFile.filePath,
+      metadataInput,
+      errorLines,
+    };
+  },
+};
+export const firmixPresenter: FirmixPresenter = {
+  async buildLocalDevelopmentProject(inputResources) {
+    const {
+      metadataFile,
+      firmwareFile,
+      thumbnailFile,
+      readmeFile,
+      projectRootDirectoryHandle,
+      firmwareDirectoryHandle,
+    } = inputResources;
+
     const firmwareContainer: FirmwareContainer = {
       kind: "uf2",
       fileName: filePathHelper.getFileNameFromFilePath(firmwareFile.filePath),
@@ -42,28 +77,24 @@ export const firmixPresenter: FirmixPresenter = {
       thumbnailFile
     );
 
-    const assetReadme: LocalAsset_Readme = {
-      validity: readmeFile ? "valid" : "warning",
-      filePath: readmeFile?.filePath ?? "readme.md",
-      fileContent: readmeFile?.contentText ?? "",
-      errorLines: readmeFile ? [] : ["ファイルがありません。"],
-    };
-
+    const assetReadme = local.buildAssetReadme(readmeFile);
+    const assetMetadata = local.buildAssetMetadata(metadataFile);
     return {
       projectRootDirectoryHandle,
       firmwareDirectoryHandle,
       firmwareContainer,
       thumbnailImageContainer,
       // readmeFileContent,
-      metadataInput,
-      patchingManifest,
+      // metadataInput,
+      // patchingManifest,
       assetFilePaths: {
         firmware: firmwareFile.filePath,
-        metadata: metadataFile.filePath,
+        // metadata: metadataFile.filePath,
         // readme: readmeFile.filePath,
         thumbnail: thumbnailFile.filePath,
       },
       assetReadme,
+      assetMetadata,
     };
   },
   buildConfigurationSourceItems(patchingManifest) {
@@ -108,11 +139,12 @@ export const firmixPresenter: FirmixPresenter = {
     });
   },
   patchLocalProjectFirmware(project, editItems) {
-    const { firmwareContainer, patchingManifest } = project;
+    const { firmwareContainer } = project;
     const patchingDataBlob: PatchingDataBlob = { editItems };
+    if (!project.assetMetadata.metadataInput) raiseError(`invalid condition`);
     return firmixCore.fabricateFirmware(
       firmwareContainer,
-      patchingManifest,
+      project.assetMetadata.metadataInput,
       patchingDataBlob
     );
   },

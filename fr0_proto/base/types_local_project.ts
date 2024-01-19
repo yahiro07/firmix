@@ -1,7 +1,6 @@
 import {
   FirmwareContainer,
   ImageFileContainer,
-  PatchingManifest,
 } from "~/base/types_project_edit.ts";
 import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 
@@ -48,9 +47,12 @@ export type LocalAsset_Readme = {
   errorLines: string[];
 };
 
-export type LocalAsset_Metadata = LocalProjectAsset<{
-  metadataInput: ProjectMetadataInput;
-}>;
+export type LocalAsset_Metadata = {
+  validity: LocalAssetValidity;
+  filePath: string;
+  metadataInput: ProjectMetadataInput | undefined;
+  errorLines: string[];
+};
 
 export type LocalDevelopmentProject = {
   projectRootDirectoryHandle: FileSystemDirectoryHandle;
@@ -58,16 +60,17 @@ export type LocalDevelopmentProject = {
   firmwareContainer: FirmwareContainer;
   thumbnailImageContainer: ImageFileContainer;
   // readmeFileContent: string;
-  metadataInput: ProjectMetadataInput;
-  patchingManifest: PatchingManifest;
+  // metadataInput: ProjectMetadataInput;
+  // patchingManifest: PatchingManifest;
   assetFilePaths: {
-    metadata: string;
+    // metadata: string;
     firmware: string;
     thumbnail: string;
     // readme: string;
     modFirmware?: string;
   };
   assetReadme: LocalAsset_Readme;
+  assetMetadata: LocalAsset_Metadata;
 };
 
 export type LocalDevelopmentProject2 = {

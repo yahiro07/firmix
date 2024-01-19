@@ -32,7 +32,7 @@ export type FirmixCore = {
 export type LocalProjectInputResources = {
   projectRootDirectoryHandle: FileSystemDirectoryHandle;
   firmwareDirectoryHandle: FileSystemDirectoryHandle;
-  metadataFile: TextFileEntry;
+  metadataFile?: TextFileEntry;
   firmwareFile: BinaryFileEntry;
   readmeFile?: TextFileEntry;
   thumbnailFile: BinaryFileEntry;
