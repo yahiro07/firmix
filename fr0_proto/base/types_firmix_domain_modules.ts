@@ -17,6 +17,7 @@ import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 
 export type FirmixCore = {
   loadProjectMetadataFile_json(fileContentText: string): ProjectMetadataInput;
+  validateMetadataInput(metadataInput: ProjectMetadataInput): string;
   checkPatchingManifestValidity(manifest: PatchingManifest): string;
   checkPatchingDataBlobValidity(
     manifest: PatchingManifest,
@@ -31,11 +32,12 @@ export type FirmixCore = {
 
 export type LocalProjectInputResources = {
   projectRootDirectoryHandle: FileSystemDirectoryHandle;
-  firmwareDirectoryHandle: FileSystemDirectoryHandle;
+  firmwareDirectoryHandle?: FileSystemDirectoryHandle;
   metadataFile?: TextFileEntry;
-  firmwareFile: BinaryFileEntry;
+  firmwareFile?: BinaryFileEntry;
   readmeFile?: TextFileEntry;
   thumbnailFile?: BinaryFileEntry;
+  firmwareFileLoadingErrorText?: string;
 };
 
 export type FirmixPresenter = {

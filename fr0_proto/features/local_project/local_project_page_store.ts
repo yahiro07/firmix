@@ -171,15 +171,16 @@ const local = {
     const {
       assetMetadata: { metadataInput },
       assetThumbnail: { thumbnailContainer },
+      assetFirmware: { firmwareContainer },
     } = project;
-    if (!(metadataInput && thumbnailContainer)) {
+    if (!(metadataInput && thumbnailContainer && firmwareContainer)) {
       raiseError(`invalid project to submit`);
     }
     return {
       ...metadataInput,
       firmwareObject: {
-        fileName: project.firmwareContainer.fileName,
-        binaryBytes: project.firmwareContainer.binaryBytes,
+        fileName: firmwareContainer.fileName,
+        binaryBytes: firmwareContainer.binaryBytes,
       },
       thumbnailObject: {
         fileName: thumbnailContainer.fileName,

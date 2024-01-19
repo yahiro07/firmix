@@ -27,6 +27,7 @@ export const LocalProjectHeadingArea = createFC<Props>(
         </div>
       );
     }
+
     const repositoryInfo = useRepositoryDisplayInfo(
       metadataInput.sourceCodeUrl
     );
@@ -85,6 +86,8 @@ const style = css`
   padding: 8px;
   position: relative;
 
+  ${flexVertical(8)};
+
   > h2 {
     ${flexHorizontalAligned(2)};
     > .icon {
@@ -93,9 +96,7 @@ const style = css`
   }
 
   > .repository-info {
-    margin-top: 4px;
     font-size: 16px;
-    min-height: 60px;
     ${flexVertical(2)};
     align-items: flex-start;
     > .repository {

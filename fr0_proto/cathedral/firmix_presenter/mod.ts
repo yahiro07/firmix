@@ -1,10 +1,10 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
-import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 import { FirmixPresenter } from "~/base/types_firmix_domain_modules.ts";
 import {
   BinaryFileEntry,
+  LocalAsset_Firmware,
   LocalAsset_Metadata,
   LocalAsset_Readme,
   LocalAsset_Thumbnail,
@@ -48,20 +48,20 @@ const local = {
     const metadataInput = firmixCore.loadProjectMetadataFile_json(
       metadataFile.contentText
     );
-    const patchingManifest = pickObjectMembers(metadataInput, [
-      "targetMcu",
-      "dataEntries",
-      "editUiItems",
-    ]);
-    const validationResult =
-      firmixCore.checkPatchingManifestValidity(patchingManifest);
+
+    // const patchingManifest = pickObjectMembers(metadataInput, [
+    //   "targetMcu",
+    //   "dataEntries",
+    //   "editUiItems",
+    // ]);
+    const validationResult = firmixCore.validateMetadataInput(metadataInput);
 
     const errorLines = validationResult ? [validationResult] : [];
     const validity = errorLines.length === 0 ? "valid" : "error";
     return {
       validity,
       filePath: metadataFile.filePath,
-      metadataInput,
+      metadataInput: validity === "valid" ? metadataInput : undefined,
       errorLines,
     };
   },
@@ -96,6 +96,33 @@ const local = {
       errorLines,
     };
   },
+  buildAssetFirmware(
+    firmwareFile: BinaryFileEntry | undefined,
+    firmwareFileLoadingErrorText: string | undefined
+  ): LocalAsset_Firmware {
+    if (!firmwareFile || firmwareFileLoadingErrorText) {
+      return {
+        validity: "error",
+        filePath: ".pio/build/<board_type>/firmware.uf2",
+        firmwareContainer: undefined,
+        errorLines: [
+          firmwareFileLoadingErrorText ??
+            "ファームウェアがありません。プロジェクトをビルドしてください。",
+        ],
+      };
+    }
+    const firmwareContainer: FirmwareContainer = {
+      kind: "uf2",
+      fileName: filePathHelper.getFileNameFromFilePath(firmwareFile.filePath),
+      binaryBytes: firmwareFile.contentBytes,
+    };
+    return {
+      validity: "valid",
+      filePath: firmwareFile.filePath,
+      firmwareContainer,
+      errorLines: [],
+    };
+  },
 };
 export const firmixPresenter: FirmixPresenter = {
   async buildLocalDevelopmentProject(inputResources) {
@@ -106,35 +133,22 @@ export const firmixPresenter: FirmixPresenter = {
       readmeFile,
       projectRootDirectoryHandle,
       firmwareDirectoryHandle,
+      firmwareFileLoadingErrorText,
     } = inputResources;
-
-    const firmwareContainer: FirmwareContainer = {
-      kind: "uf2",
-      fileName: filePathHelper.getFileNameFromFilePath(firmwareFile.filePath),
-      binaryBytes: firmwareFile.contentBytes,
-    };
-    // const readmeFileContent = readmeFile.contentText;
-
     const assetReadme = local.buildAssetReadme(readmeFile);
     const assetMetadata = local.buildAssetMetadata(metadataFile);
     const assetThumbnail = await local.buildAssetThumbnail(thumbnailFile);
+    const assetFirmware = local.buildAssetFirmware(
+      firmwareFile,
+      firmwareFileLoadingErrorText
+    );
     return {
       projectRootDirectoryHandle,
       firmwareDirectoryHandle,
-      firmwareContainer,
-      // thumbnailImageContainer,
-      // readmeFileContent,
-      // metadataInput,
-      // patchingManifest,
-      assetFilePaths: {
-        firmware: firmwareFile.filePath,
-        // metadata: metadataFile.filePath,
-        // readme: readmeFile.filePath,
-        // thumbnail: thumbnailFile.filePath,
-      },
       assetReadme,
       assetMetadata,
       assetThumbnail,
+      assetFirmware,
     };
   },
   buildConfigurationSourceItems(patchingManifest) {
@@ -179,12 +193,15 @@ export const firmixPresenter: FirmixPresenter = {
     });
   },
   patchLocalProjectFirmware(project, editItems) {
-    const { firmwareContainer } = project;
+    const {
+      assetFirmware: { firmwareContainer },
+      assetMetadata: { metadataInput },
+    } = project;
+    if (!(firmwareContainer && metadataInput)) raiseError(`invalid condition`);
     const patchingDataBlob: PatchingDataBlob = { editItems };
-    if (!project.assetMetadata.metadataInput) raiseError(`invalid condition`);
     return firmixCore.fabricateFirmware(
       firmwareContainer,
-      project.assetMetadata.metadataInput,
+      metadataInput,
       patchingDataBlob
     );
   },

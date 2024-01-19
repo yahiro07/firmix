@@ -1,7 +1,6 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { FirmixCore } from "~/base/types_firmix_domain_modules.ts";
 import {
-  FirmwareContainer,
   PatchingDataBlob,
   PatchingManifest,
 } from "~/base/types_project_edit.ts";
@@ -41,20 +40,22 @@ export const firmixCore: FirmixCore = {
       editUiItems,
     };
   },
-  checkPatchingManifestValidity(_manifest: PatchingManifest): string {
+  validateMetadataInput(metadataInput) {
+    if (!metadataInput.tags) {
+      return `missing field: tags`;
+    }
+    return "";
+  },
+  checkPatchingManifestValidity(_manifest: PatchingManifest) {
     return "";
   },
   checkPatchingDataBlobValidity(
     _manifest: PatchingManifest,
     _blob: PatchingDataBlob
-  ): string {
+  ) {
     return "";
   },
-  fabricateFirmware(
-    firmware: FirmwareContainer,
-    patchingManifest: PatchingManifest,
-    patchingDataBlob: PatchingDataBlob
-  ): FirmwareContainer {
+  fabricateFirmware(firmware, patchingManifest, patchingDataBlob) {
     if (firmware.kind !== "uf2") {
       raiseError(`unsupported firmware type ${firmware.kind}`);
     }
