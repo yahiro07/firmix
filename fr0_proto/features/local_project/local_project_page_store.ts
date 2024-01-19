@@ -8,7 +8,10 @@ import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { useEffectAsync } from "~/aux/utils_fe/hooks.ts";
 import { ensureFileHandlePermission } from "~/aux/utils_fe/local_filesystem_helper.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
-import { LocalProjectSubmissionInputDto } from "~/base/types_dto.ts";
+import {
+  ConfigurationSourceItemWrapper,
+  LocalProjectSubmissionInputDto,
+} from "~/base/types_dto.ts";
 import {
   LocalDevelopmentProject,
   LocalDevelopmentWork,
@@ -27,7 +30,23 @@ const projectDirectoryHandleStorage =
     "fr0_local_project_directory_handle"
   );
 
-export type LocalProjectPageStore = ReturnType<typeof useLocalProjectPageStore>;
+export type LocalProjectPageStore = {
+  loadedFolderName?: string;
+  work?: LocalDevelopmentWork;
+  project?: LocalDevelopmentProject;
+  configurationsSourceItems?: ConfigurationSourceItemWrapper[];
+  errorMessage?: string;
+  markdownSourceText?: string;
+  canSubmitProject: boolean;
+  projectTab: ProjectTab;
+  loadProjectFolder: (dirHandle: FileSystemDirectoryHandle) => Promise<void>;
+  reloadProjectFolder(): Promise<void>;
+  closeProjectFolder(): void;
+  submitEditItems(editItems: ConfigurationEditItem[]): void;
+  submitEditItems2(editItems: ConfigurationEditItem[]): Promise<void>;
+  submitProject(): Promise<void>;
+  setProjectTab: (value: ProjectTab) => void;
+};
 
 export function useLocalProjectPageStore() {
   const [
