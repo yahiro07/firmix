@@ -1,12 +1,50 @@
-import { css } from "~/aux/resin/resin_css.ts";
+import { css, domStyled } from "~/aux/resin/resin_css.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
-import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
+import {
+  LocalAssetBase,
+  LocalDevelopmentProject,
+} from "~/base/types_local_project.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
 import { IconIconify } from "~/components/IconIconify.tsx";
 
 type Props = {
   project: LocalDevelopmentProject;
 };
+
+const AssetEntry = createFC<{
+  title: string;
+  asset: LocalAssetBase;
+  infoAdditional?: string;
+}>(({ title, asset, infoAdditional }) => {
+  const iconSpec = {
+    valid: "mdi:check",
+    warning: "mdi:warning",
+    error: "mdi:error",
+  }[asset.validity];
+  return domStyled(
+    <div>
+      <div q="heading">
+        <IconIconify spec={iconSpec} />
+        <span>
+          {title}: {asset.filePath} {infoAdditional}
+        </span>
+      </div>
+      <div q="errors">
+        {asset.errorLines.map((line) => (
+          <div>{line}</div>
+        ))}
+      </div>
+    </div>,
+    css`
+      > .heading {
+        ${flexHorizontalAligned(2)};
+      }
+      > .errors {
+        margin-left: 16px;
+      }
+    `
+  );
+});
 
 export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
   const {
@@ -22,7 +60,7 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
         <span>プロジェクトリソース</span>
       </h3>
       {/* <div>ターゲットMCU:{patchingManifest.targetMcu}</div> */}
-      <div>Readmeファイル: {assetFilePaths.readme}</div>
+      <AssetEntry title="Readmeファイル" asset={project.assetReadme} />
       <div>メタデータファイル: {assetFilePaths.metadata}</div>
       <div>
         サムネイルファイル: {assetFilePaths.thumbnail} ({imageSizeText})

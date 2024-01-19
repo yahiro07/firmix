@@ -9,6 +9,10 @@ export const firmixWorkBuilder = {
     dirHandle: FileSystemDirectoryHandle
   ): Promise<LocalDevelopmentProject> {
     const dirReader = createLocalDirectoryReader(dirHandle);
+    const metadataFile = await dirReader.readTextFile(`project.fm1.json`);
+    const thumbnailFile = await dirReader.readBinaryFile(`thumbnail.jpg`);
+    const readmeFile = await dirReader.readTextFile("readme.md");
+
     const boardFolderName = await dirReader.getSingleSubDirectoryNameUnder(
       `.pio/build`
     );
@@ -18,13 +22,11 @@ export const firmixWorkBuilder = {
     const firmwareFile = await dirReader.readBinaryFile(
       `.pio/build/${boardFolderName}/firmware.uf2`
     );
-    const metadataFile = await dirReader.readTextFile(`project.fm1.json`);
-    const thumbnailFile = await dirReader.readBinaryFile(`thumbnail.jpg`);
-    const readmeFile = await dirReader.readTextFile("readme.md");
+
     const project = await firmixPresenter.buildLocalDevelopmentProject({
       projectRootDirectoryHandle: dirHandle,
       firmwareDirectoryHandle,
-      metadataFile,
+      metadataFile: metadataFile!,
       firmwareFile,
       thumbnailFile,
       readmeFile,

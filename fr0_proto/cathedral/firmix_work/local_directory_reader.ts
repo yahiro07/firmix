@@ -46,10 +46,14 @@ export function createLocalDirectoryReader(
     },
   };
   return {
-    async readTextFile(path: string): Promise<TextFileEntry> {
-      const file = await m.getFile(path);
-      const contentText = await file.text();
-      return { filePath: path, contentText };
+    async readTextFile(path: string): Promise<TextFileEntry | undefined> {
+      try {
+        const file = await m.getFile(path);
+        const contentText = await file.text();
+        return { filePath: path, contentText };
+      } catch (_) {
+        return undefined;
+      }
     },
     async readBinaryFile(path: string): Promise<BinaryFileEntry> {
       const file = await m.getFile(path);

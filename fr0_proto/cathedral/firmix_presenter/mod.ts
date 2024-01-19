@@ -3,6 +3,7 @@ import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
 import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 import { FirmixPresenter } from "~/base/types_firmix_domain_modules.ts";
+import { LocalAsset_Readme } from "~/base/types_local_project.ts";
 import {
   FirmwareContainer,
   PatchingDataBlob,
@@ -36,24 +37,33 @@ export const firmixPresenter: FirmixPresenter = {
       fileName: filePathHelper.getFileNameFromFilePath(firmwareFile.filePath),
       binaryBytes: firmwareFile.contentBytes,
     };
-    const readmeFileContent = readmeFile.contentText;
+    // const readmeFileContent = readmeFile.contentText;
     const thumbnailImageContainer = await imageFileLoader.loadBinaryImageFile(
       thumbnailFile
     );
+
+    const assetReadme: LocalAsset_Readme = {
+      validity: readmeFile ? "valid" : "warning",
+      filePath: readmeFile?.filePath ?? "readme.md",
+      fileContent: readmeFile?.contentText ?? "",
+      errorLines: readmeFile ? [] : ["ファイルがありません。"],
+    };
+
     return {
       projectRootDirectoryHandle,
       firmwareDirectoryHandle,
       firmwareContainer,
       thumbnailImageContainer,
-      readmeFileContent,
+      // readmeFileContent,
       metadataInput,
       patchingManifest,
       assetFilePaths: {
         firmware: firmwareFile.filePath,
         metadata: metadataFile.filePath,
-        readme: readmeFile.filePath,
+        // readme: readmeFile.filePath,
         thumbnail: thumbnailFile.filePath,
       },
+      assetReadme,
     };
   },
   buildConfigurationSourceItems(patchingManifest) {

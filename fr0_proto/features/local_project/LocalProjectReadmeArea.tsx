@@ -10,29 +10,12 @@ type Props = {
 
 export const LocalProjectReadmeArea = createFC<Props>(({ project }) => {
   const body = useMemo(() => {
-    const {
-      metadataInput: { sourceCodeUrl },
-      readmeFileContent,
-      thumbnailImageContainer: { imageDataUrl: thumbnailImageDataUrl },
-      assetFilePaths: { thumbnail: thumbnailImageFileName },
-    } = project;
-    const htmlCode = render(readmeFileContent, {
-      baseUrl: sourceCodeUrl ? sourceCodeUrl + "/" : "",
-    });
-    if (0) {
-      //readme内に含まれるサムネイル画像への相対参照をプロジェクトリソースの画像で置き換える対応
-      //readme内にサムネイル以外の他の画像を置いたときにこれらが表示されず混乱する可能性があるので、
-      //一旦無効にしておく
-      const repositoryThumbnailUrl = `${sourceCodeUrl}/${thumbnailImageFileName}`;
-      const modHtmlCode = htmlCode.replaceAll(
-        repositoryThumbnailUrl,
-        thumbnailImageDataUrl
-      );
-      return modHtmlCode;
-    } else {
-      return htmlCode;
-    }
+    const readmeFileContent = project.assetReadme.fileContent;
+    if (!readmeFileContent) return undefined;
+    return render(readmeFileContent, {});
   }, [project]);
+
+  if (body === undefined) return null;
 
   return (
     <div q={style}>

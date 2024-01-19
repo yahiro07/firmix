@@ -17,19 +17,38 @@ export type BinaryFileEntry = {
   contentBytes: Uint8Array;
 };
 
-type LocalAsset<T> =
-  | ({ state: "loaded" } & T)
-  | { state: "warning" | "error"; filePath: string; errorLines: string[] };
+type LocalAssetValidity = "valid" | "warning" | "error";
 
-export type LocalAsset_Firmware = LocalAsset<{ firmware: FirmwareContainer }>;
+type LocalProjectAsset<T> =
+  | ({ state: "loaded"; filepath: string } & T)
+  | ({
+      state: "warning" | "error";
+      filePath: string;
+      errorLines: string[];
+    } & { [K in keyof T]: undefined });
 
-export type LocalAsset_Thumbnail = LocalAsset<{
+export type LocalAsset_Firmware = LocalProjectAsset<{
+  firmware: FirmwareContainer;
+}>;
+
+export type LocalAsset_Thumbnail = LocalProjectAsset<{
   thumbnail: ImageFileContainer;
 }>;
 
-export type LocalAsset_Readme = LocalAsset<{ fileContent: string }>;
+export type LocalAssetBase = {
+  validity: LocalAssetValidity;
+  filePath: string;
+  errorLines: string[];
+};
 
-export type LocalAsset_Metadata = LocalAsset<{
+export type LocalAsset_Readme = {
+  validity: LocalAssetValidity;
+  filePath: string;
+  fileContent: string;
+  errorLines: string[];
+};
+
+export type LocalAsset_Metadata = LocalProjectAsset<{
   metadataInput: ProjectMetadataInput;
 }>;
 
@@ -38,16 +57,17 @@ export type LocalDevelopmentProject = {
   firmwareDirectoryHandle: FileSystemDirectoryHandle;
   firmwareContainer: FirmwareContainer;
   thumbnailImageContainer: ImageFileContainer;
-  readmeFileContent: string;
+  // readmeFileContent: string;
   metadataInput: ProjectMetadataInput;
   patchingManifest: PatchingManifest;
   assetFilePaths: {
     metadata: string;
     firmware: string;
     thumbnail: string;
-    readme: string;
+    // readme: string;
     modFirmware?: string;
   };
+  assetReadme: LocalAsset_Readme;
 };
 
 export type LocalDevelopmentProject2 = {

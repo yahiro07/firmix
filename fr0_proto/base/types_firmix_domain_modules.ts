@@ -29,15 +29,19 @@ export type FirmixCore = {
   ): FirmwareContainer;
 };
 
+export type LocalProjectInputResources = {
+  projectRootDirectoryHandle: FileSystemDirectoryHandle;
+  firmwareDirectoryHandle: FileSystemDirectoryHandle;
+  metadataFile: TextFileEntry;
+  firmwareFile: BinaryFileEntry;
+  readmeFile?: TextFileEntry;
+  thumbnailFile: BinaryFileEntry;
+};
+
 export type FirmixPresenter = {
-  buildLocalDevelopmentProject(inputResources: {
-    projectRootDirectoryHandle: FileSystemDirectoryHandle;
-    firmwareDirectoryHandle: FileSystemDirectoryHandle;
-    metadataFile: TextFileEntry;
-    firmwareFile: BinaryFileEntry;
-    readmeFile: TextFileEntry;
-    thumbnailFile: BinaryFileEntry;
-  }): Promise<LocalDevelopmentProject>;
+  buildLocalDevelopmentProject(
+    inputResources: LocalProjectInputResources
+  ): Promise<LocalDevelopmentProject>;
   buildConfigurationSourceItems(
     patchingManifest: PatchingManifest
   ): ConfigurationSourceItemWrapper[];

@@ -187,7 +187,7 @@ const local = {
         binaryBytes: project.thumbnailImageContainer.binaryBytes,
         mimeType: project.thumbnailImageContainer.mimeType,
       },
-      readmeFileContent: project.readmeFileContent,
+      readmeFileContent: project.assetReadme.fileContent ?? "",
     };
   },
 };
