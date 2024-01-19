@@ -35,7 +35,7 @@ export type LocalProjectInputResources = {
   metadataFile?: TextFileEntry;
   firmwareFile: BinaryFileEntry;
   readmeFile?: TextFileEntry;
-  thumbnailFile: BinaryFileEntry;
+  thumbnailFile?: BinaryFileEntry;
 };
 
 export type FirmixPresenter = {

@@ -2,6 +2,7 @@ import { css, domStyled } from "~/aux/resin/resin_css.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import {
   LocalAssetBase,
+  LocalAsset_Thumbnail,
   LocalDevelopmentProject,
 } from "~/base/types_local_project.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
@@ -18,8 +19,8 @@ const AssetEntry = createFC<{
 }>(({ title, asset, infoAdditional }) => {
   const iconSpec = {
     valid: "mdi:check",
-    warning: "mdi:warning",
-    error: "mdi:error-outline",
+    warning: "mdi:warning-outline",
+    error: "subway:error",
   }[asset.validity];
   return domStyled(
     <div>
@@ -46,13 +47,27 @@ const AssetEntry = createFC<{
   );
 });
 
+const local = {
+  extractThumbnailInfoAdditional(assetThumbnail: LocalAsset_Thumbnail): string {
+    const thumb = assetThumbnail.thumbnailContainer;
+    if (thumb) {
+      return `(${thumb.width}x${thumb.height})`;
+    }
+    return "";
+  },
+};
+
 export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
   const {
     // patchingManifest,
     assetFilePaths,
-    thumbnailImageContainer: thumb,
+    // thumbnailImageContainer: thumb,
   } = project;
-  const imageSizeText = `${thumb.width}x${thumb.height}`;
+  const thumbnailInfoAdditional = local.extractThumbnailInfoAdditional(
+    project.assetThumbnail
+  );
+  const thumbnailImageDataUrl =
+    project.assetThumbnail.thumbnailContainer?.imageDataUrl;
   return (
     <div q={style}>
       <h3>
@@ -62,15 +77,20 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
       {/* <div>ターゲットMCU:{patchingManifest.targetMcu}</div> */}
       <AssetEntry title="Readmeファイル" asset={project.assetReadme} />
       <AssetEntry title="メタデータファイル" asset={project.assetMetadata} />
-      <div>
+      <AssetEntry
+        title="サムネイルファイル"
+        asset={project.assetThumbnail}
+        infoAdditional={thumbnailInfoAdditional}
+      />
+      {/* <div>
         サムネイルファイル: {assetFilePaths.thumbnail} ({imageSizeText})
-      </div>
+      </div> */}
       <div>ファームウェア: {assetFilePaths.firmware}</div>
       <div if={assetFilePaths.modFirmware}>
         パッチ適用済ファームウェア: {assetFilePaths.modFirmware}
       </div>
-      <div q="thumbnail-box">
-        <img src={project.thumbnailImageContainer.imageDataUrl} />
+      <div q="thumbnail-box" if={thumbnailImageDataUrl}>
+        <img src={thumbnailImageDataUrl} />
       </div>
     </div>
   );

@@ -30,10 +30,6 @@ export type LocalAsset_Firmware = LocalProjectAsset<{
   firmware: FirmwareContainer;
 }>;
 
-export type LocalAsset_Thumbnail = LocalProjectAsset<{
-  thumbnail: ImageFileContainer;
-}>;
-
 export type LocalAssetBase = {
   validity: LocalAssetValidity;
   filePath: string;
@@ -54,23 +50,31 @@ export type LocalAsset_Metadata = {
   errorLines: string[];
 };
 
+export type LocalAsset_Thumbnail = {
+  validity: LocalAssetValidity;
+  filePath: string;
+  thumbnailContainer: ImageFileContainer | undefined;
+  errorLines: string[];
+};
+
 export type LocalDevelopmentProject = {
   projectRootDirectoryHandle: FileSystemDirectoryHandle;
   firmwareDirectoryHandle: FileSystemDirectoryHandle;
   firmwareContainer: FirmwareContainer;
-  thumbnailImageContainer: ImageFileContainer;
+  // thumbnailImageContainer: ImageFileContainer;
   // readmeFileContent: string;
   // metadataInput: ProjectMetadataInput;
   // patchingManifest: PatchingManifest;
   assetFilePaths: {
     // metadata: string;
     firmware: string;
-    thumbnail: string;
+    // thumbnail: string;
     // readme: string;
     modFirmware?: string;
   };
   assetReadme: LocalAsset_Readme;
   assetMetadata: LocalAsset_Metadata;
+  assetThumbnail: LocalAsset_Thumbnail;
 };
 
 export type LocalDevelopmentProject2 = {

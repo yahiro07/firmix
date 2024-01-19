@@ -27,19 +27,11 @@ export const firmixWorkBuilder = {
       projectRootDirectoryHandle: dirHandle,
       firmwareDirectoryHandle,
       metadataFile,
-      firmwareFile,
+      firmwareFile: firmwareFile!,
       thumbnailFile,
       readmeFile,
     });
     return project;
-    // try {
-    //   // return { state: "loaded", project };
-    // } catch (error) {
-    //   const message = error.message ?? error.toString();
-    //   console.error(error);
-    //   alert(message);
-    //   // return { state: "error", message };
-    // }
   },
   async projectEmitModifiedFirmware(
     project: LocalDevelopmentProject,

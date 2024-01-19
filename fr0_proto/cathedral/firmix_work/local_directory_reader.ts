@@ -55,10 +55,14 @@ export function createLocalDirectoryReader(
         return undefined;
       }
     },
-    async readBinaryFile(path: string): Promise<BinaryFileEntry> {
-      const file = await m.getFile(path);
-      const contentBytes = new Uint8Array(await file.arrayBuffer());
-      return { filePath: path, contentBytes };
+    async readBinaryFile(path: string): Promise<BinaryFileEntry | undefined> {
+      try {
+        const file = await m.getFile(path);
+        const contentBytes = new Uint8Array(await file.arrayBuffer());
+        return { filePath: path, contentBytes };
+      } catch (_) {
+        return undefined;
+      }
     },
     async getSingleSubDirectoryNameUnder(path: string): Promise<string> {
       const subFolderNames = await m.getSubFolderNamesUnder(path);

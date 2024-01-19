@@ -35,7 +35,9 @@ export const LocalProjectLoadingArea = createFC<Props>(
 
     return (
       <div q={style}>
-        <button onClick={handleSelectFolder}>フォルダ選択</button>
+        <button onClick={handleSelectFolder} if={!loaded}>
+          フォルダ選択
+        </button>
         <div if={loaded} q="folder">
           <IconIconify spec="mdi:folder" />
           <span>{loadedFolderName}</span>

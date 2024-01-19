@@ -168,19 +168,23 @@ const local = {
   mapLocalDevelopmentProjectToLocalProjectSubmissionInputDto(
     project: LocalDevelopmentProject
   ): LocalProjectSubmissionInputDto {
-    if (!project.assetMetadata.metadataInput) {
+    const {
+      assetMetadata: { metadataInput },
+      assetThumbnail: { thumbnailContainer },
+    } = project;
+    if (!(metadataInput && thumbnailContainer)) {
       raiseError(`invalid project to submit`);
     }
     return {
-      ...project.assetMetadata.metadataInput,
+      ...metadataInput,
       firmwareObject: {
         fileName: project.firmwareContainer.fileName,
         binaryBytes: project.firmwareContainer.binaryBytes,
       },
       thumbnailObject: {
-        fileName: project.thumbnailImageContainer.fileName,
-        binaryBytes: project.thumbnailImageContainer.binaryBytes,
-        mimeType: project.thumbnailImageContainer.mimeType,
+        fileName: thumbnailContainer.fileName,
+        binaryBytes: thumbnailContainer.binaryBytes,
+        mimeType: thumbnailContainer.mimeType,
       },
       readmeFileContent: project.assetReadme.fileContent ?? "",
     };

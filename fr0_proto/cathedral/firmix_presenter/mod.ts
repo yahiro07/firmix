@@ -4,8 +4,10 @@ import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 import { FirmixPresenter } from "~/base/types_firmix_domain_modules.ts";
 import {
+  BinaryFileEntry,
   LocalAsset_Metadata,
   LocalAsset_Readme,
+  LocalAsset_Thumbnail,
   TextFileEntry,
 } from "~/base/types_local_project.ts";
 import {
@@ -55,6 +57,37 @@ const local = {
       errorLines,
     };
   },
+  async buildAssetThumbnail(
+    thumbnailFile: BinaryFileEntry | undefined
+  ): Promise<LocalAsset_Thumbnail> {
+    if (!thumbnailFile) {
+      return {
+        validity: "warning",
+        filePath: "thumbnail.(jpg|png)",
+        thumbnailContainer: undefined,
+        errorLines: ["ファイルがありません。"],
+      };
+    }
+    const thumbnailContainer = await imageFileLoader.loadBinaryImageFile(
+      thumbnailFile
+    );
+    const errorLines: string[] = [];
+    const { width, height } = thumbnailContainer;
+    const sizeValid = width <= 320 && height <= 320;
+    if (!sizeValid) {
+      errorLines.push(
+        `画像の縦横のサイズを320x320以下にしてください。(現在のサイズ:${width}x${height})`
+      );
+    }
+    const validity = errorLines.length === 0 ? "valid" : "error";
+    return {
+      validity,
+      filePath: thumbnailFile.filePath,
+      thumbnailContainer:
+        (validity === "valid" && thumbnailContainer) || undefined,
+      errorLines,
+    };
+  },
 };
 export const firmixPresenter: FirmixPresenter = {
   async buildLocalDevelopmentProject(inputResources) {
@@ -73,17 +106,15 @@ export const firmixPresenter: FirmixPresenter = {
       binaryBytes: firmwareFile.contentBytes,
     };
     // const readmeFileContent = readmeFile.contentText;
-    const thumbnailImageContainer = await imageFileLoader.loadBinaryImageFile(
-      thumbnailFile
-    );
 
     const assetReadme = local.buildAssetReadme(readmeFile);
     const assetMetadata = local.buildAssetMetadata(metadataFile);
+    const assetThumbnail = await local.buildAssetThumbnail(thumbnailFile);
     return {
       projectRootDirectoryHandle,
       firmwareDirectoryHandle,
       firmwareContainer,
-      thumbnailImageContainer,
+      // thumbnailImageContainer,
       // readmeFileContent,
       // metadataInput,
       // patchingManifest,
@@ -91,10 +122,11 @@ export const firmixPresenter: FirmixPresenter = {
         firmware: firmwareFile.filePath,
         // metadata: metadataFile.filePath,
         // readme: readmeFile.filePath,
-        thumbnail: thumbnailFile.filePath,
+        // thumbnail: thumbnailFile.filePath,
       },
       assetReadme,
       assetMetadata,
+      assetThumbnail,
     };
   },
   buildConfigurationSourceItems(patchingManifest) {
