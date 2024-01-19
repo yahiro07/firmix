@@ -19,11 +19,19 @@ import { imageFileLoader } from "~/cathedral/firmix_presenter/image_file_loader.
 
 const local = {
   buildAssetReadme(readmeFile: TextFileEntry | undefined): LocalAsset_Readme {
+    if (!readmeFile) {
+      return {
+        validity: "warning",
+        filePath: "readme.md",
+        fileContent: undefined,
+        errorLines: ["ファイルがありません。"],
+      };
+    }
     return {
-      validity: readmeFile ? "valid" : "warning",
-      filePath: readmeFile?.filePath ?? "readme.md",
-      fileContent: readmeFile?.contentText ?? "",
-      errorLines: readmeFile ? [] : ["ファイルがありません。"],
+      validity: "valid",
+      filePath: readmeFile.filePath,
+      fileContent: readmeFile.contentText,
+      errorLines: [],
     };
   },
   buildAssetMetadata(

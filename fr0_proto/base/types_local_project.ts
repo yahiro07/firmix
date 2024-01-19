@@ -39,7 +39,7 @@ export type LocalAssetBase = {
 export type LocalAsset_Readme = {
   validity: LocalAssetValidity;
   filePath: string;
-  fileContent: string;
+  fileContent: string | undefined;
   errorLines: string[];
 };
 
