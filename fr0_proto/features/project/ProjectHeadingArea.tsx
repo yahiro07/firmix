@@ -1,7 +1,6 @@
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
-import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import {
   flexHorizontalAligned,
   flexVertical,
@@ -10,28 +9,24 @@ import { IconIconify } from "~/components/IconIconify.tsx";
 import { useRepositoryDisplayInfo } from "~/fe_modules/repository_info_helper.ts";
 
 type Props = {
-  project: LocalDevelopmentProject;
+  projectName: string;
+  repositoryUrl: string;
+  tags: string[];
   projectTab: ProjectTab;
   setProjectTab(tab: ProjectTab): void;
 };
 
-export const LocalProjectHeadingArea = createFC<Props>(
-  ({ project, projectTab, setProjectTab }) => {
-    const {
-      assetMetadata: { metadataInput },
-    } = project;
-    if (!metadataInput) {
-      return (
-        <div q={style}>
-          メタデータファイルが存在しないか、内容にエラーがあります。
-        </div>
-      );
-    }
+export const LocalProjectHeadingAreaDummy = createFC(() => {
+  return (
+    <div q={style}>
+      メタデータファイルが存在しないか、内容にエラーがあります。
+    </div>
+  );
+});
 
-    const repositoryInfo = useRepositoryDisplayInfo(
-      metadataInput.sourceCodeUrl
-    );
-
+export const ProjectHeadingArea = createFC<Props>(
+  ({ projectName, repositoryUrl, tags, projectTab, setProjectTab }) => {
+    const repositoryInfo = useRepositoryDisplayInfo(repositoryUrl);
     const toggleProjectTab = () => {
       const nextTab = projectTab === "editor" ? "info" : "editor";
       setProjectTab(nextTab);
@@ -40,12 +35,12 @@ export const LocalProjectHeadingArea = createFC<Props>(
       <div q={style}>
         <h2>
           <IconIconify spec="icon-park-twotone:chip" q="icon" />
-          <span>{metadataInput.projectName}</span>
+          <span>{projectName}</span>
         </h2>
         {repositoryInfo && (
           <div q="repository-info">
             <a
-              href={repositoryInfo.sourceCodeUrl}
+              href={repositoryInfo.repositoryUrl}
               target="_blank"
               q="repository"
             >
@@ -62,7 +57,7 @@ export const LocalProjectHeadingArea = createFC<Props>(
         )}
         <div q="repository-info" if={!repositoryInfo} />
         <div q="tags">
-          {metadataInput.tags.map((tag) => (
+          {tags.map((tag) => (
             <div key={tag} q="tag">
               {tag}
             </div>

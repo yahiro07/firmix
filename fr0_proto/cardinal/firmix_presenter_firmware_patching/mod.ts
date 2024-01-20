@@ -1,16 +1,23 @@
+import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
 import { serverFetchHelper } from "~/aux/utils_be/server_fetch_helper.ts";
-import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { storehouse } from "~/be/depot/storehouse.ts";
+import {
+  ConfigurationEditItem,
+  PatchingManifest,
+} from "~/base/types_project_edit.ts";
 import { firmwareDataInjector } from "~/cardinal/firmix_core_firmware_patching/firmware_data_injector.ts";
+
+type ProjectPartial = PatchingManifest & {
+  projectId: string;
+  firmwareBinaryUrl: string;
+};
 
 export const firmixPresenter_firmwarePatching = {
   async generatePatchedFirmware(
-    projectId: string,
+    project: ProjectPartial,
     editItems: ConfigurationEditItem[]
   ): Promise<{ fileName: string; fileContentBytes: Uint8Array }> {
-    const project = await storehouse.projectCabinet.get(projectId);
     const firmwareBinary = await serverFetchHelper.fetchBinary(
-      "http://localhost:3000/gadget1/firmware.uf2",
+      project.firmwareBinaryUrl,
       {}
     );
     const modFirmwareBinary = firmwareDataInjector.patchFirmwareBinary(
@@ -18,8 +25,11 @@ export const firmixPresenter_firmwarePatching = {
       project,
       editItems
     );
+    const fileName = filePathHelper.getFileNameFromFilePath(
+      project.firmwareBinaryUrl
+    );
     return {
-      fileName: "firmware.uf2",
+      fileName,
       fileContentBytes: modFirmwareBinary,
     };
   },

@@ -21,11 +21,18 @@ export type ConfigurationSourceItemWrapper =
 
 export type ProjectDetailDto = {
   projectId: string;
+  projectGuid: string;
   projectName: string;
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
-  configurationSourceItemWrappers: ConfigurationSourceItemWrapper[];
+  tags: string[];
+  repositoryUrl: string;
+  readmeFileContent: string;
+  dataEntries: CustomDataEntry[];
+  editUiItems: EditUiItem[];
+  thumbnailUrl: string;
+  firmwareBinaryUrl: string;
 };
 
 export type ProjectListItemDto = {
@@ -34,6 +41,8 @@ export type ProjectListItemDto = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
+  tags: string[];
+  repositoryUrl: string;
   thumbnailUrl: string;
 };
 
@@ -43,9 +52,11 @@ export type LocalProjectSubmissionInputDto = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
+  tags: string[];
+  repositoryUrl: string;
+  readmeFileContent: string;
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
-  readmeFileContent: string;
   thumbnailObject: { fileName: string; imageDataUrl: string };
   firmwareObject: { fileName: string; binaryBytes_base64: string };
 };

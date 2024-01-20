@@ -136,7 +136,7 @@ const local = {
       introductionLines,
       targetMcu,
       primaryTargetBoard,
-      sourceCodeUrl,
+      repositoryUrl,
       tags,
       dataEntries,
       editUiItems: editUiItemsInput,
@@ -153,7 +153,7 @@ const local = {
       targetMcu,
       primaryTargetBoard,
       tags,
-      sourceCodeUrl,
+      repositoryUrl,
       dataEntries,
       editUiItems,
     };

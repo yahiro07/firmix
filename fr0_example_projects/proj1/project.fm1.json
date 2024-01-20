@@ -8,7 +8,7 @@
   ],
   "targetMcu": "RP2040",
   "primaryTargetBoard": "WaveShare RP2040 Zero",
-  "sourceCodeUrl": "https://github.com/kermite-org/kermite_platformio_projects/tree/main/example_rp2040_basic",
+  "repositoryUrl": "https://github.com/kermite-org/kermite_platformio_projects/tree/main/example_rp2040_basic",
   "tags": ["RP2040", "サンプル"],
   "dataEntries": [
     {

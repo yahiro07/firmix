@@ -1,7 +1,7 @@
-import { getEnvVariable } from "~/aux/utils_be/env_helper.ts";
 import { ProjectEntity } from "~/base/types_db_entity.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { storehouse } from "~/be/depot/storehouse.ts";
+import { projectHelper } from "~/be/domain_helpers/project_helper.ts";
 
 export function createProjectListService() {
   return {
@@ -16,15 +16,15 @@ export function createProjectListService() {
 
 const local = {
   mapProjectEntityToListItemDto(project: ProjectEntity): ProjectListItemDto {
-    const r2PublicUrl = getEnvVariable("R2_PUBLIC_URL");
-    const thumbnailUrl = `${r2PublicUrl}/${project.projectId}/${project.thumbnailFileName}?rev=1`;
     return {
       projectId: project.projectId,
       projectName: project.projectName,
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
-      thumbnailUrl,
+      tags: project.tags,
+      repositoryUrl: project.repositoryUrl,
+      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
     };
   },
 };

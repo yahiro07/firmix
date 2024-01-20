@@ -1,6 +1,6 @@
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
-import { ProjectListItemCard } from "~/features/project_ist/ProjectListItemCard.tsx";
+import { ProjectListItemCard } from "../features/project_list/ProjectListItemCard.tsx";
 
 type Props = {
   projects: ProjectListItemDto[];

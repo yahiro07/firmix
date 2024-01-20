@@ -30,7 +30,7 @@ const projectDirectoryHandleStorage =
 export type LocalProjectPageStore = {
   loadedFolderName?: string;
   project?: LocalDevelopmentProject;
-  configurationsSourceItems?: ConfigurationSourceItemWrapper[];
+  configurationSourceItems?: ConfigurationSourceItemWrapper[];
   canSubmitProject: boolean;
   projectTab: ProjectTab;
   loadProjectFolder: (dirHandle: FileSystemDirectoryHandle) => Promise<void>;
@@ -54,7 +54,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
 
   const loadedFolderName = projectDirectoryHandle?.name;
 
-  const configurationsSourceItems = useMemo(() => {
+  const configurationSourceItems = useMemo(() => {
     if (project?.assetMetadata.metadataInput) {
       return firmixCore_firmwareConfiguration.buildConfigurationSourceItems(
         project.assetMetadata.metadataInput
@@ -165,7 +165,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
   return {
     loadedFolderName,
     project,
-    configurationsSourceItems,
+    configurationSourceItems,
     canSubmitProject,
     projectTab,
     setProjectTab,

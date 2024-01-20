@@ -1,5 +1,5 @@
 export type ProjectRepositoryInfo = {
-  sourceCodeUrl: string;
+  repositoryUrl: string;
   repositoryName: string;
   ownerName: string;
   ownerIconUrl: string;

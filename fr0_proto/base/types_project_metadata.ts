@@ -13,7 +13,7 @@ export type ProjectMetadataJsonFileContent = {
   introductionLines: string[];
   targetMcu: string;
   primaryTargetBoard: string;
-  sourceCodeUrl: string;
+  repositoryUrl: string;
   tags: string[];
   dataEntries: CustomDataEntry[];
   editUiItems: ProjectMetadataEditUiItemInput[];
@@ -26,7 +26,7 @@ export type ProjectMetadataInput = {
   targetMcu: string;
   primaryTargetBoard: string;
   tags: string[];
-  sourceCodeUrl: string;
+  repositoryUrl: string;
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
 };

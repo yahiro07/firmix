@@ -10,7 +10,7 @@ import {
 } from "~/base/types_dto.ts";
 import { objectStorageBridge } from "~/be/depot/object_storage_bridge_instance.ts";
 import { storehouse } from "~/be/depot/storehouse.ts";
-import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
+import { projectHelper } from "~/be/domain_helpers/project_helper.ts";
 
 export function createProjectService() {
   return {
@@ -58,41 +58,37 @@ const local = {
     projectId: string,
     projectInput: LocalProjectSubmissionInputDto
   ): ProjectEntity {
-    const {
-      projectGuid,
-      projectName,
-      introduction,
-      targetMcu,
-      primaryTargetBoard,
-      dataEntries,
-      editUiItems,
-      readmeFileContent,
-      thumbnailObject,
-      firmwareObject,
-    } = projectInput;
     return {
       projectId,
-      projectGuid,
-      projectName,
-      introduction,
-      targetMcu,
-      primaryTargetBoard,
-      dataEntries,
-      editUiItems,
-      readmeFileContent,
-      firmwareFileName: firmwareObject.fileName,
-      thumbnailFileName: thumbnailObject.fileName,
+      projectGuid: projectInput.projectGuid,
+      projectName: projectInput.projectName,
+      introduction: projectInput.introduction,
+      targetMcu: projectInput.targetMcu,
+      primaryTargetBoard: projectInput.primaryTargetBoard,
+      tags: projectInput.tags,
+      repositoryUrl: projectInput.repositoryUrl,
+      dataEntries: projectInput.dataEntries,
+      editUiItems: projectInput.editUiItems,
+      readmeFileContent: projectInput.readmeFileContent,
+      firmwareFileName: projectInput.firmwareObject.fileName,
+      thumbnailFileName: projectInput.thumbnailObject.fileName,
     };
   },
   mapProjectEntityToDetailDto(project: ProjectEntity): ProjectDetailDto {
     return {
       projectId: project.projectId,
+      projectGuid: project.projectGuid,
       projectName: project.projectName,
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
-      configurationSourceItemWrappers:
-        firmixCore_firmwareConfiguration.buildConfigurationSourceItems(project),
+      tags: project.tags,
+      repositoryUrl: project.repositoryUrl,
+      readmeFileContent: project.readmeFileContent,
+      dataEntries: project.dataEntries,
+      editUiItems: project.editUiItems,
+      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
+      firmwareBinaryUrl: projectHelper.getFirmwareBinaryUrl(project),
     };
   },
 };

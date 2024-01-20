@@ -3,7 +3,7 @@ import { serverShell } from "~/be/server_shell.ts";
 import { ProjectDetailPage } from "~/islands/ProjectDetailPage.tsx";
 
 export default defineRoute(async (req, ctx) => {
-  const _projectId = ctx.params.projectId!;
-  const project = await serverShell.projectService.getProjectDetail("__proj1");
+  const projectId = ctx.params.projectId!;
+  const project = await serverShell.projectService.getProjectDetail(projectId);
   return <ProjectDetailPage project={project} />;
 });
