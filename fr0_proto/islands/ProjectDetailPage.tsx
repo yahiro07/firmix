@@ -40,7 +40,7 @@ export default function ProjectDetailPage({ project }: Props) {
           return { key, values };
         });
       const { fileName, fileContentBytes } =
-        await serverShell.generatePatchedFirmware(
+        await serverShell.firmwareService.generatePatchedFirmware(
           project.projectId,
           configurationEditItems
         );

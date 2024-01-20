@@ -9,6 +9,6 @@ export const appRpcRouter: ServerRpcRouter<AppRpcSignatures> = {
     return { resMessage: message + " world" };
   },
   async createProjectFromLocal({ projectInput }) {
-    await serverShell.createProjectFromLocal(projectInput);
+    await serverShell.projectService.createProjectFromLocal(projectInput);
   },
 };
