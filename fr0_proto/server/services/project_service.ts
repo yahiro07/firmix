@@ -16,18 +16,7 @@ export function createProjectService() {
       });
       const projectId =
         existingProject?.projectId ?? generateIdTimeSequential();
-      const {
-        projectGuid,
-        projectName,
-        introduction,
-        targetMcu,
-        primaryTargetBoard,
-        dataEntries,
-        editUiItems,
-        readmeFileContent,
-        thumbnailObject,
-        firmwareObject,
-      } = projectInput;
+      const { thumbnailObject, firmwareObject } = projectInput;
       await objectStorageBridge.uploadBinaryFile(
         `${projectId}/${firmwareObject.fileName}`,
         firmwareObject.binaryBytes
@@ -37,19 +26,7 @@ export function createProjectService() {
         thumbnailObject.binaryBytes,
         thumbnailObject.mimeType
       );
-      const projectEntity: ProjectEntity = {
-        projectId,
-        projectGuid,
-        projectName,
-        introduction,
-        targetMcu,
-        primaryTargetBoard,
-        dataEntries,
-        editUiItems,
-        readmeFileContent,
-        firmwareFileName: firmwareObject.fileName,
-        thumbnailFileName: thumbnailObject.fileName,
-      };
+      const projectEntity = local.createProjectEntity(projectId, projectInput);
       await storehouse.projectCabinet.upsert(projectEntity);
     },
     async getProjectDetail(projectId: string): Promise<ProjectDetailDto> {
@@ -69,6 +46,36 @@ export function createProjectService() {
 }
 
 const local = {
+  createProjectEntity(
+    projectId: string,
+    projectInput: LocalProjectSubmissionInputDto
+  ): ProjectEntity {
+    const {
+      projectGuid,
+      projectName,
+      introduction,
+      targetMcu,
+      primaryTargetBoard,
+      dataEntries,
+      editUiItems,
+      readmeFileContent,
+      thumbnailObject,
+      firmwareObject,
+    } = projectInput;
+    return {
+      projectId,
+      projectGuid,
+      projectName,
+      introduction,
+      targetMcu,
+      primaryTargetBoard,
+      dataEntries,
+      editUiItems,
+      readmeFileContent,
+      firmwareFileName: firmwareObject.fileName,
+      thumbnailFileName: thumbnailObject.fileName,
+    };
+  },
   mapProjectEntityToDetailDto(project: ProjectEntity): ProjectDetailDto {
     return {
       projectId: project.projectId,
