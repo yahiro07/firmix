@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import { getEnvVariable } from "~/aux/utils_be/env_helper.ts";
 import { ProjectEntity } from "~/base/types_db_entity.ts";
-import { createMongoGeneralCabinet } from "./mongo_general_cabinet.ts";
+import { createMongoGeneralCabinet } from "~/be/depot/mongo_general_cabinet.ts";
 
 async function createStoreHouse() {
   const mongoUrl = getEnvVariable("MONGO_URL");
