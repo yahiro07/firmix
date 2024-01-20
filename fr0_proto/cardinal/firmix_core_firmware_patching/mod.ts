@@ -1,5 +1,9 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
 import {
+  decodeBinaryBase64,
+  encodeBinaryBase64,
+} from "~/aux/utils/utils_binary.ts";
+import {
   FirmwareContainer,
   PatchingDataBlob,
   PatchingManifest,
@@ -39,7 +43,7 @@ export const firmixCore_firmwarePatching: FirmixCore_FirmwarePatching = {
       raiseError(`unsupported firmware type ${firmware.kind}`);
     }
     const modFirmwareBytes = firmwareDataInjector.patchFirmwareBinary(
-      firmware.binaryBytes,
+      decodeBinaryBase64(firmware.binaryBytes_base64),
       patchingManifest,
       patchingDataBlob.editItems
     );
@@ -48,7 +52,7 @@ export const firmixCore_firmwarePatching: FirmixCore_FirmwarePatching = {
     return {
       kind: "uf2",
       fileName: outputFileName,
-      binaryBytes: modFirmwareBytes,
+      binaryBytes_base64: encodeBinaryBase64(modFirmwareBytes),
     };
   },
 };

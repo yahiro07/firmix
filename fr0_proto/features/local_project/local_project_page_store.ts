@@ -1,3 +1,4 @@
+import { decodeBase64 } from "$std/encoding/base64.ts";
 import { useCallback, useMemo } from "preact/hooks";
 import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
@@ -129,7 +130,10 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
           project,
           editItems
         );
-      downloadBinaryFileBlob(modFirmware.fileName, modFirmware.binaryBytes);
+      downloadBinaryFileBlob(
+        modFirmware.fileName,
+        decodeBase64(modFirmware.binaryBytes_base64)
+      );
     },
     async submitEditItems2(editItems: ConfigurationEditItem[]) {
       if (!project) return;
@@ -185,12 +189,11 @@ const local = {
       ...metadataInput,
       firmwareObject: {
         fileName: firmwareContainer.fileName,
-        binaryBytes: firmwareContainer.binaryBytes,
+        binaryBytes_base64: firmwareContainer.binaryBytes_base64,
       },
       thumbnailObject: {
         fileName: thumbnailContainer.fileName,
-        binaryBytes: thumbnailContainer.binaryBytes,
-        mimeType: thumbnailContainer.mimeType,
+        imageDataUrl: thumbnailContainer.imageDataUrl,
       },
       readmeFileContent: project.assetReadme.fileContent ?? "",
     };

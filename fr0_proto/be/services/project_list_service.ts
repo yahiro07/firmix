@@ -17,7 +17,7 @@ export function createProjectListService() {
 const local = {
   mapProjectEntityToListItemDto(project: ProjectEntity): ProjectListItemDto {
     const r2PublicUrl = getEnvVariable("R2_PUBLIC_URL");
-    const thumbnailUrl = `${r2PublicUrl}/${project.projectId}/${project.thumbnailFileName}`;
+    const thumbnailUrl = `${r2PublicUrl}/${project.projectId}/${project.thumbnailFileName}?rev=1`;
     return {
       projectId: project.projectId,
       projectName: project.projectName,

@@ -46,10 +46,6 @@ export type LocalProjectSubmissionInputDto = {
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
   readmeFileContent: string;
-  thumbnailObject: {
-    fileName: string;
-    binaryBytes: Uint8Array;
-    mimeType: string;
-  };
-  firmwareObject: { fileName: string; binaryBytes: Uint8Array };
+  thumbnailObject: { fileName: string; imageDataUrl: string };
+  firmwareObject: { fileName: string; binaryBytes_base64: string };
 };

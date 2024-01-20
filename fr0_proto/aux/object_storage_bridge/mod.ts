@@ -6,8 +6,8 @@ type ObjectStorageBridge = {
   retrieveBinaryFile(path: string): Promise<Uint8Array>;
   uploadImageFile(
     path: string,
-    bytes: Uint8Array,
-    mimeType: string
+    binaryBytes: Uint8Array,
+    contentType: string
   ): Promise<void>;
   listItemPathsWithPrefix(prefix: string): Promise<string[]>;
   deleteItem(path: string): Promise<void>;
@@ -51,13 +51,13 @@ export function createObjectStorageBridge(spec: {
       }
       return arr;
     },
-    async uploadImageFile(path, bytes, mimeType) {
+    async uploadImageFile(path, binaryBytes, contentType) {
       await s3_client.send(
         new s3.PutObjectCommand({
           Bucket: bucketName,
           Key: path,
-          Body: bytes,
-          ContentType: mimeType,
+          Body: binaryBytes,
+          ContentType: contentType,
           ACL: "public-read",
         })
       );

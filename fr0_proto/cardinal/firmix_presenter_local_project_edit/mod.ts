@@ -1,5 +1,6 @@
 import { produce } from "immer";
 import { raiseError } from "~/aux/utils/error_util.ts";
+import { decodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
 import {
   BinaryFileEntry,
   LocalDevelopmentProject,
@@ -101,7 +102,8 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         { create: true }
       );
       const writable = await fileHandle.createWritable();
-      await writable.write(modFirmware.binaryBytes);
+      const binaryBites = decodeBinaryBase64(modFirmware.binaryBytes_base64);
+      await writable.write(binaryBites);
       await writable.close();
 
       return produce(project, (draft) => {

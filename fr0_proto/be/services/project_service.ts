@@ -1,3 +1,7 @@
+import {
+  decodeBinaryBase64,
+  imageDataUrlHelper,
+} from "~/aux/utils/utils_binary.ts";
 import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
 import { ProjectEntity } from "~/base/types_db_entity.ts";
 import {
@@ -19,12 +23,16 @@ export function createProjectService() {
       const { thumbnailObject, firmwareObject } = projectInput;
       await objectStorageBridge.uploadBinaryFile(
         `${projectId}/${firmwareObject.fileName}`,
-        firmwareObject.binaryBytes
+        decodeBinaryBase64(firmwareObject.binaryBytes_base64)
       );
+      const {
+        binaryBytes: thumbnail_binaryBytes,
+        contentType: thumbnail_contentType,
+      } = imageDataUrlHelper.extractImageDataUrl(thumbnailObject.imageDataUrl);
       await objectStorageBridge.uploadImageFile(
         `${projectId}/${thumbnailObject.fileName}`,
-        thumbnailObject.binaryBytes,
-        thumbnailObject.mimeType
+        thumbnail_binaryBytes,
+        thumbnail_contentType
       );
       const projectEntity = local.createProjectEntity(projectId, projectInput);
       await storehouse.projectCabinet.upsert(projectEntity);

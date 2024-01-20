@@ -22,7 +22,7 @@ export type PatchingManifest = {
 export type FirmwareContainer = {
   kind: "uf2";
   fileName: string;
-  binaryBytes: Uint8Array;
+  binaryBytes_base64: string;
 };
 
 export type ImageFileContainer = {
@@ -31,6 +31,5 @@ export type ImageFileContainer = {
   fileSize: number;
   width: number;
   height: number;
-  binaryBytes: Uint8Array;
   imageDataUrl: string;
 };

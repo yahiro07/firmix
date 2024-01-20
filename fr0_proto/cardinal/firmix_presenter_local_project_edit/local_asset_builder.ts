@@ -1,4 +1,5 @@
 import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
+import { encodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
 import {
   BinaryFileEntry,
   LocalAsset_Firmware,
@@ -113,7 +114,7 @@ export const localAssetBuilder = {
     const firmwareContainer: FirmwareContainer = {
       kind: "uf2",
       fileName: filePathHelper.getFileNameFromFilePath(firmwareFile.filePath),
-      binaryBytes: firmwareFile.contentBytes,
+      binaryBytes_base64: encodeBinaryBase64(firmwareFile.contentBytes),
     };
     return {
       validity: "valid",
