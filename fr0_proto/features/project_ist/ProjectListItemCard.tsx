@@ -1,6 +1,7 @@
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
+import { flexHorizontal } from "~/common/utility_styles.ts";
 
 type Props = {
   project: ProjectListItemDto;
@@ -9,9 +10,12 @@ type Props = {
 export const ProjectListItemCard = createFC<Props>(({ project }: Props) => {
   return (
     <div q={style}>
-      <h2>{project.projectName}</h2>
-      <div>
-        <img src={project.thumbnailUrl} />
+      <h3>{project.projectName}</h3>
+      <div q="content-row">
+        <div q="thumbnail-box">
+          <img src={project.thumbnailUrl} />
+        </div>
+        <div q="introduction">{project.introduction}</div>
       </div>
     </div>
   );
@@ -20,4 +24,21 @@ export const ProjectListItemCard = createFC<Props>(({ project }: Props) => {
 const style = css`
   min-height: 100px;
   background: #fff;
+  padding: 12px;
+  > .content-row {
+    ${flexHorizontal(8)};
+    > .thumbnail-box {
+      width: 160px;
+      height: 120px;
+      > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    > .introduction {
+      white-space: pre;
+    }
+  }
 `;
