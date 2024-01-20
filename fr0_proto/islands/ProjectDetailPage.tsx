@@ -3,8 +3,8 @@ import { raiseError } from "~/aux/utils/error_util.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
-import { serverShell } from "../be/server_shell.ts";
+import { serverShell } from "~/be/server_shell.ts";
+import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
 
 type Props = {
   project: ProjectDetailDto;

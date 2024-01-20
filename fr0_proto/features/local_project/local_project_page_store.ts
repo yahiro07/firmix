@@ -15,8 +15,8 @@ import {
 } from "~/base/types_dto.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
-import { firmixPresenter_localProjectEdit } from "~/cathedral/firmix_presenter_local_project_edit/mod.ts";
+import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
+import { firmixPresenter_localProjectEdit } from "~/cardinal/firmix_presenter_local_project_edit/mod.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 
 const localProjectStorage =

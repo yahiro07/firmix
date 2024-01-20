@@ -12,8 +12,8 @@ import {
   ProjectMetadataInput,
   ProjectMetadataJsonFileContent,
 } from "~/base/types_project_metadata.ts";
-import { firmixCore_firmwarePatching } from "~/cathedral/firmix_core_firmware_patching/mod.ts";
-import { imageFileLoader } from "../firmix_presenter_common_modules/image_file_loader.ts";
+import { firmixCore_firmwarePatching } from "~/cardinal/firmix_core_firmware_patching/mod.ts";
+import { imageFileLoader } from "~/cardinal/firmix_presenter_common_modules/image_file_loader.ts";
 
 export const localAssetBuilder = {
   buildAssetReadme(readmeFile: TextFileEntry | undefined): LocalAsset_Readme {

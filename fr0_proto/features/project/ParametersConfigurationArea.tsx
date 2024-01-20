@@ -7,7 +7,7 @@ import {
   ConfigurationSourceItemWrapper,
 } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
+import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
 
 type Props = {
   configurationSourceItems: ConfigurationSourceItemWrapper[];

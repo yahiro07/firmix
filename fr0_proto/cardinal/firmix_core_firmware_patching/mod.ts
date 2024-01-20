@@ -5,7 +5,7 @@ import {
   PatchingManifest,
 } from "~/base/types_project_edit.ts";
 import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
-import { firmwareDataInjector } from "./firmware_data_injector.ts";
+import { firmwareDataInjector } from "~/cardinal/firmix_core_firmware_patching/firmware_data_injector.ts";
 
 type FirmixCore_FirmwarePatching = {
   validateMetadataInput(metadataInput: ProjectMetadataInput): string;

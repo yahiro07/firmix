@@ -9,9 +9,9 @@ import {
   FirmwareContainer,
   PatchingDataBlob,
 } from "~/base/types_project_edit.ts";
-import { firmixCore_firmwarePatching } from "~/cathedral/firmix_core_firmware_patching/mod.ts";
-import { localAssetBuilder } from "~/cathedral/firmix_presenter_local_project_edit/local_asset_builder.ts";
-import { createLocalDirectoryReader } from "../firmix_presenter_common_modules/local_directory_reader.ts";
+import { firmixCore_firmwarePatching } from "~/cardinal/firmix_core_firmware_patching/mod.ts";
+import { createLocalDirectoryReader } from "~/cardinal/firmix_presenter_common_modules/local_directory_reader.ts";
+import { localAssetBuilder } from "~/cardinal/firmix_presenter_local_project_edit/local_asset_builder.ts";
 
 type FirmixPresenter_LocalProjectEdit = {
   loadLocalDevelopmentProject(
