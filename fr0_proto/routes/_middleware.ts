@@ -1,4 +1,4 @@
-import { storehouse } from "~/server/depot/storehouse.ts";
+import { storehouse } from "../be/depot/storehouse.ts";
 
 //connect to db
 storehouse;

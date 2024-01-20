@@ -1,7 +1,7 @@
 import { serverFetchHelper } from "~/aux/utils_be/server_fetch_helper.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmwareDataInjector } from "~/cathedral/firmix_core_firmware_patching/firmware_data_injector.ts";
-import { storehouse } from "~/server/depot/storehouse.ts";
+import { storehouse } from "../depot/storehouse.ts";
 
 export function createFirmwareService() {
   return {

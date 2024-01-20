@@ -1,5 +1,5 @@
-import { createFirmwareService } from "~/server/services/firmware_service.ts";
-import { createProjectService } from "~/server/services/project_service.ts";
+import { createFirmwareService } from "./services/firmware_service.ts";
+import { createProjectService } from "./services/project_service.ts";
 
 function createServerShell() {
   const projectService = createProjectService();

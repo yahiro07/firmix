@@ -5,8 +5,8 @@ import {
   ProjectDetailDto,
 } from "~/base/types_dto.ts";
 import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
-import { objectStorageBridge } from "~/server/depot/object_storage_bridge_instance.ts";
-import { storehouse } from "~/server/depot/storehouse.ts";
+import { objectStorageBridge } from "../depot/object_storage_bridge_instance.ts";
+import { storehouse } from "../depot/storehouse.ts";
 
 export function createProjectService() {
   return {

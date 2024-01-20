@@ -4,7 +4,7 @@ import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cathedral/firmix_core_firmware_configuration/mod.ts";
-import { serverShell } from "~/server/server_shell.ts";
+import { serverShell } from "../be/server_shell.ts";
 
 type Props = {
   project: ProjectDetailDto;
