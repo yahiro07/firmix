@@ -17,6 +17,7 @@ import * as $DevelopmentPage from "./islands/DevelopmentPage.tsx";
 import * as $LocalProjectPage from "./islands/LocalProjectPage.tsx";
 import * as $MainLayout from "./islands/MainLayout.tsx";
 import * as $ProjectDetailPage from "./islands/ProjectDetailPage.tsx";
+import * as $ProjectListPage from "./islands/ProjectListPage.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -38,6 +39,7 @@ const manifest = {
     "./islands/LocalProjectPage.tsx": $LocalProjectPage,
     "./islands/MainLayout.tsx": $MainLayout,
     "./islands/ProjectDetailPage.tsx": $ProjectDetailPage,
+    "./islands/ProjectListPage.tsx": $ProjectListPage,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

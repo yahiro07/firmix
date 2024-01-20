@@ -1,5 +1,6 @@
 import { css } from "resin";
 import { raiseError } from "~/aux/utils/error_util.ts";
+import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
@@ -10,7 +11,7 @@ type Props = {
   project: ProjectDetailDto;
 };
 
-export default function ProjectDetailPage({ project }: Props) {
+export const ProjectDetailPage = createFC<Props>(({ project }: Props) => {
   const hasError = project.configurationSourceItemWrappers.some(
     (it) => it.dataKind === "error"
   );
@@ -72,7 +73,7 @@ export default function ProjectDetailPage({ project }: Props) {
       </button>
     </div>
   );
-}
+});
 
 const style = css`
   border: solid 1px #888;

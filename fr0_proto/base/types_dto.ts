@@ -28,6 +28,15 @@ export type ProjectDetailDto = {
   configurationSourceItemWrappers: ConfigurationSourceItemWrapper[];
 };
 
+export type ProjectListItemDto = {
+  projectId: string;
+  projectName: string;
+  introduction: string;
+  targetMcu: string;
+  primaryTargetBoard: string;
+  thumbnailUrl: string;
+};
+
 export type LocalProjectSubmissionInputDto = {
   projectGuid: string;
   projectName: string;

@@ -22,16 +22,20 @@ export const MainLayout = createFC(({ children }) => {
             <a href="/settings">設定</a>
           </nav>
         </div>
-        <div q="main-column">{children}</div>
+        <div q="main-column">
+          <div>{children}</div>
+        </div>
       </div>
     </div>
   );
 });
 
 const style = css`
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #ddd;
   > .header-bar {
     background: #76d;
     color: #fff;
@@ -47,7 +51,7 @@ const style = css`
     flex-grow: 1;
     display: flex;
     > .side-bar {
-      width: 180px;
+      width: 200px;
       background: #ccc;
       border-right: solid 1px #aaa;
       padding: 20px 12px;
@@ -58,6 +62,14 @@ const style = css`
     }
     > .main-column {
       flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      /* border: solid 1px red; */
+      > div {
+        flex-grow: 1;
+        max-width: 900px;
+        /* border: solid 1px blue; */
+      }
     }
   }
 `;
