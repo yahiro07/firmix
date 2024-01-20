@@ -8,9 +8,15 @@ type Props = {
 };
 
 export const ProjectListItemCard = createFC<Props>(({ project }: Props) => {
+  const navigateToDetail = () => {
+    location.href = `/project/${project.projectId}`;
+  };
   return (
     <div q={style}>
-      <h3>{project.projectName}</h3>
+      <div q="head-row">
+        <h3>{project.projectName}</h3>
+        <button onClick={navigateToDetail}>詳細</button>
+      </div>
       <div q="content-row">
         <div q="thumbnail-box">
           <img src={project.thumbnailUrl} />
@@ -25,6 +31,13 @@ const style = css`
   min-height: 100px;
   background: #fff;
   padding: 12px;
+  > .head-row {
+    ${flexHorizontal()};
+    > button {
+      margin-left: auto;
+      padding: 0 8px;
+    }
+  }
   > .content-row {
     ${flexHorizontal(8)};
     > .thumbnail-box {
