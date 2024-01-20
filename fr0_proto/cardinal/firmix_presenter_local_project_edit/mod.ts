@@ -85,7 +85,6 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         patchingDataBlob
       );
     },
-
     async projectEmitModifiedFirmware(project, modFirmware) {
       const { firmwareDirectoryHandle, assetFirmware } = project;
       if (!(assetFirmware.firmwareContainer && firmwareDirectoryHandle))

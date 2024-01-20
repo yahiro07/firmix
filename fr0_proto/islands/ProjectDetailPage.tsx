@@ -4,8 +4,8 @@ import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { serverShell } from "~/be/server_shell.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
+import { firmixPresenter_firmwarePatching } from "~/cardinal/firmix_presenter_firmware_patching/mod.ts";
 
 type Props = {
   project: ProjectDetailDto;
@@ -41,7 +41,7 @@ export const ProjectDetailPage = createFC<Props>(({ project }: Props) => {
           return { key, values };
         });
       const { fileName, fileContentBytes } =
-        await serverShell.firmwareService.generatePatchedFirmware(
+        await firmixPresenter_firmwarePatching.generatePatchedFirmware(
           project.projectId,
           configurationEditItems
         );
