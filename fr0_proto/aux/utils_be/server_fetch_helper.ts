@@ -1,18 +1,12 @@
 export const serverFetchHelper = {
-  async fetchJson<T>(
-    url: string,
-    init: RequestInit,
-  ): Promise<T> {
+  async fetchJson<T>(url: string, init: RequestInit): Promise<T> {
     const response = await fetch(url, init);
     if (!response.ok) {
       throw new Error(await response.text());
     }
     return (await response.json()) as T;
   },
-  async fetchBinary(
-    url: string,
-    init: RequestInit,
-  ): Promise<Uint8Array> {
+  async fetchBinary(url: string, init: RequestInit): Promise<Uint8Array> {
     const response = await fetch(url, init);
     if (!response.ok) {
       throw new Error(await response.text());
@@ -23,7 +17,7 @@ export const serverFetchHelper = {
   async postJson<TRequestBody, TResponseBody>(
     url: string,
     reqBody: TRequestBody,
-    options?: { headers?: Record<string, string>; methodOverride?: string },
+    options?: { headers?: Record<string, string>; methodOverride?: string }
   ): Promise<TResponseBody> {
     const res = await fetch(url, {
       method: options?.methodOverride ?? "POST",
@@ -31,11 +25,11 @@ export const serverFetchHelper = {
       headers: { "content-type": "application/json", ...options?.headers },
     });
     const success = res.status < 400;
-    const isJson = res.headers.get("Content-Type")?.includes(
-      "application/json",
-    );
+    const isJson = res.headers
+      .get("Content-Type")
+      ?.includes("application/json");
     if (success) {
-      return (isJson ? await res.json() : await res.text());
+      return isJson ? await res.json() : await res.text();
     } else {
       const detail = (
         isJson ? (await res.json()).error : await res.text()

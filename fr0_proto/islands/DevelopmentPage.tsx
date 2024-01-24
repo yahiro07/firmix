@@ -1,6 +1,9 @@
 import * as idb_keyval from "idb-keyval";
 import { useState } from "preact/hooks";
+import { css } from "resin";
+import { serverFetchHelper } from "~/aux/utils_be/server_fetch_helper.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { flexVertical } from "~/common/utility_styles.ts";
 
 export const DevelopmentPage = createFC(() => {
   const [text, setText] = useState("");
@@ -45,12 +48,39 @@ export const DevelopmentPage = createFC(() => {
     setText("");
   };
 
+  const handleClick3 = async () => {
+    const uri =
+      "https://r2-fr0-assets-dev.kermite.org/54ys5lroxs/firmware.uf2?rev=5";
+    // const uri = `https://pub-3554afab200443098d621db9883cf974.r2.dev/54ys5lroxs/firmware.uf2?rev=3`;
+    const res = await serverFetchHelper.fetchBinary(uri, {});
+    console.log({ res });
+  };
+
   return (
-    <div>
-      <div>{text}</div>
-      <button onClick={handleClick}>select folder</button>
-      <button onClick={handleClick1}>reload</button>
-      <button onClick={handleClick2}>close</button>
+    <div q={style}>
+      <div>
+        <h3>directoryHandleの永続化実験</h3>
+        <div>
+          <div>{text}</div>
+          <button onClick={handleClick}>select folder</button>
+          <button onClick={handleClick1}>reload</button>
+          <button onClick={handleClick2}>close</button>
+        </div>
+      </div>
+      <div>
+        <h3>R2 CORSアクセスのデバッグ</h3>
+        <div>
+          <button onClick={handleClick3}>fetch</button>
+        </div>
+      </div>
     </div>
   );
 });
+
+const style = css`
+  padding: 16px;
+  ${flexVertical(16)};
+  button {
+    padding: 2px 6px;
+  }
+`;

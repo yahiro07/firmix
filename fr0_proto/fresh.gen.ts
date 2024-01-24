@@ -8,6 +8,7 @@ import * as $_layout from "./routes/_layout.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $api_rpc_op_ from "./routes/api/rpc/[op].ts";
+import * as $development from "./routes/development.tsx";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $local_work from "./routes/local-work.tsx";
@@ -28,6 +29,7 @@ const manifest = {
     "./routes/_middleware.ts": $_middleware,
     "./routes/api/joke.ts": $api_joke,
     "./routes/api/rpc/[op].ts": $api_rpc_op_,
+    "./routes/development.tsx": $development,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
     "./routes/local-work.tsx": $local_work,

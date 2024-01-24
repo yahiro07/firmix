@@ -20,6 +20,7 @@ export const MainLayout = createFC(({ children }) => {
             <a href="/user-projects/__user_id__">自分のプロジェクト</a>
             <a href="/local-work">ローカル開発</a>
             <a href="/settings">設定</a>
+            <a href="/development">development</a>
           </nav>
         </div>
         <div q="main-column">

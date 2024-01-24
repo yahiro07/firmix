@@ -11,4 +11,10 @@ export const appRpcRouter: ServerRpcRouter<AppRpcSignatures> = {
   async createProjectFromLocal({ projectInput }) {
     await serverShell.projectService.createProjectFromLocal(projectInput);
   },
+  async generatePatchedFirmware({ projectId, editItems }) {
+    return await serverShell.firmwareService.generatePatchedFirmware(
+      projectId,
+      editItems
+    );
+  },
 };

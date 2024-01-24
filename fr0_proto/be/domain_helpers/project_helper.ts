@@ -8,6 +8,6 @@ export const projectHelper = {
   },
   getFirmwareBinaryUrl(project: ProjectEntity): string {
     const r2PublicUrl = getEnvVariable("R2_PUBLIC_URL");
-    return `${r2PublicUrl}/${project.projectId}/${project.firmwareFileName}?rev=1`;
+    return `${r2PublicUrl}/${project.projectId}/${project.firmwareFileName}?rev=2`;
   },
 };
