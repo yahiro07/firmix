@@ -25,7 +25,6 @@ function createClientStorageImpl(): ClientStorageImpl {
       if (token) {
         const res = myJwt_verify<LoginUserClue>(token, jwtSecret);
         if (res && !res.expired) {
-          console.log({ loginUserClue: res.payload });
           return res.payload;
         }
       }
