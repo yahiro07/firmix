@@ -1,5 +1,5 @@
-import { getEnvVariable } from "~/aux/utils_be/env_helper.ts";
 import { ProjectEntity } from "~/base/types_db_entity.ts";
+import { getEnvVariable } from "~/be/base/envs.ts";
 
 export const projectHelper = {
   getThumbnailImageUrl(project: ProjectEntity): string {

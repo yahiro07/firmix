@@ -1,5 +1,5 @@
 import { createObjectStorageBridge } from "~/aux/object_storage_bridge/mod.ts";
-import { getEnvVariable } from "~/aux/utils_be/env_helper.ts";
+import { getEnvVariable } from "~/be/base/envs.ts";
 
 export const objectStorageBridge = createObjectStorageBridge({
   r2_access_key_id: getEnvVariable("R2_ACCESS_KEY_ID"),
