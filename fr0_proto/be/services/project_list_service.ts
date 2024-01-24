@@ -6,7 +6,7 @@ import { projectHelper } from "~/be/domain_helpers/project_helper.ts";
 export function createProjectListService() {
   return {
     async getProjectList_recent(): Promise<ProjectListItemDto[]> {
-      const projects = await storehouse.colProject
+      const projects = await storehouse.projectCollection
         .aggregate([{ $sort: { projectId: -1 } }])
         .toArray();
       return projects.map(local.mapProjectEntityToListItemDto);

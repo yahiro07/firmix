@@ -8,6 +8,9 @@ import * as $_layout from "./routes/_layout.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $api_rpc_op_ from "./routes/api/rpc/[op].ts";
+import * as $auth_github_callback from "./routes/auth/github/callback.ts";
+import * as $auth_github_index from "./routes/auth/github/index.ts";
+import * as $auth_logout from "./routes/auth/logout.ts";
 import * as $development from "./routes/development.tsx";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
@@ -29,6 +32,9 @@ const manifest = {
     "./routes/_middleware.ts": $_middleware,
     "./routes/api/joke.ts": $api_joke,
     "./routes/api/rpc/[op].ts": $api_rpc_op_,
+    "./routes/auth/github/callback.ts": $auth_github_callback,
+    "./routes/auth/github/index.ts": $auth_github_index,
+    "./routes/auth/logout.ts": $auth_logout,
     "./routes/development.tsx": $development,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,

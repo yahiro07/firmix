@@ -22,3 +22,7 @@ export function getRequestSourceUrl(req: Request) {
   }
   return url;
 }
+
+export function responseRedirect(destPath: string) {
+  return new Response(null, { status: 302, headers: { location: destPath } });
+}

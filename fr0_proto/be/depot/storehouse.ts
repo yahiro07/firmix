@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { ProjectEntity } from "~/base/types_db_entity.ts";
+import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { getEnvVariable } from "~/be/base/envs.ts";
 import { createMongoGeneralCabinet } from "~/be/depot/mongo_general_cabinet.ts";
 
@@ -11,19 +11,36 @@ async function createStoreHouse() {
   console.log("connected to db");
   const db = client.database(mongoDatabaseName);
 
-  const colProject = db.collection<ProjectEntity>("project");
-  const projectCabinet = createMongoGeneralCabinet(colProject, "projectId");
+  const userCollection = db.collection<UserEntity>("user");
+  const projectCollection = db.collection<ProjectEntity>("project");
+
+  const userCabinet = createMongoGeneralCabinet(userCollection, "userId");
+  const projectCabinet = createMongoGeneralCabinet(
+    projectCollection,
+    "projectId"
+  );
+
+  await userCollection.createIndexes({
+    indexes: [
+      { key: { userId: -1 }, name: "user_id", unique: true },
+      {
+        key: { loginSourceSignature: 1 },
+        name: "login_source_signature",
+        unique: true,
+      },
+    ],
+  });
 
   // await colProject.createIndex({ projectId: -1 }, { unique: true });
   // await colProject.dropIndexes({ index: "projectId_-1" });
-  await colProject.createIndexes({
+  await projectCollection.createIndexes({
     indexes: [
       { key: { projectId: -1 }, name: "project_id", unique: true },
       { key: { projectGuid: 1 }, name: "project_guid", unique: true },
     ],
   });
 
-  return { colProject, projectCabinet };
+  return { userCollection, projectCollection, userCabinet, projectCabinet };
 }
 
 export const storehouse = await createStoreHouse();

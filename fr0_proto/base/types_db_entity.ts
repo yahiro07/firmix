@@ -1,5 +1,13 @@
 import { CustomDataEntry, EditUiItem } from "~/base/types_core_entity.ts";
 
+export type UserEntity = {
+  userId: string;
+  userName: string;
+  avatarUrl: string;
+  loginSourceSignature: string;
+  createAt: number;
+};
+
 export type ProjectEntity = {
   projectId: string;
   projectGuid: string;

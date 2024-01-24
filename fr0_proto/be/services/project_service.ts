@@ -15,7 +15,7 @@ import { projectHelper } from "~/be/domain_helpers/project_helper.ts";
 export function createProjectService() {
   return {
     async createProjectFromLocal(projectInput: LocalProjectSubmissionInputDto) {
-      const existingProject = await storehouse.colProject.findOne({
+      const existingProject = await storehouse.projectCollection.findOne({
         projectGuid: projectInput.projectGuid,
       });
       const projectId =

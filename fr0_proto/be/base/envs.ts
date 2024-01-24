@@ -1,6 +1,7 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
 
 type EnvVariables = {
+  ENV_TYPE: "development" | "production";
   MONGO_URL: string;
   MONGO_DATABASE_NAME: string;
   R2_ACCESS_KEY_ID: string;

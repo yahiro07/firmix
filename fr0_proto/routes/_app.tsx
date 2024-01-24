@@ -1,8 +1,9 @@
-import { type PageProps } from "$fresh/server.ts";
+import { FreshContext } from "$fresh/server.ts";
 import { ResinCssEmitter, ResinCssGlobalStyle } from "resin";
 import { globalStyle } from "~/common/global_style.ts";
 
-export default function App({ Component }: PageProps) {
+// deno-lint-ignore require-await
+export default async function App(_req: Request, ctx: FreshContext) {
   return (
     <html>
       <head>
@@ -19,7 +20,7 @@ export default function App({ Component }: PageProps) {
         />
       </head>
       <body>
-        <Component />
+        <ctx.Component />
       </body>
     </html>
   );

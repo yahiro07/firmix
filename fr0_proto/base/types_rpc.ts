@@ -3,6 +3,10 @@ import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 
 type AsyncFn<P, R> = (payload: P) => Promise<R>;
 
+export type AppRpcContext = {
+  loginUserId: string;
+};
+
 export type AppRpcSignatures = {
   greet: AsyncFn<{ message: string }, { resMessage: string }>;
   createProjectFromLocal: AsyncFn<
