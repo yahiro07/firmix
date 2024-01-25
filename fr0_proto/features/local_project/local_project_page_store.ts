@@ -182,7 +182,7 @@ const local = {
       assetThumbnail: { thumbnailContainer },
       assetFirmware: { firmwareContainer },
     } = project;
-    if (!(metadataInput && thumbnailContainer && firmwareContainer)) {
+    if (!metadataInput || !thumbnailContainer || !firmwareContainer) {
       raiseError(`invalid project to submit`);
     }
     return {

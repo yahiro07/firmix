@@ -76,8 +76,7 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         assetFirmware: { firmwareContainer },
         assetMetadata: { metadataInput },
       } = project;
-      if (!(firmwareContainer && metadataInput))
-        raiseError(`invalid condition`);
+      if (!firmwareContainer || !metadataInput) raiseError(`invalid condition`);
       const patchingDataBlob: PatchingDataBlob = { editItems };
       return firmixCore_firmwarePatching.fabricateFirmware(
         firmwareContainer,
@@ -87,7 +86,7 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
     },
     async projectEmitModifiedFirmware(project, modFirmware) {
       const { firmwareDirectoryHandle, assetFirmware } = project;
-      if (!(assetFirmware.firmwareContainer && firmwareDirectoryHandle))
+      if (!assetFirmware.firmwareContainer || !firmwareDirectoryHandle)
         raiseError(`invalid condition`);
       const srcFirmwareFilePath = assetFirmware.filePath;
       const srcFirmwareFileName = assetFirmware.firmwareContainer.fileName;
