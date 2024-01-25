@@ -1,7 +1,13 @@
 import { FreshContext, Handlers } from "$fresh/server.ts";
 
+export function createGetHandler(
+  GET: (req: Request, ctx: FreshContext) => Response | Promise<Response>
+): Handlers {
+  return { GET };
+}
+
 export function createPostHandler(
-  POST: (req: Request, ctx: FreshContext) => Promise<Response>
+  POST: (req: Request, ctx: FreshContext) => Response | Promise<Response>
 ): Handlers {
   return { POST };
 }
