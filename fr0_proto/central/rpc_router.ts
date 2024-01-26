@@ -1,7 +1,7 @@
 import { ServerRpcRouterWithContext } from "~/aux/chibi_rpc/types.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { AppRpcContext, AppRpcSignatures } from "~/base/types_rpc.ts";
-import { serverShell } from "~/be/server_shell.ts";
+import { serverShell } from "~/central/server_shell.ts";
 
 export const appRpcRouter: ServerRpcRouterWithContext<
   AppRpcSignatures,

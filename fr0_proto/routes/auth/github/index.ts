@@ -1,4 +1,4 @@
-import { oauthClientGithub } from "~/be/user_auth/oauth_clients.ts";
+import { oauthClientGithub } from "~/central/user_auth/oauth_clients.ts";
 import {
   createGetHandler,
   getRequestSourceUrl,

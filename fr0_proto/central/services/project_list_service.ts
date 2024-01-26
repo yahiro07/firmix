@@ -1,6 +1,6 @@
 import { ProjectEntity } from "~/base/types_db_entity.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
-import { storehouse } from "~/be/depot/storehouse.ts";
+import { storehouse } from "~/central/depot/storehouse.ts";
 
 export function createProjectListService() {
   return {

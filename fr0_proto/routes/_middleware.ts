@@ -1,6 +1,6 @@
 import { FreshContext } from "$fresh/server.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
-import { storehouse } from "~/be/depot/storehouse.ts";
+import { storehouse } from "~/central/depot/storehouse.ts";
 
 //connect to db
 storehouse;

@@ -61,7 +61,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
     return undefined;
   }, [project]);
 
-  const canSubmitProject = !!project;
+  const canSubmitProject = project?.canSubmit ?? false;
 
   useEffectAsync(async () => {
     const tmpProject = localProjectStorage.read();

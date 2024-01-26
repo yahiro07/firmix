@@ -1,4 +1,4 @@
-import { getEnvVariable } from "~/be/base/envs.ts";
+import { getEnvVariable } from "~/central/base/envs.ts";
 
 const envType = getEnvVariable("ENV_TYPE");
 

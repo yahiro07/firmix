@@ -48,5 +48,6 @@ export type LocalDevelopmentProject = {
   assetMetadata: LocalAsset_Metadata;
   assetThumbnail: LocalAsset_Thumbnail;
   assetFirmware: LocalAsset_Firmware;
+  canSubmit: boolean;
   modFirmwareFilePath?: string;
 };

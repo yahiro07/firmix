@@ -4,9 +4,9 @@ import {
   generateRandomId,
 } from "~/aux/utils_be/id_generator.ts";
 import { LoginUserClue } from "~/base/types_dto_internal.ts";
-import { CookieOutputJob } from "~/be/base/types_client_storage.ts";
-import { OAuthLoginSourceUserInfo } from "~/be/base/types_oauth.ts";
-import { storehouse } from "~/be/depot/storehouse.ts";
+import { CookieOutputJob } from "~/central/base/types_client_storage.ts";
+import { OAuthLoginSourceUserInfo } from "~/central/base/types_oauth.ts";
+import { storehouse } from "~/central/depot/storehouse.ts";
 
 export function createUserService() {
   return {

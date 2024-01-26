@@ -1,5 +1,5 @@
 import { ProjectEntity } from "~/base/types_db_entity.ts";
-import { getEnvVariable } from "~/be/base/envs.ts";
+import { getEnvVariable } from "~/central/base/envs.ts";
 
 export const projectHelper = {
   getFirmwareBinaryUrl(project: ProjectEntity): string {
