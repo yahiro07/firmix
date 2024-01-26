@@ -1,15 +1,16 @@
-import { css } from "~/aux/resin/resin_css.ts";
+import { css } from "resin";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
+
 import {
-  ConfigurationEditItem,
   ConfigurationSourceItem,
-  ConfigurationSourceItem_Valid,
-} from "~/base/dto_types.ts";
-import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
+  ConfigurationSourceItemWrapper,
+} from "~/base/types_dto.ts";
+import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
+import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
 
 type Props = {
-  configurationSourceItems: ConfigurationSourceItem[];
+  configurationSourceItems: ConfigurationSourceItemWrapper[];
   submitEditItems(editItems: ConfigurationEditItem[]): void;
   submitButtonLabel: string;
   submit2?(editItems: ConfigurationEditItem[]): void;
@@ -17,44 +18,41 @@ type Props = {
 };
 
 export const ParametersConfigurationArea = createFC<Props>(
-  (
-    {
-      configurationSourceItems: configurationSourceItemsRaw,
-      submitEditItems,
-      submitButtonLabel,
-      submit2,
-      submit2Label,
-    },
-  ) => {
-    const hasError = configurationSourceItemsRaw.some((it) =>
-      it.dataKind === "error"
+  ({
+    configurationSourceItems: configurationSourceItemsRaw,
+    submitEditItems,
+    submitButtonLabel,
+    submit2,
+    submit2Label,
+  }) => {
+    const hasError = configurationSourceItemsRaw.some(
+      (it) => it.dataKind === "error"
     );
     const configurationSourceItems =
-      configurationSourceItemsRaw as ConfigurationSourceItem_Valid[];
+      configurationSourceItemsRaw as ConfigurationSourceItem[];
 
     const inputIdPrefix = `config-input-`;
 
     const handleDownload = (destFn: 1 | 2) => {
       try {
-        const configurationEditItems: (ConfigurationEditItem)[] =
-          configurationSourceItems.map(
-            (sourceItem) => {
-              const { key } = sourceItem;
-              const inputElementId = `${inputIdPrefix}${key}`;
-              const element = document.getElementById(
-                inputElementId,
-              ) as HTMLInputElement;
-              if (!element) {
-                raiseError(`target element not found for ${inputElementId}`);
-              }
-              const text = element.value;
-              const values = firmixPresenter.splitSourceItemEditTextValues(
+        const configurationEditItems: ConfigurationEditItem[] =
+          configurationSourceItems.map((sourceItem) => {
+            const { key } = sourceItem;
+            const inputElementId = `${inputIdPrefix}${key}`;
+            const element = document.getElementById(
+              inputElementId
+            ) as HTMLInputElement;
+            if (!element) {
+              raiseError(`target element not found for ${inputElementId}`);
+            }
+            const text = element.value;
+            const values =
+              firmixCore_firmwareConfiguration.splitSourceItemEditTextValues(
                 sourceItem,
-                text,
+                text
               );
-              return { key, values };
-            },
-          );
+            return { key, values };
+          });
         if (destFn === 1) {
           submitEditItems(configurationEditItems);
         } else {
@@ -67,11 +65,7 @@ export const ParametersConfigurationArea = createFC<Props>(
 
     return (
       <div q={style}>
-        {hasError && (
-          <div>
-            カスタムデータの定義にエラーがあります
-          </div>
-        )}
+        {hasError && <div>カスタムデータの定義にエラーがあります</div>}
         {!hasError && (
           <div>
             {configurationSourceItems.map((item) => (
@@ -81,7 +75,7 @@ export const ParametersConfigurationArea = createFC<Props>(
                   {local.configurationSourceItem_getCountsText(item)}
                 </label>
                 <input id={`${inputIdPrefix}${item.key}`} />
-                <span>{item.instruction}</span>
+                <span if={false}>{item.instruction}</span>
               </div>
             ))}
           </div>
@@ -98,7 +92,7 @@ export const ParametersConfigurationArea = createFC<Props>(
         </button>
       </div>
     );
-  },
+  }
 );
 
 const style = css`
@@ -108,9 +102,7 @@ const style = css`
 `;
 
 const local = {
-  configurationSourceItem_getCountsText(
-    item: ConfigurationSourceItem_Valid,
-  ): string {
+  configurationSourceItem_getCountsText(item: ConfigurationSourceItem): string {
     if (item.dataKind === "pins") {
       return `(gpio x${item.pinCount})`;
     } else if (item.dataKind === "vl_pins") {

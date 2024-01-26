@@ -1,6 +1,6 @@
-import { css } from "~/aux/resin/resin_css.ts";
+import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
-import { ProjectDetailDto } from "~/base/dto_types.ts";
+import { ProjectDetailDto } from "~/base/types_dto.ts";
 
 type Props = {
   project: ProjectDetailDto;
@@ -9,15 +9,9 @@ type Props = {
 export const ProjectInformationArea = createFC<Props>(({ project }) => {
   return (
     <div q={style}>
-      <div>
-        project name: {project.projectName}
-      </div>
-      <div>
-        introduction: {project.introduction}
-      </div>
-      <div>
-        target mcu: {project.targetMcu}
-      </div>
+      <div>project name: {project.projectName}</div>
+      <div>introduction: {project.introduction}</div>
+      <div>target mcu: {project.targetMcu}</div>
     </div>
   );
 });

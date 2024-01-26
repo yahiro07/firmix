@@ -1,31 +1,8 @@
-import { css } from "~/aux/resin/resin_css.ts";
-import { flexVertical } from "~/common/utility_styles.ts";
+import { defineRoute } from "$fresh/src/server/defines.ts";
+import { serverShell } from "~/be/server_shell.ts";
+import { ProjectListPage } from "~/islands/ProjectListPage.tsx";
 
-export default function Home() {
-  return (
-    <div class="px-4 py-8 mx-auto bg-[#86efac]">
-      <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <img
-          class="my-6"
-          src="/logo.svg"
-          width="128"
-          height="128"
-          alt="the Fresh logo: a sliced lemon dripping with juice"
-        />
-        <h1 class="text-4xl font-bold">Welcome to Fresh</h1>
-        <p class="my-4">
-          Try updating this message in the
-          <code class="mx-2">./routes/index.tsx</code> file, and refresh.
-        </p>
-      </div>
-      <div q={styleLinks}>
-        <a href="/project/foo">プロジェクト詳細画面</a>
-        <a href="/local-work">ローカルワーク</a>
-      </div>
-    </div>
-  );
-}
-
-const styleLinks = css`
-  ${flexVertical()};
-`;
+export default defineRoute(async () => {
+  const projects = await serverShell.projectListService.getProjectList_recent();
+  return <ProjectListPage projects={projects} />;
+});

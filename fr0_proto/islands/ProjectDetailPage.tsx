@@ -1,93 +1,11 @@
-import { css } from "~/aux/resin/resin_css.ts";
-import { raiseError } from "~/aux/utils/error_util.ts";
-import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
-import {
-  ConfigurationEditItem,
-  ConfigurationSourceItem_Valid,
-  ProjectDetailDto,
-} from "~/base/dto_types.ts";
-import { firmixPresenter } from "~/cathedral/firmix_presenter/mod.ts";
-import { serverShell } from "~/server/server_shell.ts";
+import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { ProjectDetailDto } from "~/base/types_dto.ts";
+import { ProjectDetailPageImpl } from "~/features/project_detail/ProjectDetailPageImpl.tsx";
 
 type Props = {
   project: ProjectDetailDto;
 };
 
-export default function ProjectDetailPage({ project }: Props) {
-  const hasError = project.configurationSourceItems.some((it) =>
-    it.dataKind === "error"
-  );
-  const configurationSourceItems = project
-    .configurationSourceItems as ConfigurationSourceItem_Valid[];
-
-  const inputIdPrefix = `config-input-`;
-
-  const handleDownload = async () => {
-    try {
-      const configurationEditItems: (ConfigurationEditItem)[] =
-        configurationSourceItems.map(
-          (sourceItem) => {
-            const { key } = sourceItem;
-            const inputElementId = `${inputIdPrefix}${key}`;
-            const element = document.getElementById(
-              inputElementId,
-            ) as HTMLInputElement;
-            if (!element) {
-              raiseError(`target element not found for ${inputElementId}`);
-            }
-            const text = element.value;
-            const values = firmixPresenter.splitSourceItemEditTextValues(
-              sourceItem,
-              text,
-            );
-            return { key, values };
-          },
-        );
-      const { fileName, fileContentBytes } = await serverShell
-        .generatePatchedFirmware(
-          project.projectId,
-          configurationEditItems,
-        );
-      downloadBinaryFileBlob(fileName, fileContentBytes);
-    } catch (error) {
-      alert(error.message ?? error.toString());
-    }
-  };
-
-  return (
-    <div q={style}>
-      <div>
-        project name: {project.projectName}
-      </div>
-      <div>
-        introduction: {project.introduction}
-      </div>
-      <div>
-        target mcu: {project.targetMcu}
-      </div>
-      {hasError && (
-        <div>
-          カスタムデータの定義にエラーがあります
-        </div>
-      )}
-      {!hasError && (
-        <div>
-          {configurationSourceItems.map((item) => (
-            <div key={item.key}>
-              {/* <label>{item.label} (gpio x{item.dataCount})</label> */}
-              <span>{item.instruction}</span>
-              <input id={`${inputIdPrefix}${item.key}`}></input>
-            </div>
-          ))}
-        </div>
-      )}
-      <button onClick={handleDownload} disabled={hasError}>download</button>
-    </div>
-  );
-}
-
-const style = css`
-  border: solid 1px #888;
-  padding: 10px;
-  background: #fff;
-`;
+export const ProjectDetailPage = createFC<Props>(({ project }: Props) => {
+  return <ProjectDetailPageImpl project={project} />;
+});

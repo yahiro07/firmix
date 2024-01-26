@@ -1,12 +1,13 @@
 {
   "projectGuid": "DBB02917-6B1A-4357-BA71-2FCB80AFF5A1",
-  "projectName": "Basic Keyboard Example",
+  "projectName": "一体型キーボードサンプル",
   "introductionLines": [
     "一体型のキーボードファームウェアのサンプルです",
     "Kermiteに対応しています"
   ],
   "targetMcu": "RP2040",
   "primaryTargetBoard": "KB2040",
+  "tags": ["RP2040", "サンプル"],
   "dataEntries": [
     {
       "marker": "PINDEFS",

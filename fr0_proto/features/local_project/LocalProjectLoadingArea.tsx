@@ -1,61 +1,79 @@
-import { useCallback, useEffect } from "preact/hooks";
-import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
+import { useEffect } from "preact/hooks";
+import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
-import { LocalDevelopmentWork } from "~/cathedral/firmix_presenter/types.ts";
-import { firmixWorkBuilder } from "~/cathedral/firmix_work/mod.ts";
+import { flexHorizontalAligned } from "~/common/utility_styles.ts";
+import { IconIconify } from "~/components/IconIconify.tsx";
 
 type Props = {
-  setWork(work: LocalDevelopmentWork): void;
+  loadedFolderName: string | undefined;
+  loadFolder(dirHandle: FileSystemDirectoryHandle): void;
+  reloadFolder(): void;
+  closeFolder(): void;
+  canSubmitProject: boolean;
+  submitProject(): void;
 };
 
-export const LocalProjectLoadingArea = createFC<Props>(({ setWork }) => {
-  const [v, m] = useReasyState({
-    dirHandle: undefined as FileSystemDirectoryHandle | undefined,
-  });
+export const LocalProjectLoadingArea = createFC<Props>(
+  ({
+    loadedFolderName,
+    loadFolder,
+    reloadFolder,
+    closeFolder,
+    canSubmitProject,
+    submitProject,
+  }) => {
+    useEffect(() => local.setupFolderDrop(loadFolder), []);
 
-  const loadDirectory = useCallback(
-    async (dirHandle: FileSystemDirectoryHandle) => {
-      m.setDirHandle(dirHandle);
-      const loadedWork = await firmixWorkBuilder.loadLocalDevelopmentWork(
-        dirHandle,
-      );
-      setWork(loadedWork);
-    },
-    [],
-  );
+    const loaded = !!loadedFolderName;
 
-  useEffect(() => local.setupFolderDrop(loadDirectory), []);
+    const handleSelectFolder = async () => {
+      const dirHandle = await window.showDirectoryPicker();
+      if (dirHandle) {
+        loadFolder(dirHandle);
+      }
+    };
 
-  const handleLoadFolder = async () => {
-    const dirHandle = await window.showDirectoryPicker();
-    if (dirHandle) {
-      loadDirectory(dirHandle);
-    }
-  };
-
-  const handleReload = async () => {
-    const dirHandle = v.dirHandle;
-    if (dirHandle) {
-      const loadedWork = await firmixWorkBuilder.loadLocalDevelopmentWork(
-        dirHandle,
-      );
-      setWork(loadedWork);
-    }
-  };
-
-  return (
-    <div>
-      <div>
-        <button onClick={handleLoadFolder}>フォルダ選択</button>
-        <button onClick={handleReload} disabled={!v.dirHandle}>リロード</button>
+    return (
+      <div q={style}>
+        <button onClick={handleSelectFolder} if={!loaded}>
+          フォルダ選択
+        </button>
+        <div if={loaded} q="folder">
+          <IconIconify spec="mdi:folder" />
+          <span>{loadedFolderName}</span>
+        </div>
+        <div q="spacer" />
+        <button onClick={submitProject} if={canSubmitProject}>
+          投稿
+        </button>
+        <button onClick={reloadFolder} if={loaded}>
+          再読み込み
+        </button>
+        <button onClick={closeFolder} if={loaded}>
+          閉じる
+        </button>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
+
+const style = css`
+  padding: 8px;
+  ${flexHorizontalAligned(8)};
+  > button {
+    padding: 1px 6px;
+  }
+  > .folder {
+    ${flexHorizontalAligned(4)};
+  }
+  > .spacer {
+    margin-left: auto;
+  }
+`;
 
 const local = {
   setupFolderDrop(
-    loadDirectory: (dirHandle: FileSystemDirectoryHandle) => void,
+    loadDirectory: (dirHandle: FileSystemDirectoryHandle) => void
   ) {
     const dragHandler = (event: DragEvent) => event.preventDefault();
     const dropHandler = async (event: DragEvent) => {
@@ -64,7 +82,6 @@ const local = {
       if (item) {
         const handle = await item?.getAsFileSystemHandle();
         if (handle) {
-          console.log({ handle });
           if (handle.kind === "directory") {
             loadDirectory(handle as FileSystemDirectoryHandle);
           }

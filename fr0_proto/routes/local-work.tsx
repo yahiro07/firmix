@@ -1,5 +1,5 @@
-import LocalProjectDevelopmentPage from "~/islands/LocalProjectDevelopmentPage.tsx";
+import { LocalProjectPage } from "~/islands/LocalProjectPage.tsx";
 
 export default function Page() {
-  return <LocalProjectDevelopmentPage />;
+  return <LocalProjectPage />;
 }
