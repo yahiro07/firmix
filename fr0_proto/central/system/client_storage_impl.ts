@@ -7,9 +7,9 @@ import {
 import { myJwt_create, myJwt_verify } from "~/aux/myjwt/mod.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { LoginUserClue } from "~/base/types_dto_internal.ts";
-import { getEnvVariable } from "~/be/base/envs.ts";
-import { serverConfig } from "~/be/base/server_config.ts";
-import { CookieOutputJob } from "~/be/base/types_client_storage.ts";
+import { getEnvVariable } from "~/central/base/envs.ts";
+import { serverConfig } from "~/central/base/server_config.ts";
+import { CookieOutputJob } from "~/central/base/types_client_storage.ts";
 
 type ClientStorageImpl = {
   readCookieLoginUserClue(req: Request): LoginUserClue | undefined;

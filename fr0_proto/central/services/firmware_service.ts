@@ -1,8 +1,8 @@
 import { encodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { storehouse } from "~/be/depot/storehouse.ts";
-import { projectHelper } from "~/be/domain_helpers/project_helper.ts";
 import { firmixPresenter_firmwarePatching } from "~/cardinal/firmix_presenter_firmware_patching/mod.ts";
+import { storehouse } from "~/central/depot/storehouse.ts";
+import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 export function createFirmwareService() {
   return {

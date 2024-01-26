@@ -11,10 +11,10 @@ import {
   ProjectSubmissionArgument,
 } from "~/base/types_dto_internal.ts";
 import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
-import { objectStorageBridge } from "~/be/depot/object_storage_bridge_instance.ts";
-import { storehouse } from "~/be/depot/storehouse.ts";
-import { projectHelper } from "~/be/domain_helpers/project_helper.ts";
 import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
+import { objectStorageBridge } from "~/central/depot/object_storage_bridge_instance.ts";
+import { storehouse } from "~/central/depot/storehouse.ts";
+import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 export function createProjectService() {
   const m = {

@@ -1,5 +1,5 @@
 import { defineRoute } from "$fresh/server.ts";
-import { serverShell } from "~/be/server_shell.ts";
+import { serverShell } from "~/central/server_shell.ts";
 import { ProjectDetailPage } from "~/islands/ProjectDetailPage.tsx";
 
 export default defineRoute(async (req, ctx) => {
