@@ -27,7 +27,7 @@ export function createUserService() {
           avatarUrl: loginSource.oAuthAvatarUrl,
           loginSourceSignature,
           createAt: Date.now(),
-          apiKey: generateRandomId(32),
+          apiKey: generateRandomId(24),
         };
         await storehouse.userCabinet.insert(user);
       }
