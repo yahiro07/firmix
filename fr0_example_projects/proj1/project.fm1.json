@@ -1,6 +1,7 @@
 {
   "projectGuid": "8a23b7fd-c462-43ca-9a31-263c4764991a",
   "projectName": "LED出力サンプル",
+  "thumbnailUrl": "https://i.imgur.com/eWinDSX.jpg",
   "introductionLines": [
     "スイッチを押すとLEDが光ります",
     "LED1 点滅します",

@@ -24,7 +24,6 @@ export type LocalProjectSubmissionPayload = {
   metadataFileContent: string;
   firmwareFormat: FirmwareFormat;
   firmwareFileBytes_base64: string;
-  thumbnailFileBytes_base64: string;
 };
 
 export type ProjectSubmissionArgument = {
@@ -33,5 +32,4 @@ export type ProjectSubmissionArgument = {
   metadataFileContent: string;
   firmwareFormat: FirmwareFormat;
   firmwareFileBytes: Uint8Array;
-  thumbnailFileBytes: Uint8Array;
 };

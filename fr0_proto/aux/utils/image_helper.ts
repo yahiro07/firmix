@@ -11,14 +11,6 @@ export function imageHelper_extractImageDataUrl(imageDataUrl: string) {
 
 type SupportedMimeType = "image/png" | "image/jpeg";
 
-const mimeTypeMapper: Record<string, SupportedMimeType> = {
-  "89504e47": "image/png",
-  // "47494638": "image/gif",
-  ffd8ffe0: "image/jpeg",
-  ffd8ffe1: "image/jpeg",
-  ffd8ffe2: "image/jpeg",
-};
-
 const mimeTypeToExtensionMapper: Record<SupportedMimeType, string> = {
   "image/png": "png",
   "image/jpeg": "jpg",
@@ -29,7 +21,12 @@ export function imageHelper_getImageDataMimeType(
 ): SupportedMimeType | undefined {
   const buf = [...bytes.slice(0, 4)];
   const code = buf.map((it) => it.toString(16)).join("");
-  return mimeTypeMapper[code];
+  if (code.startsWith("ffd8ff")) {
+    return "image/jpeg";
+  } else if (code.startsWith("89504e47")) {
+    return "image/png";
+  }
+  return undefined;
 }
 
 export function imageHelper_getImageFormat(

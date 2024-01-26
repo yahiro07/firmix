@@ -1,6 +1,6 @@
 import {
   FirmwareContainer,
-  ImageFileContainer,
+  OnlineImageAssetContainer,
 } from "~/base/types_project_edit.ts";
 import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 
@@ -34,7 +34,7 @@ export type LocalAsset_Metadata = LocalAssetBase & {
 };
 
 export type LocalAsset_Thumbnail = LocalAssetBase & {
-  thumbnailContainer: ImageFileContainer | undefined;
+  thumbnailContainer: OnlineImageAssetContainer | undefined;
 };
 
 export type LocalAsset_Firmware = LocalAssetBase & {
