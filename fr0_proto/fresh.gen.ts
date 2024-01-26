@@ -2,13 +2,6 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import { type Manifest } from "$fresh/server.ts";
-import * as $Counter from "./islands/Counter.tsx";
-import * as $DevelopmentPage from "./islands/DevelopmentPage.tsx";
-import * as $LocalProjectPage from "./islands/LocalProjectPage.tsx";
-import * as $MainLayout from "./islands/MainLayout.tsx";
-import * as $ProjectDetailPage from "./islands/ProjectDetailPage.tsx";
-import * as $ProjectListPage from "./islands/ProjectListPage.tsx";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_layout from "./routes/_layout.tsx";
@@ -24,6 +17,13 @@ import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $local_work from "./routes/local-work.tsx";
 import * as $project_projectId_ from "./routes/project/[projectId].tsx";
+import * as $Counter from "./islands/Counter.tsx";
+import * as $DevelopmentPage from "./islands/DevelopmentPage.tsx";
+import * as $LocalProjectPage from "./islands/LocalProjectPage.tsx";
+import * as $MainLayout from "./islands/MainLayout.tsx";
+import * as $ProjectDetailPage from "./islands/ProjectDetailPage.tsx";
+import * as $ProjectListPage from "./islands/ProjectListPage.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {

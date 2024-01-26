@@ -27,13 +27,14 @@ export const firmixCore_projectLoader = {
     }));
 
     //TODO: 各フィールドの内容も含めてスキーマをチェックする
-    const dataValid =
-      !projectGuid &&
-      !projectName &&
-      !targetMcu &&
-      !tags &&
-      !dataEntries &&
-      !editUiItems;
+    const dataValid = !!(
+      projectGuid &&
+      projectName &&
+      targetMcu &&
+      tags &&
+      dataEntries &&
+      editUiItems
+    );
     if (!dataValid) raiseError(`invalid metadata file content`);
 
     return {
