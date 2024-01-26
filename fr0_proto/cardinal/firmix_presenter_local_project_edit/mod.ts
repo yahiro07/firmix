@@ -61,6 +61,13 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         firmwareFile,
         firmwareFileLoadingErrorText
       );
+
+      const canSubmit =
+        assetReadme.validity !== "error" &&
+        assetMetadata.validity !== "error" &&
+        assetFirmware.validity !== "error" &&
+        assetThumbnail.validity !== "error";
+
       return {
         projectRootDirectoryHandle: dirHandle,
         firmwareDirectoryHandle,
@@ -68,6 +75,7 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         assetMetadata,
         assetThumbnail,
         assetFirmware,
+        canSubmit,
       };
     },
     patchLocalProjectFirmware(project, editItems) {

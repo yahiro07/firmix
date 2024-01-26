@@ -12,7 +12,11 @@ import {
 } from "~/features/project/ProjectHeadingArea.tsx";
 import { ProjectReadmeArea } from "~/features/project/ProjectReadmeArea.tsx";
 
-export const LocalProjectPageImpl = createFC(() => {
+type Props = {
+  loggedIn: boolean;
+};
+
+export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
   const {
     loadedFolderName,
     loadProjectFolder,
@@ -38,6 +42,7 @@ export const LocalProjectPageImpl = createFC(() => {
         closeFolder={closeProjectFolder}
         canSubmitProject={canSubmitProject}
         submitProject={submitProject}
+        loggedIn={loggedIn}
       />
       {metadataInput && (
         <ProjectHeadingArea

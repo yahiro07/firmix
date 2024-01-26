@@ -11,6 +11,7 @@ type Props = {
   closeFolder(): void;
   canSubmitProject: boolean;
   submitProject(): void;
+  loggedIn: boolean;
 };
 
 export const LocalProjectLoadingArea = createFC<Props>(
@@ -21,6 +22,7 @@ export const LocalProjectLoadingArea = createFC<Props>(
     closeFolder,
     canSubmitProject,
     submitProject,
+    loggedIn,
   }) => {
     useEffect(() => local.setupFolderDrop(loadFolder), []);
 
@@ -43,7 +45,11 @@ export const LocalProjectLoadingArea = createFC<Props>(
           <span>{loadedFolderName}</span>
         </div>
         <div q="spacer" />
-        <button onClick={submitProject} if={canSubmitProject}>
+        <button
+          onClick={submitProject}
+          if={loaded && loggedIn}
+          disabled={!canSubmitProject}
+        >
           投稿
         </button>
         <button onClick={reloadFolder} if={loaded}>
@@ -62,6 +68,10 @@ const style = css`
   ${flexHorizontalAligned(8)};
   > button {
     padding: 1px 6px;
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
   > .folder {
     ${flexHorizontalAligned(4)};
