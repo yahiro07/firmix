@@ -26,6 +26,7 @@ export function createProjectService() {
       thumbnailFileBytes: Uint8Array;
       firmwareFormat: FirmwareFormat;
       firmwareFileBytes: Uint8Array;
+      automated: boolean;
     }) {
       const {
         userId,
@@ -34,6 +35,7 @@ export function createProjectService() {
         thumbnailFileBytes,
         firmwareFormat,
         firmwareFileBytes,
+        automated,
       } = args;
       const metadataInput =
         firmixCore_projectLoader.loadProjectMetadataFile_json(
@@ -63,6 +65,10 @@ export function createProjectService() {
       if (!firmwareFormatValid) {
         raiseError(`unsupported firmware format ${firmwareFormat}`);
       }
+
+      const revision = (existingProject?.revision ?? 0) + 1;
+      const published = existingProject?.published ?? false;
+      const createAt = existingProject?.createAt ?? Date.now();
 
       const firmwareFileName = `firmware.${firmwareFormat}`;
       const firmwareFileHash = generateHashMd5(firmwareFileBytes);
@@ -99,6 +105,10 @@ export function createProjectService() {
         thumbnailFileName,
         thumbnailFileHash,
         thumbnailRevision,
+        revision,
+        published,
+        automated,
+        createAt,
       });
       await storehouse.projectCabinet.upsert(projectEntity);
     },
@@ -106,12 +116,29 @@ export function createProjectService() {
 
   return {
     async upsertProject(args: ProjectSubmissionArgument) {
+      const {
+        apiKey,
+        readmeFileContent,
+        metadataFileContent,
+        firmwareFormat,
+        firmwareFileBytes,
+        thumbnailFileBytes,
+      } = args;
       const user = await storehouse.userCollection.findOne({
-        apiKey: args.apiKey,
+        apiKey,
       });
       if (!user) raiseError(`invalid api key`);
 
-      await m.upsertProject({ ...args, userId: user.userId });
+      const { userId } = user;
+      await m.upsertProject({
+        userId,
+        readmeFileContent,
+        metadataFileContent,
+        firmwareFormat,
+        firmwareFileBytes,
+        thumbnailFileBytes,
+        automated: true,
+      });
     },
     async upsertProjectFromLocal(
       projectPayload: LocalProjectSubmissionPayload,
@@ -132,6 +159,7 @@ export function createProjectService() {
         thumbnailFileBytes: decodeBinaryBase64(thumbnailFileBytes_base64),
         firmwareFormat,
         firmwareFileBytes: decodeBinaryBase64(firmwareFileBytes_base64),
+        automated: false,
       });
     },
     async getProjectDetail(projectId: string): Promise<ProjectDetailDto> {
@@ -162,6 +190,10 @@ const local = {
     thumbnailFileName: string;
     thumbnailFileHash: string;
     thumbnailRevision: number;
+    revision: number;
+    published: boolean;
+    automated: boolean;
+    createAt: number;
   }): ProjectEntity {
     const { metadataInput } = args;
     return {
@@ -183,6 +215,11 @@ const local = {
       thumbnailFileName: args.thumbnailFileName,
       thumbnailFileHash: args.thumbnailFileHash,
       thumbnailRevision: args.thumbnailRevision,
+      revision: args.revision,
+      published: args.published,
+      automated: args.automated,
+      createAt: args.createAt,
+      updateAt: Date.now(),
     };
   },
   mapProjectEntityToDetailDto(project: ProjectEntity): ProjectDetailDto {

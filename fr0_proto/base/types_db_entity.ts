@@ -29,4 +29,9 @@ export type ProjectEntity = {
   thumbnailFileName: string;
   thumbnailFileHash: string;
   thumbnailRevision: number;
+  revision: number;
+  published: boolean;
+  automated: boolean;
+  createAt: number;
+  updateAt: number;
 };
