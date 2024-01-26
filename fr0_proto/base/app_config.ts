@@ -1,1 +1,3 @@
-export const appConfig = {};
+export const appConfig = {
+  versionCode: "240126a",
+};
