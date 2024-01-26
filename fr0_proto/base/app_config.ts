@@ -1,3 +1,3 @@
 export const appConfig = {
-  versionCode: "240126a",
+  versionCode: "240126b",
 };

@@ -9,7 +9,7 @@ export default async function App(_req: Request, ctx: FreshContext) {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>firmix proto</title>
+        <title>Firmix</title>
         <link rel="stylesheet" href="/styles.css" />
         <ResinCssGlobalStyle css={globalStyle} />
         <ResinCssEmitter />
