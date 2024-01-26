@@ -1,3 +1,4 @@
+import { FirmwareFormat } from "~/base/types_app_common.ts";
 import { CustomDataEntry, EditUiItem } from "~/base/types_core_entity.ts";
 
 export type FirmwarePatchingBlob = {
@@ -20,7 +21,7 @@ export type PatchingManifest = {
 };
 
 export type FirmwareContainer = {
-  kind: "uf2";
+  kind: FirmwareFormat;
   fileName: string;
   binaryBytes_base64: string;
 };

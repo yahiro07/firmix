@@ -29,6 +29,7 @@ export type LocalAsset_Readme = LocalAssetBase & {
 };
 
 export type LocalAsset_Metadata = LocalAssetBase & {
+  fileContent: string | undefined;
   metadataInput: ProjectMetadataInput | undefined;
 };
 

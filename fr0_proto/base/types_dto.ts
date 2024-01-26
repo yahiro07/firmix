@@ -45,18 +45,3 @@ export type ProjectListItemDto = {
   repositoryUrl: string;
   thumbnailUrl: string;
 };
-
-export type LocalProjectSubmissionInputDto = {
-  projectGuid: string;
-  projectName: string;
-  introduction: string;
-  targetMcu: string;
-  primaryTargetBoard: string;
-  tags: string[];
-  repositoryUrl: string;
-  readmeFileContent: string;
-  dataEntries: CustomDataEntry[];
-  editUiItems: EditUiItem[];
-  thumbnailObject: { fileName: string; imageDataUrl: string };
-  firmwareObject: { fileName: string; binaryBytes_base64: string };
-};

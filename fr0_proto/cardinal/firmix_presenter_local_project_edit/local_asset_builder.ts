@@ -9,11 +9,8 @@ import {
   TextFileEntry,
 } from "~/base/types_local_project.ts";
 import { FirmwareContainer } from "~/base/types_project_edit.ts";
-import {
-  ProjectMetadataInput,
-  ProjectMetadataJsonFileContent,
-} from "~/base/types_project_metadata.ts";
 import { firmixCore_firmwarePatching } from "~/cardinal/firmix_core_firmware_patching/mod.ts";
+import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
 import { imageFileLoader } from "~/cardinal/firmix_presenter_common_modules/image_file_loader.ts";
 
 export const localAssetBuilder = {
@@ -40,11 +37,12 @@ export const localAssetBuilder = {
       return {
         validity: "error",
         filePath: "metadata.fm1.json",
+        fileContent: undefined,
         metadataInput: undefined,
         errorLines: ["ファイルがありません。"],
       };
     }
-    const metadataInput = local.loadProjectMetadataFile_json(
+    const metadataInput = firmixCore_projectLoader.loadProjectMetadataFile_json(
       metadataFile.contentText
     );
 
@@ -61,6 +59,7 @@ export const localAssetBuilder = {
     return {
       validity,
       filePath: metadataFile.filePath,
+      fileContent: metadataFile.contentText,
       metadataInput: validity === "valid" ? metadataInput : undefined,
       errorLines,
     };
@@ -121,41 +120,6 @@ export const localAssetBuilder = {
       filePath: firmwareFile.filePath,
       firmwareContainer,
       errorLines: [],
-    };
-  },
-};
-
-const local = {
-  loadProjectMetadataFile_json(fileContentText: string): ProjectMetadataInput {
-    const metadata = JSON.parse(
-      fileContentText
-    ) as ProjectMetadataJsonFileContent;
-    const {
-      projectGuid,
-      projectName,
-      introductionLines,
-      targetMcu,
-      primaryTargetBoard,
-      repositoryUrl,
-      tags,
-      dataEntries,
-      editUiItems: editUiItemsInput,
-    } = metadata;
-    const introduction = introductionLines.join("\n");
-    const editUiItems = editUiItemsInput.map((it) => ({
-      ...it,
-      instruction: it.instruction ?? it.instructionLines?.join("\n") ?? "",
-    }));
-    return {
-      projectGuid,
-      projectName,
-      introduction,
-      targetMcu,
-      primaryTargetBoard,
-      tags,
-      repositoryUrl,
-      dataEntries,
-      editUiItems,
     };
   },
 };

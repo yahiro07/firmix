@@ -10,10 +10,8 @@ import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { useEffectAsync } from "~/aux/utils_fe/hooks.ts";
 import { ensureFileHandlePermission } from "~/aux/utils_fe/local_filesystem_helper.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
-import {
-  ConfigurationSourceItemWrapper,
-  LocalProjectSubmissionInputDto,
-} from "~/base/types_dto.ts";
+import { ConfigurationSourceItemWrapper } from "~/base/types_dto.ts";
+import { LocalProjectSubmissionPayload } from "~/base/types_dto_internal.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
@@ -153,11 +151,11 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
       if (!project) return;
       const proceed = window.confirm(`プロジェクトを投稿します。`);
       if (proceed) {
-        const projectInput =
-          local.mapLocalDevelopmentProjectToLocalProjectSubmissionInputDto(
+        const projectPayload =
+          local.mapLocalDevelopmentProjectToLocalProjectSubmissionPayload(
             project
           );
-        await rpcClient.createProjectFromLocal({ projectInput });
+        await rpcClient.upsertProjectFromLocal({ projectPayload });
       }
     },
   };
@@ -174,28 +172,25 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
 }
 
 const local = {
-  mapLocalDevelopmentProjectToLocalProjectSubmissionInputDto(
+  mapLocalDevelopmentProjectToLocalProjectSubmissionPayload(
     project: LocalDevelopmentProject
-  ): LocalProjectSubmissionInputDto {
+  ): LocalProjectSubmissionPayload {
     const {
-      assetMetadata: { metadataInput },
+      assetReadme: { fileContent: readmeFileContent },
+      assetMetadata: { fileContent: metadataFileContent },
       assetThumbnail: { thumbnailContainer },
       assetFirmware: { firmwareContainer },
     } = project;
-    if (!metadataInput || !thumbnailContainer || !firmwareContainer) {
+    if (!metadataFileContent || !thumbnailContainer || !firmwareContainer) {
       raiseError(`invalid project to submit`);
     }
+
     return {
-      ...metadataInput,
-      firmwareObject: {
-        fileName: firmwareContainer.fileName,
-        binaryBytes_base64: firmwareContainer.binaryBytes_base64,
-      },
-      thumbnailObject: {
-        fileName: thumbnailContainer.fileName,
-        imageDataUrl: thumbnailContainer.imageDataUrl,
-      },
-      readmeFileContent: project.assetReadme.fileContent ?? "",
+      readmeFileContent: readmeFileContent ?? "",
+      metadataFileContent,
+      firmwareFormat: firmwareContainer.kind,
+      firmwareFileBytes_base64: firmwareContainer.binaryBytes_base64,
+      thumbnailFileBytes_base64: thumbnailContainer.imageDataUrl.split(",")[1],
     };
   },
 };

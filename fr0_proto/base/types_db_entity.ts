@@ -6,10 +6,12 @@ export type UserEntity = {
   avatarUrl: string;
   loginSourceSignature: string;
   createAt: number;
+  apiKey: string;
 };
 
 export type ProjectEntity = {
   projectId: string;
+  userId: string;
   projectGuid: string;
   projectName: string;
   introduction: string;
@@ -22,5 +24,9 @@ export type ProjectEntity = {
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
   firmwareFileName: string;
+  firmwareFileHash: string;
+  firmwareRevision: number;
   thumbnailFileName: string;
+  thumbnailFileHash: string;
+  thumbnailRevision: number;
 };

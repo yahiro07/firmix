@@ -1,38 +1,54 @@
-import { decode } from "https://deno.land/x/imagescript@v1.2.14/mod.ts";
+import { raiseError } from "~/aux/utils/error_util.ts";
+import { FirmwareFormat } from "~/base/types_app_common.ts";
+import { serverShell } from "~/be/server_shell.ts";
 import { createPostHandler } from "~/system/route_helper.ts";
 
 export const handler = createPostHandler(async (req, _ctx) => {
-  console.log({ req });
   const authHeaderValue = req.headers.get("Authorization");
   const apiKey = authHeaderValue?.split(" ")[1];
-
-  console.log({ authHeaderValue, apiKey });
+  if (!apiKey) {
+    raiseError(`api key required`);
+  }
 
   const form = await req.formData();
-  const foo = form.get("foo")?.toString();
-  console.log({ foo });
-  const file_readme = form.get("readme") as File;
-  const file_metadata = form.get("metadata") as File;
-  const file_thumbnail = form.get("thumbnail") as File;
-  const file_firmware = form.get("firmware") as File;
 
-  console.log({ file_readme, file_metadata, file_thumbnail, file_firmware });
+  const getFormValue = (key: string) => {
+    const value = form.get(key);
+    if (!value) {
+      raiseError(`payload ${key} undefined`);
+    }
+    return value;
+  };
+  const file_readme = getFormValue("readme") as File;
+  const file_metadata = getFormValue("metadata") as File;
+  const file_thumbnail = getFormValue("thumbnail") as File;
+  const file_firmware = getFormValue("firmware") as File;
+  const firmware_format = getFormValue("firmware_format")?.toString();
 
   const readmeFileContent = await file_readme.text();
   const metadataFileContent = await file_metadata.text();
-  const thumbnailImageBytes = await file_thumbnail.arrayBuffer();
-  const thumbnailMimeType = file_thumbnail.type;
-  const firmwareFileBytes = await file_firmware.arrayBuffer();
+  const thumbnailFileBytes = new Uint8Array(await file_thumbnail.arrayBuffer());
+  const firmwareFileBytes = new Uint8Array(await file_firmware.arrayBuffer());
+  const firmwareFormat = firmware_format as FirmwareFormat;
 
-  const img = await decode(new Uint8Array(thumbnailImageBytes));
-  console.log({ w: img.width, h: img.height });
+  const allDataExists =
+    readmeFileContent.length > 0 &&
+    metadataFileContent.length > 0 &&
+    thumbnailFileBytes.length > 0 &&
+    firmwareFileBytes.length > 0 &&
+    firmwareFormat.length > 0;
 
-  console.log({
+  if (!allDataExists) {
+    raiseError(`incomplete payload data`);
+  }
+
+  await serverShell.projectService.upsertProject({
+    apiKey,
     readmeFileContent,
     metadataFileContent,
-    img_sz: thumbnailImageBytes.byteLength,
-    thumbnailMimeType,
-    frm_sz: firmwareFileBytes.byteLength,
+    firmwareFormat,
+    firmwareFileBytes,
+    thumbnailFileBytes,
   });
 
   return Response.json({ success: 1 });

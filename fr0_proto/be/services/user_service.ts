@@ -1,5 +1,8 @@
 import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
-import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
+import {
+  generateIdTimeSequential,
+  generateRandomId,
+} from "~/aux/utils_be/id_generator.ts";
 import { LoginUserClue } from "~/base/types_dto_internal.ts";
 import { CookieOutputJob } from "~/be/base/types_client_storage.ts";
 import { OAuthLoginSourceUserInfo } from "~/be/base/types_oauth.ts";
@@ -24,6 +27,7 @@ export function createUserService() {
           avatarUrl: loginSource.oAuthAvatarUrl,
           loginSourceSignature,
           createAt: Date.now(),
+          apiKey: generateRandomId(32),
         };
         await storehouse.userCabinet.insert(user);
       }

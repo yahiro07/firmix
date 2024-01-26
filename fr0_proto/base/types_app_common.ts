@@ -6,3 +6,5 @@ export type ProjectRepositoryInfo = {
 };
 
 export type ProjectTab = "info" | "editor";
+
+export type FirmwareFormat = "uf2";

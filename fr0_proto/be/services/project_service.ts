@@ -1,41 +1,138 @@
-import {
-  decodeBinaryBase64,
-  imageDataUrlHelper,
-} from "~/aux/utils/utils_binary.ts";
+import { raiseError } from "~/aux/utils/error_util.ts";
+import { imageHelper_getImageFormat } from "~/aux/utils/image_helper.ts";
+import { decodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
+import { generateHashMd5 } from "~/aux/utils_be/hash_helper.ts";
 import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
+import { serverImageHelper } from "~/aux/utils_be/server_image_helper.ts";
+import { FirmwareFormat } from "~/base/types_app_common.ts";
 import { ProjectEntity } from "~/base/types_db_entity.ts";
+import { ProjectDetailDto } from "~/base/types_dto.ts";
 import {
-  LocalProjectSubmissionInputDto,
-  ProjectDetailDto,
-} from "~/base/types_dto.ts";
+  LocalProjectSubmissionPayload,
+  ProjectSubmissionArgument,
+} from "~/base/types_dto_internal.ts";
+import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 import { objectStorageBridge } from "~/be/depot/object_storage_bridge_instance.ts";
 import { storehouse } from "~/be/depot/storehouse.ts";
 import { projectHelper } from "~/be/domain_helpers/project_helper.ts";
+import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
 
 export function createProjectService() {
-  return {
-    async createProjectFromLocal(projectInput: LocalProjectSubmissionInputDto) {
+  const m = {
+    async upsertProject(args: {
+      userId: string;
+      readmeFileContent: string;
+      metadataFileContent: string;
+      thumbnailFileBytes: Uint8Array;
+      firmwareFormat: FirmwareFormat;
+      firmwareFileBytes: Uint8Array;
+    }) {
+      const {
+        userId,
+        readmeFileContent,
+        metadataFileContent,
+        thumbnailFileBytes,
+        firmwareFormat,
+        firmwareFileBytes,
+      } = args;
+      const metadataInput =
+        firmixCore_projectLoader.loadProjectMetadataFile_json(
+          metadataFileContent
+        );
       const existingProject = await storehouse.projectCollection.findOne({
-        projectGuid: projectInput.projectGuid,
+        projectGuid: metadataInput.projectGuid,
       });
       const projectId =
         existingProject?.projectId ?? generateIdTimeSequential();
-      const { thumbnailObject, firmwareObject } = projectInput;
-      await objectStorageBridge.uploadBinaryFile(
-        `${projectId}/${firmwareObject.fileName}`,
-        decodeBinaryBase64(firmwareObject.binaryBytes_base64)
+
+      const thumbnailFormat = imageHelper_getImageFormat(thumbnailFileBytes);
+      if (!thumbnailFormat) {
+        raiseError(`invalid or unsupported thumbnail image file format`);
+      }
+      const imageSize = await serverImageHelper.getImageSize(
+        thumbnailFileBytes
       );
-      const {
-        binaryBytes: thumbnail_binaryBytes,
-        contentType: thumbnail_contentType,
-      } = imageDataUrlHelper.extractImageDataUrl(thumbnailObject.imageDataUrl);
-      await objectStorageBridge.uploadImageFile(
-        `${projectId}/${thumbnailObject.fileName}`,
-        thumbnail_binaryBytes,
-        thumbnail_contentType
-      );
-      const projectEntity = local.createProjectEntity(projectId, projectInput);
+      const imageSizeValid = imageSize.w <= 320 && imageSize.h <= 240;
+      if (!imageSizeValid) {
+        raiseError(
+          `thumbnail image size too large, actual:${imageSize.w}x${imageSize.h}, expected: 320x240`
+        );
+      }
+
+      const firmwareFormatValid = ["uf2"].includes(firmwareFormat);
+      if (!firmwareFormatValid) {
+        raiseError(`unsupported firmware format ${firmwareFormat}`);
+      }
+
+      const firmwareFileName = `firmware.${firmwareFormat}`;
+      const firmwareFileHash = generateHashMd5(firmwareFileBytes);
+      let firmwareRevision = existingProject?.firmwareRevision ?? 1;
+
+      const thumbnailFileName = `thumbnail.${thumbnailFormat.fileExtension}`;
+      const thumbnailFileHash = generateHashMd5(thumbnailFileBytes);
+      let thumbnailRevision = existingProject?.thumbnailRevision ?? 1;
+
+      if (firmwareFileHash !== existingProject?.firmwareFileHash) {
+        await objectStorageBridge.uploadBinaryFile(
+          `${projectId}/${firmwareFileName}`,
+          firmwareFileBytes
+        );
+        firmwareRevision++;
+      }
+      if (thumbnailFileHash !== existingProject?.thumbnailFileHash) {
+        await objectStorageBridge.uploadImageFile(
+          `${projectId}/${thumbnailFileName}`,
+          thumbnailFileBytes,
+          thumbnailFormat.mimeType
+        );
+        thumbnailRevision++;
+      }
+
+      const projectEntity = local.createProjectEntity({
+        projectId,
+        userId,
+        metadataInput,
+        readmeFileContent,
+        firmwareFileName,
+        firmwareFileHash,
+        firmwareRevision,
+        thumbnailFileName,
+        thumbnailFileHash,
+        thumbnailRevision,
+      });
       await storehouse.projectCabinet.upsert(projectEntity);
+    },
+  };
+
+  return {
+    async upsertProject(args: ProjectSubmissionArgument) {
+      const user = await storehouse.userCollection.findOne({
+        apiKey: args.apiKey,
+      });
+      if (!user) raiseError(`invalid api key`);
+
+      await m.upsertProject({ ...args, userId: user.userId });
+    },
+    async upsertProjectFromLocal(
+      projectPayload: LocalProjectSubmissionPayload,
+      userId: string
+    ) {
+      const {
+        readmeFileContent,
+        metadataFileContent,
+        thumbnailFileBytes_base64,
+        firmwareFormat,
+        firmwareFileBytes_base64,
+      } = projectPayload;
+
+      await m.upsertProject({
+        userId,
+        readmeFileContent,
+        metadataFileContent,
+        thumbnailFileBytes: decodeBinaryBase64(thumbnailFileBytes_base64),
+        firmwareFormat,
+        firmwareFileBytes: decodeBinaryBase64(firmwareFileBytes_base64),
+      });
     },
     async getProjectDetail(projectId: string): Promise<ProjectDetailDto> {
       const project = await storehouse.projectCabinet.get(projectId);
@@ -54,24 +151,38 @@ export function createProjectService() {
 }
 
 const local = {
-  createProjectEntity(
-    projectId: string,
-    projectInput: LocalProjectSubmissionInputDto
-  ): ProjectEntity {
+  createProjectEntity(args: {
+    projectId: string;
+    userId: string;
+    metadataInput: ProjectMetadataInput;
+    readmeFileContent: string;
+    firmwareFileName: string;
+    firmwareFileHash: string;
+    firmwareRevision: number;
+    thumbnailFileName: string;
+    thumbnailFileHash: string;
+    thumbnailRevision: number;
+  }): ProjectEntity {
+    const { metadataInput } = args;
     return {
-      projectId,
-      projectGuid: projectInput.projectGuid,
-      projectName: projectInput.projectName,
-      introduction: projectInput.introduction,
-      targetMcu: projectInput.targetMcu,
-      primaryTargetBoard: projectInput.primaryTargetBoard,
-      tags: projectInput.tags,
-      repositoryUrl: projectInput.repositoryUrl,
-      dataEntries: projectInput.dataEntries,
-      editUiItems: projectInput.editUiItems,
-      readmeFileContent: projectInput.readmeFileContent,
-      firmwareFileName: projectInput.firmwareObject.fileName,
-      thumbnailFileName: projectInput.thumbnailObject.fileName,
+      projectId: args.projectId,
+      userId: args.userId,
+      projectGuid: metadataInput.projectGuid,
+      projectName: metadataInput.projectName,
+      introduction: metadataInput.introduction,
+      targetMcu: metadataInput.targetMcu,
+      primaryTargetBoard: metadataInput.primaryTargetBoard,
+      tags: metadataInput.tags,
+      repositoryUrl: metadataInput.repositoryUrl,
+      dataEntries: metadataInput.dataEntries,
+      editUiItems: metadataInput.editUiItems,
+      readmeFileContent: args.readmeFileContent,
+      firmwareFileName: args.firmwareFileName,
+      firmwareFileHash: args.firmwareFileHash,
+      firmwareRevision: args.firmwareRevision,
+      thumbnailFileName: args.thumbnailFileName,
+      thumbnailFileHash: args.thumbnailFileHash,
+      thumbnailRevision: args.thumbnailRevision,
     };
   },
   mapProjectEntityToDetailDto(project: ProjectEntity): ProjectDetailDto {

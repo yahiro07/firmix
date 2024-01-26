@@ -28,6 +28,7 @@ async function createStoreHouse() {
         name: "login_source_signature",
         unique: true,
       },
+      { key: { apiKey: 1 }, name: "api_key", unique: true },
     ],
   });
 
@@ -37,6 +38,7 @@ async function createStoreHouse() {
     indexes: [
       { key: { projectId: -1 }, name: "project_id", unique: true },
       { key: { projectGuid: 1 }, name: "project_guid", unique: true },
+      { key: { userId: 1 }, name: "user_id" },
     ],
   });
 

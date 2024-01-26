@@ -1,4 +1,4 @@
-import { LocalProjectSubmissionInputDto } from "~/base/types_dto.ts";
+import { LocalProjectSubmissionPayload } from "~/base/types_dto_internal.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 
 type AsyncFn<P, R> = (payload: P) => Promise<R>;
@@ -9,8 +9,8 @@ export type AppRpcContext = {
 
 export type AppRpcSignatures = {
   greet: AsyncFn<{ message: string }, { resMessage: string }>;
-  createProjectFromLocal: AsyncFn<
-    { projectInput: LocalProjectSubmissionInputDto },
+  upsertProjectFromLocal: AsyncFn<
+    { projectPayload: LocalProjectSubmissionPayload },
     void
   >;
   generatePatchedFirmware: AsyncFn<
