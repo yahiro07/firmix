@@ -23,13 +23,12 @@ export const handler = createPostHandler(async (req, _ctx) => {
   const file_metadata = getFormValue("metadata") as File;
   const file_thumbnail = getFormValue("thumbnail") as File;
   const file_firmware = getFormValue("firmware") as File;
-  const firmware_format = getFormValue("firmware_format")?.toString();
 
   const readmeFileContent = await file_readme.text();
   const metadataFileContent = await file_metadata.text();
   const thumbnailFileBytes = new Uint8Array(await file_thumbnail.arrayBuffer());
   const firmwareFileBytes = new Uint8Array(await file_firmware.arrayBuffer());
-  const firmwareFormat = firmware_format as FirmwareFormat;
+  const firmwareFormat = file_firmware.name.split(".")[1] as FirmwareFormat;
 
   const allDataExists =
     readmeFileContent.length > 0 &&

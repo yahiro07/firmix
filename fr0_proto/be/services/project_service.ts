@@ -66,11 +66,11 @@ export function createProjectService() {
 
       const firmwareFileName = `firmware.${firmwareFormat}`;
       const firmwareFileHash = generateHashMd5(firmwareFileBytes);
-      let firmwareRevision = existingProject?.firmwareRevision ?? 1;
+      let firmwareRevision = existingProject?.firmwareRevision ?? 0;
 
       const thumbnailFileName = `thumbnail.${thumbnailFormat.fileExtension}`;
       const thumbnailFileHash = generateHashMd5(thumbnailFileBytes);
-      let thumbnailRevision = existingProject?.thumbnailRevision ?? 1;
+      let thumbnailRevision = existingProject?.thumbnailRevision ?? 0;
 
       if (firmwareFileHash !== existingProject?.firmwareFileHash) {
         await objectStorageBridge.uploadBinaryFile(
