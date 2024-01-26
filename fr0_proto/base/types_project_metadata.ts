@@ -10,6 +10,7 @@ export type ProjectMetadataEditUiItemInput = {
 export type ProjectMetadataJsonFileContent = {
   projectGuid: string;
   projectName: string;
+  thumbnailUrl: string;
   introductionLines: string[];
   targetMcu: string;
   primaryTargetBoard: string;
@@ -22,6 +23,7 @@ export type ProjectMetadataJsonFileContent = {
 export type ProjectMetadataInput = {
   projectGuid: string;
   projectName: string;
+  thumbnailUrl: string;
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;

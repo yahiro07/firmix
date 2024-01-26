@@ -46,11 +46,6 @@ export const localAssetBuilder = {
       metadataFile.contentText
     );
 
-    // const patchingManifest = pickObjectMembers(metadataInput, [
-    //   "targetMcu",
-    //   "dataEntries",
-    //   "editUiItems",
-    // ]);
     const validationResult =
       firmixCore_firmwarePatching.validateMetadataInput(metadataInput);
 
@@ -65,31 +60,32 @@ export const localAssetBuilder = {
     };
   },
   async buildAssetThumbnail(
-    thumbnailFile: BinaryFileEntry | undefined
+    thumbnailUrl: string | undefined
   ): Promise<LocalAsset_Thumbnail> {
-    if (!thumbnailFile) {
+    if (!thumbnailUrl) {
       return {
         validity: "warning",
-        filePath: "thumbnail.(jpg|png)",
+        filePath: "",
         thumbnailContainer: undefined,
-        errorLines: ["ファイルがありません。"],
+        errorLines: ["サムネイルの指定がありません。"],
       };
     }
-    const thumbnailContainer = await imageFileLoader.loadBinaryImageFile(
-      thumbnailFile
+    const thumbnailContainer = await imageFileLoader.loadOnlineImageAsset(
+      thumbnailUrl
     );
     const errorLines: string[] = [];
-    const { width, height } = thumbnailContainer;
-    const sizeValid = width <= 320 && height <= 320;
-    if (!sizeValid) {
-      errorLines.push(
-        `画像の縦横のサイズを320x320以下にしてください。(現在のサイズ:${width}x${height})`
+
+    const thumbnailValidationRes =
+      firmixCore_projectLoader.validateOnlineThumbnailOnFrontend(
+        thumbnailContainer
       );
-    }
+
+    errorLines.push(...thumbnailValidationRes);
+
     const validity = errorLines.length === 0 ? "valid" : "error";
     return {
       validity,
-      filePath: thumbnailFile.filePath,
+      filePath: thumbnailUrl,
       thumbnailContainer:
         (validity === "valid" && thumbnailContainer) || undefined,
       errorLines,

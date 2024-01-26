@@ -48,7 +48,7 @@ export const LocalProjectPageImpl = createFC(() => {
           setProjectTab={setProjectTab}
         />
       )}
-      {!metadataInput && <LocalProjectHeadingAreaDummy />}
+      {project && !metadataInput && <LocalProjectHeadingAreaDummy />}
       <LocalProjectAssetsArea project={project!} if={project} />
       {/* <div if={errorMessage}>{errorMessage}</div> */}
       <ParametersConfigurationArea

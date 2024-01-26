@@ -26,9 +26,7 @@ export type ProjectEntity = {
   firmwareFileName: string;
   firmwareFileHash: string;
   firmwareRevision: number;
-  thumbnailFileName: string;
-  thumbnailFileHash: string;
-  thumbnailRevision: number;
+  thumbnailUrl: string;
   revision: number;
   published: boolean;
   automated: boolean;

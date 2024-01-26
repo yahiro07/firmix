@@ -1,42 +1,30 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
-import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
-import { encodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
-import { BinaryFileEntry } from "~/base/types_local_project.ts";
-import { ImageFileContainer } from "~/base/types_project_edit.ts";
+import { imageHelper_getImageDataMimeType } from "~/aux/utils/image_helper.ts";
+import { OnlineImageAssetContainer } from "~/base/types_project_edit.ts";
 
 export const imageFileLoader = {
-  async loadBinaryImageFile(
-    fileEntry: BinaryFileEntry
-  ): Promise<ImageFileContainer> {
-    const fileName = filePathHelper.getFileNameFromFilePath(fileEntry.filePath);
-    const contentBytes = fileEntry.contentBytes;
-    const fileSize = contentBytes.byteLength;
-    const binaryBytes = contentBytes;
-
-    const extension = fileName.split(".")[1];
-    const mimeType = {
-      png: "image/png",
-      jpg: "image/jpeg",
-      jpeg: "image/jpeg",
-    }[extension];
+  async loadOnlineImageAsset(
+    imageUrl: string
+  ): Promise<OnlineImageAssetContainer> {
+    const arrayBuffer = await fetch(imageUrl).then((res) => res.arrayBuffer());
+    const imageDataBytes = new Uint8Array(arrayBuffer);
+    const mimeType = imageHelper_getImageDataMimeType(imageDataBytes);
     if (!mimeType) {
-      raiseError(`unsupported image file extension ${extension}`);
+      raiseError(`unsupported image file type}`);
     }
-    const imageDataUrl = `data:${mimeType};base64,${encodeBinaryBase64(
-      binaryBytes
-    )}`;
+    const fileSize = imageDataBytes.byteLength;
+
     //縦横のサイズを得るためにImageBitmapを作る
-    const blob = new Blob([binaryBytes], { type: mimeType });
+    const blob = new Blob([imageDataBytes], { type: mimeType });
     const imageBitmap = await createImageBitmap(blob);
     const { width, height } = imageBitmap;
 
     return {
-      fileName,
+      imageUrl,
       mimeType,
       fileSize,
       width,
       height,
-      imageDataUrl,
     };
   },
 };

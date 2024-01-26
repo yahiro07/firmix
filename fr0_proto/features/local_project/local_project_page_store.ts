@@ -156,6 +156,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
             project
           );
         await rpcClient.upsertProjectFromLocal({ projectPayload });
+        location.href = "/";
       }
     },
   };
@@ -190,7 +191,6 @@ const local = {
       metadataFileContent,
       firmwareFormat: firmwareContainer.kind,
       firmwareFileBytes_base64: firmwareContainer.binaryBytes_base64,
-      thumbnailFileBytes_base64: thumbnailContainer.imageDataUrl.split(",")[1],
     };
   },
 };

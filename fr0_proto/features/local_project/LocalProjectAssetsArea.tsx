@@ -83,7 +83,7 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
   } = project;
   const thumbnailInfoAdditional =
     local.extractThumbnailInfoAdditional(assetThumbnail);
-  const thumbnailImageDataUrl = assetThumbnail.thumbnailContainer?.imageDataUrl;
+  const thumbnailUrl = assetMetadata.metadataInput?.thumbnailUrl;
   return (
     <div q={style}>
       <h3>
@@ -93,17 +93,17 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
       {/* <div>ターゲットMCU:{patchingManifest.targetMcu}</div> */}
       <AssetEntry title="Readmeファイル" asset={assetReadme} />
       <AssetEntry title="メタデータファイル" asset={assetMetadata} />
+      <AssetEntry title="ファームウェア" asset={assetFirmware} />
       <AssetEntry
-        title="サムネイルファイル"
+        title="サムネイル"
         asset={assetThumbnail}
         infoAdditional={thumbnailInfoAdditional}
       />
-      <AssetEntry title="ファームウェア" asset={assetFirmware} />
       <div if={modFirmwareFilePath}>
         パッチ適用済ファームウェア: {modFirmwareFilePath}
       </div>
-      <div q="thumbnail-box" if={thumbnailImageDataUrl}>
-        <img src={thumbnailImageDataUrl} />
+      <div q="thumbnail-box" if={thumbnailUrl}>
+        <img src={thumbnailUrl} />
       </div>
       <div q="foo" />
     </div>

@@ -1,7 +1,6 @@
 import { ProjectEntity } from "~/base/types_db_entity.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { storehouse } from "~/be/depot/storehouse.ts";
-import { projectHelper } from "~/be/domain_helpers/project_helper.ts";
 
 export function createProjectListService() {
   return {
@@ -24,7 +23,7 @@ const local = {
       primaryTargetBoard: project.primaryTargetBoard,
       tags: project.tags,
       repositoryUrl: project.repositoryUrl,
-      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
+      thumbnailUrl: project.thumbnailUrl,
     };
   },
 };

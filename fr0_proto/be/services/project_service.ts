@@ -1,5 +1,4 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
-import { imageHelper_getImageFormat } from "~/aux/utils/image_helper.ts";
 import { decodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
 import { generateHashMd5 } from "~/aux/utils_be/hash_helper.ts";
 import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
@@ -23,7 +22,6 @@ export function createProjectService() {
       userId: string;
       readmeFileContent: string;
       metadataFileContent: string;
-      thumbnailFileBytes: Uint8Array;
       firmwareFormat: FirmwareFormat;
       firmwareFileBytes: Uint8Array;
       automated: boolean;
@@ -32,7 +30,6 @@ export function createProjectService() {
         userId,
         readmeFileContent,
         metadataFileContent,
-        thumbnailFileBytes,
         firmwareFormat,
         firmwareFileBytes,
         automated,
@@ -47,19 +44,12 @@ export function createProjectService() {
       const projectId =
         existingProject?.projectId ?? generateIdTimeSequential();
 
-      const thumbnailFormat = imageHelper_getImageFormat(thumbnailFileBytes);
-      if (!thumbnailFormat) {
-        raiseError(`invalid or unsupported thumbnail image file format`);
-      }
-      const imageSize = await serverImageHelper.getImageSize(
-        thumbnailFileBytes
+      const { thumbnailUrl } = metadataInput;
+
+      const imageAttrs = await serverImageHelper.loadOnlineImageAssetAttrs(
+        thumbnailUrl
       );
-      const imageSizeValid = imageSize.w <= 320 && imageSize.h <= 240;
-      if (!imageSizeValid) {
-        raiseError(
-          `thumbnail image size too large, actual:${imageSize.w}x${imageSize.h}, expected: 320x240`
-        );
-      }
+      firmixCore_projectLoader.validateOnlineThumbnailOnServer(imageAttrs);
 
       const firmwareFormatValid = ["uf2"].includes(firmwareFormat);
       if (!firmwareFormatValid) {
@@ -74,24 +64,12 @@ export function createProjectService() {
       const firmwareFileHash = generateHashMd5(firmwareFileBytes);
       let firmwareRevision = existingProject?.firmwareRevision ?? 0;
 
-      const thumbnailFileName = `thumbnail.${thumbnailFormat.fileExtension}`;
-      const thumbnailFileHash = generateHashMd5(thumbnailFileBytes);
-      let thumbnailRevision = existingProject?.thumbnailRevision ?? 0;
-
       if (firmwareFileHash !== existingProject?.firmwareFileHash) {
         await objectStorageBridge.uploadBinaryFile(
           `${projectId}/${firmwareFileName}`,
           firmwareFileBytes
         );
         firmwareRevision++;
-      }
-      if (thumbnailFileHash !== existingProject?.thumbnailFileHash) {
-        await objectStorageBridge.uploadImageFile(
-          `${projectId}/${thumbnailFileName}`,
-          thumbnailFileBytes,
-          thumbnailFormat.mimeType
-        );
-        thumbnailRevision++;
       }
 
       const projectEntity = local.createProjectEntity({
@@ -102,9 +80,7 @@ export function createProjectService() {
         firmwareFileName,
         firmwareFileHash,
         firmwareRevision,
-        thumbnailFileName,
-        thumbnailFileHash,
-        thumbnailRevision,
+        thumbnailUrl,
         revision,
         published,
         automated,
@@ -122,7 +98,6 @@ export function createProjectService() {
         metadataFileContent,
         firmwareFormat,
         firmwareFileBytes,
-        thumbnailFileBytes,
       } = args;
       const user = await storehouse.userCollection.findOne({
         apiKey,
@@ -136,7 +111,6 @@ export function createProjectService() {
         metadataFileContent,
         firmwareFormat,
         firmwareFileBytes,
-        thumbnailFileBytes,
         automated: true,
       });
     },
@@ -147,7 +121,6 @@ export function createProjectService() {
       const {
         readmeFileContent,
         metadataFileContent,
-        thumbnailFileBytes_base64,
         firmwareFormat,
         firmwareFileBytes_base64,
       } = projectPayload;
@@ -156,7 +129,6 @@ export function createProjectService() {
         userId,
         readmeFileContent,
         metadataFileContent,
-        thumbnailFileBytes: decodeBinaryBase64(thumbnailFileBytes_base64),
         firmwareFormat,
         firmwareFileBytes: decodeBinaryBase64(firmwareFileBytes_base64),
         automated: false,
@@ -187,9 +159,7 @@ const local = {
     firmwareFileName: string;
     firmwareFileHash: string;
     firmwareRevision: number;
-    thumbnailFileName: string;
-    thumbnailFileHash: string;
-    thumbnailRevision: number;
+    thumbnailUrl: string;
     revision: number;
     published: boolean;
     automated: boolean;
@@ -212,9 +182,7 @@ const local = {
       firmwareFileName: args.firmwareFileName,
       firmwareFileHash: args.firmwareFileHash,
       firmwareRevision: args.firmwareRevision,
-      thumbnailFileName: args.thumbnailFileName,
-      thumbnailFileHash: args.thumbnailFileHash,
-      thumbnailRevision: args.thumbnailRevision,
+      thumbnailUrl: args.thumbnailUrl,
       revision: args.revision,
       published: args.published,
       automated: args.automated,
@@ -235,7 +203,7 @@ const local = {
       readmeFileContent: project.readmeFileContent,
       dataEntries: project.dataEntries,
       editUiItems: project.editUiItems,
-      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
+      thumbnailUrl: project.thumbnailUrl,
       firmwareBinaryUrl: projectHelper.getFirmwareBinaryUrl(project),
     };
   },

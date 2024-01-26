@@ -26,11 +26,10 @@ export type FirmwareContainer = {
   binaryBytes_base64: string;
 };
 
-export type ImageFileContainer = {
-  fileName: string;
+export type OnlineImageAssetContainer = {
+  imageUrl: string;
   mimeType: string;
   fileSize: number;
   width: number;
   height: number;
-  imageDataUrl: string;
 };
