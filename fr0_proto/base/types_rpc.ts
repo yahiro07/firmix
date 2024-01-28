@@ -17,4 +17,5 @@ export type AppRpcSignatures = {
     { projectId: string; editItems: ConfigurationEditItem[] },
     { fileName: string; fileContentBytes_base64: string }
   >;
+  setApiKeyAvailability: AsyncFn<{ enabled: boolean }, void>;
 };

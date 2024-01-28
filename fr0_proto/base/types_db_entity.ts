@@ -7,6 +7,7 @@ export type UserEntity = {
   loginSourceSignature: string;
   createAt: number;
   apiKey: string;
+  apiKeyActive: boolean;
 };
 
 export type ProjectEntity = {

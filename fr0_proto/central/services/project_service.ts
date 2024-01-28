@@ -129,6 +129,7 @@ export function createProjectService() {
       } = args;
       const user = await storehouse.userCollection.findOne({
         apiKey,
+        apiKeyActive: true,
       });
       if (!user) raiseError(`invalid api key`);
       const { userId } = user;
