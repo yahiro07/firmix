@@ -1,10 +1,15 @@
 export type CustomDataItemCore =
-  | { dataKind: "u8"; dataCount: number }
-  | { dataKind: "i8"; dataCount: number }
-  | { dataKind: "pins"; pinCount: number }
-  | { dataKind: "vl_pins"; pinsCapacity: number };
+  | { dataKind: "u8"; dataCount: number; fallbackValues?: number[] }
+  | { dataKind: "i8"; dataCount: number; fallbackValues?: number[] }
+  | { dataKind: "pins"; pinsCount: number }
+  | { dataKind: "vl_pins"; pinsCapacity: number }
+  | { dataKind: "text"; textLength: number }
+  | { dataKind: "vl_text"; textCapacity: number };
 
-export type CustomDataItem = { key: string } & CustomDataItemCore;
+export type CustomDataItem = {
+  key: string;
+  required?: boolean;
+} & CustomDataItemCore;
 
 export type CustomDataEntry = {
   marker: string;

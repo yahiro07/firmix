@@ -35,4 +35,9 @@ export const globalStyle = css`
     /* font-family: "Sawarabi Gothic", sans-serif; */
     line-height: 1.5;
   }
+
+  button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 `;

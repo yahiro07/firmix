@@ -1,5 +1,5 @@
 export const appConfig = {
-  versionCode: "240127a",
+  versionCode: "240128a",
   thumbnail_maxFileSize: 400000,
   thumbnail_maxWidth: 320,
   thumbnail_maxHeight: 240,
