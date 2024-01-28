@@ -26,13 +26,13 @@ export const MainLayout = createFC<Props>(({ loginUser, children }) => {
           <nav>
             <a href="/">プロジェクト一覧</a>
             <a href="/user-projects/__user_id__">自分のプロジェクト</a>
-            <a href="/local-work" if={appConfig.isDevelopment}>
-              ローカル開発
-            </a>
+            <a href="/local-work">ローカル開発</a>
             <a href="/settings" if={loggedIn}>
               設定
             </a>
-            <a href="/development">development</a>
+            <a href="/development" if={appConfig.isDevelopment}>
+              development
+            </a>
             <a href="/auth/github" if={!loggedIn}>
               ログイン(github)
             </a>
