@@ -10,6 +10,7 @@ import {
   FirmwareContainer,
   PatchingDataBlob,
 } from "~/base/types_project_edit.ts";
+import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
 import { firmixCore_firmwarePatching } from "~/cardinal/firmix_core_firmware_patching/mod.ts";
 import { createLocalDirectoryReader } from "~/cardinal/firmix_presenter_common_modules/local_directory_reader.ts";
 import { localAssetBuilder } from "~/cardinal/firmix_presenter_local_project_edit/local_asset_builder.ts";
@@ -68,6 +69,12 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         assetFirmware.validity !== "error" &&
         assetThumbnail.validity !== "error";
 
+      const configurationSourceItems =
+        assetMetadata.metadataInput &&
+        firmixCore_firmwareConfiguration.buildConfigurationSourceItems(
+          assetMetadata.metadataInput
+        );
+
       return {
         projectRootDirectoryHandle: dirHandle,
         firmwareDirectoryHandle,
@@ -75,6 +82,7 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         assetMetadata,
         assetThumbnail,
         assetFirmware,
+        configurationSourceItems,
         canSubmit,
       };
     },

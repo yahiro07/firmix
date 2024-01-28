@@ -1,5 +1,5 @@
 import { decodeBase64 } from "$std/encoding/base64.ts";
-import { useCallback, useMemo } from "preact/hooks";
+import { useCallback } from "preact/hooks";
 import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import {
@@ -10,11 +10,9 @@ import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
 import { useEffectAsync } from "~/aux/utils_fe/hooks.ts";
 import { ensureFileHandlePermission } from "~/aux/utils_fe/local_filesystem_helper.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
-import { ConfigurationSourceItemWrapper } from "~/base/types_dto.ts";
 import { LocalProjectSubmissionPayload } from "~/base/types_dto_internal.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
 import { firmixPresenter_localProjectEdit } from "~/cardinal/firmix_presenter_local_project_edit/mod.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 
@@ -28,7 +26,6 @@ const projectDirectoryHandleStorage =
 export type LocalProjectPageStore = {
   loadedFolderName?: string;
   project?: LocalDevelopmentProject;
-  configurationSourceItems?: ConfigurationSourceItemWrapper[];
   canSubmitProject: boolean;
   projectTab: ProjectTab;
   loadProjectFolder: (dirHandle: FileSystemDirectoryHandle) => Promise<void>;
@@ -51,16 +48,6 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
   });
 
   const loadedFolderName = projectDirectoryHandle?.name;
-
-  const configurationSourceItems = useMemo(() => {
-    if (project?.assetMetadata.metadataInput) {
-      return firmixCore_firmwareConfiguration.buildConfigurationSourceItems(
-        project.assetMetadata.metadataInput
-      );
-    }
-    return undefined;
-  }, [project]);
-
   const canSubmitProject = project?.canSubmit ?? false;
 
   useEffectAsync(async () => {
@@ -164,7 +151,6 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
   return {
     loadedFolderName,
     project,
-    configurationSourceItems,
     canSubmitProject,
     projectTab,
     setProjectTab,

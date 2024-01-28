@@ -23,7 +23,6 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
     reloadProjectFolder,
     closeProjectFolder,
     project,
-    configurationSourceItems,
     submitEditItems,
     submitEditItems2,
     canSubmitProject,
@@ -57,12 +56,12 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
       <LocalProjectAssetsArea project={project!} if={project} />
       {/* <div if={errorMessage}>{errorMessage}</div> */}
       <ParametersConfigurationArea
-        configurationSourceItems={configurationSourceItems!}
+        configurationSourceItems={project?.configurationSourceItems!}
         submitEditItems={submitEditItems}
         submitButtonLabel="ダウンロード"
         submit2={submitEditItems2}
         submit2Label="出力"
-        if={configurationSourceItems && projectTab === "editor"}
+        if={project?.configurationSourceItems && projectTab === "editor"}
       />
       <ProjectReadmeArea
         q="readme"

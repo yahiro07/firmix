@@ -1,3 +1,4 @@
+import { ConfigurationSourceItemWrapper } from "~/base/types_dto.ts";
 import {
   FirmwareContainer,
   OnlineImageAssetContainer,
@@ -48,6 +49,7 @@ export type LocalDevelopmentProject = {
   assetMetadata: LocalAsset_Metadata;
   assetThumbnail: LocalAsset_Thumbnail;
   assetFirmware: LocalAsset_Firmware;
+  configurationSourceItems: ConfigurationSourceItemWrapper[] | undefined;
   canSubmit: boolean;
   modFirmwareFilePath?: string;
 };
