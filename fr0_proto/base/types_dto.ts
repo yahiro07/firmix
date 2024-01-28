@@ -1,18 +1,18 @@
 import {
   CustomDataEntry,
-  CustomDataItemCore,
+  CustomDataItem,
   EditUiItem,
 } from "~/base/types_core_entity.ts";
 
 export type ConfigurationSourceItem = {
-  key: string;
   label: string;
   instruction: string;
-} & CustomDataItemCore;
+} & CustomDataItem;
 
 export type ConfigurationSourceItem_Error = {
   key: string;
   dataKind: "error";
+  message: string;
 };
 
 export type ConfigurationSourceItemWrapper =

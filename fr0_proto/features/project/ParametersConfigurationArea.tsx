@@ -5,6 +5,7 @@ import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,
+  ConfigurationSourceItem_Error,
 } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
@@ -25,9 +26,11 @@ export const ParametersConfigurationArea = createFC<Props>(
     submit2,
     submit2Label,
   }) => {
-    const hasError = configurationSourceItemsRaw.some(
+    const errorConfigurations = configurationSourceItemsRaw.filter(
       (it) => it.dataKind === "error"
-    );
+    ) as ConfigurationSourceItem_Error[];
+
+    const hasError = errorConfigurations.length > 0;
     const configurationSourceItems =
       configurationSourceItemsRaw as ConfigurationSourceItem[];
 
@@ -65,7 +68,18 @@ export const ParametersConfigurationArea = createFC<Props>(
 
     return (
       <div q={style}>
-        {hasError && <div>カスタムデータの定義にエラーがあります</div>}
+        {hasError && (
+          <div>
+            <div>カスタムデータの定義にエラーがあります</div>
+            <div>
+              {errorConfigurations.map((item) => (
+                <div>
+                  {item.key}: {item.message}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         {!hasError && (
           <div>
             {configurationSourceItems.map((item) => (
@@ -80,14 +94,10 @@ export const ParametersConfigurationArea = createFC<Props>(
             ))}
           </div>
         )}
-        <button
-          onClick={() => handleDownload(2)}
-          disabled={hasError}
-          if={submit2}
-        >
+        <button onClick={() => handleDownload(2)} if={!hasError && submit2}>
           {submit2Label}
         </button>
-        <button onClick={() => handleDownload(1)} disabled={hasError}>
+        <button onClick={() => handleDownload(1)} if={!hasError}>
           {submitButtonLabel}
         </button>
       </div>
@@ -103,13 +113,20 @@ const style = css`
 
 const local = {
   configurationSourceItem_getCountsText(item: ConfigurationSourceItem): string {
-    if (item.dataKind === "pins") {
-      return `(gpio x${item.pinCount})`;
-    } else if (item.dataKind === "vl_pins") {
+    const { dataKind } = item;
+    if (dataKind === "pins") {
+      return `(gpio x${item.pinsCount})`;
+    } else if (dataKind === "vl_pins") {
       return `(gpio max${item.pinsCapacity})`;
-    } else {
+    } else if (dataKind === "text") {
+      return `(${item.textLength}文字)`;
+    } else if (dataKind === "vl_text") {
+      return `(最大 ${item.textCapacity}文字)`;
+    } else if (dataKind === "i8" || dataKind === "u8") {
       if (item.dataCount === 1) return "";
       return `(x${item.dataCount})`;
+    } else {
+      raiseError(`invalid dataKind ${dataKind}`);
     }
   },
 };

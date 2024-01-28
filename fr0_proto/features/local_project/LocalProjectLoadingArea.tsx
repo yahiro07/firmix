@@ -68,10 +68,6 @@ const style = css`
   ${flexHorizontalAligned(8)};
   > button {
     padding: 1px 6px;
-    &:disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
   }
   > .folder {
     ${flexHorizontalAligned(4)};
