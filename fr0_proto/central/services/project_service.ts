@@ -1,10 +1,11 @@
+import { getDateTimeText_yyyyMMddHHmmss } from "~/aux/utils/date_time_helper.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import { decodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
 import { generateHashMd5 } from "~/aux/utils_be/hash_helper.ts";
 import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
 import { serverImageHelper } from "~/aux/utils_be/server_image_helper.ts";
 import { FirmwareFormat } from "~/base/types_app_common.ts";
-import { ProjectEntity } from "~/base/types_db_entity.ts";
+import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { ProjectDetailDto } from "~/base/types_dto.ts";
 import {
   LocalProjectSubmissionPayload,
@@ -87,6 +88,33 @@ export function createProjectService() {
         createAt,
       });
       await storehouse.projectCabinet.upsert(projectEntity);
+      return projectEntity;
+    },
+    async upsertProjectWithLog(
+      args: {
+        userId: string;
+        readmeFileContent: string;
+        metadataFileContent: string;
+        firmwareFormat: FirmwareFormat;
+        firmwareFileBytes: Uint8Array;
+        automated: boolean;
+      },
+      user: UserEntity
+    ) {
+      const from = args.automated ? "via api" : "from local";
+      try {
+        const project = await m.upsertProject(args);
+        const timeText = getDateTimeText_yyyyMMddHHmmss();
+        console.log(
+          `${timeText} user ${user.userName} published ${project.projectName} rev${project.revision} ${from}`
+        );
+      } catch (error) {
+        const timeText = getDateTimeText_yyyyMMddHHmmss();
+        console.log(
+          `${timeText} user ${user.userName} tried to publish a project ${from} but failed `
+        );
+        throw error;
+      }
     },
   };
 
@@ -103,21 +131,26 @@ export function createProjectService() {
         apiKey,
       });
       if (!user) raiseError(`invalid api key`);
-
       const { userId } = user;
-      await m.upsertProject({
-        userId,
-        readmeFileContent,
-        metadataFileContent,
-        firmwareFormat,
-        firmwareFileBytes,
-        automated: true,
-      });
+
+      await m.upsertProjectWithLog(
+        {
+          userId,
+          readmeFileContent,
+          metadataFileContent,
+          firmwareFormat,
+          firmwareFileBytes,
+          automated: true,
+        },
+        user
+      );
     },
     async upsertProjectFromLocal(
       projectPayload: LocalProjectSubmissionPayload,
       userId: string
     ) {
+      const user = await storehouse.userCabinet.get(userId);
+
       const {
         readmeFileContent,
         metadataFileContent,
@@ -125,14 +158,17 @@ export function createProjectService() {
         firmwareFileBytes_base64,
       } = projectPayload;
 
-      await m.upsertProject({
-        userId,
-        readmeFileContent,
-        metadataFileContent,
-        firmwareFormat,
-        firmwareFileBytes: decodeBinaryBase64(firmwareFileBytes_base64),
-        automated: false,
-      });
+      await m.upsertProjectWithLog(
+        {
+          userId,
+          readmeFileContent,
+          metadataFileContent,
+          firmwareFormat,
+          firmwareFileBytes: decodeBinaryBase64(firmwareFileBytes_base64),
+          automated: false,
+        },
+        user
+      );
     },
     async getProjectDetail(projectId: string): Promise<ProjectDetailDto> {
       const project = await storehouse.projectCabinet.get(projectId);
