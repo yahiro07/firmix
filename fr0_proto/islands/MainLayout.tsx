@@ -1,5 +1,6 @@
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { appConfig } from "~/base/app_config.ts";
 import { LoginUser } from "~/base/types_dto_internal.ts";
 import {
   flexHorizontalAligned,
@@ -13,6 +14,7 @@ type Props = {
 
 export const MainLayout = createFC<Props>(({ loginUser, children }) => {
   const loggedIn = !!loginUser;
+
   return (
     <div q={style}>
       <div q="header-bar">
@@ -24,7 +26,9 @@ export const MainLayout = createFC<Props>(({ loginUser, children }) => {
           <nav>
             <a href="/">プロジェクト一覧</a>
             <a href="/user-projects/__user_id__">自分のプロジェクト</a>
-            <a href="/local-work">ローカル開発</a>
+            <a href="/local-work" if={appConfig.isDevelopment}>
+              ローカル開発
+            </a>
             <a href="/settings" if={loggedIn}>
               設定
             </a>
