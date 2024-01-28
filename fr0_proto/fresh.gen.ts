@@ -17,12 +17,14 @@ import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $local_work from "./routes/local-work.tsx";
 import * as $project_projectId_ from "./routes/project/[projectId].tsx";
+import * as $settings from "./routes/settings.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $DevelopmentPage from "./islands/DevelopmentPage.tsx";
 import * as $LocalProjectPage from "./islands/LocalProjectPage.tsx";
 import * as $MainLayout from "./islands/MainLayout.tsx";
 import * as $ProjectDetailPage from "./islands/ProjectDetailPage.tsx";
 import * as $ProjectListPage from "./islands/ProjectListPage.tsx";
+import * as $SettingsPage from "./islands/SettingsPage.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -42,6 +44,7 @@ const manifest = {
     "./routes/index.tsx": $index,
     "./routes/local-work.tsx": $local_work,
     "./routes/project/[projectId].tsx": $project_projectId_,
+    "./routes/settings.tsx": $settings,
   },
   islands: {
     "./islands/Counter.tsx": $Counter,
@@ -50,6 +53,7 @@ const manifest = {
     "./islands/MainLayout.tsx": $MainLayout,
     "./islands/ProjectDetailPage.tsx": $ProjectDetailPage,
     "./islands/ProjectListPage.tsx": $ProjectListPage,
+    "./islands/SettingsPage.tsx": $SettingsPage,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

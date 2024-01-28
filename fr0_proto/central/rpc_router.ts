@@ -25,4 +25,11 @@ export const appRpcRouter: ServerRpcRouterWithContext<
       editItems
     );
   },
+  async setApiKeyAvailability({ enabled }, { loginUserId }) {
+    if (!loginUserId) raiseError(`login required`);
+    return await serverShell.userService.setApiKeyAvailability(
+      loginUserId,
+      enabled
+    );
+  },
 };
