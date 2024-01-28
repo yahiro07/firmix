@@ -1,6 +1,10 @@
 import { firmwareBinaryModifier_patchUf2FileContent } from "~/aux/firmware_manipulation_helper/firmware_binary_modifier_uf2.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
 import {
+  convertTextToBinaryBytes,
+  stringifyBytesHex,
+} from "~/aux/utils/utils_binary.ts";
+import {
   ConfigurationEditItem,
   FirmwarePatchingBlob,
   PatchingManifest,
@@ -48,22 +52,30 @@ const local = {
   ): FirmwarePatchingBlob {
     const entries: FirmwarePatchingBlob["entries"] =
       patchingManifest.dataEntries.map((dataEntry) => {
-        const dataBytes = dataEntry.items
-          .map((customDataItem) => {
-            const editItem = editItems.find(
-              (it) => it.key === customDataItem.key
-            );
-            if (!editItem) {
-              raiseError(`edit item not found for ${customDataItem.key}`);
-            }
-            return firmixCore_firmwareConfiguration.serializeEditData(
-              customDataItem,
-              editItem.values
-            );
-          })
-          .flat();
-        console.log({ dataBytes });
-        return { marker: dataEntry.marker, dataBytes };
+        const dataBlocks = dataEntry.items.map((customDataItem) => {
+          const editItem = editItems.find(
+            (it) => it.key === customDataItem.key
+          );
+          if (!editItem) {
+            raiseError(`edit item not found for ${customDataItem.key}`);
+          }
+          return firmixCore_firmwareConfiguration.serializeEditData(
+            customDataItem,
+            editItem.values
+          );
+        });
+
+        const { marker } = dataEntry;
+        const markerBytes = convertTextToBinaryBytes(marker, true);
+
+        console.log(`🔖marker ${marker}`);
+        console.log(stringifyBytesHex(markerBytes), `(${markerBytes.length})`);
+        const dataBytes = dataBlocks.flat();
+        for (const block of dataBlocks) {
+          console.log(stringifyBytesHex(block), `(${block.length})`);
+        }
+        console.log(`data length: ${dataBytes.length}`);
+        return { marker, dataBytes };
       });
     return { entries };
   },
