@@ -6,6 +6,7 @@ import { createMongoGeneralCabinet } from "~/central/depot/mongo_general_cabinet
 async function createStoreHouse() {
   const mongoUrl = getEnvVariable("MONGO_URL");
   const mongoDatabaseName = getEnvVariable("MONGO_DATABASE_NAME");
+  if (mongoUrl === "__dummy__") return undefined;
   const client = new MongoClient();
   await client.connect(mongoUrl);
   console.log("connected to db");
@@ -45,4 +46,4 @@ async function createStoreHouse() {
   return { userCollection, projectCollection, userCabinet, projectCabinet };
 }
 
-export const storehouse = await createStoreHouse();
+export const storehouse = (await createStoreHouse())!;
