@@ -3,10 +3,6 @@ on:
   push:
     branches: [main]
 
-defaults:
-  run:
-    working-directory: fr0_proto
-
 jobs:
   deploy:
     name: Deploy
@@ -27,6 +23,7 @@ jobs:
 
       - name: Build step
         run: "deno task build"
+        working-directory: fr0_proto
         env:
           ENV_TYPE: "production"
           MONGO_URL: "__dummy__"
@@ -44,4 +41,4 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "firmix"
-          entrypoint: "./main.ts"
+          entrypoint: "fr0_proto/main.ts"
