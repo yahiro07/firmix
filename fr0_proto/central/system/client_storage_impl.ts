@@ -22,6 +22,7 @@ function createClientStorageImpl(): ClientStorageImpl {
 
   const m = {
     readCookieLoginUserClue(req: Request) {
+      if (jwtSecret === "") raiseError(`invalid jwt secret`);
       const token = getCookies(req.headers)[cookieNameLoginUserToken];
       if (token) {
         const res = myJwt_verify<LoginUserClue>(token, jwtSecret);
@@ -32,6 +33,7 @@ function createClientStorageImpl(): ClientStorageImpl {
       return undefined;
     },
     writeLoginUserClue(res: Response, loginUserClue: LoginUserClue) {
+      if (jwtSecret === "") raiseError(`invalid jwt secret`);
       const hours = 2;
       const durationSec = 3600 * hours;
       // const durationSec = 60; //debug

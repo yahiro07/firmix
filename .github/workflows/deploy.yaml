@@ -27,6 +27,18 @@ jobs:
 
       - name: Build step
         run: "deno task build"
+        env:
+          ENV_TYPE: "production"
+          MONGO_URL: "__dummy__"
+          MONGO_DATABASE_NAME: "__dummy__"
+          R2_ACCESS_KEY_ID: "__dummy__"
+          R2_ACCESS_KEY_SECRET: "__dummy__"
+          R2_ENDPOINT_URL: "__dummy__"
+          R2_BUCKET_NAME: "__dummy__"
+          R2_PUBLIC_URL: "__dummy__"
+          GITHUB_CLIENT_ID: "__dummy__"
+          GITHUB_CLIENT_SECRET: "__dummy__"
+          JWT_SECRET: ""
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
