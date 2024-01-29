@@ -1,5 +1,5 @@
 export const appConfig = {
-  versionCode: "240129c",
+  versionCode: "240129d",
   isDevelopment:
     typeof Deno !== "undefined"
       ? Deno.env.get("ENV_TYPE") === "development"
@@ -8,3 +8,4 @@ export const appConfig = {
   thumbnail_maxWidth: 320,
   thumbnail_maxHeight: 240,
 };
+console.log(`version ${appConfig.versionCode}`);
