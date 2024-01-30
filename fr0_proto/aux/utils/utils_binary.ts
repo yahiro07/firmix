@@ -9,7 +9,9 @@ export function decodeBinaryBase64(base64: string): Uint8Array {
 }
 
 export function stringifyBytesHex(bytes: number[]): string {
-  return bytes.map((byte) => byte.toString(16).padStart(2, "0")).join(" ");
+  return bytes
+    .map((byte) => byte.toString(16).toUpperCase().padStart(2, "0"))
+    .join(" ");
 }
 
 export function convertTextToBinaryBytes(

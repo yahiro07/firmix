@@ -1,5 +1,5 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
-import { padZeros } from "~/aux/utils/utils_array.ts";
+import { padZeros, seqNumbers } from "~/aux/utils/utils_array.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 import { CustomDataItem } from "~/base/types_core_entity.ts";
 import {
@@ -189,6 +189,9 @@ export const firmixCore_firmwareConfiguration = {
       return byteValues;
     } else if (dataKind === "pins") {
       const { pinsCount } = customDataItem;
+      if (textValues.length === 0) {
+        return seqNumbers(pinsCount).map(() => -1);
+      }
       if (textValues.length !== pinsCount) {
         raiseError(`invalid pin count for ${key}`);
       }

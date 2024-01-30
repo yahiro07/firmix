@@ -59,10 +59,11 @@ const local = {
           if (!editItem) {
             raiseError(`edit item not found for ${customDataItem.key}`);
           }
-          return firmixCore_firmwareConfiguration.serializeEditData(
+          const dataBytes = firmixCore_firmwareConfiguration.serializeEditData(
             customDataItem,
             editItem.values
           );
+          return dataBytes.map((val) => (val === -1 ? 255 : val));
         });
 
         const { marker } = dataEntry;
