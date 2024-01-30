@@ -4,6 +4,7 @@ import {
   convertTextToBinaryBytes,
   stringifyBytesHex,
 } from "~/aux/utils/utils_binary.ts";
+import { generateRandomId } from "~/aux/utils_be/id_generator.ts";
 import {
   ConfigurationEditItem,
   FirmwarePatchingBlob,
@@ -33,15 +34,21 @@ const local = {
   ) {
     const firmwareText = new TextDecoder("ascii").decode(firmwareBytes);
     for (const patchingEntry of patchingBlob.entries) {
-      const { marker, dataBytes } = patchingEntry;
+      const { marker, dataBytes, ensurePatched } = patchingEntry;
       const pos = firmwareText.indexOf(marker);
       const lastPos = firmwareText.lastIndexOf(marker);
       if (lastPos !== pos) {
         raiseError(`more than two markers found in firmware binary: ${marker}`);
       }
-      const offset = pos + marker.length + 1;
-      for (let i = 0; i < dataBytes.length; i++) {
-        firmwareBytes[offset + i] = dataBytes[i];
+      if (pos === -1) {
+        if (ensurePatched) {
+          raiseError(`marker not found ${marker}`);
+        }
+      } else {
+        const offset = pos + marker.length + 1;
+        for (let i = 0; i < dataBytes.length; i++) {
+          firmwareBytes[offset + i] = dataBytes[i];
+        }
       }
     }
   },
@@ -76,8 +83,22 @@ const local = {
           console.log(stringifyBytesHex(block), `(${block.length})`);
         }
         console.log(`data length: ${dataBytes.length}`);
-        return { marker, dataBytes };
+        return { marker, dataBytes, ensurePatched: true };
       });
+    if (1) {
+      //Kermite FirmwareのdeviceInstanceCodeを注入
+      const dataBytes = [
+        ...convertTextToBinaryBytes("000000", true),
+        ...convertTextToBinaryBytes("00", true),
+        ...convertTextToBinaryBytes(generateRandomId(4), true),
+      ];
+      console.log({ dataBytes });
+      entries.push({
+        marker: "$KMME",
+        dataBytes,
+        ensurePatched: false,
+      });
+    }
     return { entries };
   },
 };
