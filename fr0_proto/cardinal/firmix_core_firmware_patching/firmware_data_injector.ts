@@ -34,7 +34,8 @@ const local = {
   ) {
     const firmwareText = new TextDecoder("ascii").decode(firmwareBytes);
     for (const patchingEntry of patchingBlob.entries) {
-      const { marker, dataBytes, ensurePatched } = patchingEntry;
+      const { marker, dataBytes, ensurePatched, markerNullTerminated } =
+        patchingEntry;
       const pos = firmwareText.indexOf(marker);
       const lastPos = firmwareText.lastIndexOf(marker);
       if (lastPos !== pos) {
@@ -45,7 +46,7 @@ const local = {
           raiseError(`marker not found ${marker}`);
         }
       } else {
-        const offset = pos + marker.length + 1;
+        const offset = pos + marker.length + (markerNullTerminated ? 1 : 0);
         for (let i = 0; i < dataBytes.length; i++) {
           firmwareBytes[offset + i] = dataBytes[i];
         }
@@ -83,7 +84,12 @@ const local = {
           console.log(stringifyBytesHex(block), `(${block.length})`);
         }
         console.log(`data length: ${dataBytes.length}`);
-        return { marker, dataBytes, ensurePatched: true };
+        return {
+          marker,
+          dataBytes,
+          ensurePatched: true,
+          markerNullTerminated: true,
+        };
       });
     if (1) {
       //Kermite FirmwareのdeviceInstanceCodeを注入
@@ -94,9 +100,10 @@ const local = {
       ];
       console.log({ dataBytes });
       entries.push({
-        marker: "$KMME",
+        marker: "$KMMD",
         dataBytes,
         ensurePatched: false,
+        markerNullTerminated: false,
       });
     }
     return { entries };
