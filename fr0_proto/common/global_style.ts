@@ -15,14 +15,6 @@ export const globalStyle = css`
     }
   }
 
-  body {
-  }
-
-  ul,
-  li {
-    list-style: none;
-  }
-
   body,
   button,
   input,
