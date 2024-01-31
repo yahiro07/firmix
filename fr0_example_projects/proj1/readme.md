@@ -2,7 +2,7 @@
 
 サンプルプロジェクト
 
-![](https://i.imgur.com/StokW11.jpg)
+![](https://i.imgur.com/as7Iity.jpeg)
 
 スイッチを押すことで、LEDの点灯状態を変更できます。
 
