@@ -80,8 +80,8 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
   },
   Button: bindTagWithClassNames("button", "btn btn-primary"),
   Card: bindTagWithClassNames("div", "card"),
-  FormLabel: bindTagWithClassNames("label", ""),
-  FormTextInput: bindTagWithClassNames("input", ""),
+  FormLabel: bindTagWithClassNames("label", "form-label"),
+  FormTextInput: bindTagWithClassNames("input", "form-control"),
   Nav: bindTagWithClassNames("ul", "nav flex-column nav-pills"),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
