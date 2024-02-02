@@ -1,29 +1,32 @@
-import { FunctionalComponent } from "preact";
+import { FunctionComponent } from "preact";
+import { css, domStyled } from "resin";
 import { JSX, jsx } from "~/aux/xjsx/jsx-runtime.ts";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
+
+type FC<T = {}> = FunctionComponent<T>;
 
 export function bindTagWithClassNames<K extends keyof JSXIntrinsicElements>(
   tag: Extract<K, string>,
   classes?: string,
   classes2?: string
-): FunctionalComponent<JSXIntrinsicElements[K]> {
+): FC<JSXIntrinsicElements[K]> {
   return (props: JSXIntrinsicElements[K]) => {
     const classNames = [props.q, classes, classes2 ?? ""].join(" ").trim();
     return jsx(tag, { ...props, q: classNames }, props.key);
   };
 }
 
-type XDom<K extends keyof JSXIntrinsicElements> = FunctionalComponent<
-  JSXIntrinsicElements[K]
->;
+type XDom<K extends keyof JSXIntrinsicElements> = FC<JSXIntrinsicElements[K]>;
 
 type IComponentFlavorWrapper = {
-  CssFrameworkAssetsImporter: FunctionalComponent;
+  CssFrameworkAssetsImporter: FC;
   Button: XDom<"button">;
   Card: XDom<"div">;
   FormLabel: XDom<"label">;
   FormTextInput: XDom<"input">;
+  Nav: XDom<"ul">;
+  NavItem: FC<{ path: string; title: string }>;
 };
 
 const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
@@ -43,6 +46,19 @@ const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
   Card: bindTagWithClassNames("div", "uk-card uk-card-default"),
   FormLabel: bindTagWithClassNames("label"),
   FormTextInput: bindTagWithClassNames("input", "uk-input"),
+  Nav: bindTagWithClassNames("ul", "uk-nav uk-nav-default"),
+  NavItem: ({ path, title }) => {
+    return domStyled(
+      <li>
+        <a href={path}>
+          <span>{title}</span>
+        </a>
+      </li>,
+      css`
+        font-size: 18px;
+      `
+    );
+  },
 };
 
 const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
@@ -62,6 +78,16 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
   Card: bindTagWithClassNames("div", "card"),
   FormLabel: bindTagWithClassNames("label", ""),
   FormTextInput: bindTagWithClassNames("input", ""),
+  Nav: bindTagWithClassNames("ul"),
+  NavItem: ({ path, title }) => {
+    return (
+      <li>
+        <a href={path}>
+          <span>{title}</span>
+        </a>
+      </li>
+    );
+  },
 };
 
 const componentFlavor = componentFlavorWrapper_UiKit;
@@ -72,4 +98,6 @@ export const {
   Card,
   FormLabel,
   FormTextInput,
-}: IComponentFlavorWrapper = componentFlavor;
+  Nav,
+  NavItem,
+} = componentFlavor;

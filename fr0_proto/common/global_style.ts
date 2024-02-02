@@ -7,14 +7,6 @@ export const globalStyle = css`
     padding: 0;
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
   body,
   button,
   input,
@@ -26,10 +18,5 @@ export const globalStyle = css`
     /* font-family: "Murecho", sans-serif; */
     /* font-family: "Sawarabi Gothic", sans-serif; */
     line-height: 1.5;
-  }
-
-  button:disabled {
-    opacity: 0.5;
-    pointer-events: none;
   }
 `;

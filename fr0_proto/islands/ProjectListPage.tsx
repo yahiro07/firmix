@@ -2,7 +2,7 @@ import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
-import { ProjectListItemCard } from "../features/project_list/ProjectListItemCard.tsx";
+import { ProjectListItemCard } from "~/features/project_list/ProjectListItemCard.tsx";
 
 type Props = {
   projects: ProjectListItemDto[];
