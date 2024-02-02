@@ -25,6 +25,7 @@ import * as $MainLayout from "./islands/MainLayout.tsx";
 import * as $ProjectDetailPage from "./islands/ProjectDetailPage.tsx";
 import * as $ProjectListPage from "./islands/ProjectListPage.tsx";
 import * as $SettingsPage from "./islands/SettingsPage.tsx";
+import * as $SiteContextProvider from "./islands/SiteContextProvider.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -54,6 +55,7 @@ const manifest = {
     "./islands/ProjectDetailPage.tsx": $ProjectDetailPage,
     "./islands/ProjectListPage.tsx": $ProjectListPage,
     "./islands/SettingsPage.tsx": $SettingsPage,
+    "./islands/SiteContextProvider.tsx": $SiteContextProvider,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

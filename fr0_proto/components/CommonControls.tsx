@@ -1,6 +1,7 @@
 import { FunctionComponent } from "preact";
 import { css, domStyled } from "resin";
 import { JSX, jsx } from "~/aux/xjsx/jsx-runtime.ts";
+import { useSiteContext } from "~/common/site_context.ts";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
 
@@ -48,8 +49,10 @@ const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
   FormTextInput: bindTagWithClassNames("input", "uk-input"),
   Nav: bindTagWithClassNames("ul", "uk-nav uk-nav-default"),
   NavItem: ({ path, title }) => {
+    const { pagePath } = useSiteContext();
+    const active = path === pagePath;
     return domStyled(
-      <li>
+      <li q={active && "uk-active"}>
         <a href={path}>
           <span>{title}</span>
         </a>

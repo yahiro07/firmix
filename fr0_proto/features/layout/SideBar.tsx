@@ -1,14 +1,11 @@
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { appConfig } from "~/base/app_config.ts";
-import { LoginUser } from "~/base/types_dto_internal.ts";
+import { useSiteContext } from "~/common/site_context.ts";
 import { Nav, NavItem } from "~/components/CommonControls.tsx";
 
-type Props = {
-  loginUser: LoginUser | undefined;
-};
-
-export const SideBar = createFC<Props>(({ loginUser }) => {
+export const SideBar = createFC(() => {
+  const { loginUser } = useSiteContext();
   const loggedIn = !!loginUser;
   return (
     <div q={style}>
