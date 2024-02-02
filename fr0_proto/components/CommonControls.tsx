@@ -1,6 +1,7 @@
 import { FunctionComponent } from "preact";
 import { css, domStyled } from "resin";
 import { JSX, jsx } from "~/aux/xjsx/jsx-runtime.ts";
+import { styleTextLinkInheritColor } from "~/common/common_styles.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
@@ -81,11 +82,16 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
   Card: bindTagWithClassNames("div", "card"),
   FormLabel: bindTagWithClassNames("label", ""),
   FormTextInput: bindTagWithClassNames("input", ""),
-  Nav: bindTagWithClassNames("ul"),
+  Nav: bindTagWithClassNames("ul", "nav flex-column nav-pills"),
   NavItem: ({ path, title }) => {
+    const { pagePath } = useSiteContext();
+    const active = path === pagePath;
     return (
-      <li>
-        <a href={path}>
+      <li q="nav-item">
+        <a
+          href={path}
+          q={["nav-link", active && "active", styleTextLinkInheritColor]}
+        >
           <span>{title}</span>
         </a>
       </li>
@@ -93,7 +99,8 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
   },
 };
 
-const componentFlavor = componentFlavorWrapper_UiKit;
+// const componentFlavor = componentFlavorWrapper_UiKit;
+const componentFlavor = componentFlavorWrapper_Bootstrap;
 
 export const {
   CssFrameworkAssetsImporter,
