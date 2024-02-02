@@ -1,6 +1,7 @@
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
+import { styleTextLinkInheritColor } from "~/common/common_styles.ts";
 import {
   flexHorizontalAligned,
   flexVertical,
@@ -108,6 +109,9 @@ const style = css`
         width: 18px;
       }
       ${flexHorizontalAligned(4)};
+    }
+    > a {
+      ${styleTextLinkInheritColor};
     }
   }
 
