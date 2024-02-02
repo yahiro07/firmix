@@ -9,6 +9,12 @@ import {
 } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
+import { flexVertical } from "~/common/utility_styles.ts";
+import {
+  Button,
+  FormLabel,
+  FormTextInput,
+} from "~/components/CommonControls.tsx";
 
 type Props = {
   configurationSourceItems: ConfigurationSourceItemWrapper[];
@@ -81,25 +87,27 @@ export const ParametersConfigurationArea = createFC<Props>(
           </div>
         )}
         {!hasError && (
-          <div>
+          <div q="items">
             {configurationSourceItems.map((item) => (
-              <div key={item.key}>
-                <label>
+              <div key={item.key} q="item">
+                <FormLabel>
                   {item.label}
                   {local.configurationSourceItem_getCountsText(item)}
-                </label>
-                <input id={`${inputIdPrefix}${item.key}`} />
+                </FormLabel>
+                <FormTextInput id={`${inputIdPrefix}${item.key}`} />
                 <span if={false}>{item.instruction}</span>
               </div>
             ))}
           </div>
         )}
-        <button onClick={() => handleDownload(2)} if={!hasError && submit2}>
-          {submit2Label}
-        </button>
-        <button onClick={() => handleDownload(1)} if={!hasError}>
-          {submitButtonLabel}
-        </button>
+        <div>
+          <Button onClick={() => handleDownload(2)} if={!hasError && submit2}>
+            {submit2Label}
+          </Button>
+          <Button onClick={() => handleDownload(1)} if={!hasError}>
+            {submitButtonLabel}
+          </Button>
+        </div>
       </div>
     );
   }
@@ -109,6 +117,12 @@ const style = css`
   border: solid 1px #888;
   padding: 10px;
   background: #fff;
+  ${flexVertical(16)};
+  > .items {
+    > .item {
+      ${flexVertical()};
+    }
+  }
 `;
 
 const local = {
