@@ -2,6 +2,7 @@ import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { flexHorizontal } from "~/common/utility_styles.ts";
+import { Button, Card } from "~/components/CommonControls.tsx";
 
 type Props = {
   project: ProjectListItemDto;
@@ -12,30 +13,31 @@ export const ProjectListItemCard = createFC<Props>(({ project }: Props) => {
     location.href = `/project/${project.projectId}`;
   };
   return (
-    <div q={style}>
+    <Card q={style}>
       <div q="head-row">
         <h3>{project.projectName}</h3>
-        <button onClick={navigateToDetail}>詳細</button>
+        <Button onClick={navigateToDetail}>詳細</Button>
       </div>
       <div q="content-row">
         <div q="thumbnail-box">
           <img src={project.thumbnailUrl} />
         </div>
-        <div q="introduction">{project.introduction}</div>
+        <div q="introduction">
+          <p>{project.introduction}</p>
+        </div>
       </div>
-    </div>
+    </Card>
   );
 });
 
 const style = css`
   min-height: 100px;
-  background: #fff;
-  padding: 12px;
+  padding: 16px;
   > .head-row {
     ${flexHorizontal()};
+    align-items: flex-start;
     > button {
       margin-left: auto;
-      padding: 0 8px;
     }
   }
   > .content-row {

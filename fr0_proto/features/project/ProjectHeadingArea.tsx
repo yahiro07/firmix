@@ -5,6 +5,7 @@ import {
   flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
+import { Button } from "~/components/CommonControls.tsx";
 import { IconIconify } from "~/components/IconIconify.tsx";
 import { useRepositoryDisplayInfo } from "~/fe_modules/repository_info_helper.ts";
 
@@ -64,13 +65,13 @@ export const ProjectHeadingArea = createFC<Props>(
           ))}
         </div>
         <div q="control-area">
-          <button
+          <Button
             q={["btn-edit", projectTab === "editor" && "--active"]}
             onClick={toggleProjectTab}
           >
             <IconIconify spec="mdi:edit" />
             <span>エディタ</span>
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -128,13 +129,8 @@ const style = css`
     padding: 8px;
     > .btn-edit {
       ${flexHorizontalAligned()};
-      padding: 6px 11px;
-      font-size: 15px;
-      overflow: hidden;
-      border: solid 1px #888;
-      border-radius: 3px;
       &.--active {
-        background: #8db;
+        background: #7ee5ff;
       }
     }
   }

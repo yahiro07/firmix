@@ -85,11 +85,10 @@ const style = css`
       flex-grow: 1;
       display: flex;
       justify-content: center;
-      /* border: solid 1px red; */
+      /* padding: 16px 0; */
       > div {
         flex-grow: 1;
         max-width: 900px;
-        /* border: solid 1px blue; */
       }
     }
   }

@@ -1,6 +1,7 @@
 import { FreshContext } from "$fresh/server.ts";
 import { ResinCssEmitter, ResinCssGlobalStyle } from "resin";
 import { globalStyle } from "~/common/global_style.ts";
+import { CssFrameworkAssetsImporter } from "~/components/CommonControls.tsx";
 
 // deno-lint-ignore require-await
 export default async function App(_req: Request, ctx: FreshContext) {
@@ -13,7 +14,6 @@ export default async function App(_req: Request, ctx: FreshContext) {
         <ResinCssGlobalStyle css={globalStyle} />
         <ResinCssEmitter />
         <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js" />
-
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -24,6 +24,7 @@ export default async function App(_req: Request, ctx: FreshContext) {
           href="https://fonts.googleapis.com/css2?family=M+PLUS+2&display=swap"
           rel="stylesheet"
         />
+        <CssFrameworkAssetsImporter />
       </head>
       <body>
         <ctx.Component />
