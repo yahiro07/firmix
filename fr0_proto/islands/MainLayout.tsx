@@ -37,7 +37,13 @@ const style = css`
     flex-shrink: 0;
     ${flexHorizontalAligned(2)};
     > .icon {
-      font-size: 38px;
+      font-size: 44px;
+    }
+    > h1 {
+      font-size: 36px;
+      font-weight: bold;
+      padding: 8px 0;
+      color: ${colors.topBarText};
     }
   }
   > .main-row {

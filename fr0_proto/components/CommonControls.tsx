@@ -32,6 +32,15 @@ type IComponentFlavorWrapper = {
 
 const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
+    const customCss = `
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "M PLUS 2", sans-serif;
+    font-weight: bold;
+  }
+  h1 {
+    margin: 0;
+  }
+`;
     return (
       <>
         <link
@@ -40,6 +49,7 @@ const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
         />
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.18.0/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.18.0/dist/js/uikit-icons.min.js"></script>
+        <style dangerouslySetInnerHTML={{ __html: customCss }} />
       </>
     );
   },
@@ -70,6 +80,10 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
   body {
     --bs-border-radius: 0;
     --bs-nav-pills-border-radius: 0;
+    --bs-body-font-family: "M PLUS 2", sans-serif;
+  }
+  h1 {
+    margin: 0;
   }
 `;
     return (
@@ -115,8 +129,8 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
   },
 };
 
-// const componentFlavor = componentFlavorWrapper_UiKit;
-const componentFlavor = componentFlavorWrapper_Bootstrap;
+const componentFlavor = componentFlavorWrapper_UiKit;
+// const componentFlavor = componentFlavorWrapper_Bootstrap;
 
 export const {
   CssFrameworkAssetsImporter,
