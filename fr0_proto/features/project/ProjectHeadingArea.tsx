@@ -37,7 +37,7 @@ export const ProjectHeadingArea = createFC<Props>(
     return (
       <div q={style}>
         <h2>
-          <IconIconify spec="icon-park-twotone:chip" q="icon" />
+          <IconIconify spec="icon-park-twotone:chip" q="title-icon" />
           <span>{projectName}</span>
         </h2>
         {repositoryInfo && (
@@ -47,7 +47,7 @@ export const ProjectHeadingArea = createFC<Props>(
               target="_blank"
               q="repository"
             >
-              <IconIconify spec="mdi:github" q="icon" />
+              <IconIconify spec="mdi:github" q="github-icon" />
               <span>
                 {repositoryInfo.ownerName}/{repositoryInfo.repositoryName}
               </span>
@@ -89,7 +89,7 @@ const style = css`
   > h2 {
     ${flexHorizontalAligned(2)};
     font-size: 32px;
-    > .icon {
+    > .title-icon {
       font-size: 36px;
     }
   }
@@ -99,7 +99,7 @@ const style = css`
     ${flexVertical(2)};
     align-items: flex-start;
     > .repository {
-      > .icon {
+      > .github-icon {
         font-size: 22px;
       }
       ${flexHorizontalAligned(1)};

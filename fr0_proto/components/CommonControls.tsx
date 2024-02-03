@@ -157,7 +157,7 @@ const componentFlavorWrapper_Materialize: IComponentFlavorWrapper = {
   Button: bindTagWithClassNames("button", "btn"),
   Card: bindTagWithClassNames("div", "card"),
   FormLabel: bindTagWithClassNames("label"),
-  FormTextInput: bindTagWithClassNames("input", ""),
+  FormTextInput: bindTagWithClassNames("input", "input"),
   Nav: bindTagWithClassNames("ul", ""),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
@@ -175,10 +175,47 @@ const componentFlavorWrapper_Materialize: IComponentFlavorWrapper = {
   },
 };
 
-const componentFlavor = componentFlavorWrapper_UiKit;
+const componentFlavorWrapper_Bulma: IComponentFlavorWrapper = {
+  CssFrameworkAssetsImporter() {
+    const customCss = `
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "M PLUS 2", sans-serif;
+    font-weight: bold;
+  }
+`;
+    return (
+      <>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+        />
+        <style dangerouslySetInnerHTML={{ __html: customCss }} />
+      </>
+    );
+  },
+  Button: bindTagWithClassNames("button", "button is-primary"),
+  Card: bindTagWithClassNames("div", "card"),
+  FormLabel: bindTagWithClassNames("label"),
+  FormTextInput: bindTagWithClassNames("input", "input"),
+  Nav: bindTagWithClassNames("ul", "menu-list"),
+  NavItem: ({ path, title }) => {
+    const { pagePath } = useSiteContext();
+    const active = path === pagePath;
+    return domStyled(
+      <li>
+        <a href={path} q={active && "is-active"}>
+          <span>{title}</span>
+        </a>
+      </li>,
+      css``
+    );
+  },
+};
+
+// const componentFlavor = componentFlavorWrapper_UiKit;
 // const componentFlavor = componentFlavorWrapper_Bootstrap;
 // const componentFlavor = componentFlavorWrapper_Materialize;
-
+const componentFlavor = componentFlavorWrapper_Bulma;
 export const {
   CssFrameworkAssetsImporter,
   Button,
