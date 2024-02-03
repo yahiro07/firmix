@@ -23,7 +23,7 @@ export const MainLayout = createFC(({ children }) => {
 });
 
 const style = css`
-  height: 100%;
+  /* height: 100%; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;

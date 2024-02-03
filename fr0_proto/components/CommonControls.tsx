@@ -1,5 +1,6 @@
 import { FunctionComponent } from "preact";
 import { css, domStyled } from "resin";
+import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { JSX, jsx } from "~/aux/xjsx/jsx-runtime.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 
@@ -182,13 +183,12 @@ const componentFlavorWrapper_Bulma: IComponentFlavorWrapper = {
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
-    return domStyled(
+    return (
       <li>
         <a href={path} q={active && "is-active"}>
           <span>{title}</span>
         </a>
-      </li>,
-      css``
+      </li>
     );
   },
 };
@@ -222,13 +222,12 @@ const componentFlavorWrapper_Foundation: IComponentFlavorWrapper = {
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
-    return domStyled(
+    return (
       <li q={active && "is-active"}>
         <a href={path}>
           <span>{title}</span>
         </a>
-      </li>,
-      css``
+      </li>
     );
   },
 };
@@ -263,13 +262,59 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
-    return domStyled(
+    return (
       <li q={["nav-item", active && "active"]}>
         <a href={path}>
           <span>{title}</span>
         </a>
-      </li>,
-      css``
+      </li>
+    );
+  },
+};
+
+const componentFlavorWrapper_Milligram: IComponentFlavorWrapper = {
+  CssFrameworkAssetsImporter() {
+    const customCss = `
+`;
+    return (
+      <>
+        <script
+          src="https://code.jquery.com/jquery-3.1.1.min.js"
+          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+          crossorigin="anonymous"
+        ></script>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+        <style dangerouslySetInnerHTML={{ __html: customCss }} />
+      </>
+    );
+  },
+  Button: bindTagWithClassNames("button", "ui button"),
+  Card: bindTagWithClassNames(
+    "div",
+    "ui segment",
+    css`
+      margin: 0 !important;
+    `
+  ),
+  FormLabel: bindTagWithClassNames("label"),
+  FormTextInput: createFC<JSXIntrinsicElements["input"]>((props) => (
+    <div q="ui input">
+      <input type="text" {...props} />
+    </div>
+  )),
+  Nav: bindTagWithClassNames("ul", "ui secondary vertical menu"),
+  NavItem: ({ path, title }) => {
+    const { pagePath } = useSiteContext();
+    const active = path === pagePath;
+    return (
+      <a href={path} q={["item", active && "active"]}>
+        <span>{title}</span>
+      </a>
     );
   },
 };
@@ -279,7 +324,8 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
 // const componentFlavor = componentFlavorWrapper_Materialize;
 // const componentFlavor = componentFlavorWrapper_Bulma;
 // const componentFlavor = componentFlavorWrapper_Foundation;
-const componentFlavor = componentFlavorWrapper_Spectre;
+// const componentFlavor = componentFlavorWrapper_Spectre;
+const componentFlavor = componentFlavorWrapper_Milligram;
 export const {
   CssFrameworkAssetsImporter,
   Button,
