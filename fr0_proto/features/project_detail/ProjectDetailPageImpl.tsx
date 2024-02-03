@@ -10,6 +10,7 @@ import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
 import { firmixPresenter_firmwarePatching } from "~/cardinal/firmix_presenter_firmware_patching/mod.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
+import { colors } from "~/common/ui_theme.ts";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
 import { ProjectHeadingArea } from "~/features/project/ProjectHeadingArea.tsx";
 import { ProjectReadmeArea } from "~/features/project/ProjectReadmeArea.tsx";
@@ -88,6 +89,6 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
 
 const style = css`
   padding: 10px;
-  background: #fff;
+  background: ${colors.contentBackground};
   /* min-height: 100%; */
 `;

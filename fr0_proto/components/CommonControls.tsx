@@ -1,7 +1,6 @@
 import { FunctionComponent } from "preact";
 import { css, domStyled } from "resin";
 import { JSX, jsx } from "~/aux/xjsx/jsx-runtime.ts";
-import { styleTextLinkInheritColor } from "~/common/common_styles.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
@@ -67,14 +66,34 @@ const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
 
 const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
+    const customCss = `
+  body {
+    --bs-border-radius: 0;
+    --bs-nav-pills-border-radius: 0;
+  }
+`;
     return (
       <>
         <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous"
+          if={false}
         />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.2/cosmo/bootstrap.min.css"
+          crossorigin="anonymous"
+          if={true}
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/superhero/bootstrap.min.css"
+          crossorigin="anonymous"
+          if={false}
+        />
+        <style dangerouslySetInnerHTML={{ __html: customCss }} />
       </>
     );
   },
@@ -88,10 +107,7 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
     const active = path === pagePath;
     return (
       <li q="nav-item">
-        <a
-          href={path}
-          q={["nav-link", active && "active", styleTextLinkInheritColor]}
-        >
+        <a href={path} q={["nav-link", active && "active"]}>
           <span>{title}</span>
         </a>
       </li>

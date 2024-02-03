@@ -1,5 +1,6 @@
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { colors } from "~/common/ui_theme.ts";
 import { flexCentered, flexVertical } from "~/common/utility_styles.ts";
 import { IconIconify } from "~/components/IconIconify.tsx";
 import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAssetsArea.tsx";
@@ -82,7 +83,8 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
 
 const style = css`
   height: 100%;
-  background: #fff;
+  background: ${colors.contentBackground};
+  padding: 10px;
 
   ${flexVertical()};
   > .blank-filler {

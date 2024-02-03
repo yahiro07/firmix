@@ -114,9 +114,7 @@ export const ParametersConfigurationArea = createFC<Props>(
 );
 
 const style = css`
-  border: solid 1px #888;
   padding: 10px;
-  background: #fff;
   ${flexVertical(16)};
   > .items {
     > .item {

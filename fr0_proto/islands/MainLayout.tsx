@@ -1,5 +1,6 @@
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { colors } from "~/common/ui_theme.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
 import { IconIconify } from "~/components/IconIconify.tsx";
 import { SideBar } from "~/features/layout/SideBar.tsx";
@@ -26,11 +27,12 @@ const style = css`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #ddd;
-  color: #333;
+  background: ${colors.pageBackground};
+  color: ${colors.foregroundText};
+
   > .header-bar {
-    background: #76d;
-    color: #fff;
+    background: ${colors.topBarFill};
+    color: ${colors.topBarText};
     padding: 0 12px;
     flex-shrink: 0;
     ${flexHorizontalAligned(2)};
@@ -39,7 +41,6 @@ const style = css`
     }
   }
   > .main-row {
-    background: #eee;
     flex-grow: 1;
     display: flex;
     > .side-bar {

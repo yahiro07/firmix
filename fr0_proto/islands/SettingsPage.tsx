@@ -2,6 +2,7 @@ import { useState } from "preact/hooks";
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
+import { colors } from "~/common/ui_theme.ts";
 import {
   flexCentered,
   flexHorizontalAligned,
@@ -55,8 +56,10 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
 });
 
 const style = css`
-  padding: 10px;
+  padding: 20px;
   ${flexVertical(12)};
+  background: ${colors.contentBackground};
+  height: 100%;
 
   > .edit-row {
     ${flexHorizontalAligned()};

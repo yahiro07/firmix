@@ -2,6 +2,7 @@ import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { appConfig } from "~/base/app_config.ts";
 import { useSiteContext } from "~/common/site_context.ts";
+import { colors } from "~/common/ui_theme.ts";
 import { Nav, NavItem } from "~/components/CommonControls.tsx";
 
 export const SideBar = createFC(() => {
@@ -32,7 +33,7 @@ export const SideBar = createFC(() => {
 
 const style = css`
   width: 240px;
-  background: #ccc;
-  border-right: solid 1px #aaa;
+  background: ${colors.sideBarFill};
+  border-right: solid 1px ${colors.sideBarEdge};
   padding: 20px 12px;
 `;

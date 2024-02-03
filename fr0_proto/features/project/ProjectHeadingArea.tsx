@@ -2,6 +2,7 @@ import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
 import { styleTextLinkInheritColor } from "~/common/common_styles.ts";
+import { colors } from "~/common/ui_theme.ts";
 import {
   flexHorizontalAligned,
   flexVertical,
@@ -134,7 +135,7 @@ const style = css`
     > .btn-edit {
       ${flexHorizontalAligned()};
       &.--active {
-        background: #7ee5ff;
+        background: ${colors.buttonEditActive};
       }
     }
   }
