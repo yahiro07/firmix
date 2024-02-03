@@ -116,6 +116,7 @@ const style = css`
 
   > h3 {
     ${flexHorizontalAligned()};
+    font-size: 20px;
     > .icon {
       font-size: 24px;
     }

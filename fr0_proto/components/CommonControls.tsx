@@ -129,8 +129,55 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
   },
 };
 
+const componentFlavorWrapper_Materialize: IComponentFlavorWrapper = {
+  CssFrameworkAssetsImporter() {
+    const customCss = `
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "M PLUS 2", sans-serif;
+    font-weight: bold;
+    margin: 0;
+  }
+`;
+    return (
+      <>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <style dangerouslySetInnerHTML={{ __html: customCss }} />
+      </>
+    );
+  },
+  Button: bindTagWithClassNames("button", "btn"),
+  Card: bindTagWithClassNames("div", "card"),
+  FormLabel: bindTagWithClassNames("label"),
+  FormTextInput: bindTagWithClassNames("input", ""),
+  Nav: bindTagWithClassNames("ul", ""),
+  NavItem: ({ path, title }) => {
+    const { pagePath } = useSiteContext();
+    const active = path === pagePath;
+    return domStyled(
+      <li q={active && "--active"}>
+        <a href={path}>
+          <span>{title}</span>
+        </a>
+      </li>,
+      css`
+        font-size: 18px;
+      `
+    );
+  },
+};
+
 const componentFlavor = componentFlavorWrapper_UiKit;
 // const componentFlavor = componentFlavorWrapper_Bootstrap;
+// const componentFlavor = componentFlavorWrapper_Materialize;
 
 export const {
   CssFrameworkAssetsImporter,

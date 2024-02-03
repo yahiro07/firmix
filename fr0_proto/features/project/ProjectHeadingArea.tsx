@@ -88,8 +88,9 @@ const style = css`
 
   > h2 {
     ${flexHorizontalAligned(2)};
+    font-size: 32px;
     > .icon {
-      font-size: 28px;
+      font-size: 36px;
     }
   }
 

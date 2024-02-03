@@ -7,7 +7,7 @@ import { SideBar } from "~/features/layout/SideBar.tsx";
 
 export const MainLayout = createFC(({ children }) => {
   return (
-    <div q={style}>
+    <div q={[style, "main-layout-root"]}>
       <div q="header-bar">
         <IconIconify spec="mdi:chip" q="icon" />
         <h1>Firmix</h1>

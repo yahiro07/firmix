@@ -36,6 +36,9 @@ const style = css`
   > .head-row {
     ${flexHorizontal()};
     align-items: flex-start;
+    > h3 {
+      font-size: 24px;
+    }
     > button {
       margin-left: auto;
     }
