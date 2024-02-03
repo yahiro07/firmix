@@ -272,7 +272,7 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
   },
 };
 
-const componentFlavorWrapper_Milligram: IComponentFlavorWrapper = {
+const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
 `;
@@ -325,7 +325,7 @@ const componentFlavorWrapper_Milligram: IComponentFlavorWrapper = {
 // const componentFlavor = componentFlavorWrapper_Bulma;
 // const componentFlavor = componentFlavorWrapper_Foundation;
 // const componentFlavor = componentFlavorWrapper_Spectre;
-const componentFlavor = componentFlavorWrapper_Milligram;
+const componentFlavor = componentFlavorWrapper_SemanticUI;
 export const {
   CssFrameworkAssetsImporter,
   Button,
