@@ -193,10 +193,51 @@ const componentFlavorWrapper_Bulma: IComponentFlavorWrapper = {
   },
 };
 
+const componentFlavorWrapper_Foundation: IComponentFlavorWrapper = {
+  CssFrameworkAssetsImporter() {
+    const customCss = `
+`;
+    return (
+      <>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css"
+          crossorigin="anonymous"
+        />
+        <style dangerouslySetInnerHTML={{ __html: customCss }} />
+      </>
+    );
+  },
+  Button: bindTagWithClassNames("button", "button primary"),
+  Card: bindTagWithClassNames("div", "card"),
+  FormLabel: bindTagWithClassNames("label"),
+  FormTextInput: bindTagWithClassNames(
+    "input",
+    "input",
+    css`
+      margin: 0 !important;
+    `
+  ),
+  Nav: bindTagWithClassNames("ul", "menu vertical"),
+  NavItem: ({ path, title }) => {
+    const { pagePath } = useSiteContext();
+    const active = path === pagePath;
+    return domStyled(
+      <li q={active && "is-active"}>
+        <a href={path}>
+          <span>{title}</span>
+        </a>
+      </li>,
+      css``
+    );
+  },
+};
+
 // const componentFlavor = componentFlavorWrapper_UiKit;
 // const componentFlavor = componentFlavorWrapper_Bootstrap;
 // const componentFlavor = componentFlavorWrapper_Materialize;
-const componentFlavor = componentFlavorWrapper_Bulma;
+// const componentFlavor = componentFlavorWrapper_Bulma;
+const componentFlavor = componentFlavorWrapper_Foundation;
 export const {
   CssFrameworkAssetsImporter,
   Button,
