@@ -233,11 +233,53 @@ const componentFlavorWrapper_Foundation: IComponentFlavorWrapper = {
   },
 };
 
+const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
+  CssFrameworkAssetsImporter() {
+    const customCss = `
+`;
+    return (
+      <>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/spectre.css/dist/spectre.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css"
+        />
+        <style dangerouslySetInnerHTML={{ __html: customCss }} />
+      </>
+    );
+  },
+  Button: bindTagWithClassNames("button", "btn btn-primary"),
+  Card: bindTagWithClassNames("div", "card"),
+  FormLabel: bindTagWithClassNames("label", "form-label"),
+  FormTextInput: bindTagWithClassNames("input", "form-input"),
+  Nav: bindTagWithClassNames("ul", "nav"),
+  NavItem: ({ path, title }) => {
+    const { pagePath } = useSiteContext();
+    const active = path === pagePath;
+    return domStyled(
+      <li q={["nav-item", active && "active"]}>
+        <a href={path}>
+          <span>{title}</span>
+        </a>
+      </li>,
+      css``
+    );
+  },
+};
+
 // const componentFlavor = componentFlavorWrapper_UiKit;
 // const componentFlavor = componentFlavorWrapper_Bootstrap;
 // const componentFlavor = componentFlavorWrapper_Materialize;
 // const componentFlavor = componentFlavorWrapper_Bulma;
-const componentFlavor = componentFlavorWrapper_Foundation;
+// const componentFlavor = componentFlavorWrapper_Foundation;
+const componentFlavor = componentFlavorWrapper_Spectre;
 export const {
   CssFrameworkAssetsImporter,
   Button,
