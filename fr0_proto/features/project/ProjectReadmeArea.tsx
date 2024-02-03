@@ -24,6 +24,6 @@ export const ProjectReadmeArea = createFC<Props>(({ readmeFileContent }) => {
 
 const style = css`
   > .base-plane {
-    padding: 20px;
+    padding: 10px;
   }
 `;

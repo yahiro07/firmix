@@ -33,6 +33,7 @@ const style = css`
   > .header-bar {
     background: ${colors.topBarFill};
     color: ${colors.topBarText};
+    height: 60px;
     padding: 0 12px;
     flex-shrink: 0;
     ${flexHorizontalAligned(2)};

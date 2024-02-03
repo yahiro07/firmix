@@ -70,6 +70,7 @@ const style = css`
     padding: 1px 6px;
   }
   > .folder {
+    font-size: 18px;
     ${flexHorizontalAligned(4)};
   }
   > .spacer {

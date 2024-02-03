@@ -33,13 +33,6 @@ type IComponentFlavorWrapper = {
 const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "M PLUS 2", sans-serif;
-    font-weight: bold;
-  }
-  h1 {
-    margin: 0;
-  }
 `;
     return (
       <>
@@ -81,9 +74,6 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
     --bs-border-radius: 0;
     --bs-nav-pills-border-radius: 0;
     --bs-body-font-family: "M PLUS 2", sans-serif;
-  }
-  h1 {
-    margin: 0;
   }
 `;
     return (
@@ -132,11 +122,6 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
 const componentFlavorWrapper_Materialize: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "M PLUS 2", sans-serif;
-    font-weight: bold;
-    margin: 0;
-  }
 `;
     return (
       <>
@@ -178,10 +163,6 @@ const componentFlavorWrapper_Materialize: IComponentFlavorWrapper = {
 const componentFlavorWrapper_Bulma: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "M PLUS 2", sans-serif;
-    font-weight: bold;
-  }
 `;
     return (
       <>

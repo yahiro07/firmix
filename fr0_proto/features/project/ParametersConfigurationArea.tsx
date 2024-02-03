@@ -9,7 +9,7 @@ import {
 } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
-import { flexVertical } from "~/common/utility_styles.ts";
+import { flexHorizontal, flexVertical } from "~/common/utility_styles.ts";
 import {
   Button,
   FormLabel,
@@ -100,7 +100,7 @@ export const ParametersConfigurationArea = createFC<Props>(
             ))}
           </div>
         )}
-        <div>
+        <div q="buttons-row">
           <Button onClick={() => handleDownload(2)} if={!hasError && submit2}>
             {submit2Label}
           </Button>
@@ -121,6 +121,9 @@ const style = css`
     > .item {
       ${flexVertical()};
     }
+  }
+  > .buttons-row {
+    ${flexHorizontal(8)};
   }
 `;
 

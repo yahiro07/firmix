@@ -27,7 +27,7 @@ export default async function App(req: Request, ctx: FreshContext) {
           crossOrigin="true"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=M+PLUS+2&display=swap"
+          href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@400;500&display=swap"
           rel="stylesheet"
         />
         <CssFrameworkAssetsImporter />

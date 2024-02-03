@@ -25,10 +25,10 @@ const AssetEntry = createFC<{
 
   return domStyled(
     <div>
-      <div q="heading">
+      <div q="ae-heading">
         <IconIconify
           spec={iconSpec}
-          q={["icon", `--validity-${asset.validity}`]}
+          q={["validity-icon", `--validity-${asset.validity}`]}
         />
         <span>
           {title}: {asset.filePath} {infoAdditional}
@@ -41,10 +41,10 @@ const AssetEntry = createFC<{
       </div>
     </div>,
     css`
-      > .heading {
+      > .ae-heading {
         ${flexHorizontalAligned(2)};
 
-        > .icon {
+        > .validity-icon {
           &.--validity-valid {
             color: green;
           }
