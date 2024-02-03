@@ -319,13 +319,61 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
   },
 };
 
+const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
+  CssFrameworkAssetsImporter() {
+    const customCss = `
+`;
+    return (
+      <>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"
+          rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
+        <style dangerouslySetInnerHTML={{ __html: customCss }} />
+      </>
+    );
+  },
+  Button: bindTagWithClassNames(
+    "button",
+    "bg-indigo-500 p-2 text-white focus:outline-none text-white hover:bg-indigo-400 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mb-2"
+  ),
+  Card: bindTagWithClassNames("div", "bg-white shadow"),
+  FormLabel: bindTagWithClassNames("label", ""),
+  FormTextInput: bindTagWithClassNames(
+    "input",
+    "bg-gray-50 border border-gray-300 text-gray-900 focus:border-indigo-300 focus:ring-indigo-300 p-2.5"
+  ),
+  Nav: bindTagWithClassNames("ul", "nav"),
+  NavItem: ({ path, title }) => {
+    const { pagePath } = useSiteContext();
+    const active = path === pagePath;
+    return (
+      <li>
+        <a
+          href={path}
+          q={[
+            "flex items-center p-2 text-gray-900  hover:bg-gray-300 group",
+            active && "bg-indigo-400",
+          ]}
+        >
+          <span>{title}</span>
+        </a>
+      </li>
+    );
+  },
+};
+
 // const componentFlavor = componentFlavorWrapper_UiKit;
 // const componentFlavor = componentFlavorWrapper_Bootstrap;
 // const componentFlavor = componentFlavorWrapper_Materialize;
 // const componentFlavor = componentFlavorWrapper_Bulma;
 // const componentFlavor = componentFlavorWrapper_Foundation;
 // const componentFlavor = componentFlavorWrapper_Spectre;
-const componentFlavor = componentFlavorWrapper_SemanticUI;
+// const componentFlavor = componentFlavorWrapper_SemanticUI;
+const componentFlavor = componentFlavorWrapper_Tailwind_Flowbite;
 export const {
   CssFrameworkAssetsImporter,
   Button,
