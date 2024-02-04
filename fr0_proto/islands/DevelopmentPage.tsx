@@ -4,6 +4,7 @@ import { css } from "resin";
 import { serverFetchHelper } from "~/aux/utils_be/server_fetch_helper.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
+import { ButtonSmall } from "~/components/CommonControls.tsx";
 
 export const DevelopmentPage = createFC(() => {
   const [text, setText] = useState("");
@@ -62,15 +63,15 @@ export const DevelopmentPage = createFC(() => {
         <h3>directoryHandleの永続化実験</h3>
         <div>
           <div>{text}</div>
-          <button onClick={handleClick}>select folder</button>
-          <button onClick={handleClick1}>reload</button>
-          <button onClick={handleClick2}>close</button>
+          <ButtonSmall onClick={handleClick}>select folder</ButtonSmall>
+          <ButtonSmall onClick={handleClick1}>reload</ButtonSmall>
+          <ButtonSmall onClick={handleClick2}>close</ButtonSmall>
         </div>
       </div>
       <div>
         <h3>R2 CORSアクセスのデバッグ</h3>
         <div>
-          <button onClick={handleClick3}>fetch</button>
+          <ButtonSmall onClick={handleClick3}>fetch</ButtonSmall>
         </div>
       </div>
     </div>
@@ -82,5 +83,6 @@ const style = css`
   ${flexVertical(16)};
   button {
     padding: 2px 6px;
+    margin-right: 8px;
   }
 `;
