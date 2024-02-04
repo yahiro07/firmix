@@ -64,6 +64,10 @@ export function createProjectService() {
       const firmwareFileName = `firmware.${firmwareFormat}`;
       const firmwareFileHash = generateHashMd5(firmwareFileBytes);
       let firmwareRevision = existingProject?.firmwareRevision ?? 0;
+      let firmwareUpdateAt =
+        existingProject?.firmwareUpdateAt ??
+        existingProject?.updateAt ??
+        Date.now();
 
       if (firmwareFileHash !== existingProject?.firmwareFileHash) {
         await objectStorageBridge.uploadBinaryFile(
@@ -71,6 +75,7 @@ export function createProjectService() {
           firmwareFileBytes
         );
         firmwareRevision++;
+        firmwareUpdateAt = Date.now();
       }
 
       const projectEntity = local.createProjectEntity({
@@ -81,6 +86,7 @@ export function createProjectService() {
         firmwareFileName,
         firmwareFileHash,
         firmwareRevision,
+        firmwareUpdateAt,
         thumbnailUrl,
         revision,
         published,
@@ -196,6 +202,7 @@ const local = {
     firmwareFileName: string;
     firmwareFileHash: string;
     firmwareRevision: number;
+    firmwareUpdateAt: number;
     thumbnailUrl: string;
     revision: number;
     published: boolean;
@@ -219,6 +226,7 @@ const local = {
       firmwareFileName: args.firmwareFileName,
       firmwareFileHash: args.firmwareFileHash,
       firmwareRevision: args.firmwareRevision,
+      firmwareUpdateAt: args.firmwareUpdateAt,
       thumbnailUrl: args.thumbnailUrl,
       revision: args.revision,
       published: args.published,
@@ -242,6 +250,11 @@ const local = {
       editUiItems: project.editUiItems,
       thumbnailUrl: project.thumbnailUrl,
       firmwareBinaryUrl: projectHelper.getFirmwareBinaryUrl(project),
+      firmwareUpdateAt: project.firmwareUpdateAt,
+      published: project.published,
+      automated: project.automated,
+      firmwareRevision: project.firmwareRevision,
+      updateAt: project.updateAt,
     };
   },
 };

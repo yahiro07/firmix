@@ -33,6 +33,11 @@ export type ProjectDetailDto = {
   editUiItems: EditUiItem[];
   thumbnailUrl: string;
   firmwareBinaryUrl: string;
+  published: boolean;
+  automated: boolean;
+  firmwareRevision: number;
+  firmwareUpdateAt: number;
+  updateAt: number;
 };
 
 export type ProjectListItemDto = {

@@ -1,6 +1,7 @@
 import { useMemo } from "preact/hooks";
 import { css } from "resin";
 import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
+import { getDateTimeText_yyyyMMddHHmmss } from "~/aux/utils/date_time_helper.ts";
 import { decodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
@@ -60,6 +61,10 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
     }
   };
 
+  const firmwareUpdateAtText =
+    project.firmwareUpdateAt &&
+    getDateTimeText_yyyyMMddHHmmss(new Date(project.firmwareUpdateAt));
+
   return (
     <div q={style}>
       <ProjectHeadingArea
@@ -69,8 +74,16 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         projectTab={projectTab}
         setProjectTab={setProjectTab}
       />
-      <div q="info-area">
-        <div>target mcu: {project.targetMcu}</div>
+      <div q="info-area" if={projectTab === "info"}>
+        <div>ターゲットMCU: {project.targetMcu}</div>
+        <div>ファームウェア更新日時: {firmwareUpdateAtText}</div>
+        <div>ファームウェアリビジョン: {project.firmwareRevision}</div>
+        <div if={false}>
+          公開状態: {project.published ? "公開" : "ドラフト"}
+        </div>
+        <div if={false}>
+          投稿ソース: {project.automated ? "API経由" : "ローカル"}
+        </div>
         {hasError && <div>カスタムデータの定義にエラーがあります</div>}
       </div>
       <ProjectReadmeArea
@@ -91,4 +104,7 @@ const style = css`
   padding: 10px;
   background: ${colors.contentBackground};
   /* min-height: 100%; */
+  > .info-area {
+    padding: 0 8px;
+  }
 `;
