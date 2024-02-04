@@ -20,7 +20,7 @@
       ]
     }
   },
-  "exclude": ["**/_fresh/*"],
+  "exclude": ["**/_fresh/*", ".local"],
   "imports": {
     "~/": "./",
     "$fresh/": "https://deno.land/x/fresh@1.6.1/",
@@ -36,7 +36,8 @@
     // "mongodb": "npm:mongodb",
     "gfm": "https://deno.land/x/gfm@0.5.0/mod.ts",
     "idb-keyval": "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js",
-    "resin": "https://deno.land/x/resin@v0.1.7/mod.ts"
+    "resin": "https://deno.land/x/resin@v0.1.7/mod.ts",
+    "zod": "https://deno.land/x/zod@v3.16.1/mod.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

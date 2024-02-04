@@ -3,8 +3,6 @@ import { CustomDataEntry, EditUiItem } from "~/base/types_core_entity.ts";
 export type ProjectMetadataEditUiItemInput = {
   key: string;
   label: string;
-  instruction?: string;
-  instructionLines?: string[];
 };
 
 export type ProjectMetadataJsonFileContent = {

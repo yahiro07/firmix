@@ -14,7 +14,7 @@ export const firmixCore_firmwareConfiguration = {
   ): ConfigurationSourceItemWrapper[] {
     const dataItems = patchingManifest.dataEntries.map((it) => it.items).flat();
     return patchingManifest.editUiItems.map((editUiItem) => {
-      const { key, label, instruction } = editUiItem;
+      const { key, label } = editUiItem;
       const dataItem = dataItems.find((it) => it.key === key);
       if (!dataItem) {
         return {
@@ -31,7 +31,6 @@ export const firmixCore_firmwareConfiguration = {
           dataKind,
           dataCount,
           label,
-          instruction,
           required,
           fallbackValues,
         };
@@ -42,7 +41,6 @@ export const firmixCore_firmwareConfiguration = {
           dataKind,
           pinsCount,
           label,
-          instruction,
           required,
         };
       } else if (dataKind === "vl_pins") {
@@ -52,7 +50,6 @@ export const firmixCore_firmwareConfiguration = {
           dataKind,
           pinsCapacity,
           label,
-          instruction,
           required,
         };
       } else if (dataKind === "vl_text") {
@@ -62,7 +59,6 @@ export const firmixCore_firmwareConfiguration = {
           dataKind,
           textCapacity,
           label,
-          instruction,
           required,
         };
       } else {

@@ -19,5 +19,4 @@ export type CustomDataEntry = {
 export type EditUiItem = {
   key: string;
   label: string;
-  instruction: string;
 };

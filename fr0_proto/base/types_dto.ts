@@ -6,7 +6,6 @@ import {
 
 export type ConfigurationSourceItem = {
   label: string;
-  instruction: string;
 } & CustomDataItem;
 
 export type ConfigurationSourceItem_Error = {

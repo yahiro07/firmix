@@ -36,10 +36,13 @@ export function createProjectService() {
         firmwareFileBytes,
         automated,
       } = args;
-      const metadataInput =
+      const { metadataInput, errorLines } =
         firmixCore_projectLoader.loadProjectMetadataFile_json(
           metadataFileContent
         );
+      if (errorLines.length > 0) {
+        raiseError(`invalid metadata schema, ${errorLines.join("\n")} `);
+      }
       const existingProject = await storehouse.projectCollection.findOne({
         projectGuid: metadataInput.projectGuid,
       });

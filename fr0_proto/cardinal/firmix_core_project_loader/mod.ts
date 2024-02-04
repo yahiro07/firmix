@@ -1,58 +1,40 @@
 import { raiseError } from "~/aux/utils/error_util.ts";
+import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
 import { appConfig } from "~/base/app_config.ts";
 import { ImageAssetAttrs } from "~/base/types_app_common.ts";
 import {
   ProjectMetadataInput,
   ProjectMetadataJsonFileContent,
 } from "~/base/types_project_metadata.ts";
+import { validateSchemaMetadataFileContent } from "~/cardinal/firmix_core_firmware_patching/matada_input_validator.ts";
 
 export const firmixCore_projectLoader = {
-  loadProjectMetadataFile_json(fileContentText: string): ProjectMetadataInput {
-    const metadata = JSON.parse(
+  loadProjectMetadataFile_json(fileContentText: string): {
+    metadataInput: ProjectMetadataInput;
+    errorLines: string[];
+  } {
+    const fileContentJson = JSON.parse(
       fileContentText
     ) as ProjectMetadataJsonFileContent;
-    const {
-      projectGuid,
-      projectName,
-      thumbnailUrl,
-      introductionLines,
-      targetMcu,
-      primaryTargetBoard,
-      repositoryUrl,
-      tags,
-      dataEntries,
-      editUiItems: editUiItemsInput,
-    } = metadata;
-    const introduction = introductionLines.join("\n");
-    const editUiItems = editUiItemsInput.map((it) => ({
-      ...it,
-      instruction: it.instruction ?? it.instructionLines?.join("\n") ?? "",
-    }));
 
-    //TODO: 各フィールドの内容も含めてスキーマをチェックする
-    const dataValid = !!(
-      projectGuid &&
-      projectName &&
-      thumbnailUrl &&
-      targetMcu &&
-      tags &&
-      dataEntries &&
-      editUiItems
-    );
-    if (!dataValid) raiseError(`invalid metadata file content`);
+    const errorLines = validateSchemaMetadataFileContent(fileContentJson);
 
-    return {
-      projectGuid,
-      projectName,
-      thumbnailUrl,
-      introduction,
-      targetMcu,
-      primaryTargetBoard,
-      tags,
-      repositoryUrl,
-      dataEntries,
-      editUiItems,
+    const metadataInput = {
+      ...pickObjectMembers(fileContentJson, [
+        "projectGuid",
+        "projectName",
+        "thumbnailUrl",
+        "targetMcu",
+        "primaryTargetBoard",
+        "tags",
+        "repositoryUrl",
+        "dataEntries",
+        "editUiItems",
+      ]),
+      introduction: fileContentJson.introductionLines.join("\n"),
     };
+
+    return { metadataInput, errorLines };
   },
   validateOnlineThumbnailOnServer(imageAttrs: ImageAssetAttrs) {
     const { fileSize, width, height } = imageAttrs;

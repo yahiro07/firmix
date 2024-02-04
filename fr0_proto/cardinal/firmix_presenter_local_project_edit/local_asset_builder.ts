@@ -9,7 +9,6 @@ import {
   TextFileEntry,
 } from "~/base/types_local_project.ts";
 import { FirmwareContainer } from "~/base/types_project_edit.ts";
-import { firmixCore_firmwarePatching } from "~/cardinal/firmix_core_firmware_patching/mod.ts";
 import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
 import { imageFileLoader } from "~/cardinal/firmix_presenter_common_modules/image_file_loader.ts";
 
@@ -42,14 +41,10 @@ export const localAssetBuilder = {
         errorLines: ["ファイルがありません。"],
       };
     }
-    const metadataInput = firmixCore_projectLoader.loadProjectMetadataFile_json(
-      metadataFile.contentText
-    );
-
-    const validationResult =
-      firmixCore_firmwarePatching.validateMetadataInput(metadataInput);
-
-    const errorLines = validationResult ? [validationResult] : [];
+    const { metadataInput, errorLines } =
+      firmixCore_projectLoader.loadProjectMetadataFile_json(
+        metadataFile.contentText
+      );
     const validity = errorLines.length === 0 ? "valid" : "error";
     return {
       validity,

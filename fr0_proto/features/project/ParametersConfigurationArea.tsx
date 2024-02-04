@@ -95,7 +95,6 @@ export const ParametersConfigurationArea = createFC<Props>(
                   {local.configurationSourceItem_getCountsText(item)}
                 </FormLabel>
                 <FormTextInput type="text" id={`${inputIdPrefix}${item.key}`} />
-                <span if={false}>{item.instruction}</span>
               </div>
             ))}
           </div>

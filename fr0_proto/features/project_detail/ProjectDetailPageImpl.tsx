@@ -77,8 +77,10 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         repositoryUrl={project.repositoryUrl}
         projectTab={projectTab}
         setProjectTab={setProjectTab}
-        userName={project.userName}
-        userAvatarUrl={project.userAvatarUrl}
+        authorInfo={{
+          userName: project.userName,
+          userAvatarUrl: project.userAvatarUrl,
+        }}
         operationUiAdditional={
           <ProjectOperationPart
             projectId={project.projectId}
