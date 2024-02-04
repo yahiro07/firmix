@@ -6,14 +6,17 @@ export function useRepositoryDisplayInfo(
 ): ProjectRepositoryInfo | undefined {
   return useMemo(() => {
     if (repositoryUrl?.startsWith("https://github.com/")) {
-      const [, ownerName, repositoryName] = repositoryUrl
-        .replace("https://", "")
-        .split("/");
-      if (ownerName && repositoryName) {
+      const ownerName = repositoryUrl
+        .replace("https://github.com/", "")
+        .split("/")[0];
+      const repositoryProjectPath = repositoryUrl
+        .replace("https://github.com/", "")
+        .replace(/\/tree\/\w+/g, "");
+      if (ownerName && repositoryProjectPath) {
         const ownerIconUrl = `https://github.com/${ownerName}.png?size=48`;
         return {
           repositoryUrl,
-          repositoryName,
+          repositoryProjectPath,
           ownerName,
           ownerIconUrl,
         };

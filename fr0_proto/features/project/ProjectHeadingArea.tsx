@@ -48,9 +48,7 @@ export const ProjectHeadingArea = createFC<Props>(
               q="repository"
             >
               <IconIconify spec="mdi:github" q="github-icon" />
-              <span>
-                {repositoryInfo.ownerName}/{repositoryInfo.repositoryName}
-              </span>
+              <span>{repositoryInfo.repositoryProjectPath}</span>
             </a>
             <div q="author">
               <img src={repositoryInfo.ownerIconUrl} />

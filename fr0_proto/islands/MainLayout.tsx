@@ -41,6 +41,7 @@ const style = css`
     ${flexHorizontalAligned(2)};
     > .site-icon {
       font-size: 44px;
+      margin-top: 3px;
     }
     > h1 {
       ${flexHorizontalAligned(8)};
@@ -51,7 +52,7 @@ const style = css`
       > .beta {
         font-size: 28px;
         font-weight: normal;
-        margin-top: 6px;
+        margin-top: 5px;
       }
     }
   }
