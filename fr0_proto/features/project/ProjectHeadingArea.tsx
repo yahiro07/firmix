@@ -13,6 +13,8 @@ type Props = {
   projectTab: ProjectTab;
   setProjectTab(tab: ProjectTab): void;
   operationUiAdditional?: ComponentChildren;
+  userName: string;
+  userAvatarUrl: string;
 };
 
 export const LocalProjectHeadingAreaDummy = createFC(() => {
@@ -31,6 +33,8 @@ export const ProjectHeadingArea = createFC<Props>(
     projectTab,
     setProjectTab,
     operationUiAdditional,
+    userName,
+    userAvatarUrl,
   }) => {
     const repositoryInfo = useRepositoryDisplayInfo(repositoryUrl);
     const toggleProjectTab = () => {
@@ -41,6 +45,7 @@ export const ProjectHeadingArea = createFC<Props>(
       ProjectTitlePart,
       ProjectTagsList,
       RepositoryInfoPart,
+      AuthorPart,
       EditorButton,
     } = projectHeadingArea_parts;
     return (
@@ -49,8 +54,9 @@ export const ProjectHeadingArea = createFC<Props>(
         {repositoryInfo && (
           <RepositoryInfoPart repositoryInfo={repositoryInfo} />
         )}
+        <AuthorPart userName={userName} avatarUrl={userAvatarUrl} q="author" />
         {/* <div q="repository-info" if={!repositoryInfo} /> */}
-        <ProjectTagsList tags={tags} />
+        <ProjectTagsList tags={tags} q="tags" />
         <div q="control-area">
           <EditorButton
             active={projectTab === "editor"}
@@ -67,7 +73,7 @@ const style = css`
   padding: 8px;
   position: relative;
 
-  ${flexVertical(8)};
+  ${flexVertical(4)};
 
   > .control-area {
     position: absolute;
@@ -76,5 +82,9 @@ const style = css`
     padding: 8px;
     ${flexVertical(16)};
     align-items: flex-end;
+  }
+  > .author {
+    margin-left: 2px;
+    margin-bottom: 8px;
   }
 `;

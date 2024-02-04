@@ -1,3 +1,4 @@
+import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { storehouse } from "~/central/depot/storehouse.ts";
@@ -58,7 +59,7 @@ const local = {
       thumbnailUrl: project.thumbnailUrl,
       published: project.published,
       userName: project.user.userName,
-      userAvatarUrl: project.user.avatarUrl,
+      userAvatarUrl: specifyGithubAvatarUrlSize(project.user.avatarUrl, 48),
     };
   },
 };

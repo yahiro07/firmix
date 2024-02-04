@@ -39,6 +39,8 @@ export type ProjectDetailDto = {
   firmwareRevision: number;
   firmwareUpdateAt: number;
   updateAt: number;
+  userName: string;
+  userAvatarUrl: string;
 };
 
 export type ProjectListItemDto = {

@@ -4,6 +4,7 @@ import { decodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
 import { generateHashMd5 } from "~/aux/utils_be/hash_helper.ts";
 import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
 import { serverImageHelper } from "~/aux/utils_be/server_image_helper.ts";
+import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
 import { FirmwareFormat } from "~/base/types_app_common.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { ProjectDetailDto } from "~/base/types_dto.ts";
@@ -191,7 +192,8 @@ export function createProjectService() {
     },
     async getProjectDetail(projectId: string): Promise<ProjectDetailDto> {
       const project = await storehouse.projectCabinet.get(projectId);
-      return local.mapProjectEntityToDetailDto(project);
+      const user = await storehouse.userCabinet.get(project.userId);
+      return local.mapProjectEntityToDetailDto(project, user);
     },
     async deleteProject(projectId: string, operatorUserId: string) {
       const project = await storehouse.projectCabinet.get(projectId);
@@ -249,7 +251,10 @@ const local = {
       updateAt: Date.now(),
     };
   },
-  mapProjectEntityToDetailDto(project: ProjectEntity): ProjectDetailDto {
+  mapProjectEntityToDetailDto(
+    project: ProjectEntity,
+    user: UserEntity
+  ): ProjectDetailDto {
     return {
       projectId: project.projectId,
       projectGuid: project.projectGuid,
@@ -270,6 +275,8 @@ const local = {
       automated: project.automated,
       firmwareRevision: project.firmwareRevision,
       updateAt: project.updateAt,
+      userName: user.userName,
+      userAvatarUrl: specifyGithubAvatarUrlSize(user.avatarUrl, 48),
     };
   },
 };

@@ -60,34 +60,41 @@ const RepositoryInfoPart = createFCX<{ repositoryInfo: ProjectRepositoryInfo }>(
           <IconIconify spec="mdi:github" q="github-icon" />
           <span>{repositoryInfo.repositoryProjectPath}</span>
         </a>
-        <div q="author">
-          <img src={repositoryInfo.ownerIconUrl} />
-          <div>{repositoryInfo.ownerName}</div>
-        </div>
       </div>
     );
   },
   css`
-    font-size: 16px;
+    font-size: 18px;
     ${flexVertical(2)};
     align-items: flex-start;
     > .repository {
       > .github-icon {
-        font-size: 22px;
+        font-size: 30px;
+        margin-top: 4px;
       }
       ${flexHorizontalAligned(1)};
-    }
-    > .author {
-      margin-left: 2px;
-
-      > img {
-        width: 18px;
-      }
-      ${flexHorizontalAligned(4)};
     }
     > a {
       ${styleTextLinkInheritColor};
     }
+  `
+);
+
+const AuthorPart = createFCX<{ userName: string; avatarUrl: string }>(
+  ({ userName, avatarUrl }) => {
+    return (
+      <div>
+        <img src={avatarUrl} />
+        <div>{userName}</div>
+      </div>
+    );
+  },
+  css`
+    font-size: 18px;
+    > img {
+      width: 26px;
+    }
+    ${flexHorizontalAligned(4)};
   `
 );
 
@@ -112,5 +119,6 @@ export const projectHeadingArea_parts = {
   ProjectTitlePart,
   ProjectTagsList,
   RepositoryInfoPart,
+  AuthorPart,
   EditorButton,
 };
