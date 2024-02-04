@@ -3,7 +3,9 @@ import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { appConfig } from "~/base/app_config.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 import { colors } from "~/common/ui_theme.ts";
+import { flexVertical } from "~/common/utility_styles.ts";
 import { Nav, NavItem } from "~/components/CommonControls.tsx";
+import { LoginUserBox } from "~/features/layout/LoginUserBox.tsx";
 
 export const SideBar = createFC(() => {
   const { loginUser } = useSiteContext();
@@ -47,10 +49,7 @@ export const SideBar = createFC(() => {
           if={loggedIn}
         />
       </Nav>
-      <div>
-        <div if={loggedIn}>logged in as {loginUser?.userName}</div>
-        <div if={!loggedIn}>not logged in</div>
-      </div>
+      <LoginUserBox user={loginUser!} if={loginUser} q="login-user-box" />
     </div>
   );
 });
@@ -60,4 +59,9 @@ const style = css`
   background: ${colors.sideBarFill};
   border-right: solid 1px ${colors.sideBarEdge};
   padding: 20px 8px;
+  ${flexVertical(8)};
+
+  > .login-user-box {
+    padding: 8px;
+  }
 `;
