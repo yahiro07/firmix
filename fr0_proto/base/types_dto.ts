@@ -51,4 +51,6 @@ export type ProjectListItemDto = {
   repositoryUrl: string;
   thumbnailUrl: string;
   published: boolean;
+  userName: string;
+  userAvatarUrl: string;
 };

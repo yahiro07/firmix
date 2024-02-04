@@ -46,7 +46,7 @@ const ProjectTagsList = createFCX<{ tags: string[] }>(
       font-size: 14px;
       padding: 0 8px 1px;
       border-radius: 20px;
-      background: #aaa;
+      background: #bbb;
       color: #fff;
     }
   `

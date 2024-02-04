@@ -25,5 +25,6 @@ export const ProjectListPage = createFC<Props>(
 );
 
 const style = css`
+  padding: 16px 0;
   ${flexVertical(16)};
 `;
