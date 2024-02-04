@@ -330,6 +330,11 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
 const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
+  .markdown-body {
+    ul, li{
+      list-style: disc;
+    }
+  }
 `;
     return (
       <>

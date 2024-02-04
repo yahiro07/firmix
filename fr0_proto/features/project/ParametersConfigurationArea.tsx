@@ -129,18 +129,19 @@ const style = css`
 
 const local = {
   configurationSourceItem_getCountsText(item: ConfigurationSourceItem): string {
-    const { dataKind } = item;
+    const { dataKind, required } = item;
+    const reqMark = required ? "*" : "";
     if (dataKind === "pins") {
-      return `(gpio x${item.pinsCount})`;
+      return `(gpio x${item.pinsCount})` + reqMark;
     } else if (dataKind === "vl_pins") {
-      return `(gpio max${item.pinsCapacity})`;
+      return `(gpio max${item.pinsCapacity})` + reqMark;
     } else if (dataKind === "text") {
-      return `(${item.textLength}文字)`;
+      return `(${item.textLength}文字)` + reqMark;
     } else if (dataKind === "vl_text") {
-      return `(最大 ${item.textCapacity}文字)`;
+      return `(最大 ${item.textCapacity}文字)` + reqMark;
     } else if (dataKind === "i8" || dataKind === "u8") {
-      if (item.dataCount === 1) return "";
-      return `(x${item.dataCount})`;
+      if (item.dataCount === 1) return "" + reqMark;
+      return `(x${item.dataCount})` + reqMark;
     } else {
       raiseError(`invalid dataKind ${dataKind}`);
     }
