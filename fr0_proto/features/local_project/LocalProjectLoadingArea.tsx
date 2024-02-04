@@ -2,6 +2,7 @@ import { useEffect } from "preact/hooks";
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
+import { ButtonSmall } from "~/components/CommonControls.tsx";
 import { IconIconify } from "~/components/IconIconify.tsx";
 
 type Props = {
@@ -37,27 +38,27 @@ export const LocalProjectLoadingArea = createFC<Props>(
 
     return (
       <div q={style}>
-        <button onClick={handleSelectFolder} if={!loaded}>
+        <ButtonSmall onClick={handleSelectFolder} if={!loaded}>
           フォルダ選択
-        </button>
+        </ButtonSmall>
         <div if={loaded} q="folder">
           <IconIconify spec="mdi:folder" />
           <span>{loadedFolderName}</span>
         </div>
         <div q="spacer" />
-        <button
+        <ButtonSmall
           onClick={submitProject}
           if={loaded && loggedIn}
           disabled={!canSubmitProject}
         >
           投稿
-        </button>
-        <button onClick={reloadFolder} if={loaded}>
+        </ButtonSmall>
+        <ButtonSmall onClick={reloadFolder} if={loaded}>
           再読み込み
-        </button>
-        <button onClick={closeFolder} if={loaded}>
+        </ButtonSmall>
+        <ButtonSmall onClick={closeFolder} if={loaded}>
           閉じる
-        </button>
+        </ButtonSmall>
       </div>
     );
   }
@@ -66,9 +67,6 @@ export const LocalProjectLoadingArea = createFC<Props>(
 const style = css`
   padding: 8px;
   ${flexHorizontalAligned(8)};
-  > button {
-    padding: 1px 6px;
-  }
   > .folder {
     font-size: 18px;
     ${flexHorizontalAligned(4)};

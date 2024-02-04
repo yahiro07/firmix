@@ -8,6 +8,7 @@ import {
   flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
+import { ButtonSmall } from "~/components/CommonControls.tsx";
 import { IconIconify } from "~/components/IconIconify.tsx";
 
 type Props = {
@@ -36,13 +37,13 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
       <h3>APIアクセスキー</h3>
       <div q="edit-row">
         <input value={apiKey} readOnly type={exhibit ? "text" : "password"} />
-        <button q="btn-eye" disabled={!apiKey} onClick={toggleExhibit}>
+        <ButtonSmall q="btn-eye" disabled={!apiKey} onClick={toggleExhibit}>
           <IconIconify spec="fa-solid:eye" if={exhibit} />
           <IconIconify spec="fa-solid:eye-slash" if={!exhibit} />
-        </button>
-        <button q="btn-op" onClick={handleOperationButton}>
+        </ButtonSmall>
+        <ButtonSmall q="btn-op" onClick={handleOperationButton}>
           {!apiKey ? "生成" : "破棄"}
-        </button>
+        </ButtonSmall>
       </div>
       <div>
         CIタスクからAPI経由でプロジェクトを投稿する際に使用します。
@@ -71,6 +72,7 @@ const style = css`
       ${flexCentered()};
     }
     > .btn-eye {
+      margin-left: 1px;
       width: 32px;
     }
     > .btn-op {

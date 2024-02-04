@@ -24,6 +24,7 @@ type XDom<K extends keyof JSXIntrinsicElements> = FC<JSXIntrinsicElements[K]>;
 type IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter: FC;
   Button: XDom<"button">;
+  ButtonSmall: XDom<"button">;
   Card: XDom<"div">;
   FormLabel: XDom<"label">;
   FormTextInput: XDom<"input">;
@@ -48,6 +49,7 @@ const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
     );
   },
   Button: bindTagWithClassNames("button", "uk-button uk-button-default"),
+  ButtonSmall: bindTagWithClassNames("button", ""),
   Card: bindTagWithClassNames("div", "uk-card uk-card-default"),
   FormLabel: bindTagWithClassNames("label"),
   FormTextInput: bindTagWithClassNames("input", "uk-input"),
@@ -103,6 +105,7 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
     );
   },
   Button: bindTagWithClassNames("button", "btn btn-primary"),
+  ButtonSmall: bindTagWithClassNames("button", ""),
   Card: bindTagWithClassNames("div", "card"),
   FormLabel: bindTagWithClassNames("label", "form-label"),
   FormTextInput: bindTagWithClassNames("input", "form-control"),
@@ -141,6 +144,7 @@ const componentFlavorWrapper_Materialize: IComponentFlavorWrapper = {
     );
   },
   Button: bindTagWithClassNames("button", "btn"),
+  ButtonSmall: bindTagWithClassNames("button", ""),
   Card: bindTagWithClassNames("div", "card"),
   FormLabel: bindTagWithClassNames("label"),
   FormTextInput: bindTagWithClassNames("input", "input"),
@@ -176,6 +180,7 @@ const componentFlavorWrapper_Bulma: IComponentFlavorWrapper = {
     );
   },
   Button: bindTagWithClassNames("button", "button is-primary"),
+  ButtonSmall: bindTagWithClassNames("button", ""),
   Card: bindTagWithClassNames("div", "card"),
   FormLabel: bindTagWithClassNames("label"),
   FormTextInput: bindTagWithClassNames("input", "input"),
@@ -209,6 +214,7 @@ const componentFlavorWrapper_Foundation: IComponentFlavorWrapper = {
     );
   },
   Button: bindTagWithClassNames("button", "button primary"),
+  ButtonSmall: bindTagWithClassNames("button", ""),
   Card: bindTagWithClassNames("div", "card"),
   FormLabel: bindTagWithClassNames("label"),
   FormTextInput: bindTagWithClassNames(
@@ -255,6 +261,7 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
     );
   },
   Button: bindTagWithClassNames("button", "btn btn-primary"),
+  ButtonSmall: bindTagWithClassNames("button", ""),
   Card: bindTagWithClassNames("div", "card"),
   FormLabel: bindTagWithClassNames("label", "form-label"),
   FormTextInput: bindTagWithClassNames("input", "form-input"),
@@ -294,6 +301,7 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
     );
   },
   Button: bindTagWithClassNames("button", "ui button"),
+  ButtonSmall: bindTagWithClassNames("button", ""),
   Card: bindTagWithClassNames(
     "div",
     "ui segment",
@@ -338,7 +346,29 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
   },
   Button: bindTagWithClassNames(
     "button",
-    "bg-indigo-500 p-2 text-white focus:outline-none text-white hover:bg-indigo-400 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mb-2"
+    "bg-indigo-500 p-2 text-white focus:outline-none text-white focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mb-2",
+    css`
+      &:hover {
+        opacity: 0.8;
+      }
+      &:disabled {
+        opacity: 0.3;
+      }
+    `
+  ),
+  ButtonSmall: bindTagWithClassNames(
+    "button",
+    css`
+      padding: 4px 8px;
+      background: #ccc;
+      font-size: 14px;
+      &:hover {
+        opacity: 0.8;
+      }
+      &:disabled {
+        opacity: 0.3;
+      }
+    `
   ),
   Card: bindTagWithClassNames("div", "bg-white shadow"),
   FormLabel: bindTagWithClassNames("label", ""),
@@ -355,8 +385,16 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
         <a
           href={path}
           q={[
-            "flex items-center p-2 text-gray-900  hover:bg-gray-300 group",
-            active && "bg-indigo-400",
+            "flex items-center p-2 text-gray-900 group",
+            active && "--active",
+            css`
+              &.--active {
+                font-weight: 500;
+              }
+              &:hover {
+                opacity: 0.7;
+              }
+            `,
           ]}
         >
           <span>{title}</span>
@@ -377,6 +415,7 @@ const componentFlavor = componentFlavorWrapper_Tailwind_Flowbite;
 export const {
   CssFrameworkAssetsImporter,
   Button,
+  ButtonSmall,
   Card,
   FormLabel,
   FormTextInput,
