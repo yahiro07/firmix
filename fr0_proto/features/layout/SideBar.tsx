@@ -11,17 +11,41 @@ export const SideBar = createFC(() => {
   return (
     <div q={style}>
       <Nav>
-        <NavItem path="/" title="プロジェクト一覧" />
-        <NavItem path="/user-projects/__user_id__" title="自分のプロジェクト" />
-        <NavItem path="/local-work" title="ローカル開発" />
-        <NavItem path="/settings" title="設定" if={loggedIn} />
+        <NavItem path="/" iconSpec="lucide:package" title="プロジェクト一覧" />
+        <NavItem
+          path="/user-projects/__user_id__"
+          iconSpec="ph:toolbox"
+          title="自分のプロジェクト"
+        />
+        <NavItem
+          path="/local-work"
+          iconSpec="grommet-icons:personal-computer"
+          title="ローカル開発"
+        />
+        <NavItem
+          path="/settings"
+          iconSpec="material-symbols:settings"
+          title="設定"
+          if={loggedIn}
+        />
         <NavItem
           path="/development"
+          iconSpec="carbon:debug"
           title="development"
           if={appConfig.isDevelopment}
         />
-        <NavItem path="/auth/github" title="ログイン(github)" if={!loggedIn} />
-        <NavItem path="/auth/logout" title="ログアウト" if={loggedIn} />
+        <NavItem
+          path="/auth/github"
+          iconSpec="material-symbols:login"
+          title="ログイン(github)"
+          if={!loggedIn}
+        />
+        <NavItem
+          path="/auth/logout"
+          iconSpec="material-symbols:logout"
+          title="ログアウト"
+          if={loggedIn}
+        />
       </Nav>
       <div>
         <div if={loggedIn}>logged in as {loginUser?.userName}</div>
@@ -35,5 +59,5 @@ const style = css`
   width: 240px;
   background: ${colors.sideBarFill};
   border-right: solid 1px ${colors.sideBarEdge};
-  padding: 20px 12px;
+  padding: 20px 8px;
 `;

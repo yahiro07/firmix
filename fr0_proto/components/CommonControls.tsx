@@ -3,6 +3,8 @@ import { css, domStyled } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { JSX, jsx } from "~/aux/xjsx/jsx-runtime.ts";
 import { useSiteContext } from "~/common/site_context.ts";
+import { flexHorizontal } from "~/common/utility_styles.ts";
+import { IconIconify } from "~/components/IconIconify.tsx";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
 
@@ -29,7 +31,7 @@ type IComponentFlavorWrapper = {
   FormLabel: XDom<"label">;
   FormTextInput: XDom<"input">;
   Nav: XDom<"ul">;
-  NavItem: FC<{ path: string; title: string }>;
+  NavItem: FC<{ path: string; title: string; iconSpec: string }>;
 };
 
 const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
@@ -382,7 +384,7 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
     "bg-gray-50 border border-gray-300 text-gray-900 focus:border-indigo-300 focus:ring-indigo-300 p-2.5"
   ),
   Nav: bindTagWithClassNames("ul", "nav"),
-  NavItem: ({ path, title }) => {
+  NavItem: ({ path, title, iconSpec }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
     return (
@@ -393,6 +395,11 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
             "flex items-center p-2 text-gray-900 group",
             active && "--active",
             css`
+              font-size: 18px;
+              ${flexHorizontal(8)};
+              > .icon {
+                font-size: 22px;
+              }
               &.--active {
                 font-weight: 500;
               }
@@ -402,6 +409,7 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
             `,
           ]}
         >
+          <IconIconify spec={iconSpec} q="icon" />
           <span>{title}</span>
         </a>
       </li>
