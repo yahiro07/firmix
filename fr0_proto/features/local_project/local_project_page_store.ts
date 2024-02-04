@@ -143,7 +143,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
             project
           );
         await rpcClient.upsertProjectFromLocal({ projectPayload });
-        location.href = "/";
+        location.href = "/self-projects";
       }
     },
   };

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "preact";
-import { css, domStyled } from "resin";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { css } from "resin";
+import { reflectInputChecked } from "~/aux/utils_fe/form_helper.ts";
 import { JSX, jsx } from "~/aux/xjsx/jsx-runtime.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 import { flexHorizontal } from "~/common/utility_styles.ts";
@@ -32,8 +32,10 @@ type IComponentFlavorWrapper = {
   FormTextInput: XDom<"input">;
   Nav: XDom<"ul">;
   NavItem: FC<{ path: string; title: string; iconSpec: string }>;
+  ToggleButtonLarge: FC<{ checked: boolean; setChecked(): void; text: string }>;
 };
 
+/*
 const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -328,6 +330,7 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
     );
   },
 };
+*/
 
 const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
@@ -415,6 +418,23 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
       </li>
     );
   },
+  ToggleButtonLarge: ({ checked, setChecked, text }) => {
+    return (
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input
+          type="checkbox"
+          value=""
+          class="sr-only peer"
+          checked={checked}
+          onChange={reflectInputChecked(setChecked)}
+        />
+        <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+          {text}
+        </span>
+      </label>
+    );
+  },
 };
 
 // const componentFlavor = componentFlavorWrapper_UiKit;
@@ -434,4 +454,5 @@ export const {
   FormTextInput,
   Nav,
   NavItem,
+  ToggleButtonLarge,
 } = componentFlavor;

@@ -6,32 +6,35 @@ import { Button, Card } from "~/components/CommonControls.tsx";
 
 type Props = {
   project: ProjectListItemDto;
+  showPublicity: boolean;
 };
 
-export const ProjectListItemCard = createFC<Props>(({ project }: Props) => {
-  const navigateToDetail = () => {
-    location.href = `/project/${project.projectId}`;
-  };
-  return (
-    <Card q={style}>
-      <div q="head-row">
-        <h3>{project.projectName}</h3>
-        <Button onClick={navigateToDetail}>詳細</Button>
-      </div>
-      <div q="content-row">
-        <div q="thumbnail-box">
-          <img src={project.thumbnailUrl} />
+export const ProjectListItemCard = createFC<Props>(
+  ({ project, showPublicity }) => {
+    const navigateToDetail = () => {
+      location.href = `/project/${project.projectId}`;
+    };
+    return (
+      <Card q={style}>
+        <div q="head-row">
+          <h3>{project.projectName}</h3>
+          <Button onClick={navigateToDetail}>詳細</Button>
         </div>
-        <div q="introduction">
-          <p>{project.introduction}</p>
-          <p if={false}>
-            公開状態: {project.published ? "公開中" : "ドラフト"}
-          </p>
+        <div q="content-row">
+          <div q="thumbnail-box">
+            <img src={project.thumbnailUrl} />
+          </div>
+          <div q="introduction">
+            <p>{project.introduction}</p>
+            <p if={showPublicity}>
+              公開状態: {project.published ? "公開中" : "ドラフト"}
+            </p>
+          </div>
         </div>
-      </div>
-    </Card>
-  );
-});
+      </Card>
+    );
+  }
+);
 
 const style = css`
   min-height: 100px;

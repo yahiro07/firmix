@@ -10,5 +10,5 @@ export default defineRoute(async (req) => {
   const projects = await serverShell.projectListService.getProjectList_self(
     loginUser.userId
   );
-  return <ProjectListPage projects={projects} />;
+  return <ProjectListPage projects={projects} showPublicity={true} />;
 });

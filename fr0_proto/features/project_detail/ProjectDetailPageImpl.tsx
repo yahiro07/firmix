@@ -11,16 +11,20 @@ import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
 import { firmixPresenter_firmwarePatching } from "~/cardinal/firmix_presenter_firmware_patching/mod.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
+import { useSiteContext } from "~/common/site_context.ts";
 import { colors } from "~/common/ui_theme.ts";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
 import { ProjectHeadingArea } from "~/features/project/ProjectHeadingArea.tsx";
 import { ProjectReadmeArea } from "~/features/project/ProjectReadmeArea.tsx";
+import { ProjectOperationPart } from "~/features/project_detail/ProjectOperationPart.tsx";
 
 type Props = {
   project: ProjectDetailDto;
 };
 
 export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
+  const { loginUser } = useSiteContext();
+  const isSelfProject = project.userId === loginUser?.userId;
   const [{ projectTab }, { setProjectTab }] = useReasyState({
     projectTab: "info" as ProjectTab,
   });
@@ -73,6 +77,14 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         repositoryUrl={project.repositoryUrl}
         projectTab={projectTab}
         setProjectTab={setProjectTab}
+        operationUiAdditional={
+          <ProjectOperationPart
+            projectId={project.projectId}
+            published={project.published}
+            automated={project.automated}
+            if={isSelfProject}
+          />
+        }
       />
       <div q="info-area" if={projectTab === "info"}>
         <div>ターゲットMCU: {project.targetMcu}</div>

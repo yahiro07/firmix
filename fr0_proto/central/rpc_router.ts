@@ -32,4 +32,19 @@ export const appRpcRouter: ServerRpcRouterWithContext<
       enabled
     );
   },
+  async setProjectPublicity({ projectId, published }, { loginUserId }) {
+    if (!loginUserId) raiseError(`login required`);
+    return await serverShell.projectService.setProjectPublicity(
+      projectId,
+      published,
+      loginUserId
+    );
+  },
+  async deleteProject({ projectId }, { loginUserId }) {
+    if (!loginUserId) raiseError(`login required`);
+    return await serverShell.projectService.deleteProject(
+      projectId,
+      loginUserId
+    );
+  },
 };

@@ -18,6 +18,7 @@ export const SideBar = createFC(() => {
           path="/self-projects"
           iconSpec="ph:toolbox"
           title="自分のプロジェクト"
+          if={loggedIn}
         />
         <NavItem
           path="/local-work"

@@ -6,17 +6,23 @@ import { ProjectListItemCard } from "~/features/project_list/ProjectListItemCard
 
 type Props = {
   projects: ProjectListItemDto[];
+  showPublicity: boolean;
 };
 
-export const ProjectListPage = createFC<Props>(({ projects }: Props) => {
-  return (
-    <div q={style}>
-      {projects.map((project) => (
-        <ProjectListItemCard project={project} />
-      ))}
-    </div>
-  );
-});
+export const ProjectListPage = createFC<Props>(
+  ({ projects, showPublicity }) => {
+    return (
+      <div q={style}>
+        {projects.map((project) => (
+          <ProjectListItemCard
+            project={project}
+            showPublicity={showPublicity}
+          />
+        ))}
+      </div>
+    );
+  }
+);
 
 const style = css`
   ${flexVertical(16)};

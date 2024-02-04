@@ -18,4 +18,6 @@ export type AppRpcSignatures = {
     { fileName: string; fileContentBytes_base64: string }
   >;
   setApiKeyAvailability: AsyncFn<{ enabled: boolean }, void>;
+  setProjectPublicity: AsyncFn<{ projectId: string; published: boolean }, void>;
+  deleteProject: AsyncFn<{ projectId: string }, void>;
 };

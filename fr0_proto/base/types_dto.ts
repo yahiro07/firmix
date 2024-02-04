@@ -22,6 +22,7 @@ export type ConfigurationSourceItemWrapper =
 export type ProjectDetailDto = {
   projectId: string;
   projectGuid: string;
+  userId: string;
   projectName: string;
   introduction: string;
   targetMcu: string;

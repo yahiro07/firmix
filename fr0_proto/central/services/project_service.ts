@@ -152,6 +152,18 @@ export function createProjectService() {
         user
       );
     },
+    async setProjectPublicity(
+      projectId: string,
+      published: boolean,
+      operatorUserId: string
+    ) {
+      await storehouse.userCabinet.get(operatorUserId);
+      const project = await storehouse.projectCabinet.get(projectId);
+      if (project.userId !== operatorUserId) raiseError(`invalid operation`);
+      if (project.published === published)
+        raiseError(`no state change occurred`);
+      await storehouse.projectCabinet.patch(projectId, { published });
+    },
     async upsertProjectFromLocal(
       projectPayload: LocalProjectSubmissionPayload,
       userId: string
@@ -181,14 +193,16 @@ export function createProjectService() {
       const project = await storehouse.projectCabinet.get(projectId);
       return local.mapProjectEntityToDetailDto(project);
     },
-    async deleteProject(projectId: string) {
-      await storehouse.projectCabinet.delete(projectId);
+    async deleteProject(projectId: string, operatorUserId: string) {
+      const project = await storehouse.projectCabinet.get(projectId);
+      if (project.userId !== operatorUserId) raiseError(`invalid operation`);
       const paths = await objectStorageBridge.listItemPathsWithPrefix(
         `${projectId}/`
       );
       for (const path of paths) {
         await objectStorageBridge.deleteItem(path);
       }
+      await storehouse.projectCabinet.delete(projectId);
     },
   };
 }
@@ -239,6 +253,7 @@ const local = {
     return {
       projectId: project.projectId,
       projectGuid: project.projectGuid,
+      userId: project.userId,
       projectName: project.projectName,
       introduction: project.introduction,
       targetMcu: project.targetMcu,

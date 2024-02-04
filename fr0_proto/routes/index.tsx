@@ -4,5 +4,5 @@ import { ProjectListPage } from "~/islands/ProjectListPage.tsx";
 
 export default defineRoute(async () => {
   const projects = await serverShell.projectListService.getProjectList_recent();
-  return <ProjectListPage projects={projects} />;
+  return <ProjectListPage projects={projects} showPublicity={false} />;
 });
