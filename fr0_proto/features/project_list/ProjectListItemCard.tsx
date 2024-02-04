@@ -24,6 +24,9 @@ export const ProjectListItemCard = createFC<Props>(({ project }: Props) => {
         </div>
         <div q="introduction">
           <p>{project.introduction}</p>
+          <p if={false}>
+            公開状態: {project.published ? "公開中" : "ドラフト"}
+          </p>
         </div>
       </div>
     </Card>

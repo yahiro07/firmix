@@ -15,7 +15,7 @@ export const SideBar = createFC(() => {
       <Nav>
         <NavItem path="/" iconSpec="lucide:package" title="プロジェクト一覧" />
         <NavItem
-          path="/user-projects/__user_id__"
+          path="/self-projects"
           iconSpec="ph:toolbox"
           title="自分のプロジェクト"
         />

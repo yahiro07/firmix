@@ -17,6 +17,7 @@ import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $local_work from "./routes/local-work.tsx";
 import * as $project_projectId_ from "./routes/project/[projectId].tsx";
+import * as $self_projects from "./routes/self-projects.tsx";
 import * as $settings from "./routes/settings.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $DevelopmentPage from "./islands/DevelopmentPage.tsx";
@@ -45,6 +46,7 @@ const manifest = {
     "./routes/index.tsx": $index,
     "./routes/local-work.tsx": $local_work,
     "./routes/project/[projectId].tsx": $project_projectId_,
+    "./routes/self-projects.tsx": $self_projects,
     "./routes/settings.tsx": $settings,
   },
   islands: {

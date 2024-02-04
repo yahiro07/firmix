@@ -6,7 +6,16 @@ export function createProjectListService() {
   return {
     async getProjectList_recent(): Promise<ProjectListItemDto[]> {
       const projects = await storehouse.projectCollection
-        .aggregate([{ $sort: { projectId: -1 } }])
+        .aggregate([
+          { $match: { published: true } },
+          { $sort: { projectId: -1 } },
+        ])
+        .toArray();
+      return projects.map(local.mapProjectEntityToListItemDto);
+    },
+    async getProjectList_self(userId: string): Promise<ProjectListItemDto[]> {
+      const projects = await storehouse.projectCollection
+        .aggregate([{ $match: { userId } }, { $sort: { projectId: -1 } }])
         .toArray();
       return projects.map(local.mapProjectEntityToListItemDto);
     },
@@ -24,6 +33,7 @@ const local = {
       tags: project.tags,
       repositoryUrl: project.repositoryUrl,
       thumbnailUrl: project.thumbnailUrl,
+      published: project.published,
     };
   },
 };

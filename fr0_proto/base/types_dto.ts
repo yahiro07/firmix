@@ -49,4 +49,5 @@ export type ProjectListItemDto = {
   tags: string[];
   repositoryUrl: string;
   thumbnailUrl: string;
+  published: boolean;
 };
