@@ -10,7 +10,9 @@ export const MainLayout = createFC(({ children }) => {
     <div q={[style, "main-layout-root"]}>
       <div q="header-bar">
         <IconIconify spec="mdi:chip" q="site-icon" />
-        <h1>Firmix</h1>
+        <h1>
+          Firmix <span q="beta">(beta)</span>
+        </h1>
       </div>
       <div q="main-row">
         <SideBar q="side-bar" />
@@ -41,9 +43,16 @@ const style = css`
       font-size: 44px;
     }
     > h1 {
+      ${flexHorizontalAligned(8)};
       font-size: 36px;
       font-weight: bold;
       color: ${colors.topBarText};
+
+      > .beta {
+        font-size: 28px;
+        font-weight: normal;
+        margin-top: 6px;
+      }
     }
   }
   > .main-row {
