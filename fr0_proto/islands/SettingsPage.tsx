@@ -2,11 +2,13 @@ import { useState } from "preact/hooks";
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
+import { colors } from "~/common/ui_theme.ts";
 import {
   flexCentered,
   flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
+import { ButtonSmall } from "~/components/CommonControls.tsx";
 import { IconIconify } from "~/components/IconIconify.tsx";
 
 type Props = {
@@ -35,13 +37,13 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
       <h3>APIアクセスキー</h3>
       <div q="edit-row">
         <input value={apiKey} readOnly type={exhibit ? "text" : "password"} />
-        <button q="btn-eye" disabled={!apiKey} onClick={toggleExhibit}>
+        <ButtonSmall q="btn-eye" disabled={!apiKey} onClick={toggleExhibit}>
           <IconIconify spec="fa-solid:eye" if={exhibit} />
           <IconIconify spec="fa-solid:eye-slash" if={!exhibit} />
-        </button>
-        <button q="btn-op" onClick={handleOperationButton}>
+        </ButtonSmall>
+        <ButtonSmall q="btn-op" onClick={handleOperationButton}>
           {!apiKey ? "生成" : "破棄"}
-        </button>
+        </ButtonSmall>
       </div>
       <div>
         CIタスクからAPI経由でプロジェクトを投稿する際に使用します。
@@ -55,8 +57,10 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
 });
 
 const style = css`
-  padding: 10px;
+  padding: 20px;
   ${flexVertical(12)};
+  background: ${colors.contentBackground};
+  height: 100%;
 
   > .edit-row {
     ${flexHorizontalAligned()};
@@ -68,6 +72,7 @@ const style = css`
       ${flexCentered()};
     }
     > .btn-eye {
+      margin-left: 1px;
       width: 32px;
     }
     > .btn-op {

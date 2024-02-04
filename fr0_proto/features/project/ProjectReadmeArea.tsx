@@ -8,10 +8,10 @@ type Props = {
 };
 
 export const ProjectReadmeArea = createFC<Props>(({ readmeFileContent }) => {
-  const body = useMemo(
-    () => render(readmeFileContent, {}),
-    [readmeFileContent]
-  );
+  const body = useMemo(() => {
+    const modContent = readmeFileContent.replace(/^# .*\n$/m, "");
+    return render(modContent, {});
+  }, [readmeFileContent]);
   return (
     <div q={style}>
       <div q="base-plane">
@@ -24,7 +24,6 @@ export const ProjectReadmeArea = createFC<Props>(({ readmeFileContent }) => {
 
 const style = css`
   > .base-plane {
-    background: #fff;
-    padding: 20px;
+    padding: 10px;
   }
 `;

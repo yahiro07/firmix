@@ -7,14 +7,13 @@ export const globalStyle = css`
     padding: 0;
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  div.markdown-body,
   body,
   button,
   input,
@@ -22,14 +21,22 @@ export const globalStyle = css`
   select,
   option {
     /* font-family: "M PLUS 1p", sans-serif; */
-    font-family: "M PLUS 2", sans-serif;
+    font-family: "M PLUS 2", sans-serif !important;
     /* font-family: "Murecho", sans-serif; */
     /* font-family: "Sawarabi Gothic", sans-serif; */
-    line-height: 1.5;
   }
 
-  button:disabled {
-    opacity: 0.5;
-    pointer-events: none;
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5,
+  body h6 {
+    font-weight: 500 !important;
+    margin: 0;
+  }
+
+  body {
+    line-height: 1.5;
   }
 `;

@@ -1,10 +1,13 @@
 import { css } from "resin";
 import { createFC } from "~/aux/utils_fe/create_fc.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
+import { styleTextLinkInheritColor } from "~/common/common_styles.ts";
+import { colors } from "~/common/ui_theme.ts";
 import {
   flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
+import { Button } from "~/components/CommonControls.tsx";
 import { IconIconify } from "~/components/IconIconify.tsx";
 import { useRepositoryDisplayInfo } from "~/fe_modules/repository_info_helper.ts";
 
@@ -34,7 +37,7 @@ export const ProjectHeadingArea = createFC<Props>(
     return (
       <div q={style}>
         <h2>
-          <IconIconify spec="icon-park-twotone:chip" q="icon" />
+          <IconIconify spec="icon-park-twotone:chip" q="title-icon" />
           <span>{projectName}</span>
         </h2>
         {repositoryInfo && (
@@ -44,10 +47,8 @@ export const ProjectHeadingArea = createFC<Props>(
               target="_blank"
               q="repository"
             >
-              <IconIconify spec="mdi:github" q="icon" />
-              <span>
-                {repositoryInfo.ownerName}/{repositoryInfo.repositoryName}
-              </span>
+              <IconIconify spec="mdi:github" q="github-icon" />
+              <span>{repositoryInfo.repositoryProjectPath}</span>
             </a>
             <div q="author">
               <img src={repositoryInfo.ownerIconUrl} />
@@ -64,13 +65,13 @@ export const ProjectHeadingArea = createFC<Props>(
           ))}
         </div>
         <div q="control-area">
-          <button
+          <Button
             q={["btn-edit", projectTab === "editor" && "--active"]}
             onClick={toggleProjectTab}
           >
             <IconIconify spec="mdi:edit" />
             <span>エディタ</span>
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -85,8 +86,9 @@ const style = css`
 
   > h2 {
     ${flexHorizontalAligned(2)};
-    > .icon {
-      font-size: 28px;
+    font-size: 32px;
+    > .title-icon {
+      font-size: 36px;
     }
   }
 
@@ -95,7 +97,7 @@ const style = css`
     ${flexVertical(2)};
     align-items: flex-start;
     > .repository {
-      > .icon {
+      > .github-icon {
         font-size: 22px;
       }
       ${flexHorizontalAligned(1)};
@@ -107,6 +109,9 @@ const style = css`
         width: 18px;
       }
       ${flexHorizontalAligned(4)};
+    }
+    > a {
+      ${styleTextLinkInheritColor};
     }
   }
 
@@ -128,13 +133,8 @@ const style = css`
     padding: 8px;
     > .btn-edit {
       ${flexHorizontalAligned()};
-      padding: 6px 11px;
-      font-size: 15px;
-      overflow: hidden;
-      border: solid 1px #888;
-      border-radius: 3px;
       &.--active {
-        background: #8db;
+        background: ${colors.buttonEditActive};
       }
     }
   }
