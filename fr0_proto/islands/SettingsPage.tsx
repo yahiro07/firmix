@@ -46,9 +46,7 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
         </ButtonSmall>
       </div>
       <div>
-        CIタスクからAPI経由でプロジェクトを投稿する際に使用します。
-        <br />
-        APIキーを公開データに含めないように注意してください。
+        CIタスクからAPI経由でプロジェクトを投稿/更新するときに使用します。
         <br />
         Github Actionで利用する際にはSecretsに格納してください。
       </div>
