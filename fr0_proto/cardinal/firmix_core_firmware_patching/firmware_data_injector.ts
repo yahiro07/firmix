@@ -110,7 +110,7 @@ const local = {
         ...convertTextToBinaryBytes("00", true),
         ...convertTextToBinaryBytes(generateRandomId(4), true),
       ];
-      console.log({ dataBytes });
+      // console.log({ dataBytes });
       entries.push({
         marker: "$KMMD",
         dataBytes,
