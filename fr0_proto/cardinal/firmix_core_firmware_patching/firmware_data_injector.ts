@@ -1,5 +1,6 @@
 import { firmwareBinaryModifier_patchUf2FileContent } from "~/aux/firmware_manipulation_helper/firmware_binary_modifier_uf2.ts";
 import { raiseError } from "~/aux/utils/error_util.ts";
+import { sumArrayNumbers } from "~/aux/utils/utils_array.ts";
 import {
   convertTextToBinaryBytes,
   stringifyBytesHex,
@@ -84,6 +85,17 @@ const local = {
           console.log(stringifyBytesHex(block), `(${block.length})`);
         }
         console.log(`data length: ${dataBytes.length}`);
+
+        const blockDataLengthExpected = sumArrayNumbers(
+          dataEntry.items.map(
+            firmixCore_firmwareConfiguration.getCustomDataItemFillingDataLength
+          )
+        );
+        if (dataBytes.length !== blockDataLengthExpected) {
+          raiseError(
+            `invalid block length ${dataBytes.length}/${blockDataLengthExpected}`
+          );
+        }
         return {
           marker,
           dataBytes,

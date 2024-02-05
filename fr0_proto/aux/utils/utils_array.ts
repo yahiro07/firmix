@@ -3,5 +3,9 @@ export function seqNumbers(n: number) {
 }
 
 export function padZeros(arr: number[], n: number) {
-  return seqNumbers(n).map((i) => (arr[i] ?? 0));
+  return seqNumbers(n).map((i) => arr[i] ?? 0);
+}
+
+export function sumArrayNumbers(values: number[]) {
+  return values.reduce((a, b) => a + b, 0);
 }

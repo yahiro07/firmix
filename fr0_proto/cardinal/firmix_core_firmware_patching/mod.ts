@@ -11,11 +11,6 @@ import {
 import { firmwareDataInjector } from "~/cardinal/firmix_core_firmware_patching/firmware_data_injector.ts";
 
 type FirmixCore_FirmwarePatching = {
-  checkPatchingManifestValidity(manifest: PatchingManifest): string;
-  checkPatchingDataBlobValidity(
-    manifest: PatchingManifest,
-    blob: PatchingDataBlob
-  ): string;
   fabricateFirmware(
     firmware: FirmwareContainer,
     patchingManifest: PatchingManifest,
@@ -24,12 +19,6 @@ type FirmixCore_FirmwarePatching = {
 };
 
 export const firmixCore_firmwarePatching: FirmixCore_FirmwarePatching = {
-  checkPatchingManifestValidity(_manifest) {
-    return "";
-  },
-  checkPatchingDataBlobValidity(_manifest, _blob) {
-    return "";
-  },
   fabricateFirmware(firmware, patchingManifest, patchingDataBlob) {
     if (firmware.kind !== "uf2") {
       raiseError(`unsupported firmware type ${firmware.kind}`);

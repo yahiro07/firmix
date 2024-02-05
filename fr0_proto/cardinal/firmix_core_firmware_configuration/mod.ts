@@ -230,4 +230,20 @@ export const firmixCore_firmwareConfiguration = {
       raiseError(`unsupported data kind ${dataKind}`);
     }
   },
+  getCustomDataItemFillingDataLength(customDataItem: CustomDataItem): number {
+    const { dataKind } = customDataItem;
+    if (dataKind === "u8" || dataKind === "i8") {
+      return customDataItem.dataCount;
+    } else if (dataKind === "pins") {
+      return customDataItem.pinsCount;
+    } else if (dataKind === "vl_pins") {
+      return customDataItem.pinsCapacity + 1;
+    } else if (dataKind === "text") {
+      return customDataItem.textLength + 1;
+    } else if (dataKind === "vl_text") {
+      return customDataItem.textCapacity + 1;
+    } else {
+      raiseError(`unsupported data kind ${dataKind}`);
+    }
+  },
 };
