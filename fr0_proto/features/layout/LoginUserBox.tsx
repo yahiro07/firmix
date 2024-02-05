@@ -1,5 +1,5 @@
 import { css } from "resin";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { LoginUser } from "~/base/types_dto_internal.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
 

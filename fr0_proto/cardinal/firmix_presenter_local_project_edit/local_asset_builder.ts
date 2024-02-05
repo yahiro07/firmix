@@ -1,5 +1,5 @@
-import { filePathHelper } from "~/aux/utils/file_path_helper.ts";
-import { encodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
+import { filePathHelper } from "~/auxiliaries/utils/file_path_helper.ts";
+import { encodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import {
   BinaryFileEntry,
   LocalAsset_Firmware,

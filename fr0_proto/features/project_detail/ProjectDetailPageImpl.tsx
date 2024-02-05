@@ -1,10 +1,10 @@
 import { useMemo } from "preact/hooks";
 import { css } from "resin";
-import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
-import { getDateTimeText_yyyyMMddHHmmss } from "~/aux/utils/date_time_helper.ts";
-import { decodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
-import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
+import { useReasyState } from "~/auxiliaries/reasy/reasy_state_local.ts";
+import { getDateTimeText_yyyyMMddHHmmss } from "~/auxiliaries/utils/date_time_helper.ts";
+import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
+import { downloadBinaryFileBlob } from "~/auxiliaries/utils_fe/downloading_link.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";

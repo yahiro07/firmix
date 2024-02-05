@@ -1,6 +1,6 @@
-import { raiseError } from "~/aux/utils/error_util.ts";
-import { pickObjectMembers } from "~/aux/utils/utils_general.ts";
-import { generateIdTimeSequential } from "~/aux/utils_be/id_generator.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { pickObjectMembers } from "~/auxiliaries/utils/utils_general.ts";
+import { generateIdTimeSequential } from "~/auxiliaries/utils_be/id_generator.ts";
 import { LoginUserClue } from "~/base/types_dto_internal.ts";
 import { CookieOutputJob } from "~/central/base/types_client_storage.ts";
 import { OAuthLoginSourceUserInfo } from "~/central/base/types_oauth.ts";

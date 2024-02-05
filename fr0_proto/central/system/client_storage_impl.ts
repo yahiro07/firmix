@@ -4,8 +4,8 @@ import {
   getCookies,
   setCookie,
 } from "$std/http/cookie.ts";
-import { myJwt_create, myJwt_verify } from "~/aux/myjwt/mod.ts";
-import { raiseError } from "~/aux/utils/error_util.ts";
+import { myJwt_create, myJwt_verify } from "~/auxiliaries/myjwt/mod.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import { LoginUserClue } from "~/base/types_dto_internal.ts";
 import { getEnvVariable } from "~/central/base/envs.ts";
 import { serverConfig } from "~/central/base/server_config.ts";

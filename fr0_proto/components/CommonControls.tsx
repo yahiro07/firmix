@@ -1,7 +1,7 @@
 import { FunctionComponent } from "preact";
 import { css } from "resin";
-import { reflectInputChecked } from "~/aux/utils_fe/form_helper.ts";
-import { JSX, jsx } from "~/aux/xjsx/jsx-runtime.ts";
+import { reflectInputChecked } from "~/auxiliaries/utils_fe/form_helper.ts";
+import { JSX, jsx } from "~/auxiliaries/xjsx/jsx-runtime.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 import { flexHorizontal } from "~/common/utility_styles.ts";
 import { IconIconify } from "~/components/IconIconify.tsx";

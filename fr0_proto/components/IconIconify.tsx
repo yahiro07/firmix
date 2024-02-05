@@ -1,4 +1,4 @@
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 
 type Props = {
   spec: string;

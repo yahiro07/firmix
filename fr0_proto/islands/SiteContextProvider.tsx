@@ -1,4 +1,4 @@
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { SiteContextValue, siteContext } from "~/common/site_context.ts";
 
 export const SiteContextProvider = createFC<{

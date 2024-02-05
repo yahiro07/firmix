@@ -1,5 +1,5 @@
 import { css, domStyled } from "resin";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,

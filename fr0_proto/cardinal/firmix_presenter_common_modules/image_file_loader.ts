@@ -1,5 +1,5 @@
-import { raiseError } from "~/aux/utils/error_util.ts";
-import { imageHelper_getImageDataMimeType } from "~/aux/utils/image_helper.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { imageHelper_getImageDataMimeType } from "~/auxiliaries/utils/image_helper.ts";
 import { OnlineImageAssetContainer } from "~/base/types_project_edit.ts";
 
 export const imageFileLoader = {

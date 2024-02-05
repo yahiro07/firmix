@@ -1,14 +1,14 @@
 import { decodeBase64 } from "$std/encoding/base64.ts";
 import { useCallback } from "preact/hooks";
-import { useReasyState } from "~/aux/reasy/reasy_state_local.ts";
-import { raiseError } from "~/aux/utils/error_util.ts";
+import { useReasyState } from "~/auxiliaries/reasy/reasy_state_local.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import {
   createIndexedDbStorageAdapter,
   createLocalStorageAdapter,
-} from "~/aux/utils_fe/browser_storage_adapter.ts";
-import { downloadBinaryFileBlob } from "~/aux/utils_fe/downloading_link.ts";
-import { useEffectAsync } from "~/aux/utils_fe/hooks.ts";
-import { ensureFileHandlePermission } from "~/aux/utils_fe/local_filesystem_helper.ts";
+} from "~/auxiliaries/utils_fe/browser_storage_adapter.ts";
+import { downloadBinaryFileBlob } from "~/auxiliaries/utils_fe/downloading_link.ts";
+import { useEffectAsync } from "~/auxiliaries/utils_fe/hooks.ts";
+import { ensureFileHandlePermission } from "~/auxiliaries/utils_fe/local_filesystem_helper.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
 import { LocalProjectSubmissionPayload } from "~/base/types_dto_internal.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";

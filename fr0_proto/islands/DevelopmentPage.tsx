@@ -1,8 +1,8 @@
 import * as idb_keyval from "idb-keyval";
 import { useState } from "preact/hooks";
 import { css } from "resin";
-import { serverFetchHelper } from "~/aux/utils_be/server_fetch_helper.ts";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { serverFetchHelper } from "~/auxiliaries/utils_be/server_fetch_helper.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
 import { ButtonSmall } from "~/components/CommonControls.tsx";
 

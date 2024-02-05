@@ -1,4 +1,4 @@
-import { raiseError } from "~/aux/utils/error_util.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import { FirmwareFormat } from "~/base/types_app_common.ts";
 import { serverShell } from "~/central/server_shell.ts";
 import { createPostHandler } from "~/system/route_helper.ts";

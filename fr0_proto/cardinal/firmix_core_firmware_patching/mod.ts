@@ -1,8 +1,8 @@
-import { raiseError } from "~/aux/utils/error_util.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import {
   decodeBinaryBase64,
   encodeBinaryBase64,
-} from "~/aux/utils/utils_binary.ts";
+} from "~/auxiliaries/utils/utils_binary.ts";
 import {
   FirmwareContainer,
   PatchingDataBlob,

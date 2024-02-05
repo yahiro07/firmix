@@ -1,5 +1,5 @@
-import { raiseError } from "~/aux/utils/error_util.ts";
-import { padZeros, seqNumbers } from "~/aux/utils/utils_array.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { padZeros, seqNumbers } from "~/auxiliaries/utils/utils_array.ts";
 import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 import { CustomDataItem } from "~/base/types_core_entity.ts";
 import {

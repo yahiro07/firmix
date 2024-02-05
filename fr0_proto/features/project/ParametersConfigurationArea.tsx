@@ -1,6 +1,6 @@
 import { css } from "resin";
-import { raiseError } from "~/aux/utils/error_util.ts";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 
 import {
   ConfigurationSourceItem,

@@ -1,5 +1,5 @@
 import { css } from "resin";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { appConfig } from "~/base/app_config.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 import { colors } from "~/common/ui_theme.ts";

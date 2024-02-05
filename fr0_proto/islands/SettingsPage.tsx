@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks";
 import { css } from "resin";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 import { colors } from "~/common/ui_theme.ts";
 import {

@@ -1,6 +1,6 @@
 import { produce } from "immer";
-import { raiseError } from "~/aux/utils/error_util.ts";
-import { decodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import {
   BinaryFileEntry,
   LocalDevelopmentProject,

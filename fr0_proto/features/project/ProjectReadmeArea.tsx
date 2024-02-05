@@ -1,7 +1,7 @@
 import { CSS, render } from "gfm";
 import { useMemo } from "preact/hooks";
 import { css } from "resin";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 
 type Props = {
   readmeFileContent: string;

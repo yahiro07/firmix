@@ -1,4 +1,4 @@
-import { encodeBinaryBase64 } from "~/aux/utils/utils_binary.ts";
+import { encodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixPresenter_firmwarePatching } from "~/cardinal/firmix_presenter_firmware_patching/mod.ts";
 import { storehouse } from "~/central/depot/storehouse.ts";

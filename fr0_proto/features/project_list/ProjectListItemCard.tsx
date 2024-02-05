@@ -1,5 +1,5 @@
 import { css } from "resin";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import {
   flexHorizontal,

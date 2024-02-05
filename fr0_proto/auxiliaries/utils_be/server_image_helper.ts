@@ -1,6 +1,6 @@
 import { decode } from "https://deno.land/x/imagescript@v1.2.14/mod.ts";
-import { raiseError } from "~/aux/utils/error_util.ts";
-import { imageHelper_getImageDataMimeType } from "~/aux/utils/image_helper.ts";
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { imageHelper_getImageDataMimeType } from "~/auxiliaries/utils/image_helper.ts";
 import { ImageAssetAttrs } from "~/base/types_app_common.ts";
 
 export const serverImageHelper = {

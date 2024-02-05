@@ -1,6 +1,6 @@
 import { ComponentChildren } from "preact";
 import { css } from "resin";
-import { createFC } from "~/aux/utils_fe/create_fc.ts";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { ProjectTab } from "~/base/types_app_common.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
 import { useRepositoryDisplayInfo } from "~/fe_modules/repository_info_helper.ts";
