@@ -48,6 +48,7 @@ const ProjectTagsList = createFCX<{ tags: string[] }>(
       border-radius: 20px;
       background: #bbb;
       color: #fff;
+      white-space: nowrap;
     }
   `
 );

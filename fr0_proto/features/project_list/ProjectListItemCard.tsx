@@ -63,6 +63,7 @@ const style = css`
   > .content-row {
     ${flexHorizontal(16)};
     > .thumbnail-box {
+      align-self: flex-start;
       flex-shrink: 0;
       width: 200px;
       aspect-ratio: 1.3333;
