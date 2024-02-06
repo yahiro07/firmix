@@ -1,5 +1,5 @@
 import { FunctionComponent } from "preact";
-import { css } from "resin";
+import { css, domStyled } from "resin";
 import { reflectInputChecked } from "~/auxiliaries/utils_fe/form_helper.ts";
 import { JSX, jsx } from "~/auxiliaries/xjsx/jsx-runtime.ts";
 import { flexHorizontal } from "~/common/utility_styles.ts";
@@ -380,7 +380,6 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
           rel="stylesheet"
         />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-
         <style dangerouslySetInnerHTML={{ __html: customCss }} />
       </>
     );
@@ -430,7 +429,7 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
     );
   },
   ToggleButtonLarge: ({ checked, setChecked, text }) => {
-    return (
+    return domStyled(
       <label class="relative inline-flex items-center cursor-pointer">
         <input
           type="checkbox"
@@ -443,7 +442,12 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
         <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
           {text}
         </span>
-      </label>
+      </label>,
+      css`
+        > input:checked + div {
+          background-color: #7ca;
+        }
+      `
     );
   },
 };

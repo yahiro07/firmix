@@ -6,5 +6,5 @@ export const colors = {
   sideBarFill: "#ccc",
   sideBarEdge: "#aaa",
   contentBackground: "#fff",
-  buttonEditActive: "#7ee5ff",
+  buttonEditActive: "#7dd1d7",
 };
