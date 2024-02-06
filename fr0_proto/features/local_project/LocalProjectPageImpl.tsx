@@ -3,6 +3,7 @@ import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { colors } from "~/common/ui_theme.ts";
 import { flexCentered, flexVertical } from "~/common/utility_styles.ts";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
+import { useDateTimeTextWithElapsed } from "~/fe_modules/display_data_hooks.ts";
 import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAssetsArea.tsx";
 import { LocalProjectLoadingArea } from "~/features/local_project/LocalProjectLoadingArea.tsx";
 import { useLocalProjectPageStore } from "~/features/local_project/local_project_page_store.ts";
@@ -33,6 +34,11 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
   } = useLocalProjectPageStore();
 
   const metadataInput = project?.assetMetadata.metadataInput;
+
+  const firmwareTimeText = useDateTimeTextWithElapsed(
+    project?.assetFirmware.lastModified ?? 0,
+    Date.now()
+  );
   return (
     <div q={style}>
       <LocalProjectLoadingArea
@@ -54,11 +60,18 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
         />
       )}
       {project && !metadataInput && <LocalProjectHeadingAreaDummy />}
+
       <LocalProjectAssetsArea
         project={project!}
         if={project && projectTab === "info"}
       />
       {/* <div if={errorMessage}>{errorMessage}</div> */}
+      <div
+        q="firmware-timestamp"
+        if={project?.assetFirmware.validity === "valid"}
+      >
+        ファームウェアビルド日時: {firmwareTimeText}
+      </div>
       <ParametersConfigurationArea
         configurationSourceItems={project?.configurationSourceItems!}
         submitEditItems={submitEditItems}
@@ -100,6 +113,9 @@ const style = css`
     > .text {
       text-align: center;
     }
+  }
+  > .firmware-timestamp {
+    margin: 0 8px;
   }
   > .readme {
   }

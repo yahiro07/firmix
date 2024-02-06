@@ -7,7 +7,6 @@ import {
 } from "~/base/types_local_project.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
-import { useDateTimeTextWithElapsed } from "~/fe_modules/display_data_hooks.ts";
 
 type Props = {
   project: LocalDevelopmentProject;
@@ -88,10 +87,6 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
     local.extractThumbnailInfoAdditional(assetThumbnail);
   const thumbnailUrl = assetMetadata.metadataInput?.thumbnailUrl;
 
-  const firmwareTimeText = useDateTimeTextWithElapsed(
-    assetFirmware.lastModified,
-    Date.now()
-  );
   return (
     <div q={style}>
       <h3>
@@ -109,10 +104,6 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
       <AssetEntry title="ファームウェア" asset={assetFirmware} />
       <div if={modFirmwareFilePath}>
         パッチ適用済ファームウェア: {modFirmwareFilePath}
-      </div>
-
-      <div q="firmware-timestamp" if={assetFirmware.validity === "valid"}>
-        ファームウェアビルド日時: {firmwareTimeText}
       </div>
       <div q="thumbnail-box" if={thumbnailUrl}>
         <img src={thumbnailUrl} />
@@ -145,9 +136,5 @@ const style = css`
       height: 100%;
       object-fit: cover;
     }
-  }
-
-  > .firmware-timestamp {
-    margin-top: 8px;
   }
 `;
