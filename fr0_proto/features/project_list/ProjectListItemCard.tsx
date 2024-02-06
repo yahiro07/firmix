@@ -84,6 +84,7 @@ const style = css`
         ${flexHorizontalAligned()};
 
         > h3 {
+          margin-top: -4px;
           font-size: 22px;
         }
         > .publicity {
