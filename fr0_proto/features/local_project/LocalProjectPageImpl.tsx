@@ -54,7 +54,10 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
         />
       )}
       {project && !metadataInput && <LocalProjectHeadingAreaDummy />}
-      <LocalProjectAssetsArea project={project!} if={project} />
+      <LocalProjectAssetsArea
+        project={project!}
+        if={project && projectTab === "info"}
+      />
       {/* <div if={errorMessage}>{errorMessage}</div> */}
       <ParametersConfigurationArea
         configurationSourceItems={project?.configurationSourceItems!}
