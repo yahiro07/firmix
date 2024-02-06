@@ -7,13 +7,13 @@ import {
   flexVertical,
 } from "~/common/utility_styles.ts";
 import { Button } from "~/components/CommonControls.tsx";
-import { IconIconify } from "~/components/IconIconify.tsx";
+import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 const ProjectTitlePart = createFCX<{ projectName: string }>(
   ({ projectName }) => {
     return (
       <h2>
-        <IconIconify spec="icon-park-twotone:chip" q="title-icon" />
+        <IconIconifyZ spec="icon-park-twotone:chip" q="title-icon" />
         <span>{projectName}</span>
       </h2>
     );
@@ -57,7 +57,7 @@ const RepositoryInfoPart = createFCX<{ repositoryInfo: ProjectRepositoryInfo }>(
     return (
       <div q="repository-info">
         <a href={repositoryInfo.repositoryUrl} target="_blank" q="repository">
-          <IconIconify spec="mdi:github" q="github-icon" />
+          <IconIconifyZ spec="mdi:github" q="github-icon" />
           <span>{repositoryInfo.repositoryProjectPath}</span>
         </a>
       </div>
@@ -102,7 +102,7 @@ const EditorButton = createFCX<{ active: boolean; onClick(): void }>(
   ({ active, onClick }) => {
     return (
       <Button q={active && "--active"} onClick={onClick}>
-        <IconIconify spec="mdi:edit" />
+        <IconIconifyZ spec="mdi:edit" />
         <span>エディタ</span>
       </Button>
     );

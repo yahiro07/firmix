@@ -9,7 +9,7 @@ import {
   flexVertical,
 } from "~/common/utility_styles.ts";
 import { ButtonSmall } from "~/components/CommonControls.tsx";
-import { IconIconify } from "~/components/IconIconify.tsx";
+import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type Props = {
   apiKey: string | undefined;
@@ -38,8 +38,8 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
       <div q="edit-row">
         <input value={apiKey} readOnly type={exhibit ? "text" : "password"} />
         <ButtonSmall q="btn-eye" disabled={!apiKey} onClick={toggleExhibit}>
-          <IconIconify spec="fa-solid:eye" if={exhibit} />
-          <IconIconify spec="fa-solid:eye-slash" if={!exhibit} />
+          <IconIconifyZ spec="fa-solid:eye" if={exhibit} />
+          <IconIconifyZ spec="fa-solid:eye-slash" if={!exhibit} />
         </ButtonSmall>
         <ButtonSmall q="btn-op" onClick={handleOperationButton}>
           {!apiKey ? "生成" : "破棄"}

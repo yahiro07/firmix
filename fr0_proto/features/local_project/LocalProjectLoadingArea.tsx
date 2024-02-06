@@ -3,7 +3,7 @@ import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
 import { ButtonSmall } from "~/components/CommonControls.tsx";
-import { IconIconify } from "~/components/IconIconify.tsx";
+import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type Props = {
   loadedFolderName: string | undefined;
@@ -42,7 +42,7 @@ export const LocalProjectLoadingArea = createFC<Props>(
           フォルダ選択
         </ButtonSmall>
         <div if={loaded} q="folder">
-          <IconIconify spec="mdi:folder" />
+          <IconIconifyZ spec="mdi:folder" />
           <span>{loadedFolderName}</span>
         </div>
         <div q="spacer" />
