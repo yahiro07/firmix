@@ -4,7 +4,7 @@ import { appConfig } from "~/base/app_config.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 import { colors } from "~/common/ui_theme.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
-import { Nav, NavItem } from "~/components/CommonControls.tsx";
+import { Nav, NavItem, NavItem_Button } from "~/components/CommonControls.tsx";
 import { LoginUserBox } from "~/features/layout/LoginUserBox.tsx";
 
 export const SideBar = createFC(() => {
@@ -37,13 +37,13 @@ export const SideBar = createFC(() => {
           title="development"
           if={appConfig.isDevelopment}
         />
-        <NavItem
+        <NavItem_Button
           path="/auth/github"
           iconSpec="material-symbols:login"
           title="ログイン(github)"
           if={!loggedIn}
         />
-        <NavItem
+        <NavItem_Button
           path="/auth/logout"
           iconSpec="material-symbols:logout"
           title="ログアウト"

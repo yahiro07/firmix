@@ -2,9 +2,8 @@ import { FunctionComponent } from "preact";
 import { css } from "resin";
 import { reflectInputChecked } from "~/auxiliaries/utils_fe/form_helper.ts";
 import { JSX, jsx } from "~/auxiliaries/xjsx/jsx-runtime.ts";
-import { useSiteContext } from "~/common/site_context.ts";
 import { flexHorizontal } from "~/common/utility_styles.ts";
-import { IconIconify } from "~/components/IconIconify.tsx";
+import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
 
@@ -32,6 +31,7 @@ type IComponentFlavorWrapper = {
   FormTextInput: XDom<"input">;
   Nav: XDom<"ul">;
   NavItem: FC<{ path: string; title: string; iconSpec: string }>;
+  NavItem_Button: FC<{ path: string; title: string; iconSpec: string }>;
   ToggleButtonLarge: FC<{ checked: boolean; setChecked(): void; text: string }>;
 };
 
@@ -332,6 +332,24 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
 };
 */
 
+const styleNavItem = [
+  "flex items-center p-2 text-gray-900 group",
+  css`
+    font-size: 18px;
+    ${flexHorizontal(8)};
+    cursor: pointer;
+    > .icon {
+      font-size: 22px;
+    }
+    &[data-current] {
+      font-weight: 500;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  `,
+];
+
 const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -388,33 +406,23 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
   ),
   Nav: bindTagWithClassNames("ul", "nav"),
   NavItem: ({ path, title, iconSpec }) => {
-    const { pagePath } = useSiteContext();
-    const active = path === pagePath;
     return (
       <li>
-        <a
-          href={path}
-          q={[
-            "flex items-center p-2 text-gray-900 group",
-            active && "--active",
-            css`
-              font-size: 18px;
-              ${flexHorizontal(8)};
-              > .icon {
-                font-size: 22px;
-              }
-              &.--active {
-                font-weight: 500;
-              }
-              &:hover {
-                opacity: 0.7;
-              }
-            `,
-          ]}
-        >
-          <IconIconify spec={iconSpec} q="icon" />
+        <a href={path} q={styleNavItem}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
           <span>{title}</span>
         </a>
+      </li>
+    );
+  },
+  NavItem_Button: ({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <div href={path} q={styleNavItem} onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </div>
       </li>
     );
   },
@@ -454,5 +462,6 @@ export const {
   FormTextInput,
   Nav,
   NavItem,
+  NavItem_Button,
   ToggleButtonLarge,
 } = componentFlavor;
