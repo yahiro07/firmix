@@ -2,7 +2,7 @@ import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { colors } from "~/common/ui_theme.ts";
 import { flexCentered, flexVertical } from "~/common/utility_styles.ts";
-import { IconIconify } from "~/components/IconIconify.tsx";
+import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAssetsArea.tsx";
 import { LocalProjectLoadingArea } from "~/features/local_project/LocalProjectLoadingArea.tsx";
 import { useLocalProjectPageStore } from "~/features/local_project/local_project_page_store.ts";
@@ -70,7 +70,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
         if={project?.assetReadme.fileContent && projectTab === "info"}
       />
       <div q="blank-filler" if={!project}>
-        <IconIconify spec="ph:folder-thin" q="folder-icon" />
+        <IconIconifyZ spec="ph:folder-thin" q="folder-icon" />
         <div q="text">
           ローカルプロジェクトのフォルダを
           <br />

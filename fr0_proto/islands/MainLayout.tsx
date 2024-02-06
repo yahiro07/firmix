@@ -2,14 +2,14 @@ import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { colors } from "~/common/ui_theme.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
-import { IconIconify } from "~/components/IconIconify.tsx";
+import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 import { SideBar } from "~/features/layout/SideBar.tsx";
 
 export const MainLayout = createFC(({ children }) => {
   return (
     <div q={[style, "main-layout-root"]}>
       <div q="header-bar">
-        <IconIconify spec="mdi:chip" q="site-icon" />
+        <IconIconifyZ spec="mdi:chip" q="site-icon" />
         <h1>
           Firmix <span q="beta">(beta)</span>
         </h1>

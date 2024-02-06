@@ -6,7 +6,7 @@ import {
   LocalDevelopmentProject,
 } from "~/base/types_local_project.ts";
 import { flexHorizontalAligned } from "~/common/utility_styles.ts";
-import { IconIconify } from "~/components/IconIconify.tsx";
+import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type Props = {
   project: LocalDevelopmentProject;
@@ -17,16 +17,18 @@ const AssetEntry = createFC<{
   asset: LocalAssetBase;
   infoAdditional?: string;
 }>(({ title, asset, infoAdditional }) => {
-  const iconSpec = {
-    valid: "mdi:check",
-    warning: "mdi:warning-outline",
-    error: "subway:error",
-  }[asset.validity];
+  const iconSpec = (
+    {
+      valid: "mdi:check",
+      warning: "mdi:warning-outline",
+      error: "subway:error",
+    } as const
+  )[asset.validity];
 
   return domStyled(
     <div>
       <div q="ae-heading">
-        <IconIconify
+        <IconIconifyZ
           spec={iconSpec}
           q={["validity-icon", `--validity-${asset.validity}`]}
         />
@@ -87,7 +89,7 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
   return (
     <div q={style}>
       <h3>
-        <IconIconify spec="ph:files" q="icon" />
+        <IconIconifyZ spec="ph:files" q="icon" />
         <span>プロジェクトリソース</span>
       </h3>
       {/* <div>ターゲットMCU:{patchingManifest.targetMcu}</div> */}
