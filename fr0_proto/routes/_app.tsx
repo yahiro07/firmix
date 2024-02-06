@@ -1,3 +1,4 @@
+import { Partial } from "$fresh/runtime.ts";
 import { FreshContext } from "$fresh/server.ts";
 import { ResinCssEmitter, ResinCssGlobalStyle } from "resin";
 import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
@@ -32,9 +33,11 @@ export default async function App(req: Request, ctx: FreshContext) {
         />
         <CssFrameworkAssetsImporter />
       </head>
-      <body>
+      <body f-client-nav>
         <SiteContextProvider value={siteContextValue}>
-          <ctx.Component />
+          <Partial name="body">
+            <ctx.Component />
+          </Partial>
         </SiteContextProvider>
       </body>
     </html>

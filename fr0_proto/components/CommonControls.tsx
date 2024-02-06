@@ -25,6 +25,7 @@ type XDom<K extends keyof JSXIntrinsicElements> = FC<JSXIntrinsicElements[K]>;
 type IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter: FC;
   Button: XDom<"button">;
+  LinkButton: XDom<"a">;
   ButtonSmall: XDom<"button">;
   Card: XDom<"div">;
   FormLabel: XDom<"label">;
@@ -350,6 +351,18 @@ const styleNavItem = [
   `,
 ];
 
+const styleButton = [
+  "bg-indigo-500 p-2 text-white focus:outline-none text-white focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mb-2",
+  css`
+    &:hover {
+      opacity: 0.8;
+    }
+    &:disabled {
+      opacity: 0.3;
+    }
+  `,
+];
+
 const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -372,18 +385,8 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
       </>
     );
   },
-  Button: bindTagWithClassNames(
-    "button",
-    "bg-indigo-500 p-2 text-white focus:outline-none text-white focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mb-2",
-    css`
-      &:hover {
-        opacity: 0.8;
-      }
-      &:disabled {
-        opacity: 0.3;
-      }
-    `
-  ),
+  Button: bindTagWithClassNames("button", ...styleButton),
+  LinkButton: bindTagWithClassNames("a", ...styleButton),
   ButtonSmall: bindTagWithClassNames(
     "button",
     css`
@@ -456,6 +459,7 @@ const componentFlavor = componentFlavorWrapper_Tailwind_Flowbite;
 export const {
   CssFrameworkAssetsImporter,
   Button,
+  LinkButton,
   ButtonSmall,
   Card,
   FormLabel,

@@ -6,7 +6,7 @@ import {
   flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
-import { Button, Card } from "~/components/CommonControls.tsx";
+import { Card, LinkButton } from "~/components/CommonControls.tsx";
 import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
 
 type Props = {
@@ -16,9 +16,6 @@ type Props = {
 
 export const ProjectListItemCard = createFC<Props>(
   ({ project, showPublicity }) => {
-    const navigateToDetail = () => {
-      location.href = `/project/${project.projectId}`;
-    };
     const { ProjectTagsList } = projectHeadingArea_parts;
     return (
       <Card q={style}>
@@ -35,7 +32,12 @@ export const ProjectListItemCard = createFC<Props>(
               >
                 {project.published ? "公開中" : "ドラフト"}
               </p>
-              <Button onClick={navigateToDetail}>詳細</Button>
+              <LinkButton
+                href={`/project/${project.projectId}`}
+                q="button-to-detail"
+              >
+                詳細
+              </LinkButton>
             </div>
 
             <p>{project.introduction}</p>
@@ -94,7 +96,7 @@ const style = css`
           }
         }
 
-        > button {
+        > .button-to-detail {
           position: absolute;
           top: 0;
           right: 0;
