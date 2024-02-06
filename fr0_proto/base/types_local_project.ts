@@ -17,6 +17,10 @@ export type BinaryFileEntry = {
   contentBytes: Uint8Array;
 };
 
+export type BinaryFileEntryWithTimestamp = BinaryFileEntry & {
+  lastModified: number;
+};
+
 type LocalAssetValidity = "valid" | "warning" | "error";
 
 export type LocalAssetBase = {
@@ -40,6 +44,7 @@ export type LocalAsset_Thumbnail = LocalAssetBase & {
 
 export type LocalAsset_Firmware = LocalAssetBase & {
   firmwareContainer: FirmwareContainer | undefined;
+  lastModified: number;
 };
 
 export type LocalDevelopmentProject = {

@@ -114,12 +114,12 @@ export function createProjectService() {
       const from = args.automated ? "via api" : "from local";
       try {
         const project = await m.upsertProject(args);
-        const timeText = getDateTimeText_yyyyMMddHHmmss();
+        const timeText = getDateTimeText_yyyyMMddHHmmss(Date.now());
         console.log(
           `${timeText} user ${user.userName} published ${project.projectName} rev${project.revision} ${from}`
         );
       } catch (error) {
-        const timeText = getDateTimeText_yyyyMMddHHmmss();
+        const timeText = getDateTimeText_yyyyMMddHHmmss(Date.now());
         console.log(
           `${timeText} user ${user.userName} tried to publish a project ${from} but failed `
         );

@@ -2,7 +2,7 @@ import { produce } from "immer";
 import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import {
-  BinaryFileEntry,
+  BinaryFileEntryWithTimestamp,
   LocalDevelopmentProject,
 } from "~/base/types_local_project.ts";
 import {
@@ -36,7 +36,7 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
       const metadataFile = await dirReader.readTextFile(`project.fm1.json`);
       const readmeFile = await dirReader.readTextFile("readme.md");
 
-      let firmwareFile: BinaryFileEntry | undefined;
+      let firmwareFile: BinaryFileEntryWithTimestamp | undefined;
       let firmwareFileLoadingErrorText: string | undefined;
       let firmwareDirectoryHandle: FileSystemDirectoryHandle | undefined;
       try {

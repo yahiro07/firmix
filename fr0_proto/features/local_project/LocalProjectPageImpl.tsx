@@ -84,7 +84,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
 const style = css`
   height: 100%;
   background: ${colors.contentBackground};
-  padding: 10px;
+  padding: 16px;
 
   ${flexVertical()};
   > .blank-filler {
@@ -99,6 +99,5 @@ const style = css`
     }
   }
   > .readme {
-    padding: 8px;
   }
 `;

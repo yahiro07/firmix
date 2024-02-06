@@ -57,7 +57,7 @@ export const ProjectListItemCard = createFC<Props>(
 
 const style = css`
   min-height: 100px;
-  padding: 16px;
+  padding: 20px;
   /* ${flexVertical(12)}; */
 
   > .content-row {
@@ -83,7 +83,7 @@ const style = css`
         ${flexHorizontalAligned()};
 
         > h3 {
-          font-size: 20px;
+          font-size: 22px;
         }
         > .publicity {
           flex-shrink: 0;

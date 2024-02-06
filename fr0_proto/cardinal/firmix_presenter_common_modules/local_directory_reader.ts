@@ -1,6 +1,9 @@
 import "~/auxiliaries/typings/file_system_access.ts";
 import { raiseError } from "~/auxiliaries/utils/error_util.ts";
-import { BinaryFileEntry, TextFileEntry } from "~/base/types_local_project.ts";
+import {
+  BinaryFileEntryWithTimestamp,
+  TextFileEntry,
+} from "~/base/types_local_project.ts";
 
 export function createLocalDirectoryReader(
   rootDirHandle: FileSystemDirectoryHandle
@@ -55,11 +58,17 @@ export function createLocalDirectoryReader(
         return undefined;
       }
     },
-    async readBinaryFile(path: string): Promise<BinaryFileEntry | undefined> {
+    async readBinaryFile(
+      path: string
+    ): Promise<BinaryFileEntryWithTimestamp | undefined> {
       try {
         const file = await m.getFile(path);
         const contentBytes = new Uint8Array(await file.arrayBuffer());
-        return { filePath: path, contentBytes };
+        return {
+          filePath: path,
+          contentBytes,
+          lastModified: file.lastModified,
+        };
       } catch (_) {
         return undefined;
       }

@@ -65,9 +65,9 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
     }
   };
 
-  const firmwareUpdateAtText =
-    project.firmwareUpdateAt &&
-    getDateTimeText_yyyyMMddHHmmss(new Date(project.firmwareUpdateAt));
+  const firmwareUpdateAtText = getDateTimeText_yyyyMMddHHmmss(
+    project.firmwareUpdateAt
+  );
 
   return (
     <div q={style}>
@@ -117,7 +117,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
 });
 
 const style = css`
-  padding: 10px;
+  padding: 16px;
   background: ${colors.contentBackground};
   /* min-height: 100%; */
   > .info-area {

@@ -1,7 +1,7 @@
 import { filePathHelper } from "~/auxiliaries/utils/file_path_helper.ts";
 import { encodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import {
-  BinaryFileEntry,
+  BinaryFileEntryWithTimestamp,
   LocalAsset_Firmware,
   LocalAsset_Metadata,
   LocalAsset_Readme,
@@ -87,7 +87,7 @@ export const localAssetBuilder = {
     };
   },
   buildAssetFirmware(
-    firmwareFile: BinaryFileEntry | undefined,
+    firmwareFile: BinaryFileEntryWithTimestamp | undefined,
     firmwareFileLoadingErrorText: string | undefined
   ): LocalAsset_Firmware {
     if (!firmwareFile || firmwareFileLoadingErrorText) {
@@ -99,6 +99,7 @@ export const localAssetBuilder = {
           firmwareFileLoadingErrorText ??
             "ファームウェアがありません。プロジェクトをビルドしてください。",
         ],
+        lastModified: 0,
       };
     }
     const firmwareContainer: FirmwareContainer = {
@@ -111,6 +112,7 @@ export const localAssetBuilder = {
       filePath: firmwareFile.filePath,
       firmwareContainer,
       errorLines: [],
+      lastModified: firmwareFile.lastModified,
     };
   },
 };
