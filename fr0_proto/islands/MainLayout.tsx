@@ -69,7 +69,7 @@ const style = css`
       /* padding: 16px 0; */
       > div {
         flex-grow: 1;
-        max-width: 900px;
+        max-width: 800px;
       }
     }
   }
