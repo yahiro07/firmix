@@ -9,9 +9,11 @@ export const serverImageHelper = {
     return { width: img.width, height: img.height };
   },
   async loadOnlineImageAssetAttrs(imageUrl: string): Promise<ImageAssetAttrs> {
-    const imageArrayBuffer = await fetch(imageUrl).then((res) =>
-      res.arrayBuffer()
-    );
+    const res = await fetch(imageUrl);
+    if (res.status !== 200) {
+      raiseError(`failed to fetch image ${imageUrl} (${res.status})`);
+    }
+    const imageArrayBuffer = await res.arrayBuffer();
     const imageFileBytes = new Uint8Array(imageArrayBuffer);
 
     const mimeType = imageHelper_getImageDataMimeType(imageFileBytes);

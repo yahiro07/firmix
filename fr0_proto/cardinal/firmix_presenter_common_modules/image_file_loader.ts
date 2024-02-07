@@ -6,7 +6,11 @@ export const imageFileLoader = {
   async loadOnlineImageAsset(
     imageUrl: string
   ): Promise<OnlineImageAssetContainer> {
-    const arrayBuffer = await fetch(imageUrl).then((res) => res.arrayBuffer());
+    const res = await fetch(imageUrl);
+    if (res.status !== 200) {
+      raiseError(`failed to fetch image ${imageUrl} (${res.status})`);
+    }
+    const arrayBuffer = await res.arrayBuffer();
     const imageDataBytes = new Uint8Array(arrayBuffer);
     const mimeType = imageHelper_getImageDataMimeType(imageDataBytes);
     if (!mimeType) {

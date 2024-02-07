@@ -8,7 +8,10 @@ import {
   LocalAsset_Thumbnail,
   TextFileEntry,
 } from "~/base/types_local_project.ts";
-import { FirmwareContainer } from "~/base/types_project_edit.ts";
+import {
+  FirmwareContainer,
+  OnlineImageAssetContainer,
+} from "~/base/types_project_edit.ts";
 import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
 import { imageFileLoader } from "~/cardinal/firmix_presenter_common_modules/image_file_loader.ts";
 
@@ -59,15 +62,30 @@ export const localAssetBuilder = {
   ): Promise<LocalAsset_Thumbnail> {
     if (!thumbnailUrl) {
       return {
-        validity: "warning",
+        validity: "error",
         filePath: "",
         thumbnailContainer: undefined,
         errorLines: ["サムネイルの指定がありません。"],
       };
     }
-    const thumbnailContainer = await imageFileLoader.loadOnlineImageAsset(
-      thumbnailUrl
-    );
+    let thumbnailContainer: OnlineImageAssetContainer;
+
+    try {
+      thumbnailContainer = await imageFileLoader.loadOnlineImageAsset(
+        thumbnailUrl
+      );
+    } catch (error: any) {
+      console.error(error);
+      return {
+        validity: "error",
+        filePath: thumbnailUrl,
+        thumbnailContainer: undefined,
+        errorLines: [
+          `画像の取得に失敗しました。`,
+          `詳細:${error.message ?? "unknown error"}`,
+        ],
+      };
+    }
     const errorLines: string[] = [];
 
     const thumbnailValidationRes =

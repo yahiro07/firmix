@@ -50,6 +50,9 @@ export function createProjectService() {
         existingProject?.projectId ?? generateIdTimeSequential();
 
       const { thumbnailUrl } = metadataInput;
+      if (!thumbnailUrl) {
+        raiseError(`missing thumbnailUrl in metadata`);
+      }
 
       const imageAttrs = await serverImageHelper.loadOnlineImageAssetAttrs(
         thumbnailUrl
