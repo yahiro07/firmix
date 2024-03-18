@@ -19,6 +19,8 @@ export const flexHorizontalAligned = (gap?: number) =>
     ${gap ? `gap: ${gap}px;` : ""}
   `;
 
+export const flexAligned = flexHorizontalAligned;
+
 export const flexCentered = (gap?: number) =>
   css`
     display: flex;
