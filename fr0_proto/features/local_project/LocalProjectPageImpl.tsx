@@ -81,7 +81,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
       <ParametersConfigurationArea
         configurationSourceItems={project?.configurationSourceItems!}
         submitEditItems={submitEditItems}
-        submitButtonLabel="ダウンロード"
+        submitButtonLabel="UF2ダウンロード"
         submit2={submitEditItems2}
         submit2Label="出力"
         if={project?.configurationSourceItems}

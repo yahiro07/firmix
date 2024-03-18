@@ -99,7 +99,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
       <ParametersConfigurationArea
         configurationSourceItems={configurationSourceItems}
         submitEditItems={submitEditItems}
-        submitButtonLabel="ダウンロード"
+        submitButtonLabel="UF2ダウンロード"
       />
     </div>
   );
