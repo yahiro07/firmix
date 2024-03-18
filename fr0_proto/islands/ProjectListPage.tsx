@@ -14,6 +14,9 @@ export const ProjectListPage = createFC<Props>(
   ({ projects, showPublicity }) => {
     return (
       <div q={style}>
+        <div q="site-instruction">
+          ガジェットや電子工作の作品を投稿して、ファームウェアを配布できるWebサービスです。
+        </div>
         <HomeTargetSelectionBar />
         <div q="list">
           {projects.map((project) => (
