@@ -23,7 +23,6 @@ export const firmixCore_projectLoader = {
       ...pickObjectMembers(fileContentJson, [
         "projectGuid",
         "projectName",
-        "thumbnailUrl",
         "targetMcu",
         "primaryTargetBoard",
         "tags",

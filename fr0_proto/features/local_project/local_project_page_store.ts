@@ -136,7 +136,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
     },
     async submitProject() {
       if (!project) return;
-      const proceed = window.confirm(`プロジェクトを投稿します。`);
+      const proceed = globalThis.confirm(`プロジェクトを投稿します。`);
       if (proceed) {
         const projectPayload =
           local.mapLocalDevelopmentProjectToLocalProjectSubmissionPayload(
@@ -177,6 +177,7 @@ const local = {
       metadataFileContent,
       firmwareFormat: firmwareContainer.kind,
       firmwareFileBytes_base64: firmwareContainer.binaryBytes_base64,
+      thumbnailFileBytes_base64: thumbnailContainer.imageDataUrl.split(",")[1],
     };
   },
 };

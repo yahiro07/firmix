@@ -1,6 +1,7 @@
 import { filePathHelper } from "~/auxiliaries/utils/file_path_helper.ts";
 import { encodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import {
+  BinaryFileEntry,
   BinaryFileEntryWithTimestamp,
   LocalAsset_Firmware,
   LocalAsset_Metadata,
@@ -10,7 +11,7 @@ import {
 } from "~/base/types_local_project.ts";
 import {
   FirmwareContainer,
-  OnlineImageAssetContainer,
+  ImageFileContainer,
 } from "~/base/types_project_edit.ts";
 import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
 import { imageFileLoader } from "~/cardinal/firmix_presenter_common_modules/image_file_loader.ts";
@@ -58,47 +59,46 @@ export const localAssetBuilder = {
     };
   },
   async buildAssetThumbnail(
-    thumbnailUrl: string | undefined
+    thumbnailFile: BinaryFileEntry | undefined
   ): Promise<LocalAsset_Thumbnail> {
-    if (!thumbnailUrl) {
+    if (!thumbnailFile) {
       return {
         validity: "error",
-        filePath: "",
+        filePath: "thumbnail.(jpg|png)",
         thumbnailContainer: undefined,
-        errorLines: ["サムネイルの指定がありません。"],
+        errorLines: ["ファイルがありません。"],
       };
     }
-    let thumbnailContainer: OnlineImageAssetContainer;
+    let thumbnailContainer: ImageFileContainer;
 
     try {
-      thumbnailContainer = await imageFileLoader.loadOnlineImageAsset(
-        thumbnailUrl
+      thumbnailContainer = await imageFileLoader.loadBinaryImageFile(
+        thumbnailFile
       );
     } catch (error: any) {
       console.error(error);
       return {
         validity: "error",
-        filePath: thumbnailUrl,
+        filePath: thumbnailFile.filePath,
         thumbnailContainer: undefined,
         errorLines: [
-          `画像の取得に失敗しました。`,
+          `画像を読み込めません。`,
           `詳細:${error.message ?? "unknown error"}`,
         ],
       };
     }
-    const errorLines: string[] = [];
 
+    const errorLines: string[] = [];
     const thumbnailValidationRes =
       firmixCore_projectLoader.validateOnlineThumbnailOnFrontend(
         thumbnailContainer
       );
-
     errorLines.push(...thumbnailValidationRes);
 
     const validity = errorLines.length === 0 ? "valid" : "error";
     return {
       validity,
-      filePath: thumbnailUrl,
+      filePath: thumbnailFile.filePath,
       thumbnailContainer:
         (validity === "valid" && thumbnailContainer) || undefined,
       errorLines,

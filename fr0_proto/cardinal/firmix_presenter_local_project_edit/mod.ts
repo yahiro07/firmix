@@ -35,6 +35,11 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
       const dirReader = createLocalDirectoryReader(dirHandle);
       const metadataFile = await dirReader.readTextFile(`project.fm1.json`);
       const readmeFile = await dirReader.readTextFile("readme.md");
+      const thumbnailPngFile = await dirReader.readBinaryFile("thumbnail.png");
+      const thumbnailJpgFile = await dirReader.readBinaryFile("thumbnail.jpg");
+      const thumbnailJpegFile = await dirReader.readBinaryFile(
+        "thumbnail.jpeg"
+      );
 
       let firmwareFile: BinaryFileEntryWithTimestamp | undefined;
       let firmwareFileLoadingErrorText: string | undefined;
@@ -56,7 +61,7 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
       const assetReadme = localAssetBuilder.buildAssetReadme(readmeFile);
       const assetMetadata = localAssetBuilder.buildAssetMetadata(metadataFile);
       const assetThumbnail = await localAssetBuilder.buildAssetThumbnail(
-        assetMetadata.metadataInput?.thumbnailUrl
+        thumbnailPngFile ?? thumbnailJpgFile ?? thumbnailJpegFile
       );
       const assetFirmware = localAssetBuilder.buildAssetFirmware(
         firmwareFile,

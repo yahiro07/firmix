@@ -23,7 +23,7 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
   const handleOperationButton = async () => {
     const nextEnabled = !apiKey;
     if (!nextEnabled) {
-      const ok = window.confirm(
+      const ok = globalThis.confirm(
         `APIキーを削除します。このAPIキーはこれ以降利用できなくなります。`
       );
       if (!ok) return;

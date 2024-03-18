@@ -30,7 +30,7 @@ export const LocalProjectLoadingArea = createFC<Props>(
     const loaded = !!loadedFolderName;
 
     const handleSelectFolder = async () => {
-      const dirHandle = await window.showDirectoryPicker();
+      const dirHandle = await globalThis.showDirectoryPicker();
       if (dirHandle) {
         loadFolder(dirHandle);
       }

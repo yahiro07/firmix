@@ -21,7 +21,7 @@ export const ProjectOperationPart = createFCX<{
       if (automated) {
         message += `このプロジェクトはAPI経由で更新されています。CIによる投稿処理もあわせて削除してください。`;
       }
-      const ok = window.confirm(message);
+      const ok = globalThis.confirm(message);
       if (ok) {
         await rpcClient.deleteProject({ projectId });
         location.href = "/self-projects";

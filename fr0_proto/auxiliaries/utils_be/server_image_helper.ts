@@ -8,14 +8,9 @@ export const serverImageHelper = {
     const img = await decode(imageDataBytes);
     return { width: img.width, height: img.height };
   },
-  async loadOnlineImageAssetAttrs(imageUrl: string): Promise<ImageAssetAttrs> {
-    const res = await fetch(imageUrl);
-    if (res.status !== 200) {
-      raiseError(`failed to fetch image ${imageUrl} (${res.status})`);
-    }
-    const imageArrayBuffer = await res.arrayBuffer();
-    const imageFileBytes = new Uint8Array(imageArrayBuffer);
-
+  async loadImageFileAssetAttrs(
+    imageFileBytes: Uint8Array
+  ): Promise<ImageAssetAttrs> {
     const mimeType = imageHelper_getImageDataMimeType(imageFileBytes);
     if (!mimeType) {
       raiseError(`invalid or unsupported image file format`);
@@ -24,6 +19,6 @@ export const serverImageHelper = {
       imageFileBytes
     );
     const fileSize = imageFileBytes.byteLength;
-    return { fileSize, width, height };
+    return { fileSize, width, height, mimeType };
   },
 };
