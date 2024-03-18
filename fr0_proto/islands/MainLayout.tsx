@@ -33,6 +33,10 @@ const style = css`
   color: ${colors.foregroundText};
 
   > .header-bar {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    z-index: 100;
     background: ${colors.topBarFill};
     color: ${colors.topBarText};
     height: 60px;
@@ -60,6 +64,9 @@ const style = css`
     flex-grow: 1;
     display: flex;
     > .side-bar {
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
       flex-shrink: 0;
     }
     > .main-column {
