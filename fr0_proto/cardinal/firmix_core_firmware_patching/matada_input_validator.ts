@@ -13,8 +13,9 @@ const schemaMetadataFileContent = z.object({
   introductionLines: z.array(z.string().max(256)),
   targetMcu: z.literal("RP2040"),
   primaryTargetBoard: z.string().max(32),
-  repositoryUrl: z.string().max(256),
+  realm: z.union([z.literal("general"), z.literal("keyboard")]),
   tags: z.array(z.string().max(32)),
+  repositoryUrl: z.string().max(256),
   dataEntries: z
     .array(
       z.object({

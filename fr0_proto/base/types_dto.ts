@@ -1,3 +1,4 @@
+import { ProjectRealm } from "~/base/types_app_common.ts";
 import {
   CustomDataEntry,
   CustomDataItem,
@@ -26,6 +27,7 @@ export type ProjectDetailDto = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
+  realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;
   readmeFileContent: string;
@@ -48,10 +50,15 @@ export type ProjectListItemDto = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
+  realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;
   thumbnailUrl: string;
   published: boolean;
   userName: string;
   userAvatarUrl: string;
+};
+
+export type CoactiveState = {
+  homeTargetRealm: ProjectRealm;
 };

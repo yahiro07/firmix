@@ -9,7 +9,6 @@ import {
 import { downloadBinaryFileBlob } from "~/auxiliaries/utils_fe/downloading_link.ts";
 import { useEffectAsync } from "~/auxiliaries/utils_fe/hooks.ts";
 import { ensureFileHandlePermission } from "~/auxiliaries/utils_fe/local_filesystem_helper.ts";
-import { ProjectTab } from "~/base/types_app_common.ts";
 import { LocalProjectSubmissionPayload } from "~/base/types_dto_internal.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
@@ -27,22 +26,19 @@ export type LocalProjectPageStore = {
   loadedFolderName?: string;
   project?: LocalDevelopmentProject;
   canSubmitProject: boolean;
-  projectTab: ProjectTab;
   loadProjectFolder: (dirHandle: FileSystemDirectoryHandle) => Promise<void>;
   reloadProjectFolder(): Promise<void>;
   closeProjectFolder(): void;
   submitEditItems(editItems: ConfigurationEditItem[]): void;
   submitEditItems2(editItems: ConfigurationEditItem[]): Promise<void>;
   submitProject(): Promise<void>;
-  setProjectTab: (value: ProjectTab) => void;
 };
 
 export function useLocalProjectPageStore(): LocalProjectPageStore {
   const [
-    { projectTab, project, projectDirectoryHandle },
-    { setProjectTab, setProject, setProjectDirectoryHandle },
+    { project, projectDirectoryHandle },
+    { setProject, setProjectDirectoryHandle },
   ] = useReasyState({
-    projectTab: "info" as ProjectTab,
     projectDirectoryHandle: undefined as FileSystemDirectoryHandle | undefined,
     project: undefined as LocalDevelopmentProject | undefined,
   });
@@ -152,8 +148,6 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
     loadedFolderName,
     project,
     canSubmitProject,
-    projectTab,
-    setProjectTab,
     ...actions,
   };
 }

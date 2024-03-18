@@ -1,3 +1,4 @@
+import { ProjectRealm } from "~/base/types_app_common.ts";
 import { CustomDataEntry, EditUiItem } from "~/base/types_core_entity.ts";
 
 export type UserEntity = {
@@ -18,6 +19,7 @@ export type ProjectEntity = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
+  realm: ProjectRealm;
   tags: string[];
   //Github上のプロジェクトフォルダのURL,リポジトリ内のサブ階層のフォルダパスを含む
   repositoryUrl: string;

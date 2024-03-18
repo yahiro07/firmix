@@ -1,6 +1,7 @@
 import { Partial } from "$fresh/runtime.ts";
 import { FreshContext } from "$fresh/server.ts";
 import { ResinCssEmitter, ResinCssGlobalStyle } from "resin";
+import { fallbackValues } from "~/base/fallback_values.ts";
 import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
 import { globalStyle } from "~/common/global_style.ts";
 import { SiteContextValue } from "~/common/site_context.ts";
@@ -11,7 +12,14 @@ import { SiteContextProvider } from "~/islands/SiteContextProvider.tsx";
 export default async function App(req: Request, ctx: FreshContext) {
   const pagePath = new URL(req.url).pathname;
   const loginUser = clientStorageImpl.readCookieLoginUserClue(req);
-  const siteContextValue: SiteContextValue = { pagePath, loginUser };
+  const coactiveState =
+    clientStorageImpl.readCookieCoactiveState(req) ??
+    fallbackValues.coactiveState;
+  const siteContextValue: SiteContextValue = {
+    pagePath,
+    loginUser,
+    coactiveState,
+  };
   return (
     <html>
       <head>

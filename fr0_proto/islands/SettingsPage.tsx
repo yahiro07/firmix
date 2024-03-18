@@ -4,8 +4,8 @@ import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 import { colors } from "~/common/ui_theme.ts";
 import {
+  flexAligned,
   flexCentered,
-  flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
 import { ButtonSmall } from "~/components/CommonControls.tsx";
@@ -61,7 +61,7 @@ const style = css`
   height: 100%;
 
   > .edit-row {
-    ${flexHorizontalAligned()};
+    ${flexAligned()};
     > input,
     > button {
       height: 32px;

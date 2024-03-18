@@ -2,11 +2,11 @@ import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import {
+  flexAligned,
   flexHorizontal,
-  flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
-import { Card, LinkButton } from "~/components/CommonControls.tsx";
+import { LinkButton, LinkCard } from "~/components/CommonControls.tsx";
 import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
 
 type Props = {
@@ -17,8 +17,9 @@ type Props = {
 export const ProjectListItemCard = createFC<Props>(
   ({ project, showPublicity }) => {
     const { ProjectTagsList } = projectHeadingArea_parts;
+    const detailPagePath = `/project/${project.projectId}`;
     return (
-      <Card q={style}>
+      <LinkCard href={detailPagePath} q={style}>
         <div q="content-row">
           <div q="thumbnail-box">
             <img src={project.thumbnailUrl} />
@@ -32,10 +33,7 @@ export const ProjectListItemCard = createFC<Props>(
               >
                 {project.published ? "公開中" : "ドラフト"}
               </p>
-              <LinkButton
-                href={`/project/${project.projectId}`}
-                q="button-to-detail"
-              >
+              <LinkButton href={detailPagePath} q="button-to-detail">
                 詳細
               </LinkButton>
             </div>
@@ -50,7 +48,7 @@ export const ProjectListItemCard = createFC<Props>(
             </div>
           </div>
         </div>
-      </Card>
+      </LinkCard>
     );
   }
 );
@@ -81,7 +79,7 @@ const style = css`
 
       > .head-row {
         position: relative;
-        ${flexHorizontalAligned()};
+        ${flexAligned()};
 
         > h3 {
           margin-top: -4px;
@@ -109,10 +107,10 @@ const style = css`
 
       > .foot-row {
         margin-top: auto;
-        ${flexHorizontalAligned(16)};
+        ${flexAligned(16)};
 
         > .author {
-          ${flexHorizontalAligned(4)}
+          ${flexAligned(4)}
           > img {
             width: 24px;
           }

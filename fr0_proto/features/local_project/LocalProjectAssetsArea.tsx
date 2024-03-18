@@ -5,7 +5,7 @@ import {
   LocalAsset_Thumbnail,
   LocalDevelopmentProject,
 } from "~/base/types_local_project.ts";
-import { flexHorizontalAligned } from "~/common/utility_styles.ts";
+import { flexAligned } from "~/common/utility_styles.ts";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type Props = {
@@ -44,7 +44,7 @@ const AssetEntry = createFC<{
     </div>,
     css`
       > .ae-heading {
-        ${flexHorizontalAligned(2)};
+        ${flexAligned(2)};
 
         > .validity-icon {
           &.--validity-valid {
@@ -117,7 +117,7 @@ const style = css`
   position: relative;
 
   > h3 {
-    ${flexHorizontalAligned()};
+    ${flexAligned()};
     font-size: 20px;
     > .icon {
       font-size: 24px;

@@ -28,6 +28,7 @@ type IComponentFlavorWrapper = {
   LinkButton: XDom<"a">;
   ButtonSmall: XDom<"button">;
   Card: XDom<"div">;
+  LinkCard: XDom<"a">;
   FormLabel: XDom<"label">;
   FormTextInput: XDom<"input">;
   Nav: XDom<"ul">;
@@ -401,6 +402,15 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
     `
   ),
   Card: bindTagWithClassNames("div", "bg-white shadow"),
+  LinkCard: bindTagWithClassNames(
+    "a",
+    "bg-white shadow",
+    css`
+      &:hover {
+        opacity: 0.8;
+      }
+    `
+  ),
   FormLabel: bindTagWithClassNames("label", ""),
   FormTextInput: bindTagWithClassNames(
     "input",
@@ -466,6 +476,7 @@ export const {
   LinkButton,
   ButtonSmall,
   Card,
+  LinkCard,
   FormLabel,
   FormTextInput,
   Nav,

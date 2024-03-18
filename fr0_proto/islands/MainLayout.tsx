@@ -1,7 +1,7 @@
 import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { colors } from "~/common/ui_theme.ts";
-import { flexHorizontalAligned } from "~/common/utility_styles.ts";
+import { flexAligned } from "~/common/utility_styles.ts";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 import { SideBar } from "~/features/layout/SideBar.tsx";
 
@@ -33,18 +33,22 @@ const style = css`
   color: ${colors.foregroundText};
 
   > .header-bar {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    z-index: 100;
     background: ${colors.topBarFill};
     color: ${colors.topBarText};
     height: 60px;
     padding: 0 12px;
     flex-shrink: 0;
-    ${flexHorizontalAligned(2)};
+    ${flexAligned(2)};
     > .site-icon {
       font-size: 44px;
       margin-top: 3px;
     }
     > h1 {
-      ${flexHorizontalAligned(8)};
+      ${flexAligned(8)};
       font-size: 36px;
       font-weight: bold;
       color: ${colors.topBarText};
@@ -60,6 +64,9 @@ const style = css`
     flex-grow: 1;
     display: flex;
     > .side-bar {
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
       flex-shrink: 0;
     }
     > .main-column {

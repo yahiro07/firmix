@@ -1,7 +1,6 @@
 import { ComponentChildren } from "preact";
 import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
-import { ProjectTab } from "~/base/types_app_common.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
 import { useRepositoryDisplayInfo } from "~/fe_modules/repository_info_helper.ts";
 import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
@@ -10,8 +9,6 @@ type Props = {
   projectName: string;
   repositoryUrl: string;
   tags: string[];
-  projectTab: ProjectTab;
-  setProjectTab(tab: ProjectTab): void;
   operationUiAdditional?: ComponentChildren;
   authorInfo?: {
     userName: string;
@@ -28,26 +25,13 @@ export const LocalProjectHeadingAreaDummy = createFC(() => {
 });
 
 export const ProjectHeadingArea = createFC<Props>(
-  ({
-    projectName,
-    repositoryUrl,
-    tags,
-    projectTab,
-    setProjectTab,
-    operationUiAdditional,
-    authorInfo,
-  }) => {
+  ({ projectName, repositoryUrl, tags, operationUiAdditional, authorInfo }) => {
     const repositoryInfo = useRepositoryDisplayInfo(repositoryUrl);
-    const toggleProjectTab = () => {
-      const nextTab = projectTab === "editor" ? "info" : "editor";
-      setProjectTab(nextTab);
-    };
     const {
       ProjectTitlePart,
       ProjectTagsList,
       RepositoryInfoPart,
       AuthorPart,
-      EditorButton,
     } = projectHeadingArea_parts;
     return (
       <div q={style}>
@@ -64,13 +48,7 @@ export const ProjectHeadingArea = createFC<Props>(
         )}
         {/* <div q="repository-info" if={!repositoryInfo} /> */}
         <ProjectTagsList tags={tags} q="tags" />
-        <div q="control-area">
-          <EditorButton
-            active={projectTab === "editor"}
-            onClick={toggleProjectTab}
-          />
-          {operationUiAdditional}
-        </div>
+        <div q="control-area">{operationUiAdditional}</div>
       </div>
     );
   }

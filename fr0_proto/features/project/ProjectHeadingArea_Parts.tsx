@@ -2,10 +2,7 @@ import { createFCX, css } from "resin";
 import { ProjectRepositoryInfo } from "~/base/types_app_common.ts";
 import { styleTextLinkInheritColor } from "~/common/common_styles.ts";
 import { colors } from "~/common/ui_theme.ts";
-import {
-  flexHorizontalAligned,
-  flexVertical,
-} from "~/common/utility_styles.ts";
+import { flexAligned, flexVertical } from "~/common/utility_styles.ts";
 import { Button } from "~/components/CommonControls.tsx";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
@@ -19,7 +16,7 @@ const ProjectTitlePart = createFCX<{ projectName: string }>(
     );
   },
   css`
-    ${flexHorizontalAligned(2)};
+    ${flexAligned(2)};
     font-size: 32px;
     > .title-icon {
       margin-top: 3px;
@@ -41,7 +38,7 @@ const ProjectTagsList = createFCX<{ tags: string[] }>(
     );
   },
   css`
-    ${flexHorizontalAligned(8)};
+    ${flexAligned(8)};
     > .tag {
       font-size: 14px;
       padding: 0 8px 1px;
@@ -73,7 +70,7 @@ const RepositoryInfoPart = createFCX<{ repositoryInfo: ProjectRepositoryInfo }>(
         font-size: 30px;
         margin-top: 4px;
       }
-      ${flexHorizontalAligned(1)};
+      ${flexAligned(1)};
     }
     > a {
       ${styleTextLinkInheritColor};
@@ -95,7 +92,7 @@ const AuthorPart = createFCX<{ userName: string; avatarUrl: string }>(
     > img {
       width: 26px;
     }
-    ${flexHorizontalAligned(4)};
+    ${flexAligned(4)};
   `
 );
 
@@ -109,7 +106,7 @@ const EditorButton = createFCX<{ active: boolean; onClick(): void }>(
     );
   },
   css`
-    ${flexHorizontalAligned()};
+    ${flexAligned()};
     &.--active {
       background: ${colors.buttonEditActive};
     }

@@ -1,7 +1,7 @@
 import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { LoginUser } from "~/base/types_dto_internal.ts";
-import { flexHorizontalAligned } from "~/common/utility_styles.ts";
+import { flexAligned } from "~/common/utility_styles.ts";
 
 type Props = {
   user: LoginUser;
@@ -16,7 +16,7 @@ export const LoginUserBox = createFC<Props>(({ user }) => {
 });
 
 const style = css`
-  ${flexHorizontalAligned(6)};
+  ${flexAligned(6)};
   > img {
     width: 24px;
   }

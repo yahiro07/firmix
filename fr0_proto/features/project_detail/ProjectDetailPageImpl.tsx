@@ -1,11 +1,9 @@
 import { useMemo } from "preact/hooks";
 import { css } from "resin";
-import { useReasyState } from "~/auxiliaries/reasy/reasy_state_local.ts";
 import { getDateTimeText_yyyyMMddHHmmss } from "~/auxiliaries/utils/date_time_helper.ts";
 import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { downloadBinaryFileBlob } from "~/auxiliaries/utils_fe/downloading_link.ts";
-import { ProjectTab } from "~/base/types_app_common.ts";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
@@ -25,9 +23,6 @@ type Props = {
 export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
   const { loginUser } = useSiteContext();
   const isSelfProject = project.userId === loginUser?.userId;
-  const [{ projectTab }, { setProjectTab }] = useReasyState({
-    projectTab: "info" as ProjectTab,
-  });
 
   const { hasError, configurationSourceItems } = useMemo(() => {
     const configurationSourceItemWrappers =
@@ -75,8 +70,6 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         projectName={project.projectName}
         tags={project.tags}
         repositoryUrl={project.repositoryUrl}
-        projectTab={projectTab}
-        setProjectTab={setProjectTab}
         authorInfo={{
           userName: project.userName,
           userAvatarUrl: project.userAvatarUrl,
@@ -90,7 +83,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
           />
         }
       />
-      <div q="info-area" if={projectTab === "info"}>
+      <div q="info-area">
         <div>ターゲットMCU: {project.targetMcu}</div>
         <div>ファームウェア更新日時: {firmwareUpdateAtText}</div>
         <div>ファームウェアリビジョン: {project.firmwareRevision}</div>
@@ -102,15 +95,11 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         </div>
         {hasError && <div>カスタムデータの定義にエラーがあります</div>}
       </div>
-      <ProjectReadmeArea
-        readmeFileContent={project.readmeFileContent}
-        if={projectTab === "info"}
-      />
+      <ProjectReadmeArea readmeFileContent={project.readmeFileContent} />
       <ParametersConfigurationArea
         configurationSourceItems={configurationSourceItems}
         submitEditItems={submitEditItems}
-        submitButtonLabel="ダウンロード"
-        if={projectTab === "editor"}
+        submitButtonLabel="UF2ダウンロード"
       />
     </div>
   );

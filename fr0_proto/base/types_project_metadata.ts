@@ -1,3 +1,4 @@
+import { ProjectRealm } from "~/base/types_app_common.ts";
 import { CustomDataEntry, EditUiItem } from "~/base/types_core_entity.ts";
 
 export type ProjectMetadataEditUiItemInput = {
@@ -11,8 +12,9 @@ export type ProjectMetadataJsonFileContent = {
   introductionLines: string[];
   targetMcu: string;
   primaryTargetBoard: string;
-  repositoryUrl: string;
+  realm: ProjectRealm;
   tags: string[];
+  repositoryUrl: string;
   dataEntries: CustomDataEntry[];
   editUiItems: ProjectMetadataEditUiItemInput[];
 };
@@ -23,6 +25,7 @@ export type ProjectMetadataInput = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
+  realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;
   dataEntries: CustomDataEntry[];
