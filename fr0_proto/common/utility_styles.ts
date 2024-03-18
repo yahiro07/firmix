@@ -12,14 +12,12 @@ export const flexHorizontal = (gap?: number) =>
     ${gap ? `gap: ${gap}px;` : ""}
   `;
 
-export const flexHorizontalAligned = (gap?: number) =>
+export const flexAligned = (gap?: number) =>
   css`
     display: flex;
     align-items: center;
     ${gap ? `gap: ${gap}px;` : ""}
   `;
-
-export const flexAligned = flexHorizontalAligned;
 
 export const flexCentered = (gap?: number) =>
   css`

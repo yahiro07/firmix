@@ -2,8 +2,8 @@ import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import {
+  flexAligned,
   flexHorizontal,
-  flexHorizontalAligned,
   flexVertical,
 } from "~/common/utility_styles.ts";
 import { LinkButton, LinkCard } from "~/components/CommonControls.tsx";
@@ -79,7 +79,7 @@ const style = css`
 
       > .head-row {
         position: relative;
-        ${flexHorizontalAligned()};
+        ${flexAligned()};
 
         > h3 {
           margin-top: -4px;
@@ -107,10 +107,10 @@ const style = css`
 
       > .foot-row {
         margin-top: auto;
-        ${flexHorizontalAligned(16)};
+        ${flexAligned(16)};
 
         > .author {
-          ${flexHorizontalAligned(4)}
+          ${flexAligned(4)}
           > img {
             width: 24px;
           }

@@ -1,7 +1,7 @@
 import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { colors } from "~/common/ui_theme.ts";
-import { flexHorizontalAligned } from "~/common/utility_styles.ts";
+import { flexAligned } from "~/common/utility_styles.ts";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 import { SideBar } from "~/features/layout/SideBar.tsx";
 
@@ -42,13 +42,13 @@ const style = css`
     height: 60px;
     padding: 0 12px;
     flex-shrink: 0;
-    ${flexHorizontalAligned(2)};
+    ${flexAligned(2)};
     > .site-icon {
       font-size: 44px;
       margin-top: 3px;
     }
     > h1 {
-      ${flexHorizontalAligned(8)};
+      ${flexAligned(8)};
       font-size: 36px;
       font-weight: bold;
       color: ${colors.topBarText};

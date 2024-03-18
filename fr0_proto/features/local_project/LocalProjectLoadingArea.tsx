@@ -1,7 +1,7 @@
 import { useEffect } from "preact/hooks";
 import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
-import { flexHorizontalAligned } from "~/common/utility_styles.ts";
+import { flexAligned } from "~/common/utility_styles.ts";
 import { ButtonSmall } from "~/components/CommonControls.tsx";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
@@ -66,10 +66,10 @@ export const LocalProjectLoadingArea = createFC<Props>(
 
 const style = css`
   padding: 8px;
-  ${flexHorizontalAligned(8)};
+  ${flexAligned(8)};
   > .folder {
     font-size: 18px;
-    ${flexHorizontalAligned(4)};
+    ${flexAligned(4)};
   }
   > .spacer {
     margin-left: auto;
