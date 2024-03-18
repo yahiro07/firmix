@@ -29,8 +29,6 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
     submitEditItems2,
     canSubmitProject,
     submitProject,
-    projectTab,
-    setProjectTab,
   } = useLocalProjectPageStore();
 
   const metadataInput = project?.assetMetadata.metadataInput;
@@ -55,16 +53,11 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
           projectName={metadataInput.projectName}
           tags={metadataInput.tags}
           repositoryUrl={metadataInput.repositoryUrl}
-          projectTab={projectTab}
-          setProjectTab={setProjectTab}
         />
       )}
       {project && !metadataInput && <LocalProjectHeadingAreaDummy />}
 
-      <LocalProjectAssetsArea
-        project={project!}
-        if={project && projectTab === "info"}
-      />
+      <LocalProjectAssetsArea project={project!} if={project} />
       {/* <div if={errorMessage}>{errorMessage}</div> */}
       <div
         q="firmware-timestamp"
@@ -72,18 +65,10 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
       >
         ファームウェアビルド日時: {firmwareTimeText}
       </div>
-      <ParametersConfigurationArea
-        configurationSourceItems={project?.configurationSourceItems!}
-        submitEditItems={submitEditItems}
-        submitButtonLabel="ダウンロード"
-        submit2={submitEditItems2}
-        submit2Label="出力"
-        if={project?.configurationSourceItems && projectTab === "editor"}
-      />
       <ProjectReadmeArea
         q="readme"
         readmeFileContent={project?.assetReadme.fileContent!}
-        if={project?.assetReadme.fileContent && projectTab === "info"}
+        if={project?.assetReadme.fileContent}
       />
       <div q="blank-filler" if={!project}>
         <IconIconifyZ spec="ph:folder-thin" q="folder-icon" />
@@ -93,6 +78,14 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
           ドラッグ&ドロップして読み込みます
         </div>
       </div>
+      <ParametersConfigurationArea
+        configurationSourceItems={project?.configurationSourceItems!}
+        submitEditItems={submitEditItems}
+        submitButtonLabel="ダウンロード"
+        submit2={submitEditItems2}
+        submit2Label="出力"
+        if={project?.configurationSourceItems}
+      />
     </div>
   );
 });
