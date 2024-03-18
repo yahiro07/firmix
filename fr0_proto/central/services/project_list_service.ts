@@ -55,6 +55,7 @@ const local = {
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
+      realm: project.realm,
       tags: project.tags,
       repositoryUrl: project.repositoryUrl,
       thumbnailUrl: projectHelper.getThumbnailImageUrl(project),

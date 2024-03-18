@@ -25,6 +25,7 @@ export const firmixCore_projectLoader = {
         "projectName",
         "targetMcu",
         "primaryTargetBoard",
+        "realm",
         "tags",
         "repositoryUrl",
         "dataEntries",
