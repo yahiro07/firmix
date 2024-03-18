@@ -74,6 +74,8 @@ export const ParametersConfigurationArea = createFC<Props>(
 
     return (
       <div q={style}>
+        <hr if={configurationSourceItems.length > 0} />
+        <h3 if={configurationSourceItems.length > 0}>パラメータ</h3>
         {hasError && (
           <div>
             <div>カスタムデータの定義にエラーがあります</div>
@@ -115,6 +117,12 @@ export const ParametersConfigurationArea = createFC<Props>(
 const style = css`
   padding: 10px;
   ${flexVertical(20)};
+  > hr {
+    margin-top: 20px;
+  }
+  > h3 {
+    font-size: 1.3em;
+  }
   > .items {
     ${flexVertical(12)};
     > .item {
@@ -122,6 +130,7 @@ const style = css`
     }
   }
   > .buttons-row {
+    margin-top: 8px;
     ${flexHorizontal(8)};
   }
 `;
