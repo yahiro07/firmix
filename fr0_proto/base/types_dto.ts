@@ -58,3 +58,7 @@ export type ProjectListItemDto = {
   userName: string;
   userAvatarUrl: string;
 };
+
+export type CoactiveState = {
+  homeTargetRealm: ProjectRealm;
+};
