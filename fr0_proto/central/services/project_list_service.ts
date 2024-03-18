@@ -1,4 +1,5 @@
 import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
+import { ProjectRealm } from "~/base/types_app_common.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { storehouse } from "~/central/depot/storehouse.ts";
@@ -22,10 +23,12 @@ const projectUserLookups = [
 
 export function createProjectListService() {
   return {
-    async getProjectList_recent(): Promise<ProjectListItemDto[]> {
+    async getProjectList_recent(
+      realm: ProjectRealm
+    ): Promise<ProjectListItemDto[]> {
       const projects = await storehouse.projectCollection
         .aggregate<ProjectUserAggregateResult>([
-          { $match: { published: true } },
+          { $match: { published: true, realm } },
           { $sort: { projectId: -1 } },
           ...projectUserLookups,
         ])
