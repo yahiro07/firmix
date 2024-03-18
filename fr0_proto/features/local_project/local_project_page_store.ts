@@ -136,7 +136,7 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
     },
     async submitProject() {
       if (!project) return;
-      const proceed = window.confirm(`プロジェクトを投稿します。`);
+      const proceed = globalThis.confirm(`プロジェクトを投稿します。`);
       if (proceed) {
         const projectPayload =
           local.mapLocalDevelopmentProjectToLocalProjectSubmissionPayload(

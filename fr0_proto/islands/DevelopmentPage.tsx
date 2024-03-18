@@ -34,7 +34,7 @@ export const DevelopmentPage = createFC(() => {
   };
 
   const handleClick = async () => {
-    const dirHandle = await window.showDirectoryPicker();
+    const dirHandle = await globalThis.showDirectoryPicker();
     await idb_keyval.set("dirHandle", dirHandle);
     setText(`Stored file handle for "${dirHandle.name}" in IndexedDB.`);
     await showReadmeFile(dirHandle);
