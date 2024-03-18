@@ -1,34 +1,44 @@
 import { raiseError } from "~/auxiliaries/utils/error_util.ts";
-import { imageHelper_getImageDataMimeType } from "~/auxiliaries/utils/image_helper.ts";
-import { OnlineImageAssetContainer } from "~/base/types_project_edit.ts";
+import { filePathHelper } from "~/auxiliaries/utils/file_path_helper.ts";
+import { encodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
+import { BinaryFileEntry } from "~/base/types_local_project.ts";
+import { ImageFileContainer } from "~/base/types_project_edit.ts";
 
 export const imageFileLoader = {
-  async loadOnlineImageAsset(
-    imageUrl: string
-  ): Promise<OnlineImageAssetContainer> {
-    const res = await fetch(imageUrl);
-    if (res.status !== 200) {
-      raiseError(`failed to fetch image ${imageUrl} (${res.status})`);
-    }
-    const arrayBuffer = await res.arrayBuffer();
-    const imageDataBytes = new Uint8Array(arrayBuffer);
-    const mimeType = imageHelper_getImageDataMimeType(imageDataBytes);
-    if (!mimeType) {
-      raiseError(`unsupported image file type}`);
-    }
-    const fileSize = imageDataBytes.byteLength;
+  async loadBinaryImageFile(
+    fileEntry: BinaryFileEntry
+  ): Promise<ImageFileContainer> {
+    const fileName = filePathHelper.getFileNameFromFilePath(fileEntry.filePath);
+    const contentBytes = fileEntry.contentBytes;
+    const fileSize = contentBytes.byteLength;
+    const binaryBytes = contentBytes;
 
+    const extension = fileName.split(".")[1];
+    const mimeType = (
+      {
+        png: "image/png",
+        jpg: "image/jpeg",
+        jpeg: "image/jpeg",
+      } as const
+    )[extension];
+    if (!mimeType) {
+      raiseError(`unsupported image file extension ${extension}`);
+    }
+    const imageDataUrl = `data:${mimeType};base64,${encodeBinaryBase64(
+      binaryBytes
+    )}`;
     //縦横のサイズを得るためにImageBitmapを作る
-    const blob = new Blob([imageDataBytes], { type: mimeType });
+    const blob = new Blob([binaryBytes], { type: mimeType });
     const imageBitmap = await createImageBitmap(blob);
     const { width, height } = imageBitmap;
 
     return {
-      imageUrl,
+      fileName,
       mimeType,
       fileSize,
       width,
       height,
+      imageDataUrl,
     };
   },
 };

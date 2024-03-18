@@ -2,6 +2,7 @@ import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { storehouse } from "~/central/depot/storehouse.ts";
+import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 type ProjectUserAggregateResult = ProjectEntity & {
   user: UserEntity;
@@ -56,7 +57,7 @@ const local = {
       primaryTargetBoard: project.primaryTargetBoard,
       tags: project.tags,
       repositoryUrl: project.repositoryUrl,
-      thumbnailUrl: project.thumbnailUrl,
+      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
       published: project.published,
       userName: project.user.userName,
       userAvatarUrl: specifyGithubAvatarUrlSize(project.user.avatarUrl, 48),

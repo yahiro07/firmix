@@ -26,14 +26,16 @@ export function createProjectService() {
       metadataFileContent: string;
       firmwareFormat: FirmwareFormat;
       firmwareFileBytes: Uint8Array;
+      thumbnailFileBytes: Uint8Array;
       automated: boolean;
     }) {
       const {
         userId,
         readmeFileContent,
-        metadataFileContent,
         firmwareFormat,
         firmwareFileBytes,
+        metadataFileContent,
+        thumbnailFileBytes,
         automated,
       } = args;
       const { metadataInput, errorLines } =
@@ -49,13 +51,8 @@ export function createProjectService() {
       const projectId =
         existingProject?.projectId ?? generateIdTimeSequential();
 
-      const { thumbnailUrl } = metadataInput;
-      if (!thumbnailUrl) {
-        raiseError(`missing thumbnailUrl in metadata`);
-      }
-
-      const imageAttrs = await serverImageHelper.loadOnlineImageAssetAttrs(
-        thumbnailUrl
+      const imageAttrs = await serverImageHelper.loadImageFileAssetAttrs(
+        thumbnailFileBytes
       );
       firmixCore_projectLoader.validateOnlineThumbnailOnServer(imageAttrs);
 
@@ -76,6 +73,11 @@ export function createProjectService() {
         existingProject?.updateAt ??
         Date.now();
 
+      const thumbnailExtension = imageAttrs.mimeType.replace("image/", "");
+      const thumbnailFileName = `thumbnail.${thumbnailExtension}`;
+      const thumbnailFileHash = generateHashMd5(thumbnailFileBytes);
+      let thumbnailRevision = existingProject?.thumbnailRevision ?? 0;
+
       if (firmwareFileHash !== existingProject?.firmwareFileHash) {
         await objectStorageBridge.uploadBinaryFile(
           `${projectId}/${firmwareFileName}`,
@@ -83,6 +85,15 @@ export function createProjectService() {
         );
         firmwareRevision++;
         firmwareUpdateAt = Date.now();
+      }
+
+      if (thumbnailFileHash !== existingProject?.thumbnailFileHash) {
+        await objectStorageBridge.uploadImageFile(
+          `${projectId}/${thumbnailFileName}`,
+          thumbnailFileBytes,
+          imageAttrs.mimeType
+        );
+        thumbnailRevision++;
       }
 
       const projectEntity = local.createProjectEntity({
@@ -94,7 +105,9 @@ export function createProjectService() {
         firmwareFileHash,
         firmwareRevision,
         firmwareUpdateAt,
-        thumbnailUrl,
+        thumbnailFileName,
+        thumbnailFileHash,
+        thumbnailRevision,
         revision,
         published,
         automated,
@@ -110,6 +123,7 @@ export function createProjectService() {
         metadataFileContent: string;
         firmwareFormat: FirmwareFormat;
         firmwareFileBytes: Uint8Array;
+        thumbnailFileBytes: Uint8Array;
         automated: boolean;
       },
       user: UserEntity
@@ -139,6 +153,7 @@ export function createProjectService() {
         metadataFileContent,
         firmwareFormat,
         firmwareFileBytes,
+        thumbnailFileBytes,
       } = args;
       const user = await storehouse.userCollection.findOne({
         apiKey,
@@ -154,6 +169,7 @@ export function createProjectService() {
           metadataFileContent,
           firmwareFormat,
           firmwareFileBytes,
+          thumbnailFileBytes,
           automated: true,
         },
         user
@@ -182,6 +198,7 @@ export function createProjectService() {
         metadataFileContent,
         firmwareFormat,
         firmwareFileBytes_base64,
+        thumbnailFileBytes_base64,
       } = projectPayload;
 
       await m.upsertProjectWithLog(
@@ -191,6 +208,7 @@ export function createProjectService() {
           metadataFileContent,
           firmwareFormat,
           firmwareFileBytes: decodeBinaryBase64(firmwareFileBytes_base64),
+          thumbnailFileBytes: decodeBinaryBase64(thumbnailFileBytes_base64),
           automated: false,
         },
         user
@@ -224,8 +242,10 @@ const local = {
     firmwareFileName: string;
     firmwareFileHash: string;
     firmwareRevision: number;
+    thumbnailFileName: string;
+    thumbnailFileHash: string;
+    thumbnailRevision: number;
     firmwareUpdateAt: number;
-    thumbnailUrl: string;
     revision: number;
     published: boolean;
     automated: boolean;
@@ -248,8 +268,10 @@ const local = {
       firmwareFileName: args.firmwareFileName,
       firmwareFileHash: args.firmwareFileHash,
       firmwareRevision: args.firmwareRevision,
+      thumbnailFileName: args.thumbnailFileName,
+      thumbnailFileHash: args.thumbnailFileHash,
+      thumbnailRevision: args.thumbnailRevision,
       firmwareUpdateAt: args.firmwareUpdateAt,
-      thumbnailUrl: args.thumbnailUrl,
       revision: args.revision,
       published: args.published,
       automated: args.automated,
@@ -274,7 +296,7 @@ const local = {
       readmeFileContent: project.readmeFileContent,
       dataEntries: project.dataEntries,
       editUiItems: project.editUiItems,
-      thumbnailUrl: project.thumbnailUrl,
+      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
       firmwareBinaryUrl: projectHelper.getFirmwareBinaryUrl(project),
       firmwareUpdateAt: project.firmwareUpdateAt,
       published: project.published,

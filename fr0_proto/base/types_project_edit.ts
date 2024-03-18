@@ -1,4 +1,4 @@
-import { FirmwareFormat } from "~/base/types_app_common.ts";
+import { FirmwareFormat, ThumbnailMimeTypes } from "~/base/types_app_common.ts";
 import { CustomDataEntry, EditUiItem } from "~/base/types_core_entity.ts";
 
 export type FirmwarePatchingBlob = {
@@ -31,9 +31,10 @@ export type FirmwareContainer = {
   binaryBytes_base64: string;
 };
 
-export type OnlineImageAssetContainer = {
-  imageUrl: string;
-  mimeType: string;
+export type ImageFileContainer = {
+  fileName: string;
+  imageDataUrl: string;
+  mimeType: ThumbnailMimeTypes;
   fileSize: number;
   width: number;
   height: number;

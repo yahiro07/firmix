@@ -1,7 +1,7 @@
 import { ConfigurationSourceItemWrapper } from "~/base/types_dto.ts";
 import {
   FirmwareContainer,
-  OnlineImageAssetContainer,
+  ImageFileContainer,
 } from "~/base/types_project_edit.ts";
 import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 
@@ -39,7 +39,7 @@ export type LocalAsset_Metadata = LocalAssetBase & {
 };
 
 export type LocalAsset_Thumbnail = LocalAssetBase & {
-  thumbnailContainer: OnlineImageAssetContainer | undefined;
+  thumbnailContainer: ImageFileContainer | undefined;
 };
 
 export type LocalAsset_Firmware = LocalAssetBase & {

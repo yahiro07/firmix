@@ -85,7 +85,7 @@ export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
   } = project;
   const thumbnailInfoAdditional =
     local.extractThumbnailInfoAdditional(assetThumbnail);
-  const thumbnailUrl = assetMetadata.metadataInput?.thumbnailUrl;
+  const thumbnailUrl = assetThumbnail.thumbnailContainer?.imageDataUrl;
 
   return (
     <div q={style}>
