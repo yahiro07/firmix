@@ -20,7 +20,7 @@ import * as $local_work from "./routes/local-work.tsx";
 import * as $project_projectId_ from "./routes/project/[projectId].tsx";
 import * as $self_projects from "./routes/self-projects.tsx";
 import * as $settings from "./routes/settings.tsx";
-import * as $ChildProjectsListPage from "./islands/ChildProjectsListPage.tsx";
+import * as $ChildProjectListPage from "./islands/ChildProjectListPage.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $DevelopmentPage from "./islands/DevelopmentPage.tsx";
 import * as $LocalProjectPage from "./islands/LocalProjectPage.tsx";
@@ -53,7 +53,7 @@ const manifest = {
     "./routes/settings.tsx": $settings,
   },
   islands: {
-    "./islands/ChildProjectsListPage.tsx": $ChildProjectsListPage,
+    "./islands/ChildProjectListPage.tsx": $ChildProjectListPage,
     "./islands/Counter.tsx": $Counter,
     "./islands/DevelopmentPage.tsx": $DevelopmentPage,
     "./islands/LocalProjectPage.tsx": $LocalProjectPage,

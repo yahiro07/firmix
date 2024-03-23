@@ -12,7 +12,10 @@ import { rpcClient } from "~/common/rpc_client.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 import { colors } from "~/common/ui_theme.ts";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
-import { LinkDerivedProjectPage } from "~/features/project/project_common_parts.tsx";
+import {
+  LinkChildProjectListPage,
+  LinkParentProjectPage,
+} from "~/features/project/project_common_parts.tsx";
 import { ProjectHeadingArea } from "~/features/project/ProjectHeadingArea.tsx";
 import { ProjectReadmeArea } from "~/features/project/ProjectReadmeArea.tsx";
 import { ProjectOperationPart } from "~/features/project_detail/ProjectOperationPart.tsx";
@@ -94,10 +97,15 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         <div if={false}>
           投稿ソース: {project.automated ? "API経由" : "ローカル"}
         </div>
-        <LinkDerivedProjectPage
+        <LinkChildProjectListPage
           project={project}
           if={project.numChildProjects > 0}
           q="link-derived"
+        />
+        <LinkParentProjectPage
+          projectId={project.parentProjectId}
+          if={!!project.parentProjectId}
+          q="link-parent"
         />
         {hasError && <div>カスタムデータの定義にエラーがあります</div>}
       </div>
@@ -117,6 +125,7 @@ const style = css`
   /* min-height: 100%; */
   > .info-area {
     padding: 0 8px;
+    > .link-parent,
     > .link-derived {
       margin-left: 3px;
       margin-top: 8px;

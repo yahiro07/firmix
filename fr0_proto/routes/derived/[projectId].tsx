@@ -1,7 +1,7 @@
 import { defineRoute } from "$fresh/src/server/defines.ts";
 import { serverShell } from "~/central/server_shell.ts";
 import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
-import { ChildProjectListPage } from "~/islands/ChildProjectsListPage.tsx";
+import { ChildProjectListPage } from "~/islands/ChildProjectListPage.tsx";
 
 export default defineRoute(async (req, ctx) => {
   const projectId = ctx.params.projectId!;

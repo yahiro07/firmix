@@ -8,7 +8,7 @@ import {
 } from "~/common/utility_styles.ts";
 import { LinkButton, LinkCard } from "~/components/CommonControls.tsx";
 import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
-import { LinkDerivedProjectPage } from "~/features/project/project_common_parts.tsx";
+import { LinkChildProjectListPage } from "~/features/project/project_common_parts.tsx";
 
 type Props = {
   project: ProjectListItemDto;
@@ -40,7 +40,7 @@ export const ProjectListItemCard = createFC<Props>(
             </div>
 
             <div>{project.introduction}</div>
-            <LinkDerivedProjectPage
+            <LinkChildProjectListPage
               project={project}
               q="link-derived"
               if={project.numChildProjects > 0}
