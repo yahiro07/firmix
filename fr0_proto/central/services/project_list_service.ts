@@ -7,6 +7,11 @@ import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 type ProjectUserAggregateResult = ProjectEntity & {
   user: UserEntity;
+  childProjects?: {
+    projectId: string;
+    userId: string;
+    published: boolean;
+  }[];
 };
 
 const projectUserLookups = [
@@ -21,10 +26,25 @@ const projectUserLookups = [
   { $unwind: "$user" },
 ];
 
+const projectChildProjectsLookups = [
+  {
+    $lookup: {
+      from: "project",
+      let: { cp_ids: "$childProjectIds" },
+      pipeline: [
+        { $match: { $expr: { $in: ["$projectId", "$$cp_ids"] } } },
+        { $project: { _id: 0, projectId: 1, userId: 1, published: 1 } },
+      ],
+      as: "childProjects",
+    },
+  },
+];
+
 export function createProjectListService() {
   return {
     async getProjectList_recent(
-      realm: ProjectRealm
+      realm: ProjectRealm,
+      readerUserId: string
     ): Promise<ProjectListItemDto[]> {
       const projects = await storehouse.projectCollection
         .aggregate<ProjectUserAggregateResult>([
@@ -37,9 +57,12 @@ export function createProjectListService() {
           } as any,
           { $sort: { projectId: -1 } },
           ...projectUserLookups,
+          ...projectChildProjectsLookups,
         ])
         .toArray();
-      return projects.map(local.mapProjectEntityToListItemDto);
+      return projects.map((project) =>
+        local.mapProjectEntityToListItemDto(project, readerUserId)
+      );
     },
     async getProjectList_self(userId: string): Promise<ProjectListItemDto[]> {
       const projects = await storehouse.projectCollection
@@ -47,12 +70,16 @@ export function createProjectListService() {
           { $match: { userId } },
           { $sort: { projectId: -1 } },
           ...projectUserLookups,
+          ...projectChildProjectsLookups,
         ])
         .toArray();
-      return projects.map(local.mapProjectEntityToListItemDto);
+      return projects.map((project) =>
+        local.mapProjectEntityToListItemDto(project, userId)
+      );
     },
     async getProjectList_children(
-      projectId: string
+      projectId: string,
+      readerUserId: string
     ): Promise<ProjectListItemDto[]> {
       const project = await storehouse.projectCabinet.get(projectId);
       const childProjectIds = project.childProjectIds ?? [];
@@ -63,23 +90,41 @@ export function createProjectListService() {
           ...projectUserLookups,
         ])
         .toArray();
-      return projects.map(local.mapProjectEntityToListItemDto);
+      return projects.map((project) =>
+        local.mapProjectEntityToListItemDto(project, readerUserId)
+      );
     },
-    async getProjectDetail(projectId: string): Promise<ProjectDetailDto> {
+    async getProjectDetail(
+      projectId: string,
+      readerUserId: string
+    ): Promise<ProjectDetailDto> {
       const projects = await storehouse.projectCollection
         .aggregate<ProjectUserAggregateResult>([
           { $match: { projectId } },
           ...projectUserLookups,
+          ...projectChildProjectsLookups,
         ])
         .toArray();
-      return local.mapProjectEntityToDetailDto(projects[0]);
+      return local.mapProjectEntityToDetailDto(projects[0], readerUserId);
     },
   };
 }
 
 const local = {
+  getNumChildProjects(
+    project: ProjectUserAggregateResult,
+    readerUserId: string
+  ) {
+    return (
+      project.childProjects?.filter(
+        (child) =>
+          child.published || (!child.published && child.userId === readerUserId)
+      ).length ?? 0
+    );
+  },
   mapProjectEntityToListItemDto(
-    project: ProjectUserAggregateResult
+    project: ProjectUserAggregateResult,
+    readerUserId: string
   ): ProjectListItemDto {
     return {
       projectId: project.projectId,
@@ -96,11 +141,12 @@ const local = {
       published: project.published,
       userName: project.user.userName,
       userAvatarUrl: specifyGithubAvatarUrlSize(project.user.avatarUrl, 48),
-      numChildProjects: project.childProjectIds.length,
+      numChildProjects: local.getNumChildProjects(project, readerUserId),
     };
   },
   mapProjectEntityToDetailDto(
-    project: ProjectUserAggregateResult
+    project: ProjectUserAggregateResult,
+    readerUserId: string
   ): ProjectDetailDto {
     return {
       projectId: project.projectId,
@@ -127,7 +173,7 @@ const local = {
       updateAt: project.updateAt,
       userName: project.user.userName,
       userAvatarUrl: specifyGithubAvatarUrlSize(project.user.avatarUrl, 48),
-      numChildProjects: project.childProjectIds.length,
+      numChildProjects: local.getNumChildProjects(project, readerUserId),
     };
   },
 };
