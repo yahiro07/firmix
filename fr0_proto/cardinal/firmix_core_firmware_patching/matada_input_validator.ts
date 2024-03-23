@@ -10,6 +10,8 @@ const customDataItemCommon = {
 const schemaMetadataFileContent = z.object({
   projectGuid: z.string().uuid(),
   projectName: z.string().max(32),
+  parentProjectGuid: z.string().uuid().optional(),
+  variationName: z.string().max(32).optional(),
   introductionLines: z.array(z.string().max(256)),
   targetMcu: z.literal("RP2040"),
   primaryTargetBoard: z.string().max(32),

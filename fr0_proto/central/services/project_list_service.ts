@@ -28,7 +28,13 @@ export function createProjectListService() {
     ): Promise<ProjectListItemDto[]> {
       const projects = await storehouse.projectCollection
         .aggregate<ProjectUserAggregateResult>([
-          { $match: { published: true, realm } },
+          {
+            $match: {
+              published: true,
+              realm,
+              parentProjectId: "",
+            },
+          } as any,
           { $sort: { projectId: -1 } },
           ...projectUserLookups,
         ])
@@ -45,6 +51,20 @@ export function createProjectListService() {
         .toArray();
       return projects.map(local.mapProjectEntityToListItemDto);
     },
+    async getProjectList_children(
+      projectId: string
+    ): Promise<ProjectListItemDto[]> {
+      const project = await storehouse.projectCabinet.get(projectId);
+      const childProjectIds = project.childProjectIds ?? [];
+      const projects = await storehouse.projectCollection
+        .aggregate<ProjectUserAggregateResult>([
+          { $match: { projectId: { $in: childProjectIds } } },
+          { $sort: { projectId: -1 } },
+          ...projectUserLookups,
+        ])
+        .toArray();
+      return projects.map(local.mapProjectEntityToListItemDto);
+    },
   };
 }
 
@@ -55,6 +75,8 @@ const local = {
     return {
       projectId: project.projectId,
       projectName: project.projectName,
+      parentProjectId: project.parentProjectId,
+      variationName: project.variationName,
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
@@ -65,6 +87,7 @@ const local = {
       published: project.published,
       userName: project.user.userName,
       userAvatarUrl: specifyGithubAvatarUrlSize(project.user.avatarUrl, 48),
+      numChildProjects: project.childProjectIds.length,
     };
   },
 };
