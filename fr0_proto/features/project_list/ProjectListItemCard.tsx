@@ -8,6 +8,7 @@ import {
 } from "~/common/utility_styles.ts";
 import { LinkButton, LinkCard } from "~/components/CommonControls.tsx";
 import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
+import { LinkChildProjectListPage } from "~/features/project/project_common_parts.tsx";
 
 type Props = {
   project: ProjectListItemDto;
@@ -37,8 +38,16 @@ export const ProjectListItemCard = createFC<Props>(
                 詳細
               </LinkButton>
             </div>
+            <h4 if={project.variationName}>{project.variationName}</h4>
 
-            <p>{project.introduction}</p>
+            <div>{project.introduction}</div>
+            <LinkChildProjectListPage
+              project={project}
+              q="link-derived"
+              if={project.numChildProjects > 0}
+              smaller
+            />
+
             <div q="foot-row">
               <div q="author">
                 <img src={project.userAvatarUrl} />
@@ -85,6 +94,7 @@ const style = css`
           margin-top: -4px;
           font-size: 22px;
         }
+
         > .publicity {
           flex-shrink: 0;
           font-size: 15px;
@@ -103,6 +113,15 @@ const style = css`
           flex-shrink: 0;
           margin-left: auto;
         }
+      }
+
+      > h4 {
+        font-size: 18px;
+      }
+
+      > .link-derived {
+        align-self: flex-start;
+        margin-top: 4px;
       }
 
       > .foot-row {

@@ -4,10 +4,8 @@ import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import { generateHashMd5 } from "~/auxiliaries/utils_be/hash_helper.ts";
 import { generateIdTimeSequential } from "~/auxiliaries/utils_be/id_generator.ts";
 import { serverImageHelper } from "~/auxiliaries/utils_be/server_image_helper.ts";
-import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
 import { FirmwareFormat } from "~/base/types_app_common.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
-import { ProjectDetailDto } from "~/base/types_dto.ts";
 import {
   LocalProjectSubmissionPayload,
   ProjectSubmissionArgument,
@@ -16,10 +14,30 @@ import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
 import { objectStorageBridge } from "~/central/depot/object_storage_bridge_instance.ts";
 import { storehouse } from "~/central/depot/storehouse.ts";
-import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 export function createProjectService() {
   const m = {
+    async updateProjectLink(args: {
+      projectId: string;
+      parentProjectId: string;
+      prevParentProjectId: string;
+    }) {
+      const { projectId, parentProjectId, prevParentProjectId } = args;
+      if (parentProjectId !== prevParentProjectId) {
+        if (prevParentProjectId) {
+          await storehouse.projectCollection.updateOne(
+            { projectId: prevParentProjectId },
+            { $pull: { childProjectIds: projectId } }
+          );
+        }
+        if (parentProjectId) {
+          await storehouse.projectCollection.updateOne(
+            { projectId: parentProjectId },
+            { $addToSet: { childProjectIds: projectId } }
+          );
+        }
+      }
+    },
     async upsertProject(args: {
       userId: string;
       readmeFileContent: string;
@@ -45,11 +63,30 @@ export function createProjectService() {
       if (errorLines.length > 0) {
         raiseError(`invalid metadata schema, ${errorLines.join("\n")} `);
       }
+
+      const { projectGuid, parentProjectGuid } = metadataInput;
+
       const existingProject = await storehouse.projectCollection.findOne({
-        projectGuid: metadataInput.projectGuid,
+        projectGuid,
       });
       const projectId =
         existingProject?.projectId ?? generateIdTimeSequential();
+
+      const prevParentProjectId = existingProject?.parentProjectId ?? "";
+
+      const parentProject =
+        (parentProjectGuid &&
+          (await storehouse.projectCollection.findOne({
+            projectGuid: parentProjectGuid,
+          }))) ||
+        undefined;
+
+      if (parentProject?.parentProjectId) {
+        raiseError(`cannot create grandchild project`);
+      }
+      const parentProjectId = parentProject?.projectId ?? "";
+
+      const childProjectIds = existingProject?.childProjectIds ?? [];
 
       const imageAttrs = await serverImageHelper.loadImageFileAssetAttrs(
         thumbnailFileBytes
@@ -99,6 +136,8 @@ export function createProjectService() {
       const projectEntity = local.createProjectEntity({
         projectId,
         userId,
+        parentProjectId,
+        childProjectIds,
         metadataInput,
         readmeFileContent,
         firmwareFileName,
@@ -114,6 +153,11 @@ export function createProjectService() {
         createAt,
       });
       await storehouse.projectCabinet.upsert(projectEntity);
+      await m.updateProjectLink({
+        projectId,
+        parentProjectId,
+        prevParentProjectId,
+      });
       return projectEntity;
     },
     async upsertProjectWithLog(
@@ -214,11 +258,6 @@ export function createProjectService() {
         user
       );
     },
-    async getProjectDetail(projectId: string): Promise<ProjectDetailDto> {
-      const project = await storehouse.projectCabinet.get(projectId);
-      const user = await storehouse.userCabinet.get(project.userId);
-      return local.mapProjectEntityToDetailDto(project, user);
-    },
     async deleteProject(projectId: string, operatorUserId: string) {
       const project = await storehouse.projectCabinet.get(projectId);
       if (project.userId !== operatorUserId) raiseError(`invalid operation`);
@@ -237,6 +276,8 @@ const local = {
   createProjectEntity(args: {
     projectId: string;
     userId: string;
+    parentProjectId: string;
+    childProjectIds: string[];
     metadataInput: ProjectMetadataInput;
     readmeFileContent: string;
     firmwareFileName: string;
@@ -257,6 +298,10 @@ const local = {
       userId: args.userId,
       projectGuid: metadataInput.projectGuid,
       projectName: metadataInput.projectName,
+      parentProjectId: args.parentProjectId,
+      parentProjectGuid: metadataInput.parentProjectGuid,
+      variationName: metadataInput.variationName,
+      childProjectIds: args.childProjectIds,
       introduction: metadataInput.introduction,
       targetMcu: metadataInput.targetMcu,
       primaryTargetBoard: metadataInput.primaryTargetBoard,
@@ -278,35 +323,6 @@ const local = {
       automated: args.automated,
       createAt: args.createAt,
       updateAt: Date.now(),
-    };
-  },
-  mapProjectEntityToDetailDto(
-    project: ProjectEntity,
-    user: UserEntity
-  ): ProjectDetailDto {
-    return {
-      projectId: project.projectId,
-      projectGuid: project.projectGuid,
-      userId: project.userId,
-      projectName: project.projectName,
-      introduction: project.introduction,
-      targetMcu: project.targetMcu,
-      primaryTargetBoard: project.primaryTargetBoard,
-      realm: project.realm,
-      tags: project.tags,
-      repositoryUrl: project.repositoryUrl,
-      readmeFileContent: project.readmeFileContent,
-      dataEntries: project.dataEntries,
-      editUiItems: project.editUiItems,
-      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
-      firmwareBinaryUrl: projectHelper.getFirmwareBinaryUrl(project),
-      firmwareUpdateAt: project.firmwareUpdateAt,
-      published: project.published,
-      automated: project.automated,
-      firmwareRevision: project.firmwareRevision,
-      updateAt: project.updateAt,
-      userName: user.userName,
-      userAvatarUrl: specifyGithubAvatarUrlSize(user.avatarUrl, 48),
     };
   },
 };

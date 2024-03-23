@@ -7,6 +7,7 @@ import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_
 
 type Props = {
   projectName: string;
+  variationName: string;
   repositoryUrl: string;
   tags: string[];
   operationUiAdditional?: ComponentChildren;
@@ -25,7 +26,14 @@ export const LocalProjectHeadingAreaDummy = createFC(() => {
 });
 
 export const ProjectHeadingArea = createFC<Props>(
-  ({ projectName, repositoryUrl, tags, operationUiAdditional, authorInfo }) => {
+  ({
+    projectName,
+    variationName,
+    repositoryUrl,
+    tags,
+    operationUiAdditional,
+    authorInfo,
+  }) => {
     const repositoryInfo = useRepositoryDisplayInfo(repositoryUrl);
     const {
       ProjectTitlePart,
@@ -35,7 +43,10 @@ export const ProjectHeadingArea = createFC<Props>(
     } = projectHeadingArea_parts;
     return (
       <div q={style}>
-        <ProjectTitlePart projectName={projectName} />
+        <ProjectTitlePart
+          projectName={projectName}
+          variationName={variationName}
+        />
         {repositoryInfo && (
           <RepositoryInfoPart repositoryInfo={repositoryInfo} />
         )}

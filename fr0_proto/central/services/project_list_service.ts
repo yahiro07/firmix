@@ -1,12 +1,17 @@
 import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
 import { ProjectRealm } from "~/base/types_app_common.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
-import { ProjectListItemDto } from "~/base/types_dto.ts";
+import { ProjectDetailDto, ProjectListItemDto } from "~/base/types_dto.ts";
 import { storehouse } from "~/central/depot/storehouse.ts";
 import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 type ProjectUserAggregateResult = ProjectEntity & {
   user: UserEntity;
+  childProjects?: {
+    projectId: string;
+    userId: string;
+    published: boolean;
+  }[];
 };
 
 const projectUserLookups = [
@@ -21,19 +26,43 @@ const projectUserLookups = [
   { $unwind: "$user" },
 ];
 
+const projectChildProjectsLookups = [
+  {
+    $lookup: {
+      from: "project",
+      let: { cp_ids: "$childProjectIds" },
+      pipeline: [
+        { $match: { $expr: { $in: ["$projectId", "$$cp_ids"] } } },
+        { $project: { _id: 0, projectId: 1, userId: 1, published: 1 } },
+      ],
+      as: "childProjects",
+    },
+  },
+];
+
 export function createProjectListService() {
   return {
     async getProjectList_recent(
-      realm: ProjectRealm
+      realm: ProjectRealm,
+      readerUserId: string
     ): Promise<ProjectListItemDto[]> {
       const projects = await storehouse.projectCollection
         .aggregate<ProjectUserAggregateResult>([
-          { $match: { published: true, realm } },
+          {
+            $match: {
+              published: true,
+              realm,
+              parentProjectId: "",
+            },
+          } as any,
           { $sort: { projectId: -1 } },
           ...projectUserLookups,
+          ...projectChildProjectsLookups,
         ])
         .toArray();
-      return projects.map(local.mapProjectEntityToListItemDto);
+      return projects.map((project) =>
+        local.mapProjectEntityToListItemDto(project, readerUserId)
+      );
     },
     async getProjectList_self(userId: string): Promise<ProjectListItemDto[]> {
       const projects = await storehouse.projectCollection
@@ -41,20 +70,67 @@ export function createProjectListService() {
           { $match: { userId } },
           { $sort: { projectId: -1 } },
           ...projectUserLookups,
+          ...projectChildProjectsLookups,
         ])
         .toArray();
-      return projects.map(local.mapProjectEntityToListItemDto);
+      return projects.map((project) =>
+        local.mapProjectEntityToListItemDto(project, userId)
+      );
+    },
+    async getProjectList_children(
+      projectId: string,
+      readerUserId: string
+    ): Promise<ProjectListItemDto[]> {
+      const project = await storehouse.projectCabinet.get(projectId);
+      const childProjectIds = project.childProjectIds ?? [];
+      const projects = await storehouse.projectCollection
+        .aggregate<ProjectUserAggregateResult>([
+          { $match: { projectId: { $in: childProjectIds } } },
+          { $sort: { projectId: -1 } },
+          ...projectUserLookups,
+        ])
+        .toArray();
+      return projects.map((project) =>
+        local.mapProjectEntityToListItemDto(project, readerUserId)
+      );
+    },
+    async getProjectDetail(
+      projectId: string,
+      readerUserId: string
+    ): Promise<ProjectDetailDto> {
+      const projects = await storehouse.projectCollection
+        .aggregate<ProjectUserAggregateResult>([
+          { $match: { projectId } },
+          ...projectUserLookups,
+          ...projectChildProjectsLookups,
+        ])
+        .toArray();
+      return local.mapProjectEntityToDetailDto(projects[0], readerUserId);
     },
   };
 }
 
 const local = {
+  getNumChildProjects(
+    project: ProjectUserAggregateResult,
+    readerUserId: string
+  ) {
+    return (
+      project.childProjects?.filter(
+        (child) =>
+          child.published || (!child.published && child.userId === readerUserId)
+      ).length ?? 0
+    );
+  },
   mapProjectEntityToListItemDto(
-    project: ProjectUserAggregateResult
+    project: ProjectUserAggregateResult,
+    readerUserId: string
   ): ProjectListItemDto {
     return {
       projectId: project.projectId,
       projectName: project.projectName,
+      parentProjectId: project.parentProjectId,
+      variationName: project.variationName,
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
@@ -65,6 +141,39 @@ const local = {
       published: project.published,
       userName: project.user.userName,
       userAvatarUrl: specifyGithubAvatarUrlSize(project.user.avatarUrl, 48),
+      numChildProjects: local.getNumChildProjects(project, readerUserId),
+    };
+  },
+  mapProjectEntityToDetailDto(
+    project: ProjectUserAggregateResult,
+    readerUserId: string
+  ): ProjectDetailDto {
+    return {
+      projectId: project.projectId,
+      projectGuid: project.projectGuid,
+      userId: project.userId,
+      projectName: project.projectName,
+      parentProjectId: project.parentProjectId,
+      variationName: project.variationName,
+      introduction: project.introduction,
+      targetMcu: project.targetMcu,
+      primaryTargetBoard: project.primaryTargetBoard,
+      realm: project.realm,
+      tags: project.tags,
+      repositoryUrl: project.repositoryUrl,
+      readmeFileContent: project.readmeFileContent,
+      dataEntries: project.dataEntries,
+      editUiItems: project.editUiItems,
+      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
+      firmwareBinaryUrl: projectHelper.getFirmwareBinaryUrl(project),
+      firmwareUpdateAt: project.firmwareUpdateAt,
+      published: project.published,
+      automated: project.automated,
+      firmwareRevision: project.firmwareRevision,
+      updateAt: project.updateAt,
+      userName: project.user.userName,
+      userAvatarUrl: specifyGithubAvatarUrlSize(project.user.avatarUrl, 48),
+      numChildProjects: local.getNumChildProjects(project, readerUserId),
     };
   },
 };

@@ -12,6 +12,7 @@ import * as $api_rpc_op_ from "./routes/api/rpc/[op].ts";
 import * as $auth_github_callback from "./routes/auth/github/callback.ts";
 import * as $auth_github_index from "./routes/auth/github/index.ts";
 import * as $auth_logout from "./routes/auth/logout.ts";
+import * as $derived_projectId_ from "./routes/derived/[projectId].tsx";
 import * as $development from "./routes/development.tsx";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
@@ -19,6 +20,7 @@ import * as $local_work from "./routes/local-work.tsx";
 import * as $project_projectId_ from "./routes/project/[projectId].tsx";
 import * as $self_projects from "./routes/self-projects.tsx";
 import * as $settings from "./routes/settings.tsx";
+import * as $ChildProjectListPage from "./islands/ChildProjectListPage.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $DevelopmentPage from "./islands/DevelopmentPage.tsx";
 import * as $LocalProjectPage from "./islands/LocalProjectPage.tsx";
@@ -41,6 +43,7 @@ const manifest = {
     "./routes/auth/github/callback.ts": $auth_github_callback,
     "./routes/auth/github/index.ts": $auth_github_index,
     "./routes/auth/logout.ts": $auth_logout,
+    "./routes/derived/[projectId].tsx": $derived_projectId_,
     "./routes/development.tsx": $development,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
@@ -50,6 +53,7 @@ const manifest = {
     "./routes/settings.tsx": $settings,
   },
   islands: {
+    "./islands/ChildProjectListPage.tsx": $ChildProjectListPage,
     "./islands/Counter.tsx": $Counter,
     "./islands/DevelopmentPage.tsx": $DevelopmentPage,
     "./islands/LocalProjectPage.tsx": $LocalProjectPage,

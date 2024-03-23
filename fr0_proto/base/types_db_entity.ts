@@ -16,6 +16,10 @@ export type ProjectEntity = {
   userId: string;
   projectGuid: string;
   projectName: string;
+  parentProjectId: string;
+  parentProjectGuid: string;
+  childProjectIds: string[];
+  variationName: string;
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;

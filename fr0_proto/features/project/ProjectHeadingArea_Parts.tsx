@@ -6,21 +6,32 @@ import { flexAligned, flexVertical } from "~/common/utility_styles.ts";
 import { Button } from "~/components/CommonControls.tsx";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
-const ProjectTitlePart = createFCX<{ projectName: string }>(
-  ({ projectName }) => {
+const ProjectTitlePart = createFCX<{
+  projectName: string;
+  variationName: string;
+}>(
+  ({ projectName, variationName }) => {
     return (
-      <h2>
-        <IconIconifyZ spec="icon-park-twotone:chip" q="title-icon" />
-        <span>{projectName}</span>
-      </h2>
+      <div>
+        <h2>
+          <IconIconifyZ spec="icon-park-twotone:chip" q="title-icon" />
+          <span>{projectName}</span>
+        </h2>
+        <h3 if={variationName}>{variationName}</h3>
+      </div>
     );
   },
   css`
-    ${flexAligned(2)};
-    font-size: 32px;
-    > .title-icon {
-      margin-top: 3px;
-      font-size: 36px;
+    > h2 {
+      ${flexAligned(2)};
+      font-size: 32px;
+      > .title-icon {
+        margin-top: 3px;
+        font-size: 36px;
+      }
+    }
+    > h3 {
+      font-size: 28px;
     }
   `
 );

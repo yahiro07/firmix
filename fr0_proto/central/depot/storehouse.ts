@@ -41,6 +41,7 @@ async function createStoreHouse() {
       { key: { projectGuid: 1 }, name: "project_guid", unique: true },
       { key: { userId: 1 }, name: "user_id" },
       { key: { realm: 1 }, name: "realm" },
+      { key: { parentProjectId: 1 }, name: "parent_project_id" },
     ],
   });
 

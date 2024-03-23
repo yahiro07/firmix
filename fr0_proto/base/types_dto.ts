@@ -24,6 +24,8 @@ export type ProjectDetailDto = {
   projectGuid: string;
   userId: string;
   projectName: string;
+  parentProjectId: string;
+  variationName: string;
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
@@ -42,11 +44,14 @@ export type ProjectDetailDto = {
   updateAt: number;
   userName: string;
   userAvatarUrl: string;
+  numChildProjects: number;
 };
 
 export type ProjectListItemDto = {
   projectId: string;
   projectName: string;
+  parentProjectId: string;
+  variationName: string;
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
@@ -57,6 +62,7 @@ export type ProjectListItemDto = {
   published: boolean;
   userName: string;
   userAvatarUrl: string;
+  numChildProjects: number;
 };
 
 export type CoactiveState = {

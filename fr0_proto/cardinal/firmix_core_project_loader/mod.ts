@@ -31,6 +31,8 @@ export const firmixCore_projectLoader = {
         "dataEntries",
         "editUiItems",
       ]),
+      parentProjectGuid: fileContentJson.parentProjectGuid ?? "",
+      variationName: fileContentJson.variationName ?? "",
       introduction: fileContentJson.introductionLines.join("\n"),
     };
 
