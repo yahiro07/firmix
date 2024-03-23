@@ -38,6 +38,7 @@ export const ProjectListItemCard = createFC<Props>(
                 詳細
               </LinkButton>
             </div>
+            <h4 if={project.variationName}>{project.variationName}</h4>
 
             <div>{project.introduction}</div>
             <LinkChildProjectListPage
@@ -93,6 +94,7 @@ const style = css`
           margin-top: -4px;
           font-size: 22px;
         }
+
         > .publicity {
           flex-shrink: 0;
           font-size: 15px;
@@ -111,6 +113,10 @@ const style = css`
           flex-shrink: 0;
           margin-left: auto;
         }
+      }
+
+      > h4 {
+        font-size: 18px;
       }
 
       > .link-derived {

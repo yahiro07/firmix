@@ -72,6 +72,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
     <div q={style}>
       <ProjectHeadingArea
         projectName={project.projectName}
+        variationName={project.variationName}
         tags={project.tags}
         repositoryUrl={project.repositoryUrl}
         authorInfo={{
