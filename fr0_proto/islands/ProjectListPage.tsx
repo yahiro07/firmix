@@ -15,7 +15,7 @@ export const ProjectListPage = createFC<Props>(
     return (
       <div q={style}>
         <div q="site-instruction">
-          ガジェットや電子工作の作品を投稿して、ファームウェアを配布できるWebサービスです。
+          自作キーボードや電子工作の作品を投稿して、ファームウェアを配布できるWebサービスです。
         </div>
         <HomeTargetSelectionBar />
         <div q="list">

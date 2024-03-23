@@ -20,16 +20,16 @@ export const HomeTargetSelectionBar = createFCX(
     return (
       <div>
         <div
+          q={realm === "keyboard" && "--active"}
+          onClick={() => handleSelect("keyboard")}
+        >
+          自作キーボード
+        </div>
+        <div
           q={realm === "general" && "--active"}
           onClick={() => handleSelect("general")}
         >
           電子工作
-        </div>
-        <div
-          q={realm === "keyboard" && "--active"}
-          onClick={() => handleSelect("keyboard")}
-        >
-          キーボード
         </div>
       </div>
     );
