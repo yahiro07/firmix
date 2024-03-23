@@ -80,6 +80,10 @@ export function createProjectService() {
             projectGuid: parentProjectGuid,
           }))) ||
         undefined;
+
+      if (parentProject?.parentProjectId) {
+        raiseError(`cannot create grandchild project`);
+      }
       const parentProjectId = parentProject?.projectId ?? "";
 
       const childProjectIds = existingProject?.childProjectIds ?? [];
