@@ -12,6 +12,7 @@ import { rpcClient } from "~/common/rpc_client.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 import { colors } from "~/common/ui_theme.ts";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
+import { LinkDerivedProjectPage } from "~/features/project/project_common_parts.tsx";
 import { ProjectHeadingArea } from "~/features/project/ProjectHeadingArea.tsx";
 import { ProjectReadmeArea } from "~/features/project/ProjectReadmeArea.tsx";
 import { ProjectOperationPart } from "~/features/project_detail/ProjectOperationPart.tsx";
@@ -93,6 +94,11 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         <div if={false}>
           投稿ソース: {project.automated ? "API経由" : "ローカル"}
         </div>
+        <LinkDerivedProjectPage
+          project={project}
+          if={project.numChildProjects > 0}
+          q="link-derived"
+        />
         {hasError && <div>カスタムデータの定義にエラーがあります</div>}
       </div>
       <ProjectReadmeArea readmeFileContent={project.readmeFileContent} />
@@ -111,5 +117,10 @@ const style = css`
   /* min-height: 100%; */
   > .info-area {
     padding: 0 8px;
+    > .link-derived {
+      margin-left: 3px;
+      margin-top: 8px;
+      display: inline-flex;
+    }
   }
 `;
