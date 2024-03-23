@@ -4,10 +4,8 @@ import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import { generateHashMd5 } from "~/auxiliaries/utils_be/hash_helper.ts";
 import { generateIdTimeSequential } from "~/auxiliaries/utils_be/id_generator.ts";
 import { serverImageHelper } from "~/auxiliaries/utils_be/server_image_helper.ts";
-import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
 import { FirmwareFormat } from "~/base/types_app_common.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
-import { ProjectDetailDto } from "~/base/types_dto.ts";
 import {
   LocalProjectSubmissionPayload,
   ProjectSubmissionArgument,
@@ -16,7 +14,6 @@ import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
 import { objectStorageBridge } from "~/central/depot/object_storage_bridge_instance.ts";
 import { storehouse } from "~/central/depot/storehouse.ts";
-import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 export function createProjectService() {
   const m = {
@@ -257,11 +254,6 @@ export function createProjectService() {
         user
       );
     },
-    async getProjectDetail(projectId: string): Promise<ProjectDetailDto> {
-      const project = await storehouse.projectCabinet.get(projectId);
-      const user = await storehouse.userCabinet.get(project.userId);
-      return local.mapProjectEntityToDetailDto(project, user);
-    },
     async deleteProject(projectId: string, operatorUserId: string) {
       const project = await storehouse.projectCabinet.get(projectId);
       if (project.userId !== operatorUserId) raiseError(`invalid operation`);
@@ -327,38 +319,6 @@ const local = {
       automated: args.automated,
       createAt: args.createAt,
       updateAt: Date.now(),
-    };
-  },
-  mapProjectEntityToDetailDto(
-    project: ProjectEntity,
-    user: UserEntity
-  ): ProjectDetailDto {
-    return {
-      projectId: project.projectId,
-      projectGuid: project.projectGuid,
-      userId: project.userId,
-      projectName: project.projectName,
-      parentProjectId: project.parentProjectId,
-      variationName: project.variationName,
-      introduction: project.introduction,
-      targetMcu: project.targetMcu,
-      primaryTargetBoard: project.primaryTargetBoard,
-      realm: project.realm,
-      tags: project.tags,
-      repositoryUrl: project.repositoryUrl,
-      readmeFileContent: project.readmeFileContent,
-      dataEntries: project.dataEntries,
-      editUiItems: project.editUiItems,
-      thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
-      firmwareBinaryUrl: projectHelper.getFirmwareBinaryUrl(project),
-      firmwareUpdateAt: project.firmwareUpdateAt,
-      published: project.published,
-      automated: project.automated,
-      firmwareRevision: project.firmwareRevision,
-      updateAt: project.updateAt,
-      userName: user.userName,
-      userAvatarUrl: specifyGithubAvatarUrlSize(user.avatarUrl, 48),
-      numChildProjects: project.childProjectIds.length,
     };
   },
 };

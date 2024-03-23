@@ -4,6 +4,8 @@ import { ProjectDetailPage } from "~/islands/ProjectDetailPage.tsx";
 
 export default defineRoute(async (req, ctx) => {
   const projectId = ctx.params.projectId!;
-  const project = await serverShell.projectService.getProjectDetail(projectId);
+  const project = await serverShell.projectListService.getProjectDetail(
+    projectId
+  );
   return <ProjectDetailPage project={project} />;
 });
