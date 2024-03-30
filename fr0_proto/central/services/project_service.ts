@@ -41,7 +41,8 @@ export function createProjectService() {
     async upsertProject(args: {
       userId: string;
       readmeFileContent: string;
-      metadataFileContent: string;
+      projectFileContent: string;
+      boardFileContent: string;
       firmwareFormat: FirmwareFormat;
       firmwareFileBytes: Uint8Array;
       thumbnailFileBytes: Uint8Array;
@@ -52,13 +53,15 @@ export function createProjectService() {
         readmeFileContent,
         firmwareFormat,
         firmwareFileBytes,
-        metadataFileContent,
+        projectFileContent,
+        boardFileContent,
         thumbnailFileBytes,
         automated,
       } = args;
       const { metadataInput, errorLines } =
         firmixCore_projectLoader.loadProjectMetadataFile_json(
-          metadataFileContent
+          projectFileContent,
+          boardFileContent
         );
       if (errorLines.length > 0) {
         raiseError(`invalid metadata schema, ${errorLines.join("\n")} `);
@@ -164,7 +167,8 @@ export function createProjectService() {
       args: {
         userId: string;
         readmeFileContent: string;
-        metadataFileContent: string;
+        projectFileContent: string;
+        boardFileContent: string;
         firmwareFormat: FirmwareFormat;
         firmwareFileBytes: Uint8Array;
         thumbnailFileBytes: Uint8Array;
@@ -194,7 +198,8 @@ export function createProjectService() {
       const {
         apiKey,
         readmeFileContent,
-        metadataFileContent,
+        projectFileContent,
+        boardFileContent,
         firmwareFormat,
         firmwareFileBytes,
         thumbnailFileBytes,
@@ -210,7 +215,8 @@ export function createProjectService() {
         {
           userId,
           readmeFileContent,
-          metadataFileContent,
+          projectFileContent,
+          boardFileContent,
           firmwareFormat,
           firmwareFileBytes,
           thumbnailFileBytes,
@@ -239,7 +245,8 @@ export function createProjectService() {
 
       const {
         readmeFileContent,
-        metadataFileContent,
+        projectFileContent,
+        boardFileContent,
         firmwareFormat,
         firmwareFileBytes_base64,
         thumbnailFileBytes_base64,
@@ -249,7 +256,8 @@ export function createProjectService() {
         {
           userId,
           readmeFileContent,
-          metadataFileContent,
+          projectFileContent,
+          boardFileContent,
           firmwareFormat,
           firmwareFileBytes: decodeBinaryBase64(firmwareFileBytes_base64),
           thumbnailFileBytes: decodeBinaryBase64(thumbnailFileBytes_base64),
@@ -323,6 +331,7 @@ const local = {
       automated: args.automated,
       createAt: args.createAt,
       updateAt: Date.now(),
+      pinNumbersMap: metadataInput.pinNumbersMap,
     };
   },
 };

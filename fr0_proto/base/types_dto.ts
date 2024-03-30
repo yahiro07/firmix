@@ -45,6 +45,7 @@ export type ProjectDetailDto = {
   userName: string;
   userAvatarUrl: string;
   numChildProjects: number;
+  pinNumbersMap: Record<string, number>;
 };
 
 export type ProjectListItemDto = {

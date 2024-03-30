@@ -53,6 +53,7 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
           projectName={metadataInput.projectName}
           tags={metadataInput.tags}
           repositoryUrl={metadataInput.repositoryUrl}
+          variationName={metadataInput.variationName}
         />
       )}
       {project && !metadataInput && <LocalProjectHeadingAreaDummy />}
@@ -84,6 +85,9 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
         submitButtonLabel="UF2ダウンロード"
         submit2={submitEditItems2}
         submit2Label="出力"
+        pinNumbersMap={
+          project?.assetMetadata.metadataInput?.pinNumbersMap ?? {}
+        }
         if={project?.configurationSourceItems}
       />
     </div>

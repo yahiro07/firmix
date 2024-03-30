@@ -10,7 +10,8 @@ export type LoginUser = LoginUserClue;
 
 export type LocalProjectSubmissionPayload = {
   readmeFileContent: string;
-  metadataFileContent: string;
+  projectFileContent: string;
+  boardFileContent: string;
   firmwareFormat: FirmwareFormat;
   firmwareFileBytes_base64: string;
   thumbnailFileBytes_base64: string;
@@ -19,7 +20,8 @@ export type LocalProjectSubmissionPayload = {
 export type ProjectSubmissionArgument = {
   apiKey: string;
   readmeFileContent: string;
-  metadataFileContent: string;
+  projectFileContent: string;
+  boardFileContent: string;
   firmwareFormat: FirmwareFormat;
   firmwareFileBytes: Uint8Array;
   thumbnailFileBytes: Uint8Array;

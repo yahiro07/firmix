@@ -1,6 +1,5 @@
 import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import { padZeros, seqNumbers } from "~/auxiliaries/utils/utils_array.ts";
-import { pinNameToPinNumberMap_RP2040 } from "~/base/platform_definitions.ts";
 import { CustomDataItem } from "~/base/types_core_entity.ts";
 import {
   ConfigurationSourceItem,
@@ -72,7 +71,8 @@ export const firmixCore_firmwareConfiguration = {
   },
   splitSourceItemEditTextValues(
     sourceItem: ConfigurationSourceItem,
-    text: string
+    text: string,
+    pinNumbersMap: Record<string, number>
   ): string[] {
     const { label, dataKind, required } = sourceItem;
 
@@ -117,10 +117,11 @@ export const firmixCore_firmwareConfiguration = {
 
     if (dataKind === "pins" || dataKind === "vl_pins") {
       for (const pinName of values) {
-        const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
+        const pinNumber = mapPinNameToPinNumber(pinName, pinNumbersMap);
         if (pinNumber === undefined) {
+          const allPinNames = Object.keys(pinNumbersMap).join(",");
           raiseError(
-            `${label}: ${pinName}はピンの名前として正しくありません。gp0,gp1などの形式で入力してください。`
+            `${label}: ${pinName}はピンの名前として正しくありません。\n${allPinNames}\nのどれかを指定してください。`
           );
         }
       }
@@ -161,7 +162,8 @@ export const firmixCore_firmwareConfiguration = {
   },
   serializeEditData(
     customDataItem: CustomDataItem,
-    textValues: string[]
+    textValues: string[],
+    pinNumbersMap: Record<string, number>
   ): number[] {
     const { key, dataKind } = customDataItem;
     if (dataKind === "u8" || dataKind === "i8") {
@@ -192,7 +194,7 @@ export const firmixCore_firmwareConfiguration = {
         raiseError(`invalid pin count for ${key}`);
       }
       const pinNumbers = textValues.map((pinName) => {
-        const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
+        const pinNumber = mapPinNameToPinNumber(pinName, pinNumbersMap);
         if (pinNumber === undefined) {
           raiseError(`invalid pin name ${pinName}`);
         }
@@ -205,7 +207,7 @@ export const firmixCore_firmwareConfiguration = {
         raiseError(`too many pins for ${key}`);
       }
       const pinNumbers = textValues.map((pinName) => {
-        const pinNumber = pinNameToPinNumberMap_RP2040[pinName];
+        const pinNumber = mapPinNameToPinNumber(pinName, pinNumbersMap);
         if (pinNumber === undefined) {
           raiseError(`invalid pin name ${pinName}`);
         }
@@ -247,3 +249,10 @@ export const firmixCore_firmwareConfiguration = {
     }
   },
 };
+
+function mapPinNameToPinNumber(
+  pinName: string,
+  pinNumbersMap: Record<string, number>
+): number | undefined {
+  return pinNumbersMap[pinName] ?? pinNumbersMap[pinName.toUpperCase()];
+}

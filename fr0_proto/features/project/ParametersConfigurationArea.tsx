@@ -22,6 +22,7 @@ type Props = {
   submitButtonLabel: string;
   submit2?(editItems: ConfigurationEditItem[]): void;
   submit2Label?: string;
+  pinNumbersMap: Record<string, number>;
 };
 
 export const ParametersConfigurationArea = createFC<Props>(
@@ -31,6 +32,7 @@ export const ParametersConfigurationArea = createFC<Props>(
     submitButtonLabel,
     submit2,
     submit2Label,
+    pinNumbersMap,
   }) => {
     const errorConfigurations = configurationSourceItemsRaw.filter(
       (it) => it.dataKind === "error"
@@ -58,7 +60,8 @@ export const ParametersConfigurationArea = createFC<Props>(
             const values =
               firmixCore_firmwareConfiguration.splitSourceItemEditTextValues(
                 sourceItem,
-                text
+                text,
+                pinNumbersMap
               );
             return { key, values };
           });

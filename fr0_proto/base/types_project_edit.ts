@@ -23,6 +23,7 @@ export type PatchingManifest = {
   targetMcu: string;
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
+  pinNumbersMap: Record<string, number>;
 };
 
 export type FirmwareContainer = {

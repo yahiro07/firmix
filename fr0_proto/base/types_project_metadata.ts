@@ -6,6 +6,10 @@ export type ProjectMetadataEditUiItemInput = {
   label: string;
 };
 
+export type ProjectBoardJsonFileContent = {
+  pinNumbersMap: Record<string, number>;
+};
+
 export type ProjectMetadataJsonFileContent = {
   projectGuid: string;
   projectName: string;
@@ -34,4 +38,5 @@ export type ProjectMetadataInput = {
   repositoryUrl: string;
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
+  pinNumbersMap: Record<string, number>;
 };

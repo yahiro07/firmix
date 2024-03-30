@@ -33,7 +33,8 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
   {
     async loadLocalDevelopmentProject(dirHandle) {
       const dirReader = createLocalDirectoryReader(dirHandle);
-      const metadataFile = await dirReader.readTextFile(`project.fm1.json`);
+      const metadataFile = await dirReader.readTextFile("firmix.project.json");
+      const boardFile = await dirReader.readTextFile("firmix.board.json");
       const readmeFile = await dirReader.readTextFile("readme.md");
       const thumbnailPngFile = await dirReader.readBinaryFile("thumbnail.png");
       const thumbnailJpgFile = await dirReader.readBinaryFile("thumbnail.jpg");
@@ -59,7 +60,10 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
       }
 
       const assetReadme = localAssetBuilder.buildAssetReadme(readmeFile);
-      const assetMetadata = localAssetBuilder.buildAssetMetadata(metadataFile);
+      const assetMetadata = localAssetBuilder.buildAssetMetadata(
+        metadataFile,
+        boardFile
+      );
       const assetThumbnail = await localAssetBuilder.buildAssetThumbnail(
         thumbnailPngFile ?? thumbnailJpgFile ?? thumbnailJpegFile
       );

@@ -42,4 +42,5 @@ export type ProjectEntity = {
   automated: boolean;
   createAt: number;
   updateAt: number;
+  pinNumbersMap: Record<string, number>;
 };

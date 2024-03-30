@@ -34,26 +34,30 @@ export const localAssetBuilder = {
     };
   },
   buildAssetMetadata(
-    metadataFile: TextFileEntry | undefined
+    metadataFile: TextFileEntry | undefined,
+    boardFile: TextFileEntry | undefined
   ): LocalAsset_Metadata {
     if (!metadataFile) {
       return {
         validity: "error",
-        filePath: "metadata.fm1.json",
+        filePath: "firmix.project.json",
         fileContent: undefined,
+        boardFileContent: undefined,
         metadataInput: undefined,
         errorLines: ["ファイルがありません。"],
       };
     }
     const { metadataInput, errorLines } =
       firmixCore_projectLoader.loadProjectMetadataFile_json(
-        metadataFile.contentText
+        metadataFile.contentText,
+        boardFile?.contentText ?? ""
       );
     const validity = errorLines.length === 0 ? "valid" : "error";
     return {
       validity,
       filePath: metadataFile.filePath,
       fileContent: metadataFile.contentText,
+      boardFileContent: boardFile?.contentText ?? "",
       metadataInput: validity === "valid" ? metadataInput : undefined,
       errorLines,
     };

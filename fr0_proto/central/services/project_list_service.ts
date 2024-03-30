@@ -174,6 +174,7 @@ const local = {
       userName: project.user.userName,
       userAvatarUrl: specifyGithubAvatarUrlSize(project.user.avatarUrl, 48),
       numChildProjects: local.getNumChildProjects(project, readerUserId),
+      pinNumbersMap: project.pinNumbersMap,
     };
   },
 };
