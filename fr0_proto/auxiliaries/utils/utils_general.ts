@@ -18,3 +18,7 @@ export function copyObjectMembers<T extends {}>(
     }
   }
 }
+
+export function executeInline<T>(fn: () => T): T {
+  return fn();
+}

@@ -1,5 +1,6 @@
 import { produce } from "immer";
 import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { filePathHelper } from "~/auxiliaries/utils/file_path_helper.ts";
 import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import {
   BinaryFileEntryWithTimestamp,
@@ -42,34 +43,40 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         "thumbnail.jpeg"
       );
 
-      let firmwareFile: BinaryFileEntryWithTimestamp | undefined;
-      let firmwareFileLoadingErrorText: string | undefined;
-      let firmwareDirectoryHandle: FileSystemDirectoryHandle | undefined;
-      try {
-        const boardFolderName = await dirReader.getSingleSubDirectoryNameUnder(
-          `.pio/build`
-        );
-        firmwareDirectoryHandle = await dirReader.getSubDirectoryHandle(
-          `.pio/build/${boardFolderName}`
-        );
-        firmwareFile = await dirReader.readBinaryFile(
-          `.pio/build/${boardFolderName}/firmware.uf2`
-        );
-      } catch (_error) {
-        // firmwareFileLoadingErrorText = error.message ?? error;
-      }
-
-      const assetReadme = localAssetBuilder.buildAssetReadme(readmeFile);
       const assetMetadata = localAssetBuilder.buildAssetMetadata(
         metadataFile,
         boardFile
       );
+
+      const firmwareSpec = assetMetadata.metadataInput?.firmwareSpec;
+      let firmwareFile: BinaryFileEntryWithTimestamp | undefined;
+      let firmwareFileLoadingErrorText: string | undefined;
+      let firmwareDirectoryHandle: FileSystemDirectoryHandle | undefined;
+      try {
+        const firmwareFilePath = firmwareSpec?.path;
+        if (firmwareFilePath) {
+          firmwareFile = await dirReader.readBinaryFile(firmwareFilePath);
+          const firmwareFolderPath =
+            filePathHelper.getFolderPath(firmwareFilePath);
+          firmwareDirectoryHandle = await dirReader.getSubDirectoryHandle(
+            firmwareFolderPath
+          );
+        }
+      } catch (error) {
+        console.error(error);
+        firmwareFileLoadingErrorText =
+          error.message ?? `failed to load firmware file`;
+      }
+
+      const assetReadme = localAssetBuilder.buildAssetReadme(readmeFile);
+
       const assetThumbnail = await localAssetBuilder.buildAssetThumbnail(
         thumbnailPngFile ?? thumbnailJpgFile ?? thumbnailJpegFile
       );
       const assetFirmware = localAssetBuilder.buildAssetFirmware(
         firmwareFile,
-        firmwareFileLoadingErrorText
+        firmwareFileLoadingErrorText,
+        firmwareSpec
       );
 
       const canSubmit =

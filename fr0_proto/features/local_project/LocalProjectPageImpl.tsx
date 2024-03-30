@@ -83,8 +83,8 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
         configurationSourceItems={project?.configurationSourceItems!}
         submitEditItems={submitEditItems}
         submitButtonLabel="UF2ダウンロード"
-        submit2={submitEditItems2}
-        submit2Label="出力"
+        // submit2={submitEditItems2}
+        // submit2Label="出力"
         pinNumbersMap={
           project?.assetMetadata.metadataInput?.pinNumbersMap ?? {}
         }

@@ -13,7 +13,9 @@ import {
   FirmwareContainer,
   ImageFileContainer,
 } from "~/base/types_project_edit.ts";
+import { ProjectMetadataFirmwareSpec } from "~/base/types_project_metadata.ts";
 import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
+import { convertFirmwareBytesToUF2 } from "~/cardinal/firmix_presenter_common_modules/firmware_converter.ts";
 import { imageFileLoader } from "~/cardinal/firmix_presenter_common_modules/image_file_loader.ts";
 
 export const localAssetBuilder = {
@@ -110,30 +112,67 @@ export const localAssetBuilder = {
   },
   buildAssetFirmware(
     firmwareFile: BinaryFileEntryWithTimestamp | undefined,
-    firmwareFileLoadingErrorText: string | undefined
+    firmwareFileLoadingErrorText: string | undefined,
+    firmwareSpec: ProjectMetadataFirmwareSpec | undefined
   ): LocalAsset_Firmware {
-    if (!firmwareFile || firmwareFileLoadingErrorText) {
+    const makeErrorResult = (errorLines: string[]) => {
       return {
-        validity: "error",
-        filePath: ".pio/build/<board_type>/firmware.uf2",
+        validity: "error" as const,
+        filePath: firmwareSpec?.path ?? "unknown file path",
         firmwareContainer: undefined,
-        errorLines: [
-          firmwareFileLoadingErrorText ??
-            "ファームウェアがありません。プロジェクトをビルドしてください。",
-        ],
+        errorLines,
         lastModified: 0,
       };
+    };
+
+    if (!firmwareSpec) {
+      return makeErrorResult(["メタデータにfirmwareSpecの定義がありません。"]);
     }
+
+    if (firmwareFileLoadingErrorText) {
+      return makeErrorResult([firmwareFileLoadingErrorText]);
+    }
+
+    if (!firmwareFile) {
+      return makeErrorResult([
+        "ファームウェアがありません。プロジェクトをビルドしてください。",
+      ]);
+    }
+
+    const errorLines: string[] = [];
+    let uf2BinaryBytes: Uint8Array;
+    try {
+      const res = convertFirmwareBytesToUF2(
+        firmwareFile.contentBytes,
+        firmwareSpec
+      );
+      uf2BinaryBytes = res.bytes;
+      if (res.op === "converted") {
+        errorLines.push(
+          `UF2に変換しました (family:${res.family}, base:${res.base})`
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      return makeErrorResult([
+        "ファームウェアの変換に失敗しました。",
+        error.message,
+      ]);
+    }
+
     const firmwareContainer: FirmwareContainer = {
       kind: "uf2",
-      fileName: filePathHelper.getFileNameFromFilePath(firmwareFile.filePath),
-      binaryBytes_base64: encodeBinaryBase64(firmwareFile.contentBytes),
+      fileName: filePathHelper.replaceExtension(
+        filePathHelper.getFileNameFromFilePath(firmwareFile.filePath),
+        "uf2"
+      ),
+      binaryBytes_base64: encodeBinaryBase64(uf2BinaryBytes),
     };
     return {
       validity: "valid",
       filePath: firmwareFile.filePath,
       firmwareContainer,
-      errorLines: [],
+      errorLines,
       lastModified: firmwareFile.lastModified,
     };
   },

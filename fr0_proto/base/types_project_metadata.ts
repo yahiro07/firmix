@@ -10,6 +10,11 @@ export type ProjectBoardJsonFileContent = {
   pinNumbersMap: Record<string, number>;
 };
 
+export type ProjectMetadataFirmwareSpec = {
+  path: string;
+  uf2gen_options?: { family: string; base?: string };
+};
+
 export type ProjectMetadataJsonFileContent = {
   projectGuid: string;
   projectName: string;
@@ -23,6 +28,7 @@ export type ProjectMetadataJsonFileContent = {
   repositoryUrl: string;
   dataEntries: CustomDataEntry[];
   editUiItems: ProjectMetadataEditUiItemInput[];
+  firmwareSpec: ProjectMetadataFirmwareSpec;
 };
 
 export type ProjectMetadataInput = {
@@ -39,4 +45,5 @@ export type ProjectMetadataInput = {
   dataEntries: CustomDataEntry[];
   editUiItems: EditUiItem[];
   pinNumbersMap: Record<string, number>;
+  firmwareSpec: ProjectMetadataFirmwareSpec;
 };

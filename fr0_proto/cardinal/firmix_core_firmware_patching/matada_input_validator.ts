@@ -78,6 +78,15 @@ const schemaMetadataFileContent = z.object({
       })
     )
     .optional(),
+  firmwareSpec: z.object({
+    path: z.string(),
+    uf2gen_options: z
+      .object({
+        family: z.string(),
+        base: z.string().optional(),
+      })
+      .optional(),
+  }),
 });
 
 const local = {

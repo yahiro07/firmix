@@ -45,6 +45,7 @@ export const firmixCore_projectLoader = {
         "repositoryUrl",
         "dataEntries",
         "editUiItems",
+        "firmwareSpec",
       ]),
       parentProjectGuid: fileContentJson.parentProjectGuid ?? "",
       variationName: fileContentJson.variationName ?? "",
