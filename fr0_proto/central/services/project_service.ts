@@ -40,17 +40,6 @@ export function createProjectService() {
         }
       }
     },
-    // convertFirmwareToUF2(
-    //   firmwareFileBytes: Uint8Array,
-    //   firmwareFormat: InputFirmwareFormat,
-    //   projectFileContent:
-    // ): Uint8Array {
-    //   if(firmwareFormat === "uf2"){
-    //     return firmwareFileBytes;
-    //   }else if(){
-
-    //   }
-    // },
     async upsertProject(args: {
       userId: string;
       readmeFileContent: string;
@@ -85,6 +74,12 @@ export function createProjectService() {
       const existingProject = await storehouse.projectCollection.findOne({
         projectGuid,
       });
+      if (existingProject && existingProject.userId !== userId) {
+        raiseError(
+          `Cannot update project. Project ${projectGuid} exists and it is owned by another user.`
+        );
+      }
+
       const projectId =
         existingProject?.projectId ?? generateIdTimeSequential();
 
