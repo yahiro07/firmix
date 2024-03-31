@@ -1,5 +1,5 @@
 export const appConfig = {
-  versionCode: "240331b",
+  versionCode: "240331c",
   isDevelopment:
     typeof Deno !== "undefined"
       ? Deno.env.get("ENV_TYPE") === "development"
