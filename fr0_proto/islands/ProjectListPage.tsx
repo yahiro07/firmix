@@ -2,20 +2,23 @@ import { css } from "resin";
 import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
+import { HomeTargetSelectionBar } from "~/features/project_list/HomeTargetSelectionBar.tsx";
 import { ProjectListItemCard } from "~/features/project_list/ProjectListItemCard.tsx";
 
 type Props = {
   projects: ProjectListItemDto[];
   showPublicity: boolean;
+  showHomeTargetSelectionBar: boolean;
 };
 
 export const ProjectListPage = createFC<Props>(
-  ({ projects, showPublicity }) => {
+  ({ projects, showPublicity, showHomeTargetSelectionBar }) => {
     return (
       <div q={style}>
         <div q="site-instruction">
           自作キーボードや電子工作の作品を投稿して、ファームウェアを配布できるWebサービスです。
         </div>
+        <HomeTargetSelectionBar if={showHomeTargetSelectionBar} />
         <div q="list">
           {projects.map((project) => (
             <ProjectListItemCard

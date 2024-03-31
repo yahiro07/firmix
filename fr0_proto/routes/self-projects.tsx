@@ -10,5 +10,11 @@ export default defineRoute(async (req) => {
   const projects = await serverShell.projectListService.getProjectList_self(
     loginUser.userId
   );
-  return <ProjectListPage projects={projects} showPublicity={true} />;
+  return (
+    <ProjectListPage
+      projects={projects}
+      showPublicity={true}
+      showHomeTargetSelectionBar={false}
+    />
+  );
 });

@@ -10,5 +10,11 @@ export default defineRoute(async (req) => {
     coactiveState?.homeTargetRealm ?? "general",
     loginUserClue?.userId ?? ""
   );
-  return <ProjectListPage projects={projects} showPublicity={false} />;
+  return (
+    <ProjectListPage
+      projects={projects}
+      showPublicity={false}
+      showHomeTargetSelectionBar={true}
+    />
+  );
 });
