@@ -1,6 +1,7 @@
 import { getDateTimeText_yyyyMMddHHmmss } from "~/auxiliaries/utils/date_time_helper.ts";
 import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
+import { executeInline } from "~/auxiliaries/utils/utils_general.ts";
 import { generateHashMd5 } from "~/auxiliaries/utils_be/hash_helper.ts";
 import { generateIdTimeSequential } from "~/auxiliaries/utils_be/id_generator.ts";
 import { serverImageHelper } from "~/auxiliaries/utils_be/server_image_helper.ts";
@@ -115,11 +116,18 @@ export function createProjectService() {
         raiseError(`unsupported firmware format ${firmwareFormatInput}`);
       }
 
-      const conversionResult = convertFirmwareBytesToUF2(
-        firmwareFileBytesInput,
-        metadataInput.firmwareSpec
-      );
-      const firmwareFileBytes = conversionResult.bytes;
+      const firmwareFileBytes = executeInline(() => {
+        if (firmwareFormatInput === "uf2") {
+          return firmwareFileBytesInput;
+        } else {
+          const conversionResult = convertFirmwareBytesToUF2(
+            firmwareFileBytesInput,
+            metadataInput.firmwareSpec
+          );
+          return conversionResult.bytes;
+        }
+      });
+
       const firmwareFormat = "uf2";
 
       const revision = (existingProject?.revision ?? 0) + 1;
