@@ -1,4 +1,7 @@
-import { FirmwareFormat } from "~/base/types_app_common.ts";
+import {
+  FirmwareFormat,
+  InputFirmwareFormat,
+} from "~/base/types_app_common.ts";
 
 export type LoginUserClue = {
   userId: string;
@@ -22,7 +25,7 @@ export type ProjectSubmissionArgument = {
   readmeFileContent: string;
   projectFileContent: string;
   boardFileContent: string;
-  firmwareFormat: FirmwareFormat;
+  firmwareFormat: InputFirmwareFormat;
   firmwareFileBytes: Uint8Array;
   thumbnailFileBytes: Uint8Array;
 };

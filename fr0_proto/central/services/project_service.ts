@@ -4,7 +4,7 @@ import { decodeBinaryBase64 } from "~/auxiliaries/utils/utils_binary.ts";
 import { generateHashMd5 } from "~/auxiliaries/utils_be/hash_helper.ts";
 import { generateIdTimeSequential } from "~/auxiliaries/utils_be/id_generator.ts";
 import { serverImageHelper } from "~/auxiliaries/utils_be/server_image_helper.ts";
-import { FirmwareFormat } from "~/base/types_app_common.ts";
+import { InputFirmwareFormat } from "~/base/types_app_common.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import {
   LocalProjectSubmissionPayload,
@@ -12,6 +12,7 @@ import {
 } from "~/base/types_dto_internal.ts";
 import { ProjectMetadataInput } from "~/base/types_project_metadata.ts";
 import { firmixCore_projectLoader } from "~/cardinal/firmix_core_project_loader/mod.ts";
+import { convertFirmwareBytesToUF2 } from "~/cardinal/firmix_presenter_common_modules/firmware_converter.ts";
 import { objectStorageBridge } from "~/central/depot/object_storage_bridge_instance.ts";
 import { storehouse } from "~/central/depot/storehouse.ts";
 
@@ -38,12 +39,23 @@ export function createProjectService() {
         }
       }
     },
+    // convertFirmwareToUF2(
+    //   firmwareFileBytes: Uint8Array,
+    //   firmwareFormat: InputFirmwareFormat,
+    //   projectFileContent:
+    // ): Uint8Array {
+    //   if(firmwareFormat === "uf2"){
+    //     return firmwareFileBytes;
+    //   }else if(){
+
+    //   }
+    // },
     async upsertProject(args: {
       userId: string;
       readmeFileContent: string;
       projectFileContent: string;
       boardFileContent: string;
-      firmwareFormat: FirmwareFormat;
+      firmwareFormat: InputFirmwareFormat;
       firmwareFileBytes: Uint8Array;
       thumbnailFileBytes: Uint8Array;
       automated: boolean;
@@ -51,8 +63,8 @@ export function createProjectService() {
       const {
         userId,
         readmeFileContent,
-        firmwareFormat,
-        firmwareFileBytes,
+        firmwareFormat: firmwareFormatInput,
+        firmwareFileBytes: firmwareFileBytesInput,
         projectFileContent,
         boardFileContent,
         thumbnailFileBytes,
@@ -96,10 +108,19 @@ export function createProjectService() {
       );
       firmixCore_projectLoader.validateOnlineThumbnailOnServer(imageAttrs);
 
-      const firmwareFormatValid = ["uf2"].includes(firmwareFormat);
+      const firmwareFormatValid = ["uf2", "bin", "hex"].includes(
+        firmwareFormatInput
+      );
       if (!firmwareFormatValid) {
-        raiseError(`unsupported firmware format ${firmwareFormat}`);
+        raiseError(`unsupported firmware format ${firmwareFormatInput}`);
       }
+
+      const conversionResult = convertFirmwareBytesToUF2(
+        firmwareFileBytesInput,
+        metadataInput.firmwareSpec
+      );
+      const firmwareFileBytes = conversionResult.bytes;
+      const firmwareFormat = "uf2";
 
       const revision = (existingProject?.revision ?? 0) + 1;
       const published = existingProject?.published ?? false;
@@ -169,7 +190,7 @@ export function createProjectService() {
         readmeFileContent: string;
         projectFileContent: string;
         boardFileContent: string;
-        firmwareFormat: FirmwareFormat;
+        firmwareFormat: InputFirmwareFormat;
         firmwareFileBytes: Uint8Array;
         thumbnailFileBytes: Uint8Array;
         automated: boolean;
