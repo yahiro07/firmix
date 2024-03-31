@@ -1,4 +1,7 @@
-import { FirmwareFormat } from "~/base/types_app_common.ts";
+import {
+  FirmwareFormat,
+  InputFirmwareFormat,
+} from "~/base/types_app_common.ts";
 
 export type LoginUserClue = {
   userId: string;
@@ -10,7 +13,8 @@ export type LoginUser = LoginUserClue;
 
 export type LocalProjectSubmissionPayload = {
   readmeFileContent: string;
-  metadataFileContent: string;
+  projectFileContent: string;
+  boardFileContent: string;
   firmwareFormat: FirmwareFormat;
   firmwareFileBytes_base64: string;
   thumbnailFileBytes_base64: string;
@@ -19,8 +23,9 @@ export type LocalProjectSubmissionPayload = {
 export type ProjectSubmissionArgument = {
   apiKey: string;
   readmeFileContent: string;
-  metadataFileContent: string;
-  firmwareFormat: FirmwareFormat;
+  projectFileContent: string;
+  boardFileContent: string;
+  firmwareFormat: InputFirmwareFormat;
   firmwareFileBytes: Uint8Array;
   thumbnailFileBytes: Uint8Array;
 };

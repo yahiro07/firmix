@@ -3,13 +3,18 @@ import { pickObjectMembers } from "~/auxiliaries/utils/utils_general.ts";
 import { appConfig } from "~/base/app_config.ts";
 import { ImageAssetAttrs } from "~/base/types_app_common.ts";
 import {
+  ProjectBoardJsonFileContent,
   ProjectMetadataInput,
   ProjectMetadataJsonFileContent,
 } from "~/base/types_project_metadata.ts";
+import { validateSchemaProjectBoardFileContent } from "~/cardinal/firmix_core_firmware_patching/board_input_validator.ts";
 import { validateSchemaMetadataFileContent } from "~/cardinal/firmix_core_firmware_patching/matada_input_validator.ts";
 
 export const firmixCore_projectLoader = {
-  loadProjectMetadataFile_json(fileContentText: string): {
+  loadProjectMetadataFile_json(
+    fileContentText: string,
+    boardFileContentText: string
+  ): {
     metadataInput: ProjectMetadataInput;
     errorLines: string[];
   } {
@@ -17,9 +22,19 @@ export const firmixCore_projectLoader = {
       fileContentText
     ) as ProjectMetadataJsonFileContent;
 
-    const errorLines = validateSchemaMetadataFileContent(fileContentJson);
+    const boardFileContentJson =
+      (boardFileContentText &&
+        (JSON.parse(boardFileContentText) as ProjectBoardJsonFileContent)) ||
+      undefined;
 
-    const metadataInput = {
+    const errorLines = validateSchemaMetadataFileContent(fileContentJson);
+    if (boardFileContentJson) {
+      errorLines.push(
+        ...validateSchemaProjectBoardFileContent(boardFileContentJson)
+      );
+    }
+
+    const metadataInput: ProjectMetadataInput = {
       ...pickObjectMembers(fileContentJson, [
         "projectGuid",
         "projectName",
@@ -30,11 +45,22 @@ export const firmixCore_projectLoader = {
         "repositoryUrl",
         "dataEntries",
         "editUiItems",
+        "firmwareSpec",
       ]),
       parentProjectGuid: fileContentJson.parentProjectGuid ?? "",
       variationName: fileContentJson.variationName ?? "",
       introduction: fileContentJson.introductionLines.join("\n"),
+      pinNumbersMap: boardFileContentJson?.pinNumbersMap ?? {},
     };
+
+    const hasPinsEntry = metadataInput.dataEntries.some((de) =>
+      de.items.some((it) => it.dataKind === "pins" || it.dataKind === "vl_pins")
+    );
+    if (hasPinsEntry && !boardFileContentJson) {
+      errorLines.push(
+        `board definition (firmix.board.json) is required for pin configuration.`
+      );
+    }
 
     return { metadataInput, errorLines };
   },

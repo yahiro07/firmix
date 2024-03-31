@@ -115,6 +115,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         configurationSourceItems={configurationSourceItems}
         submitEditItems={submitEditItems}
         submitButtonLabel="UF2ダウンロード"
+        pinNumbersMap={project.pinNumbersMap}
       />
     </div>
   );

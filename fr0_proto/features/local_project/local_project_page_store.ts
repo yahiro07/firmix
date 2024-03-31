@@ -158,7 +158,10 @@ const local = {
   ): LocalProjectSubmissionPayload {
     const {
       assetReadme: { fileContent: readmeFileContent },
-      assetMetadata: { fileContent: metadataFileContent },
+      assetMetadata: {
+        fileContent: metadataFileContent,
+        boardFileContent: boardMetadataFileContent,
+      },
       assetThumbnail: { thumbnailContainer },
       assetFirmware: { firmwareContainer },
     } = project;
@@ -168,7 +171,8 @@ const local = {
 
     return {
       readmeFileContent: readmeFileContent ?? "",
-      metadataFileContent,
+      projectFileContent: metadataFileContent,
+      boardFileContent: boardMetadataFileContent ?? "",
       firmwareFormat: firmwareContainer.kind,
       firmwareFileBytes_base64: firmwareContainer.binaryBytes_base64,
       thumbnailFileBytes_base64: thumbnailContainer.imageDataUrl.split(",")[1],

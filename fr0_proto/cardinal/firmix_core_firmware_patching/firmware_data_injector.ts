@@ -70,7 +70,8 @@ const local = {
           }
           const dataBytes = firmixCore_firmwareConfiguration.serializeEditData(
             customDataItem,
-            editItem.values
+            editItem.values,
+            patchingManifest.pinNumbersMap
           );
           return dataBytes.map((val) => (val === -1 ? 255 : val));
         });

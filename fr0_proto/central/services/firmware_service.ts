@@ -20,6 +20,7 @@ export function createFirmwareService() {
             dataEntries: project.dataEntries,
             editUiItems: project.editUiItems,
             firmwareBinaryUrl,
+            pinNumbersMap: project.pinNumbersMap,
           },
           editItems
         );
