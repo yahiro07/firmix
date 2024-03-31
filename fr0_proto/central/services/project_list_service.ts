@@ -1,3 +1,4 @@
+import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
 import { ProjectRealm } from "~/base/types_app_common.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
@@ -85,7 +86,12 @@ export function createProjectListService() {
       const childProjectIds = project.childProjectIds ?? [];
       const projects = await storehouse.projectCollection
         .aggregate<ProjectUserAggregateResult>([
-          { $match: { projectId: { $in: childProjectIds } } },
+          {
+            $match: {
+              projectId: { $in: childProjectIds },
+              $or: [{ published: true }, { userId: readerUserId }],
+            },
+          },
           { $sort: { projectId: -1 } },
           ...projectUserLookups,
         ])
@@ -105,6 +111,10 @@ export function createProjectListService() {
           ...projectChildProjectsLookups,
         ])
         .toArray();
+      const project = projects[0];
+      if (!project.published && project.userId !== readerUserId) {
+        raiseError(`no access rights to show draft project`);
+      }
       return local.mapProjectEntityToDetailDto(projects[0], readerUserId);
     },
   };
