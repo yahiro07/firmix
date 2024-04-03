@@ -48,6 +48,9 @@ module.exports = {
           typescript: {},
         },
       },
+      rules: {
+        "react/no-unknown-property": ["warn", { ignore: ["q", "if"] }],
+      },
     },
 
     // Typescript
