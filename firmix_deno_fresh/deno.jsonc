@@ -37,9 +37,6 @@
     "idb-keyval": "https://unpkg.com/idb-keyval@5.0.2/dist/esm/index.js",
     "resin": "https://deno.land/x/resin@v0.1.7/mod.ts",
     "zod": "https://deno.land/x/zod@v3.16.1/mod.ts",
-    "tailwindcss": "npm:tailwindcss@3.3.5",
-    "tailwindcss/": "npm:/tailwindcss@3.3.5/",
-    "tailwindcss/plugin": "npm:/tailwindcss@3.3.5/plugin.js",
     "uf2gen": "npm:uf2gen"
   },
   "compilerOptions": {

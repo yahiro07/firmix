@@ -6,7 +6,7 @@ import {
   flexHorizontal,
   flexVertical,
 } from "~/common/utility_styles.ts";
-import { LinkButton, LinkCard } from "~/components/CommonControls.tsx";
+import { Card, LinkButton } from "~/components/CommonControls.tsx";
 import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
 import { LinkChildProjectListPage } from "~/features/project/project_common_parts.tsx";
 
@@ -20,7 +20,7 @@ export const ProjectListItemCard = createFC<Props>(
     const { ProjectTagsList } = projectHeadingArea_parts;
     const detailPagePath = `/project/${project.projectId}`;
     return (
-      <LinkCard href={detailPagePath} q={style}>
+      <Card href={detailPagePath} q={style}>
         <div q="content-row">
           <div q="thumbnail-box">
             <img src={project.thumbnailUrl} />
@@ -57,7 +57,7 @@ export const ProjectListItemCard = createFC<Props>(
             </div>
           </div>
         </div>
-      </LinkCard>
+      </Card>
     );
   }
 );

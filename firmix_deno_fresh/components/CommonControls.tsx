@@ -1,22 +1,23 @@
-import { FunctionComponent } from "preact";
+import { FunctionComponent as FC } from "preact";
 import { css, domStyled } from "resin";
+import { createFC } from "~/auxiliaries/utils_fe/create_fc.ts";
 import { reflectInputChecked } from "~/auxiliaries/utils_fe/form_helper.ts";
 import { JSX, jsx } from "~/auxiliaries/xjsx/jsx-runtime.ts";
+import { useSiteContext } from "~/common/site_context.ts";
 import { flexHorizontal } from "~/common/utility_styles.ts";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
 
-type FC<T = {}> = FunctionComponent<T>;
-
-export function bindTagWithClassNames<K extends keyof JSXIntrinsicElements>(
+export function bindClasses<K extends keyof JSXIntrinsicElements>(
   tag: Extract<K, string>,
   classes?: string,
   classes2?: string
 ): FC<JSXIntrinsicElements[K]> {
+  // eslint-disable-next-line react/display-name
   return (props: JSXIntrinsicElements[K]) => {
     const classNames = [props.q, classes, classes2 ?? ""].join(" ").trim();
-    return jsx(tag, { ...props, q: classNames }, props.key);
+    return jsx(tag, { ...props, q: classNames }, props.key?.toString());
   };
 }
 
@@ -28,16 +29,13 @@ type IComponentFlavorWrapper = {
   LinkButton: XDom<"a">;
   ButtonSmall: XDom<"button">;
   Card: XDom<"div">;
-  LinkCard: XDom<"a">;
   FormLabel: XDom<"label">;
   FormTextInput: XDom<"input">;
   Nav: XDom<"ul">;
   NavItem: FC<{ path: string; title: string; iconSpec: string }>;
   NavItem_Button: FC<{ path: string; title: string; iconSpec: string }>;
-  ToggleButtonLarge: FC<{ checked: boolean; setChecked(): void; text: string }>;
 };
 
-/*
 const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -54,12 +52,13 @@ const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
       </>
     );
   },
-  Button: bindTagWithClassNames("button", "uk-button uk-button-default"),
-  ButtonSmall: bindTagWithClassNames("button", ""),
-  Card: bindTagWithClassNames("div", "uk-card uk-card-default"),
-  FormLabel: bindTagWithClassNames("label"),
-  FormTextInput: bindTagWithClassNames("input", "uk-input"),
-  Nav: bindTagWithClassNames("ul", "uk-nav uk-nav-default"),
+  Button: bindClasses("button", "uk-button uk-button-default"),
+  LinkButton: bindClasses("a", "uk-button uk-button-default"),
+  ButtonSmall: bindClasses("button", ""),
+  Card: bindClasses("div", "uk-card uk-card-default"),
+  FormLabel: bindClasses("label"),
+  FormTextInput: bindClasses("input", "uk-input"),
+  Nav: bindClasses("ul", "uk-nav uk-nav-default"),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
@@ -72,6 +71,17 @@ const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
       css`
         font-size: 18px;
       `
+    );
+  },
+  NavItem_Button: ({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <div q={styleNavItem} onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </div>
+      </li>
     );
   },
 };
@@ -91,31 +101,32 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
           if={false}
         />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.2/cosmo/bootstrap.min.css"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
           if={true}
         />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/superhero/bootstrap.min.css"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
           if={false}
         />
         <style dangerouslySetInnerHTML={{ __html: customCss }} />
       </>
     );
   },
-  Button: bindTagWithClassNames("button", "btn btn-primary"),
-  ButtonSmall: bindTagWithClassNames("button", ""),
-  Card: bindTagWithClassNames("div", "card"),
-  FormLabel: bindTagWithClassNames("label", "form-label"),
-  FormTextInput: bindTagWithClassNames("input", "form-control"),
-  Nav: bindTagWithClassNames("ul", "nav flex-column nav-pills"),
+  Button: bindClasses("button", "btn btn-primary"),
+  LinkButton: bindClasses("a", "btn btn-primary"),
+  ButtonSmall: bindClasses("button", ""),
+  Card: bindClasses("div", "card"),
+  FormLabel: bindClasses("label", "form-label"),
+  FormTextInput: bindClasses("input", "form-control"),
+  Nav: bindClasses("ul", "nav flex-column nav-pills"),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
@@ -124,6 +135,17 @@ const componentFlavorWrapper_Bootstrap: IComponentFlavorWrapper = {
         <a href={path} q={["nav-link", active && "active"]}>
           <span>{title}</span>
         </a>
+      </li>
+    );
+  },
+  NavItem_Button: ({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <div q={styleNavItem} onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </div>
       </li>
     );
   },
@@ -149,12 +171,13 @@ const componentFlavorWrapper_Materialize: IComponentFlavorWrapper = {
       </>
     );
   },
-  Button: bindTagWithClassNames("button", "btn"),
-  ButtonSmall: bindTagWithClassNames("button", ""),
-  Card: bindTagWithClassNames("div", "card"),
-  FormLabel: bindTagWithClassNames("label"),
-  FormTextInput: bindTagWithClassNames("input", "input"),
-  Nav: bindTagWithClassNames("ul", ""),
+  Button: bindClasses("button", "btn"),
+  LinkButton: bindClasses("a", "btn"),
+  ButtonSmall: bindClasses("button", ""),
+  Card: bindClasses("div", "card"),
+  FormLabel: bindClasses("label"),
+  FormTextInput: bindClasses("input", "input"),
+  Nav: bindClasses("ul", ""),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
@@ -167,6 +190,17 @@ const componentFlavorWrapper_Materialize: IComponentFlavorWrapper = {
       css`
         font-size: 18px;
       `
+    );
+  },
+  NavItem_Button: ({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <div q={styleNavItem} onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </div>
+      </li>
     );
   },
 };
@@ -185,12 +219,13 @@ const componentFlavorWrapper_Bulma: IComponentFlavorWrapper = {
       </>
     );
   },
-  Button: bindTagWithClassNames("button", "button is-primary"),
-  ButtonSmall: bindTagWithClassNames("button", ""),
-  Card: bindTagWithClassNames("div", "card"),
-  FormLabel: bindTagWithClassNames("label"),
-  FormTextInput: bindTagWithClassNames("input", "input"),
-  Nav: bindTagWithClassNames("ul", "menu-list"),
+  Button: bindClasses("button", "button is-primary"),
+  LinkButton: bindClasses("a", "button is-primary"),
+  ButtonSmall: bindClasses("button", ""),
+  Card: bindClasses("div", "card"),
+  FormLabel: bindClasses("label"),
+  FormTextInput: bindClasses("input", "input"),
+  Nav: bindClasses("ul", "menu-list"),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
@@ -199,6 +234,17 @@ const componentFlavorWrapper_Bulma: IComponentFlavorWrapper = {
         <a href={path} q={active && "is-active"}>
           <span>{title}</span>
         </a>
+      </li>
+    );
+  },
+  NavItem_Button: ({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <div q={styleNavItem} onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </div>
       </li>
     );
   },
@@ -213,24 +259,25 @@ const componentFlavorWrapper_Foundation: IComponentFlavorWrapper = {
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
         <style dangerouslySetInnerHTML={{ __html: customCss }} />
       </>
     );
   },
-  Button: bindTagWithClassNames("button", "button primary"),
-  ButtonSmall: bindTagWithClassNames("button", ""),
-  Card: bindTagWithClassNames("div", "card"),
-  FormLabel: bindTagWithClassNames("label"),
-  FormTextInput: bindTagWithClassNames(
+  Button: bindClasses("button", "button primary"),
+  LinkButton: bindClasses("a", "button primary"),
+  ButtonSmall: bindClasses("button", ""),
+  Card: bindClasses("div", "card"),
+  FormLabel: bindClasses("label"),
+  FormTextInput: bindClasses(
     "input",
     "input",
     css`
       margin: 0 !important;
     `
   ),
-  Nav: bindTagWithClassNames("ul", "menu vertical"),
+  Nav: bindClasses("ul", "menu vertical"),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
@@ -239,6 +286,17 @@ const componentFlavorWrapper_Foundation: IComponentFlavorWrapper = {
         <a href={path}>
           <span>{title}</span>
         </a>
+      </li>
+    );
+  },
+  NavItem_Button: ({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <div q={styleNavItem} onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </div>
       </li>
     );
   },
@@ -266,12 +324,13 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
       </>
     );
   },
-  Button: bindTagWithClassNames("button", "btn btn-primary"),
-  ButtonSmall: bindTagWithClassNames("button", ""),
-  Card: bindTagWithClassNames("div", "card"),
-  FormLabel: bindTagWithClassNames("label", "form-label"),
-  FormTextInput: bindTagWithClassNames("input", "form-input"),
-  Nav: bindTagWithClassNames("ul", "nav"),
+  Button: bindClasses("button", "btn btn-primary"),
+  LinkButton: bindClasses("a", "btn btn-primary"),
+  ButtonSmall: bindClasses("button", ""),
+  Card: bindClasses("div", "card"),
+  FormLabel: bindClasses("label", "form-label"),
+  FormTextInput: bindClasses("input", "form-input"),
+  Nav: bindClasses("ul", "nav"),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
@@ -280,6 +339,17 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
         <a href={path}>
           <span>{title}</span>
         </a>
+      </li>
+    );
+  },
+  NavItem_Button: ({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <div q={styleNavItem} onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </div>
       </li>
     );
   },
@@ -294,7 +364,7 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
         <script
           src="https://code.jquery.com/jquery-3.1.1.min.js"
           integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></script>
         <link
           rel="stylesheet"
@@ -306,22 +376,23 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
       </>
     );
   },
-  Button: bindTagWithClassNames("button", "ui button"),
-  ButtonSmall: bindTagWithClassNames("button", ""),
-  Card: bindTagWithClassNames(
+  Button: bindClasses("button", "ui button"),
+  LinkButton: bindClasses("a", "ui button"),
+  ButtonSmall: bindClasses("button", ""),
+  Card: bindClasses(
     "div",
     "ui segment",
     css`
       margin: 0 !important;
     `
   ),
-  FormLabel: bindTagWithClassNames("label"),
+  FormLabel: bindClasses("label"),
   FormTextInput: createFC<JSXIntrinsicElements["input"]>((props) => (
     <div q="ui input">
       <input type="text" {...props} />
     </div>
   )),
-  Nav: bindTagWithClassNames("ul", "ui secondary vertical menu"),
+  Nav: bindClasses("ul", "ui secondary vertical menu"),
   NavItem: ({ path, title }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
@@ -331,8 +402,18 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
       </a>
     );
   },
+  NavItem_Button: ({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <div q={styleNavItem} onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </div>
+      </li>
+    );
+  },
 };
-*/
 
 const styleNavItem = [
   "flex items-center p-2 text-gray-900 group",
@@ -385,9 +466,9 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
       </>
     );
   },
-  Button: bindTagWithClassNames("button", ...styleButton),
-  LinkButton: bindTagWithClassNames("a", ...styleButton),
-  ButtonSmall: bindTagWithClassNames(
+  Button: bindClasses("button", ...styleButton),
+  LinkButton: bindClasses("a", ...styleButton),
+  ButtonSmall: bindClasses(
     "button",
     css`
       padding: 4px 8px;
@@ -401,22 +482,13 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
       }
     `
   ),
-  Card: bindTagWithClassNames("div", "bg-white shadow"),
-  LinkCard: bindTagWithClassNames(
-    "a",
-    "bg-white shadow",
-    css`
-      &:hover {
-        opacity: 0.8;
-      }
-    `
-  ),
-  FormLabel: bindTagWithClassNames("label", ""),
-  FormTextInput: bindTagWithClassNames(
+  Card: bindClasses("div", "bg-white shadow"),
+  FormLabel: bindClasses("label", ""),
+  FormTextInput: bindClasses(
     "input",
     "bg-gray-50 border border-gray-300 text-gray-900 focus:border-indigo-300 focus:ring-indigo-300 p-2.5"
   ),
-  Nav: bindTagWithClassNames("ul", "nav"),
+  Nav: bindClasses("ul", "nav"),
   NavItem: ({ path, title, iconSpec }) => {
     return (
       <li>
@@ -431,33 +503,11 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
     const onClick = () => (location.href = path);
     return (
       <li>
-        <div href={path} q={styleNavItem} onClick={onClick}>
+        <div q={styleNavItem} onClick={onClick}>
           <IconIconifyZ spec={iconSpec as any} q="icon" />
           <span>{title}</span>
         </div>
       </li>
-    );
-  },
-  ToggleButtonLarge: ({ checked, setChecked, text }) => {
-    return domStyled(
-      <label class="relative inline-flex items-center cursor-pointer">
-        <input
-          type="checkbox"
-          value=""
-          class="sr-only peer"
-          checked={checked}
-          onChange={reflectInputChecked(setChecked)}
-        />
-        <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
-        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-          {text}
-        </span>
-      </label>,
-      css`
-        > input:checked + div {
-          background-color: #7ca;
-        }
-      `
     );
   },
 };
@@ -467,20 +517,45 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
 // const componentFlavor = componentFlavorWrapper_Materialize;
 // const componentFlavor = componentFlavorWrapper_Bulma;
 // const componentFlavor = componentFlavorWrapper_Foundation;
-// const componentFlavor = componentFlavorWrapper_Spectre;
+const componentFlavor = componentFlavorWrapper_Spectre;
 // const componentFlavor = componentFlavorWrapper_SemanticUI;
-const componentFlavor = componentFlavorWrapper_Tailwind_Flowbite;
+// const componentFlavor = componentFlavorWrapper_Tailwind_Flowbite;
 export const {
   CssFrameworkAssetsImporter,
   Button,
   LinkButton,
   ButtonSmall,
   Card,
-  LinkCard,
   FormLabel,
   FormTextInput,
   Nav,
   NavItem,
   NavItem_Button,
-  ToggleButtonLarge,
 } = componentFlavor;
+
+export const ToggleButtonLarge = createFC<{
+  checked: boolean;
+  setChecked(): void;
+  text: string;
+}>(({ checked, setChecked, text }) => {
+  return domStyled(
+    <label className="relative inline-flex items-center cursor-pointer">
+      <input
+        type="checkbox"
+        value=""
+        className="sr-only peer"
+        checked={checked}
+        onChange={reflectInputChecked(setChecked)}
+      />
+      <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+      <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+        {text}
+      </span>
+    </label>,
+    css`
+      > input:checked + div {
+        background-color: #7ca;
+      }
+    `
+  );
+});
