@@ -21,8 +21,8 @@ async function createStoreHouse() {
     "projectId"
   );
 
-  // userCollection.dropIndexes();
-  // projectCollection.dropIndexes();
+  userCollection.dropIndexes();
+  projectCollection.dropIndexes();
 
   await userCollection.createIndex({ userId: -1 }, { unique: true });
   await userCollection.createIndex(
