@@ -20,4 +20,4 @@ DenoとFreshによる実装です。CSS周りに問題があり開発が止ま�
 #### firmix_node_remix
 Node.jsとRemixによる実装です。現在稼働しているサーバーはこれをデプロイしています。
 
-DenoとFreshの構成でCSSまわりに問題が出ており、Node.jsとRemixによる構成に置き換えて開発を進めています。将来的にはDenoとFreshによる開発に戻したい意向です。
+DenoとFreshの構成でCSSまわりに難があり、Node.jsとRemixによる構成に置き換えて開発を進めています。将来的にはDenoとFreshによる開発に戻したい意向です。
