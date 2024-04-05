@@ -50,6 +50,10 @@ module.exports = {
       },
       rules: {
         "react/no-unknown-property": ["warn", { ignore: ["q", "if"] }],
+        "react-hooks/exhaustive-deps": "off",
+        "react/prop-types": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
       },
     },
 
@@ -74,6 +78,14 @@ module.exports = {
         "plugin:import/recommended",
         "plugin:import/typescript",
       ],
+      rules: {
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-namespace": "off",
+        "no-constant-condition": "off",
+        "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+      },
     },
 
     // Node

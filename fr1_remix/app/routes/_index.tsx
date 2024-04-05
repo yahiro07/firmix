@@ -1,22 +1,26 @@
-import { css } from "@acab/ecsstatic";
-import type { MetaFunction } from "@remix-run/node";
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
+import { useLoaderData } from "@remix-run/react";
+import { serverShell } from "~/central/server_shell.ts";
+import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
+import { ProjectListPage } from "~/islands/ProjectListPage.tsx";
+import { createLoader, createPage } from "~/system/route_helper";
 
-export default function Index() {
-  return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <div
-        q={css`
-          color: red;
-        `}
-      >
-        hello
-      </div>
-    </div>
+export const loader = createLoader(async ({ request }) => {
+  const loginUserClue = clientStorageImpl.readCookieLoginUserClue(request);
+  const coactiveState = clientStorageImpl.readCookieCoactiveState(request);
+  const projects = await serverShell.projectListService.getProjectList_recent(
+    coactiveState?.homeTargetRealm ?? "general",
+    loginUserClue?.userId ?? ""
   );
-}
+  return { projects };
+});
+
+export default createPage(() => {
+  const { projects } = useLoaderData<typeof loader>();
+  return (
+    <ProjectListPage
+      projects={projects}
+      showPublicity={false}
+      showHomeTargetSelectionBar={true}
+    />
+  );
+});

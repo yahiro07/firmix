@@ -1,10 +1,9 @@
 {
-  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "types": ["@remix-run/node", "vite/client"],
     "strict": true,
     "noEmit": true,
@@ -14,11 +13,14 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
+    "useUnknownInCatchVariables": false,
     "jsx": "react-jsx",
     "jsxImportSource": "jsxq",
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
     }
-  }
+  },
+  "include": ["app/**/*.ts", "app/**/*.tsx"]
 }
