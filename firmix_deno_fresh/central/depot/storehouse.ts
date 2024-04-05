@@ -7,10 +7,10 @@ async function createStoreHouse() {
   const mongoUrl = getEnvVariable("MONGO_URL");
   const mongoDatabaseName = getEnvVariable("MONGO_DATABASE_NAME");
   if (mongoUrl === "__dummy__") return undefined;
-  const client = new MongoClient();
-  await client.connect(mongoUrl);
+  const client = new MongoClient(mongoUrl);
+  await client.connect();
   console.log("connected to db");
-  const db = client.database(mongoDatabaseName);
+  const db = client.db(mongoDatabaseName);
 
   const userCollection = db.collection<UserEntity>("user");
   const projectCollection = db.collection<ProjectEntity>("project");
@@ -21,29 +21,21 @@ async function createStoreHouse() {
     "projectId"
   );
 
-  await userCollection.createIndexes({
-    indexes: [
-      { key: { userId: -1 }, name: "user_id", unique: true },
-      {
-        key: { loginSourceSignature: 1 },
-        name: "login_source_signature",
-        unique: true,
-      },
-      { key: { apiKey: 1 }, name: "api_key", unique: true },
-    ],
-  });
+  // userCollection.dropIndexes();
+  // projectCollection.dropIndexes();
 
-  // await colProject.createIndex({ projectId: -1 }, { unique: true });
-  // await colProject.dropIndexes({ index: "projectId_-1" });
-  await projectCollection.createIndexes({
-    indexes: [
-      { key: { projectId: -1 }, name: "project_id", unique: true },
-      { key: { projectGuid: 1 }, name: "project_guid", unique: true },
-      { key: { userId: 1 }, name: "user_id" },
-      { key: { realm: 1 }, name: "realm" },
-      { key: { parentProjectId: 1 }, name: "parent_project_id" },
-    ],
-  });
+  await userCollection.createIndex({ userId: -1 }, { unique: true });
+  await userCollection.createIndex(
+    { loginSourceSignature: 1 },
+    { unique: true }
+  );
+  await userCollection.createIndex({ apiKey: 1 }, { unique: true });
+
+  await projectCollection.createIndex({ projectId: -1 }, { unique: true });
+  await projectCollection.createIndex({ projectGuid: 1 }, { unique: true });
+  await projectCollection.createIndex({ userId: 1 });
+  await projectCollection.createIndex({ realm: 1 });
+  await projectCollection.createIndex({ parentProjectId: 1 });
 
   return { userCollection, projectCollection, userCabinet, projectCabinet };
 }
