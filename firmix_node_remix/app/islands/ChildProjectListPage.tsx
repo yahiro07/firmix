@@ -1,4 +1,5 @@
 import { css } from "@acab/ecsstatic";
+import { Link } from "@remix-run/react";
 import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
 import { ProjectDetailDto, ProjectListItemDto } from "~/base/types_dto.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
@@ -16,9 +17,9 @@ export const ChildProjectListPage = createFC<Props>(
     return (
       <div q={style}>
         <header>
-          <a href={parentPagePath} q="link">
+          <Link to={parentPagePath} q="link">
             {project.projectName}
-          </a>
+          </Link>
           &nbsp;の派生プロジェクトです。
         </header>
         <div q="list">

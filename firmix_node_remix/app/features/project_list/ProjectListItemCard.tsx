@@ -34,7 +34,7 @@ export const ProjectListItemCard = createFC<Props>(
               >
                 {project.published ? "公開中" : "ドラフト"}
               </p>
-              <LinkButton href={detailPagePath} q="button-to-detail">
+              <LinkButton to={detailPagePath} q="button-to-detail">
                 詳細
               </LinkButton>
             </div>

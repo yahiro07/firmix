@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { css } from "@acab/ecsstatic";
+import { Link } from "@remix-run/react";
 import { jsx, JSX } from "jsxq/jsx-runtime";
 import { createFC, FC } from "~/auxiliaries/fe-deps-react";
 import { domStyled } from "~/auxiliaries/utils_fe_react/fcx";
@@ -22,12 +23,24 @@ export function bindClasses<K extends keyof JSXIntrinsicElements>(
   };
 }
 
+export function bindClassesF<T>(
+  tag: FC<T>,
+  classes?: string,
+  classes2?: string
+): FC<T & { q?: string; key?: string }> {
+  // eslint-disable-next-line react/display-name
+  return (props: T & { q?: string; key?: string }) => {
+    const classNames = [props.q, classes, classes2 ?? ""].join(" ").trim();
+    return jsx(tag, { ...props, q: classNames }, props.key?.toString());
+  };
+}
+
 type XDom<K extends keyof JSXIntrinsicElements> = FC<JSXIntrinsicElements[K]>;
 
 type IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter: FC;
   Button: XDom<"button">;
-  LinkButton: XDom<"a">;
+  LinkButton: typeof Link;
   ButtonSmall: XDom<"button">;
   Card: XDom<"div">;
   FormLabel: XDom<"label">;
@@ -37,6 +50,7 @@ type IComponentFlavorWrapper = {
   NavItem_Button: FC<{ path: string; title: string; iconSpec: string }>;
 };
 
+/*
 const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -302,6 +316,7 @@ const componentFlavorWrapper_Foundation: IComponentFlavorWrapper = {
     );
   },
 };
+*/
 
 const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
@@ -326,20 +341,21 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
     );
   },
   Button: bindClasses("button", "btn btn-primary"),
-  LinkButton: bindClasses("a", "btn btn-primary"),
+  LinkButton: bindClassesF(Link, "btn btn-primary") as any,
   ButtonSmall: bindClasses("button", ""),
   Card: bindClasses("div", "card"),
   FormLabel: bindClasses("label", "form-label"),
   FormTextInput: bindClasses("input", "form-input"),
   Nav: bindClasses("ul", "nav"),
-  NavItem: ({ path, title }) => {
+  NavItem: ({ path, title, iconSpec }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
     return (
       <li q={["nav-item", active && "active"]}>
-        <a href={path}>
+        <Link to={path} q={styleNavItem}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
           <span>{title}</span>
-        </a>
+        </Link>
       </li>
     );
   },
@@ -356,6 +372,7 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
   },
 };
 
+/*
 const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -415,6 +432,7 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
     );
   },
 };
+*/
 
 const styleNavItem = [
   "flex items-center p-2 text-gray-900 group",
@@ -446,6 +464,7 @@ const styleButton = [
   `,
 ];
 
+/*
 const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -457,7 +476,6 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
 `;
     return (
       <>
-        {/* <script src="https://cdn.tailwindcss.com"></script> */}
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"
           rel="stylesheet"
@@ -512,6 +530,7 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
     );
   },
 };
+*/
 
 // const componentFlavor = componentFlavorWrapper_UiKit;
 // const componentFlavor = componentFlavorWrapper_Bootstrap;
