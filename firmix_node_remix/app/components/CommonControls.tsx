@@ -6,7 +6,7 @@ import { createFC, FC } from "~/auxiliaries/fe-deps-react";
 import { domStyled } from "~/auxiliaries/utils_fe_react/fcx";
 import { reflectInputChecked } from "~/auxiliaries/utils_fe_react/form_helper";
 import { useSiteContext } from "~/common/site_context";
-import { flexHorizontal } from "~/common/utility_styles";
+import { flexAligned, flexHorizontal } from "~/common/utility_styles";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
@@ -559,22 +559,52 @@ export const ToggleButtonLarge = createFC<{
   text: string;
 }>(({ checked, setChecked, text }) => {
   return domStyled(
-    <label className="relative inline-flex items-center cursor-pointer">
+    <label>
       <input
         type="checkbox"
         value=""
-        className="sr-only peer"
         checked={checked}
         onChange={reflectInputChecked(setChecked)}
       />
-      <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
-      <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-        {text}
-      </span>
+      <div />
+      <span>{text}</span>
     </label>,
     css`
+      position: relative;
+      cursor: pointer;
+      ${flexAligned(8)};
+
+      > input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+      }
+
+      > div {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        background: #ccc;
+        border-radius: 99px;
+
+        &:before {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          content: "";
+          width: 26px;
+          height: 26px;
+          background: #fff;
+          border-radius: 99px;
+          transition: left 0.5s;
+        }
+      }
+
       > input:checked + div {
         background-color: #7ca;
+        &:before {
+          left: 32px;
+        }
       }
     `
   );
