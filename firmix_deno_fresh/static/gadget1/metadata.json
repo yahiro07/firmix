@@ -1,9 +1,0 @@
-{
-  "targetMcu": "RP2040",
-  "referenceBoard": "WaveShare RP2040 Zero",
-  "dataEntries": [{
-    "marker": "PLED1",
-    "dataKind": "pin",
-    "dataCount": 1
-  }]
-}
