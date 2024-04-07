@@ -10,14 +10,3 @@
 
 準備中です
 
-### 開発状況
-
-現在サービスの実装が2つあります  
-
-#### firmix_deno_fresh
-DenoとFreshによる実装です。CSS周りに問題があり開発が止まっています。
-
-#### firmix_node_remix
-Node.jsとRemixによる実装です。現在稼働しているサーバーはこれをデプロイしています。
-
-DenoとFreshの構成でCSSまわりに難があり、Node.jsとRemixによる構成に置き換えて開発を進めています。将来的にはDenoとFreshによる開発に戻したい意向です。
