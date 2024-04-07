@@ -1,9 +1,9 @@
 import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import { InputFirmwareFormat } from "~/base/types_app_common.ts";
 import { serverShell } from "~/central/server_shell.ts";
-import { createPostHandler } from "~/system/route_helper.ts";
+import { createPostHandler, responseJson } from "~/system/route_helper.ts";
 
-export const loader = createPostHandler(async ({ request }) => {
+export const action = createPostHandler(async ({ request }) => {
   const authHeaderValue = request.headers.get("Authorization");
   const apiKey = authHeaderValue?.split(" ")[1];
   if (!apiKey) {
@@ -55,5 +55,5 @@ export const loader = createPostHandler(async ({ request }) => {
     thumbnailFileBytes,
   });
 
-  return Response.json({ success: 1 });
+  return responseJson({ success: 1 });
 });

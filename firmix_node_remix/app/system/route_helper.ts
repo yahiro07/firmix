@@ -48,3 +48,10 @@ export function getRequestSourceUrl(req: Request) {
 export function responseRedirect(destPath: string) {
   return new Response(null, { status: 302, headers: { location: destPath } });
 }
+
+export function responseJson(content: object) {
+  return new Response(JSON.stringify(content), {
+    status: 200,
+    headers: { "content-type": "application/json" },
+  });
+}

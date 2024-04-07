@@ -5,5 +5,5 @@ export function generateHashMd5(input: string | Uint8Array) {
 }
 
 export function makeHmacSha256(text: string, secret: string) {
-  return crypto.createHmac("sha25h", secret).update(text).digest("hex");
+  return crypto.createHmac("sha256", secret).update(text).digest("hex");
 }
