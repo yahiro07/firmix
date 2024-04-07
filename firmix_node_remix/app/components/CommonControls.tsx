@@ -6,7 +6,7 @@ import { createFC, FC } from "~/auxiliaries/fe-deps-react";
 import { domStyled } from "~/auxiliaries/utils_fe_react/fcx";
 import { reflectInputChecked } from "~/auxiliaries/utils_fe_react/form_helper";
 import { useSiteContext } from "~/common/site_context";
-import { flexAligned, flexHorizontal } from "~/common/utility_styles";
+import { flexAligned } from "~/common/utility_styles";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
@@ -438,7 +438,7 @@ const styleNavItem = [
   "flex items-center p-2 text-gray-900 group",
   css`
     font-size: 18px;
-    ${flexHorizontal(8)};
+    ${flexAligned(8)};
     cursor: pointer;
     > .icon {
       font-size: 22px;
