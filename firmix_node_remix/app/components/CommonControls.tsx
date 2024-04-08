@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
 import { Link } from "@remix-run/react";
 import { jsx, JSX } from "jsxq/jsx-runtime";
 import { createFC, FC } from "~/auxiliaries/fe-deps-react";

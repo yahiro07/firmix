@@ -1,4 +1,4 @@
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
 import { Link } from "@remix-run/react";
 import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
 import { ProjectDetailDto, ProjectListItemDto } from "~/base/types_dto.ts";

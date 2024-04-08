@@ -1,4 +1,4 @@
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
 import { ReactNode } from "~/auxiliaries/fe-deps-react";
 import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
 import { flexVertical } from "~/common/utility_styles.ts";

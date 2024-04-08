@@ -1,4 +1,4 @@
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
 import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
 import { colors } from "~/common/ui_theme.ts";
 import { flexAligned } from "~/common/utility_styles.ts";
