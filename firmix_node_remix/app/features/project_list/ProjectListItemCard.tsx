@@ -1,4 +1,4 @@
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
 import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import {
@@ -34,7 +34,7 @@ export const ProjectListItemCard = createFC<Props>(
               >
                 {project.published ? "公開中" : "ドラフト"}
               </p>
-              <LinkButton href={detailPagePath} q="button-to-detail">
+              <LinkButton to={detailPagePath} q="button-to-detail">
                 詳細
               </LinkButton>
             </div>

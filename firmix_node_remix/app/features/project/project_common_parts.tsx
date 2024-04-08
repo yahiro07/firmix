@@ -1,4 +1,5 @@
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
+import { Link } from "@remix-run/react";
 import { createFCX } from "~/auxiliaries/utils_fe_react/fcx";
 import { flexAligned } from "~/common/utility_styles.ts";
 import { IconIconify } from "~/components/IconIconify.tsx";
@@ -11,10 +12,10 @@ export const LinkChildProjectListPage = createFCX<{
     const { projectId, numChildProjects } = project;
     const pagePath = `/derived/${projectId}`;
     return (
-      <a href={pagePath} q={smaller && "--smaller"}>
+      <Link to={pagePath} q={smaller && "--smaller"}>
         <IconIconify spec="fa:code-fork" q="icon" />
         <span>{numChildProjects}件の派生プロジェクト</span>
-      </a>
+      </Link>
     );
   },
   css`
@@ -41,10 +42,10 @@ export const LinkParentProjectPage = createFCX<{
   ({ projectId, smaller }) => {
     const pagePath = `/project/${projectId}`;
     return (
-      <a href={pagePath} q={smaller && "--smaller"}>
+      <Link to={pagePath} q={smaller && "--smaller"}>
         <IconIconify spec="material-symbols:trip-origin" q="icon" />
         <span>派生元プロジェクト</span>
-      </a>
+      </Link>
     );
   },
   css`

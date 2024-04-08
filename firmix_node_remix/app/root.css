@@ -3,3 +3,12 @@
   margin: 0;
   padding: 0;
 }
+
+body,
+h2,
+h3,
+h4,
+p,
+span {
+  font-family: "M Plus 2", sans-serif;
+}

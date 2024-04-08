@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
+import { Link } from "@remix-run/react";
 import { jsx, JSX } from "jsxq/jsx-runtime";
 import { createFC, FC } from "~/auxiliaries/fe-deps-react";
 import { domStyled } from "~/auxiliaries/utils_fe_react/fcx";
 import { reflectInputChecked } from "~/auxiliaries/utils_fe_react/form_helper";
 import { useSiteContext } from "~/common/site_context";
-import { flexHorizontal } from "~/common/utility_styles";
+import { flexAligned } from "~/common/utility_styles";
 import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
@@ -22,12 +23,24 @@ export function bindClasses<K extends keyof JSXIntrinsicElements>(
   };
 }
 
+export function bindClassesF<T>(
+  tag: FC<T>,
+  classes?: string,
+  classes2?: string
+): FC<T & { q?: string; key?: string }> {
+  // eslint-disable-next-line react/display-name
+  return (props: T & { q?: string; key?: string }) => {
+    const classNames = [props.q, classes, classes2 ?? ""].join(" ").trim();
+    return jsx(tag, { ...props, q: classNames }, props.key?.toString());
+  };
+}
+
 type XDom<K extends keyof JSXIntrinsicElements> = FC<JSXIntrinsicElements[K]>;
 
 type IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter: FC;
   Button: XDom<"button">;
-  LinkButton: XDom<"a">;
+  LinkButton: typeof Link;
   ButtonSmall: XDom<"button">;
   Card: XDom<"div">;
   FormLabel: XDom<"label">;
@@ -37,6 +50,7 @@ type IComponentFlavorWrapper = {
   NavItem_Button: FC<{ path: string; title: string; iconSpec: string }>;
 };
 
+/*
 const componentFlavorWrapper_UiKit: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -302,6 +316,7 @@ const componentFlavorWrapper_Foundation: IComponentFlavorWrapper = {
     );
   },
 };
+*/
 
 const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
@@ -326,20 +341,21 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
     );
   },
   Button: bindClasses("button", "btn btn-primary"),
-  LinkButton: bindClasses("a", "btn btn-primary"),
+  LinkButton: bindClassesF(Link, "btn btn-primary") as any,
   ButtonSmall: bindClasses("button", ""),
   Card: bindClasses("div", "card"),
   FormLabel: bindClasses("label", "form-label"),
   FormTextInput: bindClasses("input", "form-input"),
   Nav: bindClasses("ul", "nav"),
-  NavItem: ({ path, title }) => {
+  NavItem: ({ path, title, iconSpec }) => {
     const { pagePath } = useSiteContext();
     const active = path === pagePath;
     return (
       <li q={["nav-item", active && "active"]}>
-        <a href={path}>
+        <Link to={path} q={styleNavItem}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
           <span>{title}</span>
-        </a>
+        </Link>
       </li>
     );
   },
@@ -356,6 +372,7 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
   },
 };
 
+/*
 const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -415,12 +432,13 @@ const componentFlavorWrapper_SemanticUI: IComponentFlavorWrapper = {
     );
   },
 };
+*/
 
 const styleNavItem = [
   "flex items-center p-2 text-gray-900 group",
   css`
     font-size: 18px;
-    ${flexHorizontal(8)};
+    ${flexAligned(8)};
     cursor: pointer;
     > .icon {
       font-size: 22px;
@@ -446,6 +464,7 @@ const styleButton = [
   `,
 ];
 
+/*
 const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
   CssFrameworkAssetsImporter() {
     const customCss = `
@@ -457,7 +476,6 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
 `;
     return (
       <>
-        {/* <script src="https://cdn.tailwindcss.com"></script> */}
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"
           rel="stylesheet"
@@ -512,6 +530,7 @@ const componentFlavorWrapper_Tailwind_Flowbite: IComponentFlavorWrapper = {
     );
   },
 };
+*/
 
 // const componentFlavor = componentFlavorWrapper_UiKit;
 // const componentFlavor = componentFlavorWrapper_Bootstrap;
@@ -540,22 +559,52 @@ export const ToggleButtonLarge = createFC<{
   text: string;
 }>(({ checked, setChecked, text }) => {
   return domStyled(
-    <label className="relative inline-flex items-center cursor-pointer">
+    <label>
       <input
         type="checkbox"
         value=""
-        className="sr-only peer"
         checked={checked}
         onChange={reflectInputChecked(setChecked)}
       />
-      <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
-      <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-        {text}
-      </span>
+      <div />
+      <span>{text}</span>
     </label>,
     css`
+      position: relative;
+      cursor: pointer;
+      ${flexAligned(8)};
+
+      > input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+      }
+
+      > div {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        background: #ccc;
+        border-radius: 99px;
+
+        &:before {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          content: "";
+          width: 26px;
+          height: 26px;
+          background: #fff;
+          border-radius: 99px;
+          transition: left 0.5s;
+        }
+      }
+
       > input:checked + div {
         background-color: #7ca;
+        &:before {
+          left: 32px;
+        }
       }
     `
   );

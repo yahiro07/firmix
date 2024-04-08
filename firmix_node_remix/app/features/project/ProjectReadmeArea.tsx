@@ -1,4 +1,4 @@
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useMemo } from "~/auxiliaries/fe-deps-react";

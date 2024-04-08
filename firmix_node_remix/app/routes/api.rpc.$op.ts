@@ -3,9 +3,13 @@ import { raiseError } from "~/auxiliaries/utils/error_util.ts";
 import { AppRpcContext } from "~/base/types_rpc.ts";
 import { appRpcRouter } from "~/central/rpc_router.ts";
 import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
-import { createPostHandler, readRequestBody } from "~/system/route_helper.ts";
+import {
+  createPostHandler,
+  readRequestBody,
+  responseJson,
+} from "~/system/route_helper.ts";
 
-export const loader = createPostHandler(async ({ request, params }) => {
+export const action = createPostHandler(async ({ request, params }) => {
   const op = params.op;
   if (!op) raiseError(`rpc op undefined`);
   const loginUserClue = clientStorageImpl.readCookieLoginUserClue(request);
@@ -19,5 +23,5 @@ export const loader = createPostHandler(async ({ request, params }) => {
     context,
     false
   );
-  return Response.json(result ?? {});
+  return responseJson(result ?? {});
 });

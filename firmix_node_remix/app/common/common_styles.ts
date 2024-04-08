@@ -1,4 +1,4 @@
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
 
 export const styleTextLinkInheritColor = css`
   color: inherit;

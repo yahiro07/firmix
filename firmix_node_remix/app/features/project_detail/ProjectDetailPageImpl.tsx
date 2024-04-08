@@ -1,4 +1,4 @@
-import { css } from "@acab/ecsstatic";
+import { css } from "@linaria/core";
 import { decodeBinaryBase64 } from "~/auxiliaries/base_env_adapters/base64";
 import { useMemo } from "~/auxiliaries/fe-deps-react";
 import { getDateTimeText_yyyyMMddHHmmss } from "~/auxiliaries/utils/date_time_helper.ts";
