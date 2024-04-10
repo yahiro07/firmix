@@ -1,10 +1,3 @@
-export type ProjectRepositoryInfo = {
-  repositoryUrl: string;
-  repositoryProjectPath: string;
-  ownerName: string;
-  ownerIconUrl: string;
-};
-
 export type FirmwareFormat = "uf2";
 
 export type InputFirmwareFormat = "uf2" | "bin" | "hex";

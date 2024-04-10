@@ -1,6 +1,6 @@
+import { apiOAuthGithub_getUserData } from "shared/foreign/api_oauth_github.ts";
 import { serverShell } from "~/central/server_shell.ts";
 import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
-import { apiOAuthGithub_getUserData } from "~/central/user_auth/api_oauth_github.ts";
 import { oauthClientGithub } from "~/central/user_auth/oauth_clients.ts";
 import {
   createGetHandler,

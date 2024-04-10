@@ -2,7 +2,7 @@ import { css } from "@linaria/core";
 import { ReactNode } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { flexVertical } from "shared/common/utility_styles.ts";
-import { useRepositoryDisplayInfo } from "~/fe_modules/repository_info_helper.ts";
+import { useRepositoryDisplayInfo } from "shared/foreign/repository_info_helper.ts";
 import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
 
 type Props = {

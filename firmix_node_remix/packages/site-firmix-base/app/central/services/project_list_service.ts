@@ -1,5 +1,5 @@
 import { raiseError } from "auxiliaries/utils/error_util.ts";
-import { specifyGithubAvatarUrlSize } from "~/base/avatar_size_modifier.ts";
+import { specifyGithubAvatarUrlSize } from "shared/foreign/avatar_size_modifier.ts";
 import { ProjectRealm } from "~/base/types_app_common.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { ProjectDetailDto, ProjectListItemDto } from "~/base/types_dto.ts";

@@ -3,7 +3,7 @@ import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { flexAligned, flexVertical } from "shared/common/utility_styles.ts";
 import { Button } from "shared/components/CommonControls.tsx";
 import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
-import { ProjectRepositoryInfo } from "~/base/types_app_common.ts";
+import { ProjectRepositoryInfo } from "shared/foreign/types";
 import { styleTextLinkInheritColor } from "~/common/common_styles.ts";
 import { colors } from "~/common/ui_theme.ts";
 

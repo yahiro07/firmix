@@ -5,6 +5,12 @@ import {
 import { myJwt_create, myJwt_verify } from "auxiliaries/myjwt/mod.ts";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { copyObjectMembers } from "auxiliaries/utils/utils_general.ts";
+import {
+  Cookie,
+  deleteCookie,
+  getCookies,
+  setCookie,
+} from "shared/system/cookie.ts";
 import { appConfig } from "~/base/app_config.ts";
 import { fallbackValues } from "~/base/fallback_values.ts";
 import { CoactiveState } from "~/base/types_dto.ts";
@@ -12,7 +18,6 @@ import { LoginUserClue } from "~/base/types_dto_internal.ts";
 import { getEnvVariable } from "~/central/base/envs.ts";
 import { serverConfig } from "~/central/base/server_config.ts";
 import { CookieOutputJob } from "~/central/base/types_client_storage.ts";
-import { Cookie, deleteCookie, getCookies, setCookie } from "./cookie.ts";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);
