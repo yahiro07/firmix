@@ -1,4 +1,4 @@
 {
-  "folders": [{ "path": "." }],
+  "folders": [{ "path": "." }, { "path": "packages/site-firmix-base" }],
   "settings": {}
 }
