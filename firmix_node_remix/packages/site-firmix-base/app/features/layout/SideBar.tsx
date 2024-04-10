@@ -8,7 +8,6 @@ import {
 } from "shared/components/CommonControls.tsx";
 import { appConfig } from "~/base/app_config.ts";
 import { useSiteContext } from "~/common/site_context.ts";
-import { colors } from "~/common/ui_theme.ts";
 import { LoginUserBox } from "~/features/layout/LoginUserBox.tsx";
 
 export const SideBar = createFCX(
@@ -69,13 +68,9 @@ export const SideBar = createFCX(
   },
   css`
     width: 240px;
-    background: ${colors.sideBarFill};
-    border-right: solid 1px ${colors.sideBarEdge};
-    padding: 20px 8px;
-    ${flexVertical(8)};
-
-    > .login-user-box {
-      padding: 8px;
-    }
+    background: var(--cl-side-bar-fill);
+    border-right: solid 1px var(--vl-side-bar-edge);
+    padding: 20px 16px;
+    ${flexVertical(16)};
   `
 );

@@ -6,6 +6,7 @@ import { LoginUser } from "~/base/types_dto_internal.ts";
 type Props = {
   user: LoginUser;
 };
+
 export const LoginUserBox = createFCX<Props>(
   ({ user }) => {
     return (

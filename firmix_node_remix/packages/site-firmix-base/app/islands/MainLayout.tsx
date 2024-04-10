@@ -3,7 +3,6 @@ import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { ReactNode } from "react";
 import { flexAligned } from "shared/common/utility_styles.ts";
 import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
-import { colors } from "~/common/ui_theme.ts";
 import { SideBar } from "~/features/layout/SideBar.tsx";
 
 const SiteTitle = createFCX(
@@ -19,6 +18,8 @@ const SiteTitle = createFCX(
   },
   css`
     ${flexAligned(2)};
+    color: var(--cl-top-bar-text);
+
     > .site-icon {
       font-size: 44px;
       margin-top: 3px;
@@ -27,7 +28,6 @@ const SiteTitle = createFCX(
       ${flexAligned(8)};
       font-size: 36px;
       font-weight: bold;
-      color: ${colors.topBarText};
       margin: 0;
 
       > .beta {
@@ -46,8 +46,7 @@ const TopBar = createFCX(
     </div>
   ),
   css`
-    background: ${colors.topBarFill};
-    color: ${colors.topBarText};
+    background: var(--cl-top-bar-fill);
     height: 60px;
     padding: 0 12px;
     ${flexAligned()};
@@ -99,8 +98,8 @@ export const MainLayout = createFCX(
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: ${colors.pageBackground};
-    color: ${colors.foregroundText};
+    background: var(--cl-page-background);
+    color: var(--cl-foreground-text);
 
     > .site-top-bar {
       position: sticky;

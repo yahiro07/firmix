@@ -10,7 +10,6 @@ import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmwar
 import { firmixPresenter_firmwarePatching } from "~/cardinal/firmix_presenter_firmware_patching/mod.ts";
 import { rpcClient } from "~/common/rpc_client.ts";
 import { useSiteContext } from "~/common/site_context.ts";
-import { colors } from "~/common/ui_theme.ts";
 import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
 import {
   LinkChildProjectListPage,
@@ -123,7 +122,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
 
 const style = css`
   padding: 16px;
-  background: ${colors.contentBackground};
+  background: var(--cl-content-background);
   /* min-height: 100%; */
   > .info-area {
     padding: 0 8px;
