@@ -1,7 +1,7 @@
+import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
+import { filePathHelper } from "auxiliaries/utils/file_path_helper.ts";
 import { produce } from "immer";
-import { decodeBinaryBase64 } from "~/auxiliaries/base_env_adapters/base64";
-import { raiseError } from "~/auxiliaries/utils/error_util.ts";
-import { filePathHelper } from "~/auxiliaries/utils/file_path_helper.ts";
 import {
   BinaryFileEntryWithTimestamp,
   LocalDevelopmentProject,

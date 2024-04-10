@@ -1,8 +1,8 @@
 import {
   decodeBinaryBase64,
   encodeBinaryBase64,
-} from "~/auxiliaries/base_env_adapters/base64";
-import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+} from "auxiliaries/base_env_adapters/base64";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
 import {
   FirmwareContainer,
   PatchingDataBlob,

@@ -1,4 +1,4 @@
-import { createContext, useContext } from "~/auxiliaries/fe-deps-react";
+import { createContext, useContext } from "auxiliaries/fe-deps-react";
 import { CoactiveState } from "~/base/types_dto.ts";
 import { LoginUser } from "~/base/types_dto_internal.ts";
 

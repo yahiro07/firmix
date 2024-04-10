@@ -1,15 +1,15 @@
+import { raiseError } from "auxiliaries/utils/error_util.ts";
+import { filePathHelper } from "auxiliaries/utils/file_path_helper.ts";
+import {
+  numberToHexString,
+  parseIntCheckedZeroOrPositiveInteger,
+} from "auxiliaries/utils/utils_number.ts";
 import {
   convertBinToUf2,
   convertHexToBin,
   getUf2FamilyId,
   readHexBaseAddress,
 } from "uf2gen";
-import { raiseError } from "~/auxiliaries/utils/error_util.ts";
-import { filePathHelper } from "~/auxiliaries/utils/file_path_helper.ts";
-import {
-  numberToHexString,
-  parseIntCheckedZeroOrPositiveInteger,
-} from "~/auxiliaries/utils/utils_number.ts";
 import { ProjectMetadataFirmwareSpec } from "~/base/types_project_metadata.ts";
 
 export function convertFirmwareBytesToUF2(

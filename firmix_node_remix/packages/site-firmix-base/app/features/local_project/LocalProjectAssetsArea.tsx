@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
-import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
-import { domStyled } from "~/auxiliaries/utils_fe_react/fcx";
+import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { domStyled } from "auxiliaries/utils_fe_react/fcx";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,

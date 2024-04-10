@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { createFCX } from "~/auxiliaries/utils_fe_react/fcx";
+import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { rpcClient } from "~/common/rpc_client.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
 import {

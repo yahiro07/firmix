@@ -1,4 +1,4 @@
-import { SyntheticEvent } from "~/auxiliaries/fe-deps-react";
+import { SyntheticEvent } from "auxiliaries/fe-deps-react";
 
 export type DomEvent<T> = Event & { currentTarget: T };
 

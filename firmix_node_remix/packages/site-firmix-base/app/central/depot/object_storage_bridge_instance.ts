@@ -1,4 +1,4 @@
-import { createObjectStorageBridge } from "~/auxiliaries/object_storage_bridge/mod.ts";
+import { createObjectStorageBridge } from "auxiliaries/object_storage_bridge/mod.ts";
 import { getEnvVariable } from "~/central/base/envs.ts";
 
 export const objectStorageBridge = createObjectStorageBridge({

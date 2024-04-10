@@ -1,5 +1,5 @@
-import { handleServerRpc } from "~/auxiliaries/chibi_rpc/server.ts";
-import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { handleServerRpc } from "auxiliaries/chibi_rpc/server.ts";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { AppRpcContext } from "~/base/types_rpc.ts";
 import { appRpcRouter } from "~/central/rpc_router.ts";
 import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";

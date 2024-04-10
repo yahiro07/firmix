@@ -1,5 +1,5 @@
+import { checkNonNull } from "auxiliaries/utils/error_util.ts";
 import { Collection } from "mongodb";
-import { checkNonNull } from "~/auxiliaries/utils/error_util.ts";
 
 type MongoGeneralCabinet<T extends object> = {
   insert(entity: T): Promise<void>;

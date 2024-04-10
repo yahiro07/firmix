@@ -1,4 +1,4 @@
-import { raiseError } from "~/auxiliaries/utils/error_util";
+import { raiseError } from "auxiliaries/utils/error_util";
 import { getEnvVariable } from "~/central/base/envs.ts";
 
 if (typeof window !== "undefined") {

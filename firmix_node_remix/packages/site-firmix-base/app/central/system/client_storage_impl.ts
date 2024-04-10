@@ -1,10 +1,10 @@
 import {
   decodeTextBase64,
   encodeTextBase64,
-} from "~/auxiliaries/base_env_adapters/base64";
-import { myJwt_create, myJwt_verify } from "~/auxiliaries/myjwt/mod.ts";
-import { raiseError } from "~/auxiliaries/utils/error_util.ts";
-import { copyObjectMembers } from "~/auxiliaries/utils/utils_general.ts";
+} from "auxiliaries/base_env_adapters/base64";
+import { myJwt_create, myJwt_verify } from "auxiliaries/myjwt/mod.ts";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
+import { copyObjectMembers } from "auxiliaries/utils/utils_general.ts";
 import { appConfig } from "~/base/app_config.ts";
 import { fallbackValues } from "~/base/fallback_values.ts";
 import { CoactiveState } from "~/base/types_dto.ts";

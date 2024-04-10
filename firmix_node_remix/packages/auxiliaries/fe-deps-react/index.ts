@@ -10,12 +10,10 @@ import {
   useMemo,
   useState,
 } from "react";
-import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
 
 export {
   Children,
   createContext,
-  createFC,
   useCallback,
   useContext,
   useEffect,

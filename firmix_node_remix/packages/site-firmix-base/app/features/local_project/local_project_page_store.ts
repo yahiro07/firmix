@@ -1,14 +1,14 @@
-import { decodeBinaryBase64 } from "~/auxiliaries/base_env_adapters/base64";
-import { useCallback } from "~/auxiliaries/fe-deps-react";
-import { useReasyState } from "~/auxiliaries/reasy/reasy_state_local.ts";
-import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
+import { useCallback } from "auxiliaries/fe-deps-react";
+import { useReasyState } from "auxiliaries/reasy/reasy_state_local.ts";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
 import {
   createIndexedDbStorageAdapter,
   createLocalStorageAdapter,
-} from "~/auxiliaries/utils_fe/browser_storage_adapter.ts";
-import { downloadBinaryFileBlob } from "~/auxiliaries/utils_fe/downloading_link.ts";
-import { ensureFileHandlePermission } from "~/auxiliaries/utils_fe/local_filesystem_helper.ts";
-import { useEffectAsync } from "~/auxiliaries/utils_fe_react/hooks";
+} from "auxiliaries/utils_fe/browser_storage_adapter.ts";
+import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link.ts";
+import { ensureFileHandlePermission } from "auxiliaries/utils_fe/local_filesystem_helper.ts";
+import { useEffectAsync } from "auxiliaries/utils_fe_react/hooks";
 import { LocalProjectSubmissionPayload } from "~/base/types_dto_internal.ts";
 import { LocalDevelopmentProject } from "~/base/types_local_project.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";

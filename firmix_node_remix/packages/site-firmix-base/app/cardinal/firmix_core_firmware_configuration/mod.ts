@@ -1,5 +1,5 @@
-import { raiseError } from "~/auxiliaries/utils/error_util.ts";
-import { padZeros, seqNumbers } from "~/auxiliaries/utils/utils_array.ts";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
+import { padZeros, seqNumbers } from "auxiliaries/utils/utils_array.ts";
 import { CustomDataItem } from "~/base/types_core_entity.ts";
 import {
   ConfigurationSourceItem,

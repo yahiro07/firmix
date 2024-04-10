@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { createFCX } from "~/auxiliaries/utils_fe_react/fcx";
+import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { ProjectRealm } from "~/base/types_app_common.ts";
 import { coactiveStateWriter } from "~/common/coactive_state_writer.ts";
 import { uiStyleClickable } from "~/common/common_styles.ts";

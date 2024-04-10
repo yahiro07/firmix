@@ -1,5 +1,5 @@
+import { raiseError } from "auxiliaries/utils/error_util";
 import { MongoClient } from "mongodb";
-import { raiseError } from "~/auxiliaries/utils/error_util";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { getEnvVariable } from "~/central/base/envs.ts";
 import { createMongoGeneralCabinet } from "~/central/depot/mongo_general_cabinet.ts";

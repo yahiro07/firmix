@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
 import { Link } from "@remix-run/react";
-import { createFCX } from "~/auxiliaries/utils_fe_react/fcx";
+import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { flexAligned } from "~/common/utility_styles.ts";
 import { IconIconify } from "~/components/IconIconify.tsx";
 

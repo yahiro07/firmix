@@ -1,5 +1,5 @@
+import { formatZodErrorToLines } from "auxiliaries/utils/zod_helper.ts";
 import { z } from "zod";
-import { formatZodErrorToLines } from "~/auxiliaries/utils/zod_helper.ts";
 import { ProjectMetadataJsonFileContent } from "~/base/types_project_metadata.ts";
 
 const customDataItemCommon = {

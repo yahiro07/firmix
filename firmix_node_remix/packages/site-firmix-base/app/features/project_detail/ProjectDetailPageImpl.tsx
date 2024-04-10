@@ -1,9 +1,9 @@
 import { css } from "@linaria/core";
-import { decodeBinaryBase64 } from "~/auxiliaries/base_env_adapters/base64";
-import { useMemo } from "~/auxiliaries/fe-deps-react";
-import { getDateTimeText_yyyyMMddHHmmss } from "~/auxiliaries/utils/date_time_helper.ts";
-import { downloadBinaryFileBlob } from "~/auxiliaries/utils_fe/downloading_link.ts";
-import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
+import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
+import { useMemo } from "auxiliaries/fe-deps-react";
+import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper.ts";
+import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link.ts";
+import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";

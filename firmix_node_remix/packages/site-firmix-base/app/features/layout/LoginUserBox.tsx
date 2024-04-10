@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
+import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { LoginUser } from "~/base/types_dto_internal.ts";
 import { flexAligned } from "~/common/utility_styles.ts";
 

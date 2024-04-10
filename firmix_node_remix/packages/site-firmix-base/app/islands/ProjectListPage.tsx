@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
+import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { flexVertical } from "~/common/utility_styles.ts";
 import { HomeTargetSelectionBar } from "~/features/project_list/HomeTargetSelectionBar.tsx";

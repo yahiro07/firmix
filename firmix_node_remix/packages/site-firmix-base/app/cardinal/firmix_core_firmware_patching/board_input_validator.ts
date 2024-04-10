@@ -1,5 +1,5 @@
+import { formatZodErrorToLines } from "auxiliaries/utils/zod_helper.ts";
 import { z } from "zod";
-import { formatZodErrorToLines } from "~/auxiliaries/utils/zod_helper.ts";
 import { ProjectBoardJsonFileContent } from "~/base/types_project_metadata.ts";
 
 const schemaProjectBoardFileContent = z.object({

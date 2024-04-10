@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { raiseError } from "auxiliaries/utils/error_util";
 import { ReactNode } from "react";
-import { raiseError } from "~/auxiliaries/utils/error_util";
 
 export function createGetHandler(
   fn: (args: LoaderFunctionArgs) => Promise<Response>

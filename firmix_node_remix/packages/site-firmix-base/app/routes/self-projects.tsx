@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import { raiseError } from "~/auxiliaries/utils/error_util.ts";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { serverShell } from "~/central/server_shell.ts";
 import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
 import { ProjectListPage } from "~/islands/ProjectListPage.tsx";

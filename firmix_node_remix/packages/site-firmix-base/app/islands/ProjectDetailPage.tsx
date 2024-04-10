@@ -1,4 +1,4 @@
-import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
+import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { ProjectDetailDto } from "~/base/types_dto.ts";
 import { ProjectDetailPageImpl } from "~/features/project_detail/ProjectDetailPageImpl.tsx";
 

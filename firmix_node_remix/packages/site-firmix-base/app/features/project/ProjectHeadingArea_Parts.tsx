@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { createFCX } from "~/auxiliaries/utils_fe_react/fcx";
+import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { ProjectRepositoryInfo } from "~/base/types_app_common.ts";
 import { styleTextLinkInheritColor } from "~/common/common_styles.ts";
 import { colors } from "~/common/ui_theme.ts";

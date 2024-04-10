@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
+import { useMemo } from "auxiliaries/fe-deps-react";
+import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { useMemo } from "~/auxiliaries/fe-deps-react";
-import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
 
 type Props = {
   readmeFileContent: string;

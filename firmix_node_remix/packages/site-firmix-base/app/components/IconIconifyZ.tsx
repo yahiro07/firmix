@@ -1,4 +1,4 @@
-import { createFC } from "~/auxiliaries/utils_fe_react/create_fc";
+import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 
 export const iconShapes = {
   "lucide:package": (
