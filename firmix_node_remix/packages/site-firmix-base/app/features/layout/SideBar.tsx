@@ -67,9 +67,9 @@ export const SideBar = createFCX(
     );
   },
   css`
-    width: 240px;
+    width: 260px;
     background: var(--cl-side-bar-fill);
-    border-right: solid 1px var(--vl-side-bar-edge);
+    /* border-right: solid 1px var(--cl-side-bar-edge); */
     padding: 20px 16px;
     ${flexVertical(16)};
   `

@@ -15,7 +15,7 @@ span {
   font-family: "M Plus 2", sans-serif;
 }
 
-body {
+:root {
   --cl-page-background: #eee;
   --cl-foreground-text: #333;
   --cl-top-bar-fill: #76d;
@@ -24,4 +24,14 @@ body {
   --cl-side-bar-edge: #aaa;
   --cl-content-background: #fff;
   --cl-button-edit-active: #7dd1d7;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }

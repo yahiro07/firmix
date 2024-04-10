@@ -8,7 +8,6 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import { CssFrameworkAssetsImporter } from "shared/components/CommonControls";
 import { fallbackValues } from "~/base/fallback_values";
 import { clientStorageImpl } from "~/central/system/client_storage_impl";
 import { SiteContextValue } from "~/common/site_context";
@@ -56,7 +55,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
           href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css"
           crossOrigin="anonymous"
         />
-        <CssFrameworkAssetsImporter />
         <Meta />
         <Links />
       </head>
