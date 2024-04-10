@@ -1,12 +1,12 @@
 import { apiOAuthGithub_getUserData } from "shared/foreign/api_oauth_github.ts";
-import { serverShell } from "~/central/server_shell.ts";
-import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
-import { oauthClientGithub } from "~/central/user_auth/oauth_clients.ts";
 import {
   createGetHandler,
   getRequestSourceUrl,
   responseRedirect,
-} from "~/system/route_helper.ts";
+} from "shared/system/route_helper.ts";
+import { serverShell } from "~/central/server_shell.ts";
+import { clientStorageImpl } from "~/central/system/client_storage_impl.ts";
+import { oauthClientGithub } from "~/central/user_auth/oauth_clients.ts";
 
 export const loader = createGetHandler(async ({ request }) => {
   const reqUrl = getRequestSourceUrl(request);

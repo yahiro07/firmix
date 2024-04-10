@@ -1,8 +1,8 @@
 import { raiseError } from "auxiliaries/utils/error_util";
 import { MongoClient } from "mongodb";
+import { createMongoGeneralCabinet } from "shared/central/mongo_general_cabinet.ts";
 import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
 import { getEnvVariable } from "~/central/base/envs.ts";
-import { createMongoGeneralCabinet } from "~/central/depot/mongo_general_cabinet.ts";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);
