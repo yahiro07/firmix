@@ -1,13 +1,13 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { domStyled } from "auxiliaries/utils_fe_react/fcx";
+import { flexAligned } from "shared/common/utility_styles.ts";
+import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,
   LocalDevelopmentProject,
 } from "~/base/types_local_project.ts";
-import { flexAligned } from "~/common/utility_styles.ts";
-import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 
 type Props = {
   project: LocalDevelopmentProject;

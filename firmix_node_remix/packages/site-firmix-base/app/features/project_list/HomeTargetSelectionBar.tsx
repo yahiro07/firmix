@@ -1,11 +1,11 @@
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
+import { flexAligned } from "shared/common/utility_styles.ts";
 import { ProjectRealm } from "~/base/types_app_common.ts";
 import { coactiveStateWriter } from "~/common/coactive_state_writer.ts";
 import { uiStyleClickable } from "~/common/common_styles.ts";
 import { useSiteContext } from "~/common/site_context.ts";
 import { uiSystem } from "~/common/ui_system.ts";
-import { flexAligned } from "~/common/utility_styles.ts";
 
 export const HomeTargetSelectionBar = createFCX(
   () => {

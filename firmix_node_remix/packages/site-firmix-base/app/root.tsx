@@ -8,10 +8,10 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
+import { CssFrameworkAssetsImporter } from "shared/components/CommonControls";
 import { fallbackValues } from "~/base/fallback_values";
 import { clientStorageImpl } from "~/central/system/client_storage_impl";
 import { SiteContextValue } from "~/common/site_context";
-import { CssFrameworkAssetsImporter } from "~/components/CommonControls";
 import { MainLayout } from "~/islands/MainLayout";
 import { SiteContextProvider } from "~/islands/SiteContextProvider";
 import styles from "./root.css?url";

@@ -1,15 +1,15 @@
 import { css } from "@linaria/core";
 import { useState } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { rpcClient } from "~/common/rpc_client.ts";
-import { colors } from "~/common/ui_theme.ts";
 import {
   flexAligned,
   flexCentered,
   flexVertical,
-} from "~/common/utility_styles.ts";
-import { ButtonSmall } from "~/components/CommonControls.tsx";
-import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
+} from "shared/common/utility_styles.ts";
+import { ButtonSmall } from "shared/components/CommonControls.tsx";
+import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+import { rpcClient } from "~/common/rpc_client.ts";
+import { colors } from "~/common/ui_theme.ts";
 
 type Props = {
   apiKey: string | undefined;

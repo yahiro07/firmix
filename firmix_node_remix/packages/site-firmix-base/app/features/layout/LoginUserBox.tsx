@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { flexAligned } from "shared/common/utility_styles.ts";
 import { LoginUser } from "~/base/types_dto_internal.ts";
-import { flexAligned } from "~/common/utility_styles.ts";
 
 type Props = {
   user: LoginUser;

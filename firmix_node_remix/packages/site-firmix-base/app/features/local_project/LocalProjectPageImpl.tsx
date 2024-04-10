@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { flexCentered, flexVertical } from "shared/common/utility_styles.ts";
+import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
 import { colors } from "~/common/ui_theme.ts";
-import { flexCentered, flexVertical } from "~/common/utility_styles.ts";
-import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 import { useDateTimeTextWithElapsed } from "~/fe_modules/display_data_hooks.ts";
 import { LocalProjectAssetsArea } from "~/features/local_project/LocalProjectAssetsArea.tsx";
 import { LocalProjectLoadingArea } from "~/features/local_project/LocalProjectLoadingArea.tsx";

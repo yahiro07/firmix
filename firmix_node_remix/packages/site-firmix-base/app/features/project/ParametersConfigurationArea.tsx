@@ -2,6 +2,12 @@ import { css } from "@linaria/core";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 
+import { flexHorizontal, flexVertical } from "shared/common/utility_styles.ts";
+import {
+  Button,
+  FormLabel,
+  FormTextInput,
+} from "shared/components/CommonControls.tsx";
 import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,
@@ -9,12 +15,6 @@ import {
 } from "~/base/types_dto.ts";
 import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
 import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
-import { flexHorizontal, flexVertical } from "~/common/utility_styles.ts";
-import {
-  Button,
-  FormLabel,
-  FormTextInput,
-} from "~/components/CommonControls.tsx";
 
 type Props = {
   configurationSourceItems: ConfigurationSourceItemWrapper[];

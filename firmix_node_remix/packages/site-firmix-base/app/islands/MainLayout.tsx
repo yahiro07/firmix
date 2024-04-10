@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { flexAligned } from "shared/common/utility_styles.ts";
+import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
 import { colors } from "~/common/ui_theme.ts";
-import { flexAligned } from "~/common/utility_styles.ts";
-import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
 import { SideBar } from "~/features/layout/SideBar.tsx";
 
 export const MainLayout = createFC(({ children }) => {

@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
 import { Link } from "@remix-run/react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { flexVertical } from "shared/common/utility_styles.ts";
 import { ProjectDetailDto, ProjectListItemDto } from "~/base/types_dto.ts";
-import { flexVertical } from "~/common/utility_styles.ts";
 import { ProjectListItemCard } from "~/features/project_list/ProjectListItemCard.tsx";
 
 type Props = {

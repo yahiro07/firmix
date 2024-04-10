@@ -1,12 +1,12 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { ProjectListItemDto } from "~/base/types_dto.ts";
 import {
   flexAligned,
   flexHorizontal,
   flexVertical,
-} from "~/common/utility_styles.ts";
-import { Card, LinkButton } from "~/components/CommonControls.tsx";
+} from "shared/common/utility_styles.ts";
+import { Card, LinkButton } from "shared/components/CommonControls.tsx";
+import { ProjectListItemDto } from "~/base/types_dto.ts";
 import { LinkChildProjectListPage } from "~/features/project/project_common_parts";
 import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
 

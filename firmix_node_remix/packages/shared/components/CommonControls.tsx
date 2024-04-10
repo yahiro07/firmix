@@ -6,9 +6,9 @@ import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { domStyled } from "auxiliaries/utils_fe_react/fcx";
 import { reflectInputChecked } from "auxiliaries/utils_fe_react/form_helper";
 import { jsx, JSX } from "jsxq/jsx-runtime";
-import { useSiteContext } from "~/common/site_context";
-import { flexAligned } from "~/common/utility_styles";
-import { IconIconifyZ } from "~/components/IconIconifyZ.tsx";
+import { flexAligned } from "shared/common/utility_styles";
+import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+// import { useSiteContext } from "~/common/site_context";
 
 type JSXIntrinsicElements = JSX.IntrinsicElements;
 
@@ -349,8 +349,10 @@ const componentFlavorWrapper_Spectre: IComponentFlavorWrapper = {
   FormTextInput: bindClasses("input", "form-input"),
   Nav: bindClasses("ul", "nav"),
   NavItem: ({ path, title, iconSpec }) => {
-    const { pagePath } = useSiteContext();
-    const active = path === pagePath;
+    // const { pagePath } = useSiteContext();
+    // const active = path === pagePath;
+    // const active = path === location.href;
+    const active = false;
     return (
       <li q={["nav-item", active && "active"]}>
         <Link to={path} q={styleNavItem}>
