@@ -1,9 +1,9 @@
 node_modules
 
-/.cache
-/build
+.cache/
+build/
 .env
 .env.*
 
 .local/
-/.vscode/settings.json
+.vscode/settings.json
