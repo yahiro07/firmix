@@ -1,8 +1,3 @@
-import { LocalProjectSubmissionPayload } from "@m/web-firmix/base/types_dto_internal.ts";
-import { LocalDevelopmentProject } from "@m/web-firmix/base/types_local_project.ts";
-import { ConfigurationEditItem } from "@m/web-firmix/base/types_project_edit.ts";
-import { firmixPresenter_localProjectEdit } from "@m/web-firmix/cardinal/firmix_presenter_local_project_edit/mod.ts";
-import { rpcClient } from "@m/web-firmix/common/rpc_client.ts";
 import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
 import { useCallback } from "auxiliaries/fe-deps-react";
 import { useReasyState } from "auxiliaries/reasy/reasy_state_local.ts";
@@ -14,6 +9,11 @@ import {
 import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link.ts";
 import { ensureFileHandlePermission } from "auxiliaries/utils_fe/local_filesystem_helper.ts";
 import { useEffectAsync } from "auxiliaries/utils_fe_react/hooks";
+import { LocalProjectSubmissionPayload } from "web-firmix/app/base/types_dto_internal.ts";
+import { LocalDevelopmentProject } from "web-firmix/app/base/types_local_project.ts";
+import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit.ts";
+import { firmixPresenter_localProjectEdit } from "web-firmix/app/cardinal/firmix_presenter_local_project_edit/mod.ts";
+import { rpcClient } from "web-firmix/app/common/rpc_client.ts";
 
 const localProjectStorage =
   createLocalStorageAdapter<LocalDevelopmentProject>("fr0_local_project");

@@ -1,2 +1,2 @@
 wf-dev:
-	npm run dev -w @m/web-firmix
+	npm run dev -w web-firmix

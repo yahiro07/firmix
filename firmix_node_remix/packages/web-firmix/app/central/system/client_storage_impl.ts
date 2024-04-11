@@ -1,10 +1,3 @@
-import { appConfig } from "@m/web-firmix/base/app_config.ts";
-import { fallbackValues } from "@m/web-firmix/base/fallback_values.ts";
-import { CoactiveState } from "@m/web-firmix/base/types_dto.ts";
-import { LoginUserClue } from "@m/web-firmix/base/types_dto_internal.ts";
-import { getEnvVariable } from "@m/web-firmix/central/base/envs.ts";
-import { serverConfig } from "@m/web-firmix/central/base/server_config.ts";
-import { CookieOutputJob } from "@m/web-firmix/central/base/types_client_storage.ts";
 import {
   decodeTextBase64,
   encodeTextBase64,
@@ -18,6 +11,13 @@ import {
   getCookies,
   setCookie,
 } from "shared/system/cookie.ts";
+import { appConfig } from "web-firmix/app/base/app_config.ts";
+import { fallbackValues } from "web-firmix/app/base/fallback_values.ts";
+import { CoactiveState } from "web-firmix/app/base/types_dto.ts";
+import { LoginUserClue } from "web-firmix/app/base/types_dto_internal.ts";
+import { getEnvVariable } from "web-firmix/app/central/base/envs.ts";
+import { serverConfig } from "web-firmix/app/central/base/server_config.ts";
+import { CookieOutputJob } from "web-firmix/app/central/base/types_client_storage.ts";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);

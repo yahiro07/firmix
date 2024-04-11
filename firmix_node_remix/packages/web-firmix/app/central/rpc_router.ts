@@ -1,10 +1,10 @@
+import { ServerRpcRouterWithContext } from "auxiliaries/chibi_rpc/types.ts";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
 import {
   AppRpcContext,
   AppRpcSignatures,
-} from "@m/web-firmix/base/types_rpc.ts";
-import { serverShell } from "@m/web-firmix/central/server_shell.ts";
-import { ServerRpcRouterWithContext } from "auxiliaries/chibi_rpc/types.ts";
-import { raiseError } from "auxiliaries/utils/error_util.ts";
+} from "web-firmix/app/base/types_rpc.ts";
+import { serverShell } from "web-firmix/app/central/server_shell.ts";
 
 export const appRpcRouter: ServerRpcRouterWithContext<
   AppRpcSignatures,

@@ -1,9 +1,9 @@
 import { css } from "@linaria/core";
-import { ProjectListItemDto } from "@m/web-firmix/base/types_dto.ts";
-import { HomeTargetSelectionBar } from "@m/web-firmix/features/project_list/HomeTargetSelectionBar.tsx";
-import { ProjectListItemCard } from "@m/web-firmix/features/project_list/ProjectListItemCard";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { flexVertical } from "shared/common/utility_styles.ts";
+import { ProjectListItemDto } from "web-firmix/app/base/types_dto.ts";
+import { HomeTargetSelectionBar } from "web-firmix/app/features/project_list/HomeTargetSelectionBar.tsx";
+import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard";
 
 type Props = {
   projects: ProjectListItemDto[];

@@ -1,7 +1,4 @@
 import { css } from "@linaria/core";
-import { ProjectListItemDto } from "@m/web-firmix/base/types_dto.ts";
-import { LinkChildProjectListPage } from "@m/web-firmix/features/project/project_common_parts";
-import { projectHeadingArea_parts } from "@m/web-firmix/features/project/ProjectHeadingArea_Parts.tsx";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import {
   flexAligned,
@@ -9,6 +6,9 @@ import {
   flexVertical,
 } from "shared/common/utility_styles.ts";
 import { Card, LinkButton } from "shared/components/CommonControls.tsx";
+import { ProjectListItemDto } from "web-firmix/app/base/types_dto.ts";
+import { LinkChildProjectListPage } from "web-firmix/app/features/project/project_common_parts";
+import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts.tsx";
 
 type Props = {
   project: ProjectListItemDto;

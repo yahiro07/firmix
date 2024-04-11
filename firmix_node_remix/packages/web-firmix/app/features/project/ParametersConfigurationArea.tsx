@@ -2,19 +2,19 @@ import { css } from "@linaria/core";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 
-import {
-  ConfigurationSourceItem,
-  ConfigurationSourceItemWrapper,
-  ConfigurationSourceItem_Error,
-} from "@m/web-firmix/base/types_dto.ts";
-import { ConfigurationEditItem } from "@m/web-firmix/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "@m/web-firmix/cardinal/firmix_core_firmware_configuration/mod.ts";
 import { flexHorizontal, flexVertical } from "shared/common/utility_styles.ts";
 import {
   Button,
   FormLabel,
   FormTextInput,
 } from "shared/components/CommonControls.tsx";
+import {
+  ConfigurationSourceItem,
+  ConfigurationSourceItemWrapper,
+  ConfigurationSourceItem_Error,
+} from "web-firmix/app/base/types_dto.ts";
+import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit.ts";
+import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod.ts";
 
 type Props = {
   configurationSourceItems: ConfigurationSourceItemWrapper[];

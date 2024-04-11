@@ -1,7 +1,4 @@
 import { css } from "@linaria/core";
-import { appConfig } from "@m/web-firmix/base/app_config.ts";
-import { useSiteContext } from "@m/web-firmix/common/site_context.ts";
-import { LoginUserBox } from "@m/web-firmix/features/layout/LoginUserBox.tsx";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { flexVertical } from "shared/common/utility_styles.ts";
 import {
@@ -9,6 +6,9 @@ import {
   NavItem,
   NavItem_Button,
 } from "shared/components/CommonControls.tsx";
+import { appConfig } from "web-firmix/app/base/app_config.ts";
+import { useSiteContext } from "web-firmix/app/common/site_context.ts";
+import { LoginUserBox } from "web-firmix/app/features/layout/LoginUserBox.tsx";
 
 export const SideBar = createFCX(
   () => {

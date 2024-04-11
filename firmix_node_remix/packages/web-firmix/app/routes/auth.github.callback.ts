@@ -1,12 +1,12 @@
-import { serverShell } from "@m/web-firmix/central/server_shell.ts";
-import { clientStorageImpl } from "@m/web-firmix/central/system/client_storage_impl.ts";
-import { oauthClientGithub } from "@m/web-firmix/central/user_auth/oauth_clients.ts";
 import { apiOAuthGithub_getUserData } from "shared/foreign/api_oauth_github.ts";
 import {
   createGetHandler,
   getRequestSourceUrl,
   responseRedirect,
 } from "shared/system/route_helper.ts";
+import { serverShell } from "web-firmix/app/central/server_shell.ts";
+import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl.ts";
+import { oauthClientGithub } from "web-firmix/app/central/user_auth/oauth_clients.ts";
 
 export const loader = createGetHandler(async ({ request }) => {
   const reqUrl = getRequestSourceUrl(request);

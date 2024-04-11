@@ -1,8 +1,8 @@
+import { FC, ReactNode } from "auxiliaries/fe-deps-react";
 import {
   SiteContextValue,
   siteContext,
-} from "@m/web-firmix/common/site_context.ts";
-import { FC, ReactNode } from "auxiliaries/fe-deps-react";
+} from "web-firmix/app/common/site_context.ts";
 
 export const SiteContextProvider: FC<{
   value: SiteContextValue;

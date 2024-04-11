@@ -16,10 +16,6 @@
     "allowImportingTsExtensions": true,
     "useUnknownInCatchVariables": false,
     "jsx": "react-jsx",
-    "jsxImportSource": "jsxq",
-    "baseUrl": ".",
-    "paths": {
-      "@m/web-firmix/*": ["./packages/web-firmix/app/*"]
-    }
+    "jsxImportSource": "jsxq"
   }
 }

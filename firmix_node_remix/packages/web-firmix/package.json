@@ -1,5 +1,5 @@
 {
-  "name": "@m/web-firmix",
+  "name": "web-firmix",
   "private": true,
   "sideEffects": false,
   "type": "module",

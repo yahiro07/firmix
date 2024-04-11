@@ -1,7 +1,7 @@
-import { InputFirmwareFormat } from "@m/web-firmix/base/types_app_common.ts";
-import { serverShell } from "@m/web-firmix/central/server_shell.ts";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { createPostHandler, responseJson } from "shared/system/route_helper.ts";
+import { InputFirmwareFormat } from "web-firmix/app/base/types_app_common.ts";
+import { serverShell } from "web-firmix/app/central/server_shell.ts";
 
 export const action = createPostHandler(async ({ request }) => {
   const authHeaderValue = request.headers.get("Authorization");

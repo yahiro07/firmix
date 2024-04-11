@@ -1,8 +1,8 @@
-import { serverShell } from "@m/web-firmix/central/server_shell.ts";
-import { clientStorageImpl } from "@m/web-firmix/central/system/client_storage_impl.ts";
-import { ChildProjectListPage } from "@m/web-firmix/islands/ChildProjectListPage.tsx";
 import { useLoaderData } from "@remix-run/react";
 import { createLoader, createPage } from "shared/system/route_helper";
+import { serverShell } from "web-firmix/app/central/server_shell.ts";
+import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl.ts";
+import { ChildProjectListPage } from "web-firmix/app/islands/ChildProjectListPage.tsx";
 
 export const loader = createLoader(async ({ request, params }) => {
   const projectId = params.projectId!;

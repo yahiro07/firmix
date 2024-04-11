@@ -1,12 +1,12 @@
-import { UserEntity } from "@m/web-firmix/base/types_db_entity";
-import { LoginUserClue } from "@m/web-firmix/base/types_dto_internal.ts";
-import { CookieOutputJob } from "@m/web-firmix/central/base/types_client_storage.ts";
-import { storehouse } from "@m/web-firmix/central/depot/storehouse.ts";
-import { userHelper } from "@m/web-firmix/central/domain_helpers/user_helper.ts";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { pickObjectMembers } from "auxiliaries/utils/utils_general.ts";
 import { generateIdTimeSequential } from "auxiliaries/utils_be/id_generator.ts";
 import { OAuthLoginSourceUserInfo } from "shared/base/types_oauth.ts";
+import { UserEntity } from "web-firmix/app/base/types_db_entity";
+import { LoginUserClue } from "web-firmix/app/base/types_dto_internal.ts";
+import { CookieOutputJob } from "web-firmix/app/central/base/types_client_storage.ts";
+import { storehouse } from "web-firmix/app/central/depot/storehouse.ts";
+import { userHelper } from "web-firmix/app/central/domain_helpers/user_helper.ts";
 
 export function createUserService() {
   return {

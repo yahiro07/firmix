@@ -1,12 +1,12 @@
 import { css } from "@linaria/core";
-import {
-  ProjectDetailDto,
-  ProjectListItemDto,
-} from "@m/web-firmix/base/types_dto.ts";
-import { ProjectListItemCard } from "@m/web-firmix/features/project_list/ProjectListItemCard.tsx";
 import { Link } from "@remix-run/react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { flexVertical } from "shared/common/utility_styles.ts";
+import {
+  ProjectDetailDto,
+  ProjectListItemDto,
+} from "web-firmix/app/base/types_dto.ts";
+import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard.tsx";
 
 type Props = {
   project: ProjectDetailDto;

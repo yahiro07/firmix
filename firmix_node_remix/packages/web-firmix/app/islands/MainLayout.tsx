@@ -1,9 +1,9 @@
 import { css } from "@linaria/core";
-import { SideBar } from "@m/web-firmix/features/layout/SideBar.tsx";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { ReactNode } from "react";
 import { flexAligned } from "shared/common/utility_styles.ts";
 import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+import { SideBar } from "web-firmix/app/features/layout/SideBar.tsx";
 
 const SiteTitle = createFCX(
   () => {

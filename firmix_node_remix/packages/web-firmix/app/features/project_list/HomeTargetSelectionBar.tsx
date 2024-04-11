@@ -1,11 +1,11 @@
 import { css } from "@linaria/core";
-import { ProjectRealm } from "@m/web-firmix/base/types_app_common.ts";
-import { coactiveStateWriter } from "@m/web-firmix/common/coactive_state_writer.ts";
-import { useSiteContext } from "@m/web-firmix/common/site_context.ts";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { uiStyleClickable } from "shared/common/common_styles.ts";
 import { uiSystem } from "shared/common/ui_system.ts";
 import { flexAligned } from "shared/common/utility_styles.ts";
+import { ProjectRealm } from "web-firmix/app/base/types_app_common.ts";
+import { coactiveStateWriter } from "web-firmix/app/common/coactive_state_writer.ts";
+import { useSiteContext } from "web-firmix/app/common/site_context.ts";
 
 export const HomeTargetSelectionBar = createFCX(
   () => {

@@ -1,5 +1,5 @@
-import { CoactiveState } from "@m/web-firmix/base/types_dto.ts";
-import { LoginUserClue } from "@m/web-firmix/base/types_dto_internal.ts";
+import { CoactiveState } from "web-firmix/app/base/types_dto.ts";
+import { LoginUserClue } from "web-firmix/app/base/types_dto_internal.ts";
 
 export type CookieOutputJob =
   | { op: "writeLoginUserClue"; loginUserClue: LoginUserClue }

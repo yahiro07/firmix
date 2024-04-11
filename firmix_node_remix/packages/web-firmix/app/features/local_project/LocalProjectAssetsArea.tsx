@@ -1,12 +1,12 @@
 import { css } from "@linaria/core";
+import { createFCX } from "auxiliaries/utils_fe_react/fcx";
+import { flexAligned } from "shared/common/utility_styles.ts";
+import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,
   LocalDevelopmentProject,
-} from "@m/web-firmix/base/types_local_project.ts";
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-import { flexAligned } from "shared/common/utility_styles.ts";
-import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+} from "web-firmix/app/base/types_local_project.ts";
 
 type Props = {
   project: LocalDevelopmentProject;

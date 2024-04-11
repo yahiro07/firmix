@@ -1,20 +1,20 @@
-import {
-  BinaryFileEntryWithTimestamp,
-  LocalDevelopmentProject,
-} from "@m/web-firmix/base/types_local_project.ts";
-import {
-  ConfigurationEditItem,
-  FirmwareContainer,
-  PatchingDataBlob,
-} from "@m/web-firmix/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "@m/web-firmix/cardinal/firmix_core_firmware_configuration/mod.ts";
-import { firmixCore_firmwarePatching } from "@m/web-firmix/cardinal/firmix_core_firmware_patching/mod.ts";
-import { createLocalDirectoryReader } from "@m/web-firmix/cardinal/firmix_presenter_common_modules/local_directory_reader.ts";
-import { localAssetBuilder } from "@m/web-firmix/cardinal/firmix_presenter_local_project_edit/local_asset_builder.ts";
 import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { filePathHelper } from "auxiliaries/utils/file_path_helper.ts";
 import { produce } from "immer";
+import {
+  BinaryFileEntryWithTimestamp,
+  LocalDevelopmentProject,
+} from "web-firmix/app/base/types_local_project.ts";
+import {
+  ConfigurationEditItem,
+  FirmwareContainer,
+  PatchingDataBlob,
+} from "web-firmix/app/base/types_project_edit.ts";
+import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod.ts";
+import { firmixCore_firmwarePatching } from "web-firmix/app/cardinal/firmix_core_firmware_patching/mod.ts";
+import { createLocalDirectoryReader } from "web-firmix/app/cardinal/firmix_presenter_common_modules/local_directory_reader.ts";
+import { localAssetBuilder } from "web-firmix/app/cardinal/firmix_presenter_local_project_edit/local_asset_builder.ts";
 
 type FirmixPresenter_LocalProjectEdit = {
   loadLocalDevelopmentProject(

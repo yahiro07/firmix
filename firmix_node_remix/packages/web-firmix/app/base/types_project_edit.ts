@@ -1,11 +1,11 @@
 import {
   FirmwareFormat,
   ThumbnailMimeTypes,
-} from "@m/web-firmix/base/types_app_common.ts";
+} from "web-firmix/app/base/types_app_common.ts";
 import {
   CustomDataEntry,
   EditUiItem,
-} from "@m/web-firmix/base/types_core_entity.ts";
+} from "web-firmix/app/base/types_core_entity.ts";
 
 export type FirmwarePatchingBlob = {
   entries: {
