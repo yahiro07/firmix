@@ -1,5 +1,5 @@
 {
-  "name": "site-firmix-base",
+  "name": "@m/web-firmix",
   "private": true,
   "sideEffects": false,
   "type": "module",
