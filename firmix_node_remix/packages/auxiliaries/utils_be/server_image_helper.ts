@@ -1,7 +1,6 @@
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { imageHelper_getImageDataMimeType } from "auxiliaries/utils/image_helper.ts";
 import sizeOf from "image-size";
-import { ImageAssetAttrs } from "~/base/types_app_common.ts";
 
 export const serverImageHelper = {
   async getImageSize(imageDataBytes: Uint8Array) {
@@ -13,7 +12,12 @@ export const serverImageHelper = {
   },
   async loadImageFileAssetAttrs(
     imageFileBytes: Uint8Array
-  ): Promise<ImageAssetAttrs> {
+  ): Promise<{
+    fileSize: number;
+    width: number;
+    height: number;
+    mimeType: string;
+  }> {
     const mimeType = imageHelper_getImageDataMimeType(imageFileBytes);
     if (!mimeType) {
       raiseError(`invalid or unsupported image file format`);
