@@ -1,8 +1,8 @@
+import { ConfigurationEditItem } from "@m/web-firmix/base/types_project_edit.ts";
+import { firmixPresenter_firmwarePatching } from "@m/web-firmix/cardinal/firmix_presenter_firmware_patching/mod.ts";
+import { storehouse } from "@m/web-firmix/central/depot/storehouse.ts";
+import { projectHelper } from "@m/web-firmix/central/domain_helpers/project_helper.ts";
 import { encodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixPresenter_firmwarePatching } from "~/cardinal/firmix_presenter_firmware_patching/mod.ts";
-import { storehouse } from "~/central/depot/storehouse.ts";
-import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 export function createFirmwareService() {
   return {

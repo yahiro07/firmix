@@ -1,7 +1,7 @@
 import {
   FirmwareFormat,
   InputFirmwareFormat,
-} from "~/base/types_app_common.ts";
+} from "@m/web-firmix/base/types_app_common.ts";
 
 export type LoginUserClue = {
   userId: string;

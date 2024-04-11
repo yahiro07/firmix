@@ -1,10 +1,10 @@
-import { filePathHelper } from "auxiliaries/utils/file_path_helper.ts";
-import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper.ts";
 import {
   ConfigurationEditItem,
   PatchingManifest,
-} from "~/base/types_project_edit.ts";
-import { firmwareDataInjector } from "~/cardinal/firmix_core_firmware_patching/firmware_data_injector.ts";
+} from "@m/web-firmix/base/types_project_edit.ts";
+import { firmwareDataInjector } from "@m/web-firmix/cardinal/firmix_core_firmware_patching/firmware_data_injector.ts";
+import { filePathHelper } from "auxiliaries/utils/file_path_helper.ts";
+import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper.ts";
 
 type ProjectPartial = PatchingManifest & {
   projectId: string;

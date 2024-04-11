@@ -1,5 +1,11 @@
-import { FirmwareFormat, ThumbnailMimeTypes } from "~/base/types_app_common.ts";
-import { CustomDataEntry, EditUiItem } from "~/base/types_core_entity.ts";
+import {
+  FirmwareFormat,
+  ThumbnailMimeTypes,
+} from "@m/web-firmix/base/types_app_common.ts";
+import {
+  CustomDataEntry,
+  EditUiItem,
+} from "@m/web-firmix/base/types_core_entity.ts";
 
 export type FirmwarePatchingBlob = {
   entries: {

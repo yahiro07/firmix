@@ -1,6 +1,6 @@
+import { ProjectBoardJsonFileContent } from "@m/web-firmix/base/types_project_metadata.ts";
 import { formatZodErrorToLines } from "auxiliaries/utils/zod_helper.ts";
 import { z } from "zod";
-import { ProjectBoardJsonFileContent } from "~/base/types_project_metadata.ts";
 
 const schemaProjectBoardFileContent = z.object({
   pinNumbersMap: z.record(z.number()),

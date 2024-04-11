@@ -1,6 +1,6 @@
+import { ProjectMetadataJsonFileContent } from "@m/web-firmix/base/types_project_metadata.ts";
 import { formatZodErrorToLines } from "auxiliaries/utils/zod_helper.ts";
 import { z } from "zod";
-import { ProjectMetadataJsonFileContent } from "~/base/types_project_metadata.ts";
 
 const customDataItemCommon = {
   key: z.string().max(32),

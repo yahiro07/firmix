@@ -19,7 +19,7 @@
     "jsxImportSource": "jsxq",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "@m/web-firmix/*": ["./app/*"]
     }
   },
   "include": ["app/**/*.ts", "app/**/*.tsx"]

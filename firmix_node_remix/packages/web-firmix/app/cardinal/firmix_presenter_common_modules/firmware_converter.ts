@@ -1,3 +1,4 @@
+import { ProjectMetadataFirmwareSpec } from "@m/web-firmix/base/types_project_metadata.ts";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { filePathHelper } from "auxiliaries/utils/file_path_helper.ts";
 import {
@@ -10,7 +11,6 @@ import {
   getUf2FamilyId,
   readHexBaseAddress,
 } from "uf2gen";
-import { ProjectMetadataFirmwareSpec } from "~/base/types_project_metadata.ts";
 
 export function convertFirmwareBytesToUF2(
   firmwareFileBytes: Uint8Array,

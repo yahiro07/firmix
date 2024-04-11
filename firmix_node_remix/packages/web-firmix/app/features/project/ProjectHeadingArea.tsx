@@ -1,9 +1,9 @@
 import { css } from "@linaria/core";
+import { projectHeadingArea_parts } from "@m/web-firmix/features/project/ProjectHeadingArea_Parts.tsx";
 import { ReactNode } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { flexVertical } from "shared/common/utility_styles.ts";
 import { useRepositoryDisplayInfo } from "shared/foreign/repository_info_helper.ts";
-import { projectHeadingArea_parts } from "~/features/project/ProjectHeadingArea_Parts.tsx";
 
 type Props = {
   projectName: string;

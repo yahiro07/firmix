@@ -1,23 +1,26 @@
 import { css } from "@linaria/core";
+import {
+  ConfigurationSourceItem,
+  ProjectDetailDto,
+} from "@m/web-firmix/base/types_dto.ts";
+import { ConfigurationEditItem } from "@m/web-firmix/base/types_project_edit.ts";
+import { firmixCore_firmwareConfiguration } from "@m/web-firmix/cardinal/firmix_core_firmware_configuration/mod.ts";
+import { firmixPresenter_firmwarePatching } from "@m/web-firmix/cardinal/firmix_presenter_firmware_patching/mod.ts";
+import { rpcClient } from "@m/web-firmix/common/rpc_client.ts";
+import { useSiteContext } from "@m/web-firmix/common/site_context.ts";
+import { ParametersConfigurationArea } from "@m/web-firmix/features/project/ParametersConfigurationArea.tsx";
+import {
+  LinkChildProjectListPage,
+  LinkParentProjectPage,
+} from "@m/web-firmix/features/project/project_common_parts.tsx";
+import { ProjectHeadingArea } from "@m/web-firmix/features/project/ProjectHeadingArea.tsx";
+import { ProjectReadmeArea } from "@m/web-firmix/features/project/ProjectReadmeArea.tsx";
+import { ProjectOperationPart } from "@m/web-firmix/features/project_detail/ProjectOperationPart.tsx";
 import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
 import { useMemo } from "auxiliaries/fe-deps-react";
 import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper.ts";
 import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link.ts";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { ConfigurationSourceItem, ProjectDetailDto } from "~/base/types_dto.ts";
-import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "~/cardinal/firmix_core_firmware_configuration/mod.ts";
-import { firmixPresenter_firmwarePatching } from "~/cardinal/firmix_presenter_firmware_patching/mod.ts";
-import { rpcClient } from "~/common/rpc_client.ts";
-import { useSiteContext } from "~/common/site_context.ts";
-import { ParametersConfigurationArea } from "~/features/project/ParametersConfigurationArea.tsx";
-import {
-  LinkChildProjectListPage,
-  LinkParentProjectPage,
-} from "~/features/project/project_common_parts.tsx";
-import { ProjectHeadingArea } from "~/features/project/ProjectHeadingArea.tsx";
-import { ProjectReadmeArea } from "~/features/project/ProjectReadmeArea.tsx";
-import { ProjectOperationPart } from "~/features/project_detail/ProjectOperationPart.tsx";
 
 type Props = {
   project: ProjectDetailDto;

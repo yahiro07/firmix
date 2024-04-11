@@ -1,10 +1,16 @@
+import { ProjectRealm } from "@m/web-firmix/base/types_app_common.ts";
+import {
+  ProjectEntity,
+  UserEntity,
+} from "@m/web-firmix/base/types_db_entity.ts";
+import {
+  ProjectDetailDto,
+  ProjectListItemDto,
+} from "@m/web-firmix/base/types_dto.ts";
+import { storehouse } from "@m/web-firmix/central/depot/storehouse.ts";
+import { projectHelper } from "@m/web-firmix/central/domain_helpers/project_helper.ts";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { specifyGithubAvatarUrlSize } from "shared/foreign/avatar_size_modifier.ts";
-import { ProjectRealm } from "~/base/types_app_common.ts";
-import { ProjectEntity, UserEntity } from "~/base/types_db_entity.ts";
-import { ProjectDetailDto, ProjectListItemDto } from "~/base/types_dto.ts";
-import { storehouse } from "~/central/depot/storehouse.ts";
-import { projectHelper } from "~/central/domain_helpers/project_helper.ts";
 
 type ProjectUserAggregateResult = ProjectEntity & {
   user: UserEntity;

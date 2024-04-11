@@ -1,9 +1,9 @@
-import "auxiliaries/typings/file_system_access.ts";
-import { raiseError } from "auxiliaries/utils/error_util.ts";
 import {
   BinaryFileEntryWithTimestamp,
   TextFileEntry,
-} from "~/base/types_local_project.ts";
+} from "@m/web-firmix/base/types_local_project.ts";
+import "auxiliaries/typings/file_system_access.ts";
+import { raiseError } from "auxiliaries/utils/error_util.ts";
 
 export function createLocalDirectoryReader(
   rootDirHandle: FileSystemDirectoryHandle

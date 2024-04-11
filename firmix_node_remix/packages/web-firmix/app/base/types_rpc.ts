@@ -1,5 +1,5 @@
-import { LocalProjectSubmissionPayload } from "~/base/types_dto_internal.ts";
-import { ConfigurationEditItem } from "~/base/types_project_edit.ts";
+import { LocalProjectSubmissionPayload } from "@m/web-firmix/base/types_dto_internal.ts";
+import { ConfigurationEditItem } from "@m/web-firmix/base/types_project_edit.ts";
 
 type AsyncFn<P, R> = (payload: P) => Promise<R>;
 

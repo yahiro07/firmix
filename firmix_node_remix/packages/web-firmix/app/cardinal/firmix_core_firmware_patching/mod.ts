@@ -1,14 +1,14 @@
 import {
+  FirmwareContainer,
+  PatchingDataBlob,
+  PatchingManifest,
+} from "@m/web-firmix/base/types_project_edit.ts";
+import { firmwareDataInjector } from "@m/web-firmix/cardinal/firmix_core_firmware_patching/firmware_data_injector.ts";
+import {
   decodeBinaryBase64,
   encodeBinaryBase64,
 } from "auxiliaries/base_env_adapters/base64";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
-import {
-  FirmwareContainer,
-  PatchingDataBlob,
-  PatchingManifest,
-} from "~/base/types_project_edit.ts";
-import { firmwareDataInjector } from "~/cardinal/firmix_core_firmware_patching/firmware_data_injector.ts";
 
 type FirmixCore_FirmwarePatching = {
   fabricateFirmware(

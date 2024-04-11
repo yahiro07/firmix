@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@m/web-firmix/*": ["./packages/web-firmix/app/*"]
+    }
+  }
+}

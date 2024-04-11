@@ -8,11 +8,11 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import { fallbackValues } from "~/base/fallback_values";
-import { clientStorageImpl } from "~/central/system/client_storage_impl";
-import { SiteContextValue } from "~/common/site_context";
-import { MainLayout } from "~/islands/MainLayout";
-import { SiteContextProvider } from "~/islands/SiteContextProvider";
+import { fallbackValues } from "@m/web-firmix/base/fallback_values";
+import { clientStorageImpl } from "@m/web-firmix/central/system/client_storage_impl";
+import { SiteContextValue } from "@m/web-firmix/common/site_context";
+import { MainLayout } from "@m/web-firmix/islands/MainLayout";
+import { SiteContextProvider } from "@m/web-firmix/islands/SiteContextProvider";
 import styles from "./root.css?url";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];

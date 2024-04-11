@@ -1,9 +1,9 @@
-import { ProjectRealm } from "~/base/types_app_common.ts";
+import { ProjectRealm } from "@m/web-firmix/base/types_app_common.ts";
 import {
   CustomDataEntry,
   CustomDataItem,
   EditUiItem,
-} from "~/base/types_core_entity.ts";
+} from "@m/web-firmix/base/types_core_entity.ts";
 
 export type ConfigurationSourceItem = {
   label: string;

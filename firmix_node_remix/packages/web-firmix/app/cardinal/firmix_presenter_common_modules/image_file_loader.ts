@@ -1,8 +1,8 @@
+import { BinaryFileEntry } from "@m/web-firmix/base/types_local_project.ts";
+import { ImageFileContainer } from "@m/web-firmix/base/types_project_edit.ts";
 import { encodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
 import { raiseError } from "auxiliaries/utils/error_util.ts";
 import { filePathHelper } from "auxiliaries/utils/file_path_helper.ts";
-import { BinaryFileEntry } from "~/base/types_local_project.ts";
-import { ImageFileContainer } from "~/base/types_project_edit.ts";
 
 export const imageFileLoader = {
   async loadBinaryImageFile(

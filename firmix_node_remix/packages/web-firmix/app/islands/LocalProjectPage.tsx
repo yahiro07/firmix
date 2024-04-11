@@ -1,5 +1,5 @@
+import { LocalProjectPageImpl } from "@m/web-firmix/features/local_project/LocalProjectPageImpl.tsx";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { LocalProjectPageImpl } from "~/features/local_project/LocalProjectPageImpl.tsx";
 
 type Props = {
   loggedIn: boolean;
