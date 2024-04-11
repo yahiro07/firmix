@@ -9,7 +9,6 @@ import {
 import { ButtonSmall } from "shared/components/CommonControls.tsx";
 import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
 import { rpcClient } from "~/common/rpc_client.ts";
-import { colors } from "~/common/ui_theme.ts";
 
 type Props = {
   apiKey: string | undefined;
@@ -57,7 +56,7 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
 const style = css`
   padding: 20px;
   ${flexVertical(12)};
-  background: ${colors.contentBackground};
+  background: var(--cl-content-background);
   height: 100%;
 
   > .edit-row {

@@ -5,7 +5,6 @@ import { flexAligned, flexVertical } from "shared/common/utility_styles.ts";
 import { Button } from "shared/components/CommonControls.tsx";
 import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
 import { ProjectRepositoryInfo } from "shared/foreign/types";
-import { colors } from "~/common/ui_theme.ts";
 
 const ProjectTitlePart = createFCX<{
   projectName: string;
@@ -125,7 +124,7 @@ const EditorButton = createFCX<{ active: boolean; onClick(): void }>(
   css`
     ${flexAligned()};
     &.--active {
-      background: ${colors.buttonEditActive};
+      background: var(--cl-button-edit-active);
     }
   `
 );
