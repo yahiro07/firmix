@@ -26,9 +26,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       { title },
       { property: "og:title", content: title },
       { property: "og:image", content: imageUrl },
+      { property: "og:description", content: introduction },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:description", content: introduction },
       { name: "twitter:image", content: imageUrl },
+      { name: "twitter:description", content: introduction },
     ];
   } else {
     return [{ title: "failed to load project" }];
