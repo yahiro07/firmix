@@ -6,8 +6,8 @@ import {
   flexCentered,
   flexVertical,
 } from "shared/common/utility_styles";
-import { ButtonSmall } from "shared/components/CommonControls.tsx";
-import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+import { ButtonSmall } from "shared/components/CommonControls";
+import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import { rpcClient } from "web-firmix/app/common/rpc_client";
 
 type Props = {

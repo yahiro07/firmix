@@ -6,7 +6,7 @@ import {
   ProjectDetailDto,
   ProjectListItemDto,
 } from "web-firmix/app/base/types_dto";
-import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard.tsx";
+import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard";
 
 type Props = {
   project: ProjectDetailDto;
