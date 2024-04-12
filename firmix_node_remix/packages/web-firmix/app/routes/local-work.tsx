@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import { createLoader, createPage } from "shared/system/route_helper";
 import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl";
-import { LocalProjectPage } from "web-firmix/app/islands/LocalProjectPage.tsx";
+import { LocalProjectPage } from "web-firmix/app/islands/LocalProjectPage";
 
 export const loader = createLoader(async ({ request }) => {
   const loggedIn = !!clientStorageImpl.readCookieLoginUserClue(request);

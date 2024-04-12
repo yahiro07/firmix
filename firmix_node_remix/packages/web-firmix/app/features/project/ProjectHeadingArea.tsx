@@ -3,7 +3,7 @@ import { ReactNode } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { flexVertical } from "shared/common/utility_styles";
 import { useRepositoryDisplayInfo } from "shared/foreign/repository_info_helper";
-import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts.tsx";
+import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts";
 
 type Props = {
   projectName: string;

@@ -2,8 +2,8 @@ import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { styleTextLinkInheritColor } from "shared/common/common_styles";
 import { flexAligned, flexVertical } from "shared/common/utility_styles";
-import { Button } from "shared/components/CommonControls.tsx";
-import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+import { Button } from "shared/components/CommonControls";
+import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import { ProjectRepositoryInfo } from "shared/foreign/types";
 
 const ProjectTitlePart = createFCX<{

@@ -1,17 +1,17 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { flexCentered, flexVertical } from "shared/common/utility_styles";
-import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import { useDateTimeTextWithElapsed } from "shared/fe_modules/display_data_hooks";
-import { LocalProjectAssetsArea } from "web-firmix/app/features/local_project/LocalProjectAssetsArea.tsx";
-import { LocalProjectLoadingArea } from "web-firmix/app/features/local_project/LocalProjectLoadingArea.tsx";
+import { LocalProjectAssetsArea } from "web-firmix/app/features/local_project/LocalProjectAssetsArea";
+import { LocalProjectLoadingArea } from "web-firmix/app/features/local_project/LocalProjectLoadingArea";
 import { useLocalProjectPageStore } from "web-firmix/app/features/local_project/local_project_page_store";
-import { ParametersConfigurationArea } from "web-firmix/app/features/project/ParametersConfigurationArea.tsx";
+import { ParametersConfigurationArea } from "web-firmix/app/features/project/ParametersConfigurationArea";
 import {
   LocalProjectHeadingAreaDummy,
   ProjectHeadingArea,
-} from "web-firmix/app/features/project/ProjectHeadingArea.tsx";
-import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea.tsx";
+} from "web-firmix/app/features/project/ProjectHeadingArea";
+import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
 
 type Props = {
   loggedIn: boolean;

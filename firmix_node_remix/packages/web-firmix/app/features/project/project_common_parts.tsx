@@ -2,7 +2,7 @@ import { css } from "@linaria/core";
 import { Link } from "@remix-run/react";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { flexAligned } from "shared/common/utility_styles";
-import { IconIconify } from "shared/components/IconIconify.tsx";
+import { IconIconify } from "shared/components/IconIconify";
 
 export const LinkChildProjectListPage = createFCX<{
   project: { projectId: string; numChildProjects: number };

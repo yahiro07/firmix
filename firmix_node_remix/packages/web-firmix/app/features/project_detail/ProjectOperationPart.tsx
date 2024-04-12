@@ -4,7 +4,7 @@ import { flexVertical } from "shared/common/utility_styles";
 import {
   ButtonSmall,
   ToggleButtonLarge,
-} from "shared/components/CommonControls.tsx";
+} from "shared/components/CommonControls";
 import { rpcClient } from "web-firmix/app/common/rpc_client";
 
 export const ProjectOperationPart = createFCX<{

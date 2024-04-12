@@ -7,7 +7,7 @@ import {
   Button,
   FormLabel,
   FormTextInput,
-} from "shared/components/CommonControls.tsx";
+} from "shared/components/CommonControls";
 import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,

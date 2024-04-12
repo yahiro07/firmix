@@ -13,14 +13,14 @@ import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix
 import { firmixPresenter_firmwarePatching } from "web-firmix/app/cardinal/firmix_presenter_firmware_patching/mod";
 import { rpcClient } from "web-firmix/app/common/rpc_client";
 import { useSiteContext } from "web-firmix/app/common/site_context";
-import { ParametersConfigurationArea } from "web-firmix/app/features/project/ParametersConfigurationArea.tsx";
+import { ParametersConfigurationArea } from "web-firmix/app/features/project/ParametersConfigurationArea";
 import {
   LinkChildProjectListPage,
   LinkParentProjectPage,
-} from "web-firmix/app/features/project/project_common_parts.tsx";
-import { ProjectHeadingArea } from "web-firmix/app/features/project/ProjectHeadingArea.tsx";
-import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea.tsx";
-import { ProjectOperationPart } from "web-firmix/app/features/project_detail/ProjectOperationPart.tsx";
+} from "web-firmix/app/features/project/project_common_parts";
+import { ProjectHeadingArea } from "web-firmix/app/features/project/ProjectHeadingArea";
+import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
+import { ProjectOperationPart } from "web-firmix/app/features/project_detail/ProjectOperationPart";
 
 type Props = {
   project: ProjectDetailDto;

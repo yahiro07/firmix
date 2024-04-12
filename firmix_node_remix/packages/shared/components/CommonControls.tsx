@@ -5,7 +5,7 @@ import { Link } from "@remix-run/react";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { reflectInputChecked } from "auxiliaries/utils_fe_react/form_helper";
 import { flexAligned, flexVertical } from "shared/common/utility_styles";
-import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+import { IconIconifyZ } from "shared/components/IconIconifyZ";
 
 export const Button = styled.button`
   padding: 0.5rem;

@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { flexAligned } from "shared/common/utility_styles";
-import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
+import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,
