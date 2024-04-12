@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable jsx-a11y/alt-text */
-import { Resvg } from "@resvg/resvg-js";
+// import { Resvg } from "@resvg/resvg-js";
 import * as fs from "fs/promises";
-import satori from "satori";
+// import satori from "satori";
 import { createLoader } from "shared/system/route_helper";
 import { ProjectDetailDto } from "../base/types_dto";
 import { serverShell } from "../central/server_shell";
@@ -17,52 +18,52 @@ async function readFont() {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function renderCustomOgpImage(project: ProjectDetailDto) {
-  const fontData = (state.fontData ??= await readFont());
-  const jsx = (
-    <div style={{ display: "flex" }}>
-      <img
-        src={project.thumbnailUrl}
-        style={{ width: "320px", height: "240px", objectFit: "cover" }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          display: "flex",
-          color: "white",
-          padding: "2px",
-          fontWeight: "bold",
-        }}
-      >
-        {project.projectName}
-      </div>
-    </div>
-  );
-  const svg = await satori(jsx, {
-    width: 320,
-    height: 240,
-    fonts: [
-      {
-        name: "MainFont",
-        data: fontData!,
-        weight: 400,
-        style: "normal",
-      },
-      {
-        name: "MainFontB",
-        data: fontData!,
-        weight: 600,
-        style: "normal",
-      },
-    ],
-  });
-  const resvg = new Resvg(svg);
-  const pngData = resvg.render();
-  const data = pngData.asPng();
-  return new Response(data, {
-    headers: {
-      "Content-Type": "image/png",
-    },
-  });
+  // const fontData = (state.fontData ??= await readFont());
+  // const jsx = (
+  //   <div style={{ display: "flex" }}>
+  //     <img
+  //       src={project.thumbnailUrl}
+  //       style={{ width: "320px", height: "240px", objectFit: "cover" }}
+  //     />
+  //     <div
+  //       style={{
+  //         position: "absolute",
+  //         display: "flex",
+  //         color: "white",
+  //         padding: "2px",
+  //         fontWeight: "bold",
+  //       }}
+  //     >
+  //       {project.projectName}
+  //     </div>
+  //   </div>
+  // );
+  // const svg = await satori(jsx, {
+  //   width: 320,
+  //   height: 240,
+  //   fonts: [
+  //     {
+  //       name: "MainFont",
+  //       data: fontData!,
+  //       weight: 400,
+  //       style: "normal",
+  //     },
+  //     {
+  //       name: "MainFontB",
+  //       data: fontData!,
+  //       weight: 600,
+  //       style: "normal",
+  //     },
+  //   ],
+  // });
+  // const resvg = new Resvg(svg);
+  // const pngData = resvg.render();
+  // const data = pngData.asPng();
+  // return new Response(data, {
+  //   headers: {
+  //     "Content-Type": "image/png",
+  //   },
+  // });
 }
 
 async function chainProjectThumbnailData(project: ProjectDetailDto) {
