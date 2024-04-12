@@ -1,5 +1,5 @@
-import { createOAuth2Client } from "auxiliaries/oauth_client/oauth_client.ts";
-import { getEnvVariable } from "web-firmix/app/central/base/envs.ts";
+import { createOAuth2Client } from "auxiliaries/oauth_client/oauth_client";
+import { getEnvVariable } from "web-firmix/app/central/base/envs";
 
 export const oauthClientGithub = createOAuth2Client({
   authEndpoint: "https://github.com/login/oauth/authorize",

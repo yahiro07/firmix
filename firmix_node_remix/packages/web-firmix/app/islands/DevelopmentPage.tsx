@@ -1,12 +1,12 @@
 import { css } from "@linaria/core";
 import { useState } from "auxiliaries/fe-deps-react";
-import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper.ts";
+import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper";
 import {
   idbKeyValGet,
   idbKeyValSet,
 } from "auxiliaries/utils_fe/browser_storage_adapter";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexVertical } from "shared/common/utility_styles.ts";
+import { flexVertical } from "shared/common/utility_styles";
 import { ButtonSmall } from "shared/components/CommonControls.tsx";
 
 export const DevelopmentPage = createFC(() => {

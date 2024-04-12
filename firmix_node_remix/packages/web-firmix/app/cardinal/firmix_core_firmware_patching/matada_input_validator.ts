@@ -1,5 +1,5 @@
-import { formatZodErrorToLines } from "auxiliaries/utils/zod_helper.ts";
-import { ProjectMetadataJsonFileContent } from "web-firmix/app/base/types_project_metadata.ts";
+import { formatZodErrorToLines } from "auxiliaries/utils/zod_helper";
+import { ProjectMetadataJsonFileContent } from "web-firmix/app/base/types_project_metadata";
 import { z } from "zod";
 
 const customDataItemCommon = {

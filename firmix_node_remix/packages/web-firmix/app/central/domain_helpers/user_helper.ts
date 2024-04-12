@@ -1,4 +1,4 @@
-import { generateRandomId } from "auxiliaries/utils_be/id_generator.ts";
+import { generateRandomId } from "auxiliaries/utils_be/id_generator";
 
 export const userHelper = {
   generateNewApiKey() {

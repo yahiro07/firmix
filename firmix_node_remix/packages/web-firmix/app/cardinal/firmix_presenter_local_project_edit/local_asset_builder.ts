@@ -1,5 +1,5 @@
 import { encodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { filePathHelper } from "auxiliaries/utils/file_path_helper.ts";
+import { filePathHelper } from "auxiliaries/utils/file_path_helper";
 import {
   BinaryFileEntry,
   BinaryFileEntryWithTimestamp,
@@ -8,15 +8,15 @@ import {
   LocalAsset_Readme,
   LocalAsset_Thumbnail,
   TextFileEntry,
-} from "web-firmix/app/base/types_local_project.ts";
+} from "web-firmix/app/base/types_local_project";
 import {
   FirmwareContainer,
   ImageFileContainer,
-} from "web-firmix/app/base/types_project_edit.ts";
-import { ProjectMetadataFirmwareSpec } from "web-firmix/app/base/types_project_metadata.ts";
-import { firmixCore_projectLoader } from "web-firmix/app/cardinal/firmix_core_project_loader/mod.ts";
-import { convertFirmwareBytesToUF2 } from "web-firmix/app/cardinal/firmix_presenter_common_modules/firmware_converter.ts";
-import { imageFileLoader } from "web-firmix/app/cardinal/firmix_presenter_common_modules/image_file_loader.ts";
+} from "web-firmix/app/base/types_project_edit";
+import { ProjectMetadataFirmwareSpec } from "web-firmix/app/base/types_project_metadata";
+import { firmixCore_projectLoader } from "web-firmix/app/cardinal/firmix_core_project_loader/mod";
+import { convertFirmwareBytesToUF2 } from "web-firmix/app/cardinal/firmix_presenter_common_modules/firmware_converter";
+import { imageFileLoader } from "web-firmix/app/cardinal/firmix_presenter_common_modules/image_file_loader";
 
 export const localAssetBuilder = {
   buildAssetReadme(readmeFile: TextFileEntry | undefined): LocalAsset_Readme {

@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import { createLoader, createPage } from "shared/system/route_helper";
-import { serverShell } from "web-firmix/app/central/server_shell.ts";
-import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl.ts";
+import { serverShell } from "web-firmix/app/central/server_shell";
+import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl";
 import { ProjectDetailPage } from "web-firmix/app/islands/ProjectDetailPage.tsx";
 
 export const loader = createLoader(async ({ request, params }) => {

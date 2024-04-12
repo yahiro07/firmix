@@ -1,18 +1,18 @@
 import { css } from "@linaria/core";
 import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
 import { useMemo } from "auxiliaries/fe-deps-react";
-import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper.ts";
-import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link.ts";
+import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper";
+import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import {
   ConfigurationSourceItem,
   ProjectDetailDto,
-} from "web-firmix/app/base/types_dto.ts";
-import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod.ts";
-import { firmixPresenter_firmwarePatching } from "web-firmix/app/cardinal/firmix_presenter_firmware_patching/mod.ts";
-import { rpcClient } from "web-firmix/app/common/rpc_client.ts";
-import { useSiteContext } from "web-firmix/app/common/site_context.ts";
+} from "web-firmix/app/base/types_dto";
+import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit";
+import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod";
+import { firmixPresenter_firmwarePatching } from "web-firmix/app/cardinal/firmix_presenter_firmware_patching/mod";
+import { rpcClient } from "web-firmix/app/common/rpc_client";
+import { useSiteContext } from "web-firmix/app/common/site_context";
 import { ParametersConfigurationArea } from "web-firmix/app/features/project/ParametersConfigurationArea.tsx";
 import {
   LinkChildProjectListPage,

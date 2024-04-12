@@ -2,13 +2,13 @@ import {
   decodeBinaryBase64,
   encodeBinaryBase64,
 } from "auxiliaries/base_env_adapters/base64";
-import { raiseError } from "auxiliaries/utils/error_util.ts";
+import { raiseError } from "auxiliaries/utils/error_util";
 import {
   FirmwareContainer,
   PatchingDataBlob,
   PatchingManifest,
-} from "web-firmix/app/base/types_project_edit.ts";
-import { firmwareDataInjector } from "web-firmix/app/cardinal/firmix_core_firmware_patching/firmware_data_injector.ts";
+} from "web-firmix/app/base/types_project_edit";
+import { firmwareDataInjector } from "web-firmix/app/cardinal/firmix_core_firmware_patching/firmware_data_injector";
 
 type FirmixCore_FirmwarePatching = {
   fabricateFirmware(

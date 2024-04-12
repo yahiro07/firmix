@@ -1,11 +1,11 @@
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-import { flexVertical } from "shared/common/utility_styles.ts";
+import { flexVertical } from "shared/common/utility_styles";
 import {
   ButtonSmall,
   ToggleButtonLarge,
 } from "shared/components/CommonControls.tsx";
-import { rpcClient } from "web-firmix/app/common/rpc_client.ts";
+import { rpcClient } from "web-firmix/app/common/rpc_client";
 
 export const ProjectOperationPart = createFCX<{
   projectId: string;

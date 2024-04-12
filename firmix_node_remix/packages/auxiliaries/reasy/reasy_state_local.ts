@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { reasyModuleHelpers } from "./reasy_module_helpers.ts";
+import { reasyModuleHelpers } from "./reasy_module_helpers";
 
 const { getObjectKeys, capitalizeFirstLetter } = reasyModuleHelpers;
 

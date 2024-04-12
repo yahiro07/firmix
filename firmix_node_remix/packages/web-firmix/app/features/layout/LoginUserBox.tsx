@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-import { flexAligned } from "shared/common/utility_styles.ts";
-import { LoginUser } from "web-firmix/app/base/types_dto_internal.ts";
+import { flexAligned } from "shared/common/utility_styles";
+import { LoginUser } from "web-firmix/app/base/types_dto_internal";
 
 type Props = {
   user: LoginUser;

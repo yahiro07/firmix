@@ -1,11 +1,8 @@
 import { raiseError } from "auxiliaries/utils/error_util";
 import { MongoClient } from "mongodb";
-import { createMongoGeneralCabinet } from "shared/central/mongo_general_cabinet.ts";
-import {
-  ProjectEntity,
-  UserEntity,
-} from "web-firmix/app/base/types_db_entity.ts";
-import { getEnvVariable } from "web-firmix/app/central/base/envs.ts";
+import { createMongoGeneralCabinet } from "shared/central/mongo_general_cabinet";
+import { ProjectEntity, UserEntity } from "web-firmix/app/base/types_db_entity";
+import { getEnvVariable } from "web-firmix/app/central/base/envs";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);

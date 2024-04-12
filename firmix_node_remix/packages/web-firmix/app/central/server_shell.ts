@@ -1,7 +1,7 @@
-import { createFirmwareService } from "web-firmix/app/central/services/firmware_service.ts";
-import { createProjectListService } from "web-firmix/app/central/services/project_list_service.ts";
-import { createProjectService } from "web-firmix/app/central/services/project_service.ts";
-import { createUserService } from "web-firmix/app/central/services/user_service.ts";
+import { createFirmwareService } from "web-firmix/app/central/services/firmware_service";
+import { createProjectListService } from "web-firmix/app/central/services/project_list_service";
+import { createProjectService } from "web-firmix/app/central/services/project_service";
+import { createUserService } from "web-firmix/app/central/services/user_service";
 
 function createServerShell() {
   const projectService = createProjectService();

@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexVertical } from "shared/common/utility_styles.ts";
-import { ProjectListItemDto } from "web-firmix/app/base/types_dto.ts";
+import { flexVertical } from "shared/common/utility_styles";
+import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { HomeTargetSelectionBar } from "web-firmix/app/features/project_list/HomeTargetSelectionBar.tsx";
 import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard";
 

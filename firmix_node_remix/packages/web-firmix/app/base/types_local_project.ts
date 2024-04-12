@@ -1,9 +1,9 @@
-import { ConfigurationSourceItemWrapper } from "web-firmix/app/base/types_dto.ts";
+import { ConfigurationSourceItemWrapper } from "web-firmix/app/base/types_dto";
 import {
   FirmwareContainer,
   ImageFileContainer,
-} from "web-firmix/app/base/types_project_edit.ts";
-import { ProjectMetadataInput } from "web-firmix/app/base/types_project_metadata.ts";
+} from "web-firmix/app/base/types_project_edit";
+import { ProjectMetadataInput } from "web-firmix/app/base/types_project_metadata";
 
 export type TextFileEntry = {
   // type: "text";

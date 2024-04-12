@@ -1,14 +1,14 @@
-import { raiseError } from "auxiliaries/utils/error_util.ts";
-import { pickObjectMembers } from "auxiliaries/utils/utils_general.ts";
-import { appConfig } from "web-firmix/app/base/app_config.ts";
-import { ImageAssetAttrs } from "web-firmix/app/base/types_app_common.ts";
+import { raiseError } from "auxiliaries/utils/error_util";
+import { pickObjectMembers } from "auxiliaries/utils/utils_general";
+import { appConfig } from "web-firmix/app/base/app_config";
+import { ImageAssetAttrs } from "web-firmix/app/base/types_app_common";
 import {
   ProjectBoardJsonFileContent,
   ProjectMetadataInput,
   ProjectMetadataJsonFileContent,
-} from "web-firmix/app/base/types_project_metadata.ts";
-import { validateSchemaProjectBoardFileContent } from "web-firmix/app/cardinal/firmix_core_firmware_patching/board_input_validator.ts";
-import { validateSchemaMetadataFileContent } from "web-firmix/app/cardinal/firmix_core_firmware_patching/matada_input_validator.ts";
+} from "web-firmix/app/base/types_project_metadata";
+import { validateSchemaProjectBoardFileContent } from "web-firmix/app/cardinal/firmix_core_firmware_patching/board_input_validator";
+import { validateSchemaMetadataFileContent } from "web-firmix/app/cardinal/firmix_core_firmware_patching/matada_input_validator";
 
 export const firmixCore_projectLoader = {
   loadProjectMetadataFile_json(

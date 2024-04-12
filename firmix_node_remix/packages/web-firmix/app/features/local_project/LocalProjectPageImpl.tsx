@@ -1,11 +1,11 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexCentered, flexVertical } from "shared/common/utility_styles.ts";
+import { flexCentered, flexVertical } from "shared/common/utility_styles";
 import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
-import { useDateTimeTextWithElapsed } from "shared/fe_modules/display_data_hooks.ts";
+import { useDateTimeTextWithElapsed } from "shared/fe_modules/display_data_hooks";
 import { LocalProjectAssetsArea } from "web-firmix/app/features/local_project/LocalProjectAssetsArea.tsx";
 import { LocalProjectLoadingArea } from "web-firmix/app/features/local_project/LocalProjectLoadingArea.tsx";
-import { useLocalProjectPageStore } from "web-firmix/app/features/local_project/local_project_page_store.ts";
+import { useLocalProjectPageStore } from "web-firmix/app/features/local_project/local_project_page_store";
 import { ParametersConfigurationArea } from "web-firmix/app/features/project/ParametersConfigurationArea.tsx";
 import {
   LocalProjectHeadingAreaDummy,

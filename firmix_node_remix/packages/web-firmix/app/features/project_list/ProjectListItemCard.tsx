@@ -4,9 +4,9 @@ import {
   flexAligned,
   flexHorizontal,
   flexVertical,
-} from "shared/common/utility_styles.ts";
+} from "shared/common/utility_styles";
 import { Card, LinkButton } from "shared/components/CommonControls.tsx";
-import { ProjectListItemDto } from "web-firmix/app/base/types_dto.ts";
+import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { LinkChildProjectListPage } from "web-firmix/app/features/project/project_common_parts";
 import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts.tsx";
 

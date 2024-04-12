@@ -1,6 +1,6 @@
 import { createContext, useContext } from "auxiliaries/fe-deps-react";
-import { CoactiveState } from "web-firmix/app/base/types_dto.ts";
-import { LoginUser } from "web-firmix/app/base/types_dto_internal.ts";
+import { CoactiveState } from "web-firmix/app/base/types_dto";
+import { LoginUser } from "web-firmix/app/base/types_dto_internal";
 
 export type SiteContextValue = {
   pagePath: string;

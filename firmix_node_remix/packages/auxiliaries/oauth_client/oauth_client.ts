@@ -1,4 +1,4 @@
-import { oAuthClientModuleHelpers } from "./oauth_client_module_helpers.ts";
+import { oAuthClientModuleHelpers } from "./oauth_client_module_helpers";
 
 const { raiseError, postJson, urlHelper } = oAuthClientModuleHelpers;
 

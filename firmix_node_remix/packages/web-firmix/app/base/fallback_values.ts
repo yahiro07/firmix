@@ -1,5 +1,5 @@
-import { appConfig } from "web-firmix/app/base/app_config.ts";
-import { CoactiveState } from "web-firmix/app/base/types_dto.ts";
+import { appConfig } from "web-firmix/app/base/app_config";
+import { CoactiveState } from "web-firmix/app/base/types_dto";
 
 const typed = <T>(value: T) => value;
 

@@ -1,4 +1,4 @@
-import { raiseError } from "auxiliaries/utils/error_util.ts";
+import { raiseError } from "auxiliaries/utils/error_util";
 
 type EnvVariables = {
   ENV_TYPE: "development" | "production";

@@ -1,5 +1,5 @@
-import { raiseError } from "auxiliaries/utils/error_util.ts";
-import { imageHelper_getImageDataMimeType } from "auxiliaries/utils/image_helper.ts";
+import { raiseError } from "auxiliaries/utils/error_util";
+import { imageHelper_getImageDataMimeType } from "auxiliaries/utils/image_helper";
 import sizeOf from "image-size";
 
 export const serverImageHelper = {
@@ -10,9 +10,7 @@ export const serverImageHelper = {
     }
     return { width: res.width, height: res.height };
   },
-  async loadImageFileAssetAttrs(
-    imageFileBytes: Uint8Array
-  ): Promise<{
+  async loadImageFileAssetAttrs(imageFileBytes: Uint8Array): Promise<{
     fileSize: number;
     width: number;
     height: number;

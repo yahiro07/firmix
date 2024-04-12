@@ -1,8 +1,8 @@
-import { ProjectRealm } from "web-firmix/app/base/types_app_common.ts";
+import { ProjectRealm } from "web-firmix/app/base/types_app_common";
 import {
   CustomDataEntry,
   EditUiItem,
-} from "web-firmix/app/base/types_core_entity.ts";
+} from "web-firmix/app/base/types_core_entity";
 
 export type ProjectMetadataEditUiItemInput = {
   key: string;

@@ -1,11 +1,11 @@
-import { raiseError } from "auxiliaries/utils/error_util.ts";
-import { padZeros, seqNumbers } from "auxiliaries/utils/utils_array.ts";
-import { CustomDataItem } from "web-firmix/app/base/types_core_entity.ts";
+import { raiseError } from "auxiliaries/utils/error_util";
+import { padZeros, seqNumbers } from "auxiliaries/utils/utils_array";
+import { CustomDataItem } from "web-firmix/app/base/types_core_entity";
 import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,
-} from "web-firmix/app/base/types_dto.ts";
-import { PatchingManifest } from "web-firmix/app/base/types_project_edit.ts";
+} from "web-firmix/app/base/types_dto";
+import { PatchingManifest } from "web-firmix/app/base/types_project_edit";
 
 export const firmixCore_firmwareConfiguration = {
   buildConfigurationSourceItems(

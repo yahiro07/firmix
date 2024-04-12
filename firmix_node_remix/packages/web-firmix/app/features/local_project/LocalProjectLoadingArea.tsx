@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
 import { useEffect } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexAligned } from "shared/common/utility_styles.ts";
+import { flexAligned } from "shared/common/utility_styles";
 import { ButtonSmall } from "shared/components/CommonControls.tsx";
 import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
 

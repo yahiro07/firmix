@@ -5,10 +5,10 @@ import {
   flexAligned,
   flexCentered,
   flexVertical,
-} from "shared/common/utility_styles.ts";
+} from "shared/common/utility_styles";
 import { ButtonSmall } from "shared/components/CommonControls.tsx";
 import { IconIconifyZ } from "shared/components/IconIconifyZ.tsx";
-import { rpcClient } from "web-firmix/app/common/rpc_client.ts";
+import { rpcClient } from "web-firmix/app/common/rpc_client";
 
 type Props = {
   apiKey: string | undefined;

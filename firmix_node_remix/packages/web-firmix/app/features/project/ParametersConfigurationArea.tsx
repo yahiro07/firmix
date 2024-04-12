@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
-import { raiseError } from "auxiliaries/utils/error_util.ts";
+import { raiseError } from "auxiliaries/utils/error_util";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 
-import { flexHorizontal, flexVertical } from "shared/common/utility_styles.ts";
+import { flexHorizontal, flexVertical } from "shared/common/utility_styles";
 import {
   Button,
   FormLabel,
@@ -12,9 +12,9 @@ import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,
   ConfigurationSourceItem_Error,
-} from "web-firmix/app/base/types_dto.ts";
-import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod.ts";
+} from "web-firmix/app/base/types_dto";
+import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit";
+import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod";
 
 type Props = {
   configurationSourceItems: ConfigurationSourceItemWrapper[];

@@ -1,17 +1,17 @@
-import { firmwareBinaryModifier_patchUf2FileContent } from "auxiliaries/firmware_manipulation_helper/firmware_binary_modifier_uf2.ts";
-import { raiseError } from "auxiliaries/utils/error_util.ts";
-import { sumArrayNumbers } from "auxiliaries/utils/utils_array.ts";
+import { firmwareBinaryModifier_patchUf2FileContent } from "auxiliaries/firmware_manipulation_helper/firmware_binary_modifier_uf2";
+import { raiseError } from "auxiliaries/utils/error_util";
+import { sumArrayNumbers } from "auxiliaries/utils/utils_array";
 import {
   convertTextToBinaryBytes,
   stringifyBytesHex,
-} from "auxiliaries/utils/utils_binary.ts";
-import { generateRandomId } from "auxiliaries/utils_be/id_generator.ts";
+} from "auxiliaries/utils/utils_binary";
+import { generateRandomId } from "auxiliaries/utils_be/id_generator";
 import {
   ConfigurationEditItem,
   FirmwarePatchingBlob,
   PatchingManifest,
-} from "web-firmix/app/base/types_project_edit.ts";
-import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod.ts";
+} from "web-firmix/app/base/types_project_edit";
+import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod";
 
 export const firmwareDataInjector = {
   patchFirmwareBinary(
