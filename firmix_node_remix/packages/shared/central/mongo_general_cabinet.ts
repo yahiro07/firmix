@@ -1,4 +1,4 @@
-import { checkNonNull } from "auxiliaries/utils/error_util.ts";
+import { checkNonNull } from "auxiliaries/utils/error_util";
 import { Collection } from "mongodb";
 
 type MongoGeneralCabinet<T extends object> = {

@@ -1,5 +1,5 @@
 import { useMemo } from "auxiliaries/fe-deps-react";
-import { ProjectRepositoryInfo } from "./types.ts";
+import { ProjectRepositoryInfo } from "./types";
 
 export function useRepositoryDisplayInfo(
   repositoryUrl: string | undefined

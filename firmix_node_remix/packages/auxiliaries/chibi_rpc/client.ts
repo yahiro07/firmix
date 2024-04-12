@@ -1,4 +1,4 @@
-import type { RpcSignaturesBase } from "./types.ts";
+import type { RpcSignaturesBase } from "./types";
 
 type IPreFetchFnExtra = (op: string, payload: any) => void;
 
@@ -9,7 +9,7 @@ export function createRpcClient<T extends RpcSignaturesBase>(
     postFetchFn?: (op: keyof T) => void;
     rawResponseCallback?: (res: Response) => void;
     commonErrorHandler?: (errorMessage: string) => void;
-  },
+  }
 ): T {
   let preFetchFnExtra: IPreFetchFnExtra;
 
@@ -56,6 +56,6 @@ export function createRpcClient<T extends RpcSignaturesBase>(
           }
         };
       },
-    },
+    }
   ) as T;
 }

@@ -1,14 +1,14 @@
-import type { RpcSignaturesBase, ServerRpcRouterWithContext } from "./types.ts";
+import type { RpcSignaturesBase, ServerRpcRouterWithContext } from "./types";
 
 export async function handleServerRpc<
   T extends RpcSignaturesBase,
-  TContext = {},
+  TContext = {}
 >(
   serverRpcRouter: ServerRpcRouterWithContext<T, TContext>,
   op: string,
   payload: object,
   context: TContext,
-  showLog: boolean,
+  showLog: boolean
 ): Promise<object> {
   if (showLog) {
     console.log("[rpc]", op, payload);

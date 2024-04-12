@@ -1,5 +1,5 @@
-import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper.ts";
-import { OAuthLoginSourceUserInfo } from "shared/base/types_oauth.ts";
+import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper";
+import { OAuthLoginSourceUserInfo } from "shared/base/types_oauth";
 
 type ApiGitHubGetUserResponsePartial = {
   id: number;
