@@ -85,6 +85,10 @@ module.exports = {
         "@typescript-eslint/no-namespace": "off",
         "no-constant-condition": "off",
         "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+        ],
       },
     },
 
