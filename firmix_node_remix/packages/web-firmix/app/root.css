@@ -1,0 +1,37 @@
+@layer reset, base, tokens, recipes, utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+h2,
+h3,
+h4,
+p,
+span {
+  font-family: "M Plus 2", sans-serif;
+}
+
+:root {
+  --cl-page-background: #eee;
+  --cl-foreground-text: #333;
+  --cl-top-bar-fill: #76d;
+  --cl-top-bar-text: #fff;
+  --cl-side-bar-fill: #ccc;
+  --cl-side-bar-edge: #aaa;
+  --cl-content-background: #fff;
+  --cl-button-edit-active: #7dd1d7;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

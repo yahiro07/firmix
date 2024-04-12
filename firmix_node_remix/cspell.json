@@ -8,6 +8,7 @@
     "chibi",
     "iconify",
     "keyval",
-    "myjwt"
+    "myjwt",
+    "linaria"
   ]
 }
