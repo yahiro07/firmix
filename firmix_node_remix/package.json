@@ -26,7 +26,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@acab/ecsstatic": "^0.8.0",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
     "@remix-run/dev": "^2.8.1",
