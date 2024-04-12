@@ -1,46 +1,32 @@
+import { createMzDbDataMigrator } from "auxiliaries/mz_data_migrator/mod";
 import { raiseError } from "auxiliaries/utils/error_util";
-import { MongoClient } from "mongodb";
 import { createMongoGeneralCabinet } from "shared/central/mongo_general_cabinet";
-import { ProjectEntity, UserEntity } from "web-firmix/app/base/types_db_entity";
-import { getEnvVariable } from "web-firmix/app/central/base/envs";
+import { getEnvVariable } from "../base/envs";
+import { connectToMongoDb, getCollections } from "./db_core";
+import { migrationDefinition } from "./migrations";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);
 }
 
-async function createStoreHouse() {
-  const mongoUrl = getEnvVariable("MONGO_URL");
-  const mongoDatabaseName = getEnvVariable("MONGO_DATABASE_NAME");
-  if (mongoUrl === "__dummy__") return undefined;
-  const client = new MongoClient(mongoUrl);
-  await client.connect();
-  console.log("connected to db");
-  const db = client.db(mongoDatabaseName);
+export async function createStoreHouse() {
+  const mzDataMigrator = createMzDbDataMigrator();
+  const isDevelopment = getEnvVariable("ENV_TYPE") === "development";
+  mzDataMigrator.setup(migrationDefinition, isDevelopment);
+  const db = await connectToMongoDb();
+  if (isDevelopment) {
+    await mzDataMigrator.migrateHot(db);
+  } else {
+    await mzDataMigrator.checkMigrations(db);
+  }
 
-  const userCollection = db.collection<UserEntity>("user");
-  const projectCollection = db.collection<ProjectEntity>("project");
+  const { userCollection, projectCollection } = getCollections(db);
 
   const userCabinet = createMongoGeneralCabinet(userCollection, "userId");
   const projectCabinet = createMongoGeneralCabinet(
     projectCollection,
     "projectId"
   );
-
-  // userCollection.dropIndexes();
-  // projectCollection.dropIndexes();
-  await userCollection.createIndex({ userId: -1 }, { unique: true });
-  await userCollection.createIndex(
-    { loginSourceSignature: 1 },
-    { unique: true }
-  );
-  await userCollection.createIndex({ apiKey: 1 }, { unique: true });
-
-  await projectCollection.createIndex({ projectId: -1 }, { unique: true });
-  await projectCollection.createIndex({ projectGuid: 1 }, { unique: true });
-  await projectCollection.createIndex({ userId: 1 });
-  await projectCollection.createIndex({ realm: 1 });
-  await projectCollection.createIndex({ parentProjectId: 1 });
-
   return { userCollection, projectCollection, userCabinet, projectCabinet };
 }
 
