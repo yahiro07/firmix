@@ -7,8 +7,12 @@ import {
   IMzDbDataMigrator,
 } from "./types";
 
-const { raiseError, itemTo, getTextMd5, getDateTimeText_yyyyMMddHHmmss } =
-  mzDataMigrator_internalHelpers;
+const {
+  raiseError,
+  itemTo,
+  getDateTimeText_yyyyMMddHHmmss,
+  getFunctionBodyTextHash,
+} = mzDataMigrator_internalHelpers;
 
 type IDbRevisionEntity = {
   kind: "common" | "step";
@@ -51,7 +55,7 @@ export function createMzDbDataMigrator(): IMzDbDataMigrator {
       }
     },
     async applyCommonSetup() {
-      const key = getTextMd5(def.commonSetup.toString());
+      const key = getFunctionBodyTextHash(def.commonSetup);
       const revision = await colRevision.findOne({ kind: "common", key });
       if (!revision) {
         await m.applyMigrationRevision("common", key, def.commonSetup);
@@ -80,7 +84,7 @@ export function createMzDbDataMigrator(): IMzDbDataMigrator {
       return newMigrationSteps.length > 0;
     },
     async checkMigrationCommon() {
-      const key = getTextMd5(def.commonSetup.toString());
+      const key = getFunctionBodyTextHash(def.commonSetup);
       const revision = await colRevision.findOne({ kind: "common", key });
       if (!revision) {
         raiseError(
@@ -111,7 +115,7 @@ export function createMzDbDataMigrator(): IMzDbDataMigrator {
         def = produce(_def, (draft) => {
           for (const m of draft.migrationsSteps) {
             if (!m.locked) {
-              m.key += "_" + getTextMd5(m.operation.toString());
+              m.key += "_" + getFunctionBodyTextHash(m.operation);
             }
           }
         });
