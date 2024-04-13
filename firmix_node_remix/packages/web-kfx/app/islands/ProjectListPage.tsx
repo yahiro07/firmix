@@ -17,6 +17,11 @@ export const ProjectListPage = createFC<Props>(
       <div q={style}>
         <div q="site-instruction">
           自作キーボードや電子工作の作品を投稿して、ファームウェアを配布できるWebサービスです。
+          <br />
+          このバージョン(KFX)では、自作キーボードエコシステムKermiteと連携する機能を搭載する予定です。
+          <br />
+          2024/4/13
+          大幅な構成変更を予定しており、その際に投稿データをリセットする場合があります。ご了承ください。
         </div>
         <HomeTargetSelectionBar if={showHomeTargetSelectionBar} />
         <div q="list">
