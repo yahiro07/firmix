@@ -8,11 +8,11 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import { fallbackValues } from "web-firmix/app/base/fallback_values";
-import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl";
-import { SiteContextValue } from "web-firmix/app/common/site_context";
-import { MainLayout } from "web-firmix/app/islands/MainLayout";
-import { SiteContextProvider } from "web-firmix/app/islands/SiteContextProvider";
+import { fallbackValues } from "web-kfx/app/base/fallback_values";
+import { clientStorageImpl } from "web-kfx/app/central/system/client_storage_impl";
+import { SiteContextValue } from "web-kfx/app/common/site_context";
+import { MainLayout } from "web-kfx/app/islands/MainLayout";
+import { SiteContextProvider } from "web-kfx/app/islands/SiteContextProvider";
 import { getEnvVariable } from "./central/base/envs";
 import styles from "./root.css?url";
 

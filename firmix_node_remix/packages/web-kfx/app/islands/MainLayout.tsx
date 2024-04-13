@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import { flexAligned } from "shared/common/utility_styles";
 import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import { SiteVariationSelectionPart } from "shared/features/layout/SiteVariationSelectionPart";
-import { SideBar } from "web-firmix/app/features/layout/SideBar";
+import { SideBar } from "web-kfx/app/features/layout/SideBar";
 
 const SiteTitle = createFCX(
   () => {
@@ -12,7 +12,7 @@ const SiteTitle = createFCX(
       <div>
         <IconIconifyZ spec="mdi:chip" q="site-icon" />
         <h1>
-          Firmix <span q="beta">(beta)</span>
+          Firmix KFX<span q="beta">(beta)</span>
         </h1>
       </div>
     );
@@ -44,7 +44,7 @@ const TopBar = createFCX(
   () => (
     <div>
       <SiteTitle />
-      <SiteVariationSelectionPart siteVariant="base" />
+      <SiteVariationSelectionPart siteVariant="kfx" />
     </div>
   ),
   css`
