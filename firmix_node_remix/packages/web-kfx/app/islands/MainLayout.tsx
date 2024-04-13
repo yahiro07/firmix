@@ -11,7 +11,7 @@ const SiteTitle = createFCX(
       <div>
         <IconIconifyZ spec="mdi:chip" q="site-icon" />
         <h1>
-          Firmix <span q="beta">(beta)</span>
+          Firmix KFX<span q="beta">(beta)</span>
         </h1>
       </div>
     );
