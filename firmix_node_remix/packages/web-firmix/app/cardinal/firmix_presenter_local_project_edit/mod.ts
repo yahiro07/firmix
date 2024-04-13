@@ -1,18 +1,11 @@
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
 import { raiseError } from "auxiliaries/utils/error_util";
 import { filePathHelper } from "auxiliaries/utils/file_path_helper";
-import { produce } from "immer";
 import {
   BinaryFileEntryWithTimestamp,
   LocalDevelopmentProject,
 } from "web-firmix/app/base/types_local_project";
-import {
-  ConfigurationEditItem,
-  FirmwareContainer,
-  PatchingDataBlob,
-} from "web-firmix/app/base/types_project_edit";
-import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod";
-import { firmixCore_firmwarePatching } from "web-firmix/app/cardinal/firmix_core_firmware_patching/mod";
+import { FirmwareContainer } from "web-firmix/app/base/types_project_edit";
+
 import { createLocalDirectoryReader } from "web-firmix/app/cardinal/firmix_presenter_common_modules/local_directory_reader";
 import { localAssetBuilder } from "web-firmix/app/cardinal/firmix_presenter_local_project_edit/local_asset_builder";
 
@@ -21,13 +14,8 @@ type FirmixPresenter_LocalProjectEdit = {
     dirHandle: FileSystemDirectoryHandle
   ): Promise<LocalDevelopmentProject>;
   patchLocalProjectFirmware(
-    project: LocalDevelopmentProject,
-    editItems: ConfigurationEditItem[]
+    project: LocalDevelopmentProject
   ): FirmwareContainer;
-  projectEmitModifiedFirmware(
-    project: LocalDevelopmentProject,
-    modFirmware: FirmwareContainer
-  ): Promise<LocalDevelopmentProject>;
 };
 
 export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit =
@@ -85,12 +73,6 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         assetFirmware.validity !== "error" &&
         assetThumbnail.validity !== "error";
 
-      const configurationSourceItems =
-        assetMetadata.metadataInput &&
-        firmixCore_firmwareConfiguration.buildConfigurationSourceItems(
-          assetMetadata.metadataInput
-        );
-
       return {
         projectRootDirectoryHandle: dirHandle,
         firmwareDirectoryHandle,
@@ -98,45 +80,15 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
         assetMetadata,
         assetThumbnail,
         assetFirmware,
-        configurationSourceItems,
         canSubmit,
       };
     },
-    patchLocalProjectFirmware(project, editItems) {
+    patchLocalProjectFirmware(project) {
       const {
         assetFirmware: { firmwareContainer },
         assetMetadata: { metadataInput },
       } = project;
       if (!firmwareContainer || !metadataInput) raiseError(`invalid condition`);
-      const patchingDataBlob: PatchingDataBlob = { editItems };
-      return firmixCore_firmwarePatching.fabricateFirmware(
-        firmwareContainer,
-        metadataInput,
-        patchingDataBlob
-      );
-    },
-    async projectEmitModifiedFirmware(project, modFirmware) {
-      const { firmwareDirectoryHandle, assetFirmware } = project;
-      if (!assetFirmware.firmwareContainer || !firmwareDirectoryHandle)
-        raiseError(`invalid condition`);
-      const srcFirmwareFilePath = assetFirmware.filePath;
-      const srcFirmwareFileName = assetFirmware.firmwareContainer.fileName;
-      const modFirmwareFileName = modFirmware.fileName;
-      const modFirmwareFilePath = srcFirmwareFilePath.replace(
-        srcFirmwareFileName,
-        modFirmwareFileName
-      );
-      const fileHandle = await firmwareDirectoryHandle.getFileHandle(
-        modFirmwareFileName,
-        { create: true }
-      );
-      const writable = await fileHandle.createWritable();
-      const binaryBites = decodeBinaryBase64(modFirmware.binaryBytes_base64);
-      await writable.write(binaryBites);
-      await writable.close();
-
-      return produce(project, (draft) => {
-        draft.modFirmwareFilePath = modFirmwareFilePath;
-      });
+      return firmwareContainer;
     },
   };

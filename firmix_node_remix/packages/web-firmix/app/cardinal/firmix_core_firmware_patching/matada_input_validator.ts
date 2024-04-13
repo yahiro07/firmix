@@ -24,7 +24,6 @@ const schemaMetadataFileContent = z.object({
     "ESP32S3",
   ]),
   primaryTargetBoard: z.string().max(32),
-  realm: z.union([z.literal("general"), z.literal("keyboard")]),
   tags: z.array(z.string().max(32)),
   repositoryUrl: z.string().max(256),
   dataEntries: z
@@ -98,38 +97,6 @@ const local = {
     }
     return [];
   },
-  checkMetadataConsistency(
-    fileContentJson: ProjectMetadataJsonFileContent
-  ): string[] {
-    const errorLines = [];
-
-    for (const dataEntry of fileContentJson.dataEntries) {
-      for (const item of dataEntry.items) {
-        if (item.dataKind === "u8" || item.dataKind === "i8") {
-          if (
-            item.fallbackValues &&
-            item.fallbackValues.length !== item.dataCount
-          ) {
-            errorLines.push(
-              `${dataEntry.marker} ${item.key}: invalid fallbackValues length`
-            );
-          }
-        }
-      }
-    }
-    const dataEntryFlatItems = fileContentJson.dataEntries.flatMap(
-      (it) => it.items
-    );
-    for (const editUiItem of fileContentJson.editUiItems) {
-      const targetDataEntry = dataEntryFlatItems.find(
-        (it) => it.key === editUiItem.key
-      );
-      if (!targetDataEntry) {
-        errorLines.push(`target data entry not found for ${editUiItem.key}`);
-      }
-    }
-    return errorLines;
-  },
 };
 
 export function validateSchemaMetadataFileContent(
@@ -139,6 +106,6 @@ export function validateSchemaMetadataFileContent(
   if (errorLines.length > 0) {
     return errorLines;
   } else {
-    return local.checkMetadataConsistency(fileContentJson);
+    return [];
   }
 }

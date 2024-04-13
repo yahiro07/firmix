@@ -14,7 +14,7 @@ export const serverImageHelper = {
     fileSize: number;
     width: number;
     height: number;
-    mimeType: string;
+    mimeType: "image/png" | "image/jpeg";
   }> {
     const mimeType = imageHelper_getImageDataMimeType(imageFileBytes);
     if (!mimeType) {
