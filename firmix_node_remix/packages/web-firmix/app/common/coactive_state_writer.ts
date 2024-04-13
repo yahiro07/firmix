@@ -17,7 +17,7 @@ export const coactiveStateWriter = {
 
 const local = {
   copyAttributes(dest: CoactiveState, src: Partial<CoactiveState>) {
-    copyObjectMembers(dest, src, ["homeTargetRealm"]);
+    copyObjectMembers(dest, src, ["homeTargetRealm_deprecated"]);
   },
   readCoactiveState(): CoactiveState {
     const cookieKey = appConfig.coactiveStateCookieKey;

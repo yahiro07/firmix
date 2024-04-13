@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "../auxiliaries"
+    },
+    {
+      "path": "../shared"
+    },
+    {
+      "path": "."
+    }
+  ],
+  "settings": {}
+}

@@ -2,8 +2,8 @@ import { createObjectStorageBridge } from "auxiliaries/object_storage_bridge/mod
 import { getEnvVariable } from "web-firmix/app/central/base/envs";
 
 export const objectStorageBridge = createObjectStorageBridge({
-  r2_access_key_id: getEnvVariable("R2_ACCESS_KEY_ID"),
-  r2_access_key_secret: getEnvVariable("R2_ACCESS_KEY_SECRET"),
-  r2_endpoint_url: getEnvVariable("R2_ENDPOINT_URL"),
-  r2_bucket_name: getEnvVariable("R2_BUCKET_NAME"),
+  s3_access_key_id: getEnvVariable("S3_ACCESS_KEY_ID"),
+  s3_access_key_secret: getEnvVariable("S3_ACCESS_KEY_SECRET"),
+  s3_endpoint_url: getEnvVariable("S3_ENDPOINT_URL"),
+  s3_bucket_name: getEnvVariable("S3_BUCKET_NAME"),
 });

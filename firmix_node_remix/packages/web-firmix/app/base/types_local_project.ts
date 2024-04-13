@@ -1,4 +1,3 @@
-import { ConfigurationSourceItemWrapper } from "web-firmix/app/base/types_dto";
 import {
   FirmwareContainer,
   ImageFileContainer,
@@ -55,7 +54,6 @@ export type LocalDevelopmentProject = {
   assetMetadata: LocalAsset_Metadata;
   assetThumbnail: LocalAsset_Thumbnail;
   assetFirmware: LocalAsset_Firmware;
-  configurationSourceItems: ConfigurationSourceItemWrapper[] | undefined;
   canSubmit: boolean;
   modFirmwareFilePath?: string;
 };

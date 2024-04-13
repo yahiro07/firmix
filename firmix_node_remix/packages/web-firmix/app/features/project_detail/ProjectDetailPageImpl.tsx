@@ -1,16 +1,9 @@
 import { css } from "@linaria/core";
 import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { useMemo } from "auxiliaries/fe-deps-react";
 import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper";
 import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import {
-  ConfigurationSourceItem,
-  ProjectDetailDto,
-} from "web-firmix/app/base/types_dto";
-import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit";
-import { firmixCore_firmwareConfiguration } from "web-firmix/app/cardinal/firmix_core_firmware_configuration/mod";
-import { firmixPresenter_firmwarePatching } from "web-firmix/app/cardinal/firmix_presenter_firmware_patching/mod";
+import { ProjectDetailDto } from "web-firmix/app/base/types_dto";
 import { rpcClient } from "web-firmix/app/common/rpc_client";
 import { useSiteContext } from "web-firmix/app/common/site_context";
 import { ParametersConfigurationArea } from "web-firmix/app/features/project/ParametersConfigurationArea";
@@ -21,6 +14,7 @@ import {
 import { ProjectHeadingArea } from "web-firmix/app/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
 import { ProjectOperationPart } from "web-firmix/app/features/project_detail/ProjectOperationPart";
+import { firmixPresenter_firmwarePatching } from "../../cardinal/firmix_presenter_firmware_patching/mod";
 
 type Props = {
   project: ProjectDetailDto;
@@ -30,37 +24,19 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
   const { loginUser } = useSiteContext();
   const isSelfProject = project.userId === loginUser?.userId;
 
-  const { hasError, configurationSourceItems } = useMemo(() => {
-    const configurationSourceItemWrappers =
-      firmixCore_firmwareConfiguration.buildConfigurationSourceItems(project);
-
-    const hasError = configurationSourceItemWrappers.some(
-      (it) => it.dataKind === "error"
-    );
-    const configurationSourceItems =
-      configurationSourceItemWrappers as ConfigurationSourceItem[];
-    return { hasError, configurationSourceItems };
-  }, [project]);
-
-  const submitEditItems = async (editItems: ConfigurationEditItem[]) => {
+  const submitEditItems = async () => {
     if (!project) return;
     if (1) {
       //ブラウザでファームウェアバイナリを取得してパッチングを行う
       //R2のCORS設定が必要
       const { fileName, fileContentBytes } =
-        await firmixPresenter_firmwarePatching.generatePatchedFirmware(
-          project,
-          editItems
-        );
+        await firmixPresenter_firmwarePatching.generatePatchedFirmware(project);
       downloadBinaryFileBlob(fileName, fileContentBytes);
     } else {
       //サーバ側でバイナリの取得とパッチングを行う
       const { projectId } = project;
       const { fileName, fileContentBytes_base64 } =
-        await rpcClient.generatePatchedFirmware({
-          projectId,
-          editItems,
-        });
+        await rpcClient.generatePatchedFirmware({ projectId });
       const fileContentBytes = decodeBinaryBase64(fileContentBytes_base64);
       downloadBinaryFileBlob(fileName, fileContentBytes);
     }
@@ -110,14 +86,11 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
           if={!!project.parentProjectId}
           q="link-parent"
         />
-        {hasError && <div>カスタムデータの定義にエラーがあります</div>}
       </div>
       <ProjectReadmeArea readmeFileContent={project.readmeFileContent} />
       <ParametersConfigurationArea
-        configurationSourceItems={configurationSourceItems}
         submitEditItems={submitEditItems}
         submitButtonLabel="UF2ダウンロード"
-        pinNumbersMap={project.pinNumbersMap}
       />
     </div>
   );
