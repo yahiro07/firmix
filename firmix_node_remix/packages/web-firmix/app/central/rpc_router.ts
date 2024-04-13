@@ -18,11 +18,8 @@ export const appRpcRouter: ServerRpcRouterWithContext<
       loginUserId
     );
   },
-  async generatePatchedFirmware({ projectId, editItems }) {
-    return await serverShell.firmwareService.generatePatchedFirmware(
-      projectId,
-      editItems
-    );
+  async generatePatchedFirmware({ projectId }) {
+    return await serverShell.firmwareService.generatePatchedFirmware(projectId);
   },
   async setApiKeyAvailability({ enabled }, { loginUserId }) {
     if (!loginUserId) raiseError(`login required`);

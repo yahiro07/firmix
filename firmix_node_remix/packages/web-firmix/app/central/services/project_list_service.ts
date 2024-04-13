@@ -170,8 +170,6 @@ const local = {
       tags: project.tags,
       repositoryUrl: project.repositoryUrl,
       readmeFileContent: project.readmeFileContent,
-      dataEntries: project.dataEntries,
-      editUiItems: project.editUiItems,
       thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
       firmwareBinaryUrl: projectHelper.getFirmwareBinaryUrl(project),
       firmwareUpdateAt: project.firmwareUpdateAt,

@@ -7,7 +7,6 @@ import {
   ProjectMetadataInput,
   ProjectMetadataJsonFileContent,
 } from "web-firmix/app/base/types_project_metadata";
-import { validateSchemaProjectBoardFileContent } from "web-firmix/app/cardinal/firmix_core_firmware_patching/board_input_validator";
 import { validateSchemaMetadataFileContent } from "web-firmix/app/cardinal/firmix_core_firmware_patching/matada_input_validator";
 
 export const firmixCore_projectLoader = {
@@ -28,11 +27,6 @@ export const firmixCore_projectLoader = {
       undefined;
 
     const errorLines = validateSchemaMetadataFileContent(fileContentJson);
-    if (boardFileContentJson) {
-      errorLines.push(
-        ...validateSchemaProjectBoardFileContent(boardFileContentJson)
-      );
-    }
 
     const metadataInput: ProjectMetadataInput = {
       ...pickObjectMembers(fileContentJson, [
@@ -42,8 +36,6 @@ export const firmixCore_projectLoader = {
         "primaryTargetBoard",
         "tags",
         "repositoryUrl",
-        "dataEntries",
-        "editUiItems",
         "firmwareSpec",
       ]),
       parentProjectGuid: fileContentJson.parentProjectGuid ?? "",
@@ -51,15 +43,6 @@ export const firmixCore_projectLoader = {
       introduction: fileContentJson.introductionLines.join("\n"),
       pinNumbersMap: boardFileContentJson?.pinNumbersMap ?? {},
     };
-
-    const hasPinsEntry = metadataInput.dataEntries.some((de) =>
-      de.items.some((it) => it.dataKind === "pins" || it.dataKind === "vl_pins")
-    );
-    if (hasPinsEntry && !boardFileContentJson) {
-      errorLines.push(
-        `board definition (firmix.board.json) is required for pin configuration.`
-      );
-    }
 
     return { metadataInput, errorLines };
   },

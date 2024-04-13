@@ -339,8 +339,6 @@ const local = {
       primaryTargetBoard: metadataInput.primaryTargetBoard,
       tags: metadataInput.tags,
       repositoryUrl: metadataInput.repositoryUrl,
-      dataEntries: metadataInput.dataEntries,
-      editUiItems: metadataInput.editUiItems,
       readmeFileContent: args.readmeFileContent,
       firmwareFileName: args.firmwareFileName,
       firmwareFileHash: args.firmwareFileHash,

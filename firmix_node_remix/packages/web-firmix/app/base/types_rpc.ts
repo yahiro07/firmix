@@ -1,5 +1,4 @@
 import { LocalProjectSubmissionPayload } from "web-firmix/app/base/types_dto_internal";
-import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit";
 
 type AsyncFn<P, R> = (payload: P) => Promise<R>;
 
@@ -14,7 +13,7 @@ export type AppRpcSignatures = {
     void
   >;
   generatePatchedFirmware: AsyncFn<
-    { projectId: string; editItems: ConfigurationEditItem[] },
+    { projectId: string },
     { fileName: string; fileContentBytes_base64: string }
   >;
   setApiKeyAvailability: AsyncFn<{ enabled: boolean }, void>;

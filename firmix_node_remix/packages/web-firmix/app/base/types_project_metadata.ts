@@ -1,13 +1,3 @@
-import {
-  CustomDataEntry,
-  EditUiItem,
-} from "web-firmix/app/base/types_core_entity";
-
-export type ProjectMetadataEditUiItemInput = {
-  key: string;
-  label: string;
-};
-
 export type ProjectBoardJsonFileContent = {
   pinNumbersMap: Record<string, number>;
 };
@@ -27,8 +17,6 @@ export type ProjectMetadataJsonFileContent = {
   primaryTargetBoard: string;
   tags: string[];
   repositoryUrl: string;
-  dataEntries: CustomDataEntry[];
-  editUiItems: ProjectMetadataEditUiItemInput[];
   firmwareSpec: ProjectMetadataFirmwareSpec;
 };
 
@@ -42,8 +30,6 @@ export type ProjectMetadataInput = {
   primaryTargetBoard: string;
   tags: string[];
   repositoryUrl: string;
-  dataEntries: CustomDataEntry[];
-  editUiItems: EditUiItem[];
   pinNumbersMap: Record<string, number>;
   firmwareSpec: ProjectMetadataFirmwareSpec;
 };

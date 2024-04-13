@@ -1,8 +1,3 @@
-import {
-  CustomDataEntry,
-  EditUiItem,
-} from "web-firmix/app/base/types_core_entity";
-
 export type UserEntity = {
   userId: string;
   userName: string;
@@ -29,8 +24,6 @@ export type ProjectEntity = {
   //Github上のプロジェクトフォルダのURL,リポジトリ内のサブ階層のフォルダパスを含む
   repositoryUrl: string;
   readmeFileContent: string;
-  dataEntries: CustomDataEntry[];
-  editUiItems: EditUiItem[];
   firmwareFileName: string;
   firmwareFileHash: string;
   firmwareRevision: number;

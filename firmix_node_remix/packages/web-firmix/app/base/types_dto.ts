@@ -1,23 +1,3 @@
-import {
-  CustomDataEntry,
-  CustomDataItem,
-  EditUiItem,
-} from "web-firmix/app/base/types_core_entity";
-
-export type ConfigurationSourceItem = {
-  label: string;
-} & CustomDataItem;
-
-export type ConfigurationSourceItem_Error = {
-  key: string;
-  dataKind: "error";
-  message: string;
-};
-
-export type ConfigurationSourceItemWrapper =
-  | ConfigurationSourceItem
-  | ConfigurationSourceItem_Error;
-
 export type ProjectDetailDto = {
   projectId: string;
   projectGuid: string;
@@ -31,8 +11,6 @@ export type ProjectDetailDto = {
   tags: string[];
   repositoryUrl: string;
   readmeFileContent: string;
-  dataEntries: CustomDataEntry[];
-  editUiItems: EditUiItem[];
   thumbnailUrl: string;
   firmwareBinaryUrl: string;
   published: boolean;
