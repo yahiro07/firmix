@@ -1,6 +1,5 @@
 import { raiseError } from "auxiliaries/utils/error_util";
 import { specifyGithubAvatarUrlSize } from "shared/foreign/avatar_size_modifier";
-import { ProjectRealm } from "web-firmix/app/base/types_app_common";
 import { ProjectEntity, UserEntity } from "web-firmix/app/base/types_db_entity";
 import {
   ProjectDetailDto,
@@ -47,7 +46,6 @@ const projectChildProjectsLookups = [
 export function createProjectListService() {
   return {
     async getProjectList_recent(
-      realm: ProjectRealm,
       readerUserId: string
     ): Promise<ProjectListItemDto[]> {
       const projects = await storehouse.projectCollection
@@ -55,7 +53,6 @@ export function createProjectListService() {
           {
             $match: {
               published: true,
-              realm,
               parentProjectId: "",
             },
           } as any,
@@ -147,7 +144,6 @@ const local = {
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
-      realm: project.realm,
       tags: project.tags,
       repositoryUrl: project.repositoryUrl,
       thumbnailUrl: projectHelper.getThumbnailImageUrl(project),
@@ -171,7 +167,6 @@ const local = {
       introduction: project.introduction,
       targetMcu: project.targetMcu,
       primaryTargetBoard: project.primaryTargetBoard,
-      realm: project.realm,
       tags: project.tags,
       repositoryUrl: project.repositoryUrl,
       readmeFileContent: project.readmeFileContent,

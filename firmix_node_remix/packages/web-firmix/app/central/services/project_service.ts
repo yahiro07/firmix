@@ -337,7 +337,6 @@ const local = {
       introduction: metadataInput.introduction,
       targetMcu: metadataInput.targetMcu,
       primaryTargetBoard: metadataInput.primaryTargetBoard,
-      realm: metadataInput.realm,
       tags: metadataInput.tags,
       repositoryUrl: metadataInput.repositoryUrl,
       dataEntries: metadataInput.dataEntries,

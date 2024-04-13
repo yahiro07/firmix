@@ -1,4 +1,3 @@
-import { ProjectRealm } from "web-firmix/app/base/types_app_common";
 import {
   CustomDataEntry,
   EditUiItem,
@@ -26,7 +25,6 @@ export type ProjectEntity = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
-  realm: ProjectRealm;
   tags: string[];
   //Github上のプロジェクトフォルダのURL,リポジトリ内のサブ階層のフォルダパスを含む
   repositoryUrl: string;

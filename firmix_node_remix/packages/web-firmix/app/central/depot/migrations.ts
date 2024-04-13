@@ -16,7 +16,6 @@ async function setupIndices(db: Db) {
   await projectCollection.createIndex({ projectId: -1 }, { unique: true });
   await projectCollection.createIndex({ projectGuid: 1 }, { unique: true });
   await projectCollection.createIndex({ userId: 1 });
-  await projectCollection.createIndex({ realm: 1 });
   await projectCollection.createIndex({ parentProjectId: 1 });
 }
 

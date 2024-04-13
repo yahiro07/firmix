@@ -24,7 +24,6 @@ const schemaMetadataFileContent = z.object({
     "ESP32S3",
   ]),
   primaryTargetBoard: z.string().max(32),
-  realm: z.union([z.literal("general"), z.literal("keyboard")]),
   tags: z.array(z.string().max(32)),
   repositoryUrl: z.string().max(256),
   dataEntries: z

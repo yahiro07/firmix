@@ -1,4 +1,3 @@
-import { ProjectRealm } from "web-firmix/app/base/types_app_common";
 import {
   CustomDataEntry,
   EditUiItem,
@@ -26,7 +25,6 @@ export type ProjectMetadataJsonFileContent = {
   introductionLines: string[];
   targetMcu: string;
   primaryTargetBoard: string;
-  realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;
   dataEntries: CustomDataEntry[];
@@ -42,7 +40,6 @@ export type ProjectMetadataInput = {
   introduction: string;
   targetMcu: string;
   primaryTargetBoard: string;
-  realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;
   dataEntries: CustomDataEntry[];

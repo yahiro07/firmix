@@ -76,7 +76,7 @@ function createClientStorageImpl(): ClientStorageImpl {
         try {
           const strObj = decodeTextBase64(text);
           const loadedObj = JSON.parse(strObj);
-          copyObjectMembers(state, loadedObj, ["homeTargetRealm"]);
+          copyObjectMembers(state, loadedObj, ["homeTargetRealm_deprecated"]);
         } catch (_) {
           //ignore
         }
