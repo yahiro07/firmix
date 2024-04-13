@@ -1,0 +1,3 @@
+higashiome-gothic-1.3i_web.woff
+https://leafscape.be/fonts/226.html
+converted woff2 to woff
