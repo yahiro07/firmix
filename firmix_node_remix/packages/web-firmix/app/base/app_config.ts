@@ -1,5 +1,5 @@
 export const appConfig = {
-  versionCode: "240413c",
+  versionCode: "240414a",
   isDevelopment:
     typeof Window === "undefined"
       ? process.env.ENV_TYPE === "development"
