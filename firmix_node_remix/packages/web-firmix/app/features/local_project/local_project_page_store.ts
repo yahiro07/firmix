@@ -11,7 +11,6 @@ import { ensureFileHandlePermission } from "auxiliaries/utils_fe/local_filesyste
 import { useEffectAsync } from "auxiliaries/utils_fe_react/hooks";
 import { LocalProjectSubmissionPayload } from "web-firmix/app/base/types_dto_internal";
 import { LocalDevelopmentProject } from "web-firmix/app/base/types_local_project";
-import { ConfigurationEditItem } from "web-firmix/app/base/types_project_edit";
 import { firmixPresenter_localProjectEdit } from "web-firmix/app/cardinal/firmix_presenter_local_project_edit/mod";
 import { rpcClient } from "web-firmix/app/common/rpc_client";
 
@@ -29,8 +28,7 @@ export type LocalProjectPageStore = {
   loadProjectFolder: (dirHandle: FileSystemDirectoryHandle) => Promise<void>;
   reloadProjectFolder(): Promise<void>;
   closeProjectFolder(): void;
-  submitEditItems(editItems: ConfigurationEditItem[]): void;
-  submitEditItems2(editItems: ConfigurationEditItem[]): Promise<void>;
+  submitEditItems(): void;
   submitProject(): Promise<void>;
 };
 
@@ -104,31 +102,14 @@ export function useLocalProjectPageStore(): LocalProjectPageStore {
       coreActions.wrapSetProjectDirectoryHandle(undefined);
       coreActions.wrapSetProject(undefined);
     },
-    submitEditItems(editItems: ConfigurationEditItem[]) {
+    submitEditItems() {
       if (!project) return;
       const modFirmware =
-        firmixPresenter_localProjectEdit.patchLocalProjectFirmware(
-          project,
-          editItems
-        );
+        firmixPresenter_localProjectEdit.patchLocalProjectFirmware(project);
       downloadBinaryFileBlob(
         modFirmware.fileName,
         decodeBinaryBase64(modFirmware.binaryBytes_base64)
       );
-    },
-    async submitEditItems2(editItems: ConfigurationEditItem[]) {
-      if (!project) return;
-      const modFirmware =
-        firmixPresenter_localProjectEdit.patchLocalProjectFirmware(
-          project,
-          editItems
-        );
-      const newProject =
-        await firmixPresenter_localProjectEdit.projectEmitModifiedFirmware(
-          project,
-          modFirmware
-        );
-      coreActions.wrapSetProject(newProject);
     },
     async submitProject() {
       if (!project) return;

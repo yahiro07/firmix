@@ -16,11 +16,5 @@ export const loader = createLoader(async ({ request }) => {
 
 export default createPage(() => {
   const { projects } = useLoaderData<typeof loader>();
-  return (
-    <ProjectListPage
-      projects={projects}
-      showPublicity={true}
-      showHomeTargetSelectionBar={false}
-    />
-  );
+  return <ProjectListPage projects={projects} showPublicity={true} />;
 });
