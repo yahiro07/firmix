@@ -14,20 +14,20 @@ type ObjectStorageBridge = {
 };
 
 export function createObjectStorageBridge(spec: {
-  r2_access_key_id: string;
-  r2_access_key_secret: string;
-  r2_endpoint_url: string;
-  r2_bucket_name: string;
+  s3_access_key_id: string;
+  s3_access_key_secret: string;
+  s3_endpoint_url: string;
+  s3_bucket_name: string;
 }): ObjectStorageBridge {
   const s3_client = new s3.S3({
     region: "auto",
-    endpoint: spec.r2_endpoint_url,
+    endpoint: spec.s3_endpoint_url,
     credentials: {
-      accessKeyId: spec.r2_access_key_id,
-      secretAccessKey: spec.r2_access_key_secret,
+      accessKeyId: spec.s3_access_key_id,
+      secretAccessKey: spec.s3_access_key_secret,
     },
   });
-  const bucketName = spec.r2_bucket_name;
+  const bucketName = spec.s3_bucket_name;
 
   return {
     async uploadBinaryFile(path, bytes) {

@@ -3,13 +3,13 @@ import { getEnvVariable } from "web-kfx/app/central/base/envs";
 
 export const projectHelper = {
   getThumbnailImageUrl(project: ProjectEntity): string {
-    const r2PublicUrl = getEnvVariable("R2_PUBLIC_URL");
+    const s3PublicUrl = getEnvVariable("S3_PUBLIC_URL");
     const { projectId, thumbnailFileName, thumbnailRevision } = project;
-    return `${r2PublicUrl}/${projectId}/${thumbnailFileName}?rev=${thumbnailRevision}`;
+    return `${s3PublicUrl}/${projectId}/${thumbnailFileName}?rev=${thumbnailRevision}`;
   },
   getFirmwareBinaryUrl(project: ProjectEntity): string {
-    const r2PublicUrl = getEnvVariable("R2_PUBLIC_URL");
+    const s3PublicUrl = getEnvVariable("S3_PUBLIC_URL");
     const { projectId, firmwareFileName, firmwareRevision } = project;
-    return `${r2PublicUrl}/${projectId}/${firmwareFileName}?rev=${firmwareRevision}`;
+    return `${s3PublicUrl}/${projectId}/${firmwareFileName}?rev=${firmwareRevision}`;
   },
 };
