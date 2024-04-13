@@ -3,7 +3,7 @@ node_modules
 .cache/
 build/
 .env
-.env.*
+.env.production.local
 
 .local/
 .vscode/settings.json
