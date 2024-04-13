@@ -52,6 +52,7 @@ const TopBar = createFCX(
     height: 60px;
     padding: 0 12px;
     ${flexAligned()};
+    justify-content: space-between;
   `
 );
 
