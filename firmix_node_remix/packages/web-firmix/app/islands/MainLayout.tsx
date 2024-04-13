@@ -3,6 +3,7 @@ import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { ReactNode } from "react";
 import { flexAligned } from "shared/common/utility_styles";
 import { IconIconifyZ } from "shared/components/IconIconifyZ";
+import { SiteVariationSelectionPart } from "shared/features/layout/SiteVariationSelectionPart";
 import { SideBar } from "web-firmix/app/features/layout/SideBar";
 
 const SiteTitle = createFCX(
@@ -43,6 +44,7 @@ const TopBar = createFCX(
   () => (
     <div>
       <SiteTitle />
+      <SiteVariationSelectionPart siteVariant="base" />
     </div>
   ),
   css`
@@ -50,6 +52,7 @@ const TopBar = createFCX(
     height: 60px;
     padding: 0 12px;
     ${flexAligned()};
+    justify-content: space-between;
   `
 );
 

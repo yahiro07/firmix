@@ -12,6 +12,7 @@ type EnvVariables = {
   GITHUB_CLIENT_ID: string;
   GITHUB_CLIENT_SECRET: string;
   JWT_SECRET: string;
+  SITE_VARIANT: "base" | "kfx";
 };
 
 export function getEnvVariable<K extends keyof EnvVariables>(

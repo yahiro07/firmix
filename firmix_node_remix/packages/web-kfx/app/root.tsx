@@ -13,6 +13,7 @@ import { clientStorageImpl } from "web-kfx/app/central/system/client_storage_imp
 import { SiteContextValue } from "web-kfx/app/common/site_context";
 import { MainLayout } from "web-kfx/app/islands/MainLayout";
 import { SiteContextProvider } from "web-kfx/app/islands/SiteContextProvider";
+import { getEnvVariable } from "./central/base/envs";
 import styles from "./root.css?url";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
@@ -28,7 +29,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
     loginUser,
     coactiveState,
   };
-  return { siteContextValue };
+  const envVariablesExposed = {
+    ENV_TYPE: getEnvVariable("ENV_TYPE"),
+  };
+  return { siteContextValue, envVariablesExposed };
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -63,6 +67,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </SiteContextProvider>
         <ScrollRestoration />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.envVariablesExposed)}`,
+          }}
+        />
         <Scripts />
       </body>
     </html>
