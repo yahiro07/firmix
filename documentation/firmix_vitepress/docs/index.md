@@ -4,10 +4,10 @@ layout: home
 
 hero:
   name: "Firmix"
-  text: "ファームウェア置き場のWebサービス"
+  # text: "ファームウェア置き場のWebサービスです"
   tagline: 電子工作の作品を投稿してファームウェアを配布できます。
   image:
-    src: /assets/freepik/photo-1603732551658-5fabbafa84eb.avif
+    src: /assets/self/img0517.jpg
     alt: firmix
   actions:
     - theme: brand
