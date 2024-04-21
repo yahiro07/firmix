@@ -97,6 +97,19 @@ const local = {
     }
     return [];
   },
+  checkJsonSchemaExtra(
+    fileContentJson: ProjectMetadataJsonFileContent
+  ): string[] {
+    const errorLines = [];
+
+    const membersProhibited = ["realm", "dataEntries", "editUiItems"];
+    for (const key of membersProhibited) {
+      if (key in fileContentJson) {
+        errorLines.push(`property ${key} is not supported on this version`);
+      }
+    }
+    return errorLines;
+  },
 };
 
 export function validateSchemaMetadataFileContent(
@@ -106,6 +119,6 @@ export function validateSchemaMetadataFileContent(
   if (errorLines.length > 0) {
     return errorLines;
   } else {
-    return [];
+    return local.checkJsonSchemaExtra(fileContentJson);
   }
 }

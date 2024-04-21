@@ -13,7 +13,7 @@ export const SiteVariationSelectionPart = createFCX<{
         <a href="https://firmix.nector.me" q={baseActive && "--active"}>
           Base
         </a>
-        <a href="https://firmix-kfx.nextor.me" q={kfxActive && "--active"}>
+        <a href="https://firmix-kfx.nector.me" q={kfxActive && "--active"}>
           KFX
         </a>
       </div>
