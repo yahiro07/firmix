@@ -24,7 +24,12 @@ export default defineConfig({
       {
         text: "開発者向け情報",
         collapsed: false,
-        items: [{ text: "フォルダ構成", link: "/project/structure" }],
+        items: [
+          { text: "フォルダ構成", link: "/project/structure" },
+          { text: "メタデータ", link: "/project/metadata" },
+          { text: "ローカル開発", link: "/project/local-dev" },
+          { text: "CI", link: "/project/ci" },
+        ],
       },
     ],
     socialLinks: [
