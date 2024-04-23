@@ -1,4 +1,8 @@
+import { Box, chakra, Flex } from "@chakra-ui/react";
+import { css as emotionCss } from "@emotion/css";
+import styled from "@emotion/styled";
 import { css } from "@linaria/core";
+
 import { useState } from "auxiliaries/fe-deps-react";
 import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper";
 import {
@@ -77,9 +81,29 @@ export const DevelopmentPage = createFC(() => {
           <ButtonSmall onClick={handleClick3}>fetch</ButtonSmall>
         </div>
       </div>
+      <div>
+        <Flex color="red">Hello Remix with Chakra UI and Vite!</Flex>
+        <MyLabel>foo</MyLabel>
+        <MyLabel2>bar</MyLabel2>
+        <MyLabel3 text="buzz" />
+      </div>
     </div>
   );
 });
+
+const MyLabel = chakra(Box, {
+  baseStyle: {
+    color: "green",
+  },
+});
+
+const MyLabel2 = styled.div`
+  color: blue;
+`;
+
+const MyLabel3 = ({ text }: { text: string }) => (
+  <div q={emotionCss`color: orange`}>{text}</div>
+);
 
 const style = css`
   padding: 16px;
