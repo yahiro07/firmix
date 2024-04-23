@@ -1,5 +1,7 @@
+import { Box, BoxProps, HStack } from "@chakra-ui/react";
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
+import { FC } from "react";
 import { styleTextLinkInheritColor } from "shared/common/common_styles";
 import { flexAligned, flexVertical } from "shared/common/utility_styles";
 import { Button } from "shared/components/CommonControls";
@@ -36,30 +38,29 @@ const ProjectTitlePart = createFCX<{
   `
 );
 
-const ProjectTagsList = createFCX<{ tags: string[] }>(
-  ({ tags }) => {
-    return (
-      <div>
-        {tags.map((tag) => (
-          <div key={tag} q="tag">
-            {tag}
-          </div>
-        ))}
-      </div>
-    );
-  },
-  css`
-    ${flexAligned(8)};
-    > .tag {
-      font-size: 14px;
-      padding: 0 8px 1px;
-      border-radius: 20px;
-      background: #bbb;
-      color: #fff;
-      white-space: nowrap;
-    }
-  `
-);
+const ProjectTagsList: FC<BoxProps & { tags: string[] }> = ({
+  tags,
+  ...props
+}) => {
+  return (
+    <HStack gap={2} {...props}>
+      {tags.map((tag) => (
+        <Box
+          key={tag}
+          q="tag"
+          fontSize="14px"
+          background="#bbb"
+          padding="0 8px 1px"
+          borderRadius="99px"
+          color="#fff"
+          whiteSpace="nowrap"
+        >
+          {tag}
+        </Box>
+      ))}
+    </HStack>
+  );
+};
 
 const RepositoryInfoPart = createFCX<{ repositoryInfo: ProjectRepositoryInfo }>(
   ({ repositoryInfo }) => {
