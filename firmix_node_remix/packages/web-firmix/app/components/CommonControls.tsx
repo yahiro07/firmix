@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import { reflectInputChecked } from "auxiliaries/utils_fe_react/form_helper";
 import { Box, HStack, styled } from "../../styled-system/jsx";
-import { createFCE2 } from "../common_styling/create_fce";
+import { createFCE } from "../common_styling/create_fce";
 import { Input, Label, Li } from "../common_styling/utility_components";
 import { IconIconifyZ } from "./IconIconifyZ";
 
@@ -85,7 +85,7 @@ export const Nav = styled("ul", {
   },
 });
 
-const NavItemCore = createFCE2<{
+const NavItemCore = createFCE<{
   title: string;
   iconSpec: string;
   active?: boolean;
@@ -102,7 +102,7 @@ const NavItemCore = createFCE2<{
   </HStack>
 ));
 
-export const NavItem = createFCE2<{
+export const NavItem = createFCE<{
   path: string;
   title: string;
   iconSpec: string;
@@ -120,7 +120,7 @@ export const NavItem = createFCE2<{
   );
 });
 
-export const NavItem_Button = createFCE2<{
+export const NavItem_Button = createFCE<{
   path: string;
   title: string;
   iconSpec: string;
@@ -136,7 +136,7 @@ export const NavItem_Button = createFCE2<{
   );
 });
 
-export const ToggleButtonLarge = createFCE2(
+export const ToggleButtonLarge = createFCE(
   ({
     checked,
     setChecked,

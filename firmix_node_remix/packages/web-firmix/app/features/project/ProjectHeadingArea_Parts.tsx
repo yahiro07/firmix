@@ -2,12 +2,12 @@ import { FC } from "react";
 import { ProjectRepositoryInfo } from "shared/foreign/types";
 import { Box, BoxProps, HStack } from "../../../styled-system/jsx";
 import { styleObj_TextLinkInheritColor } from "../../common_styling/common_styles";
-import { createFCE2 } from "../../common_styling/create_fce";
+import { createFCE } from "../../common_styling/create_fce";
 import { H2, H3, Img, StyledA } from "../../common_styling/utility_components";
 import { flexAligned } from "../../common_styling/utility_styles";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
-const ProjectTitlePart = createFCE2<{
+const ProjectTitlePart = createFCE<{
   projectName: string;
   variationName: string;
 }>(({ projectName, variationName }) => {
@@ -51,7 +51,7 @@ const ProjectTagsList: FC<BoxProps & { tags: string[] }> = ({
   );
 };
 
-const RepositoryInfoPart = createFCE2<{
+const RepositoryInfoPart = createFCE<{
   repositoryInfo: ProjectRepositoryInfo;
 }>(({ repositoryInfo }) => {
   return (
@@ -68,7 +68,7 @@ const RepositoryInfoPart = createFCE2<{
   );
 });
 
-const AuthorPart = createFCE2<{ userName: string; avatarUrl: string }>(
+const AuthorPart = createFCE<{ userName: string; avatarUrl: string }>(
   ({ userName, avatarUrl }) => {
     return (
       <HStack gap="4px">

@@ -1,14 +1,14 @@
 import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard";
 import { Stack } from "../../styled-system/jsx";
-import { createFCE2 } from "../common_styling/create_fce";
+import { createFCE } from "../common_styling/create_fce";
 
 type Props = {
   projects: ProjectListItemDto[];
   showPublicity: boolean;
 };
 
-export const ProjectListPage = createFCE2<Props>(
+export const ProjectListPage = createFCE<Props>(
   ({ projects, showPublicity }) => {
     return (
       <Stack gap={3} padding="16px 0">

@@ -1,9 +1,9 @@
 import { HStack } from "../../../styled-system/jsx";
-import { createFCE2 } from "../../common_styling/create_fce";
+import { createFCE } from "../../common_styling/create_fce";
 import { StyledLink } from "../../common_styling/utility_components";
 import { IconIconify } from "../../components/IconIconify";
 
-const ProjectLinkCommon = createFCE2<{
+const ProjectLinkCommon = createFCE<{
   pagePath: string;
   iconSpec: string;
   iconYOffset: string;
@@ -23,7 +23,7 @@ const ProjectLinkCommon = createFCE2<{
   </StyledLink>
 ));
 
-export const LinkChildProjectListPage = createFCE2<{
+export const LinkChildProjectListPage = createFCE<{
   project: { projectId: string; numChildProjects: number };
   smaller?: boolean;
 }>(({ project, smaller }) => {
@@ -40,7 +40,7 @@ export const LinkChildProjectListPage = createFCE2<{
   );
 });
 
-export const LinkParentProjectPage = createFCE2<{
+export const LinkParentProjectPage = createFCE<{
   projectId: string;
   smaller?: boolean;
 }>(({ projectId, smaller }) => {

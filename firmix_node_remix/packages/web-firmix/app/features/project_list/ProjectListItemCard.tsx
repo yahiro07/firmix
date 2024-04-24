@@ -3,7 +3,7 @@ import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { LinkChildProjectListPage } from "web-firmix/app/features/project/project_common_parts";
 import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts";
 import { Box, Flex, HStack, Spacer, Stack } from "../../../styled-system/jsx";
-import { createFCE2 } from "../../common_styling/create_fce";
+import { createFCE } from "../../common_styling/create_fce";
 import { prefab } from "../../common_styling/prefab";
 import { H3, H4, Img } from "../../common_styling/utility_components";
 import { Card, LinkButton } from "../../components/CommonControls";
@@ -13,7 +13,7 @@ type Props = {
   showPublicity: boolean;
 };
 
-const ThumbnailBox = createFCE2<{ imageUrl: string }>(({ imageUrl }) => (
+const ThumbnailBox = createFCE<{ imageUrl: string }>(({ imageUrl }) => (
   <Box width="200px" aspectRatio={1.3333}>
     <Img
       src={imageUrl}
@@ -29,7 +29,7 @@ const ProjectNameLabel = prefab(<H3 fontSize="22px" />);
 
 const VariationNameLabel = prefab(<H4 fontSize="18px" />);
 
-const AuthorInfo = createFCE2<{ userName: string; avatarUrl: string }>(
+const AuthorInfo = createFCE<{ userName: string; avatarUrl: string }>(
   ({ userName, avatarUrl }) => (
     <HStack gap={1}>
       <Img src={avatarUrl} alt="avatar" width="24px" />
@@ -38,7 +38,7 @@ const AuthorInfo = createFCE2<{ userName: string; avatarUrl: string }>(
   )
 );
 
-const PublicityLabel = createFCE2<{ published: boolean }>(({ published }) => (
+const PublicityLabel = createFCE<{ published: boolean }>(({ published }) => (
   <Box fontSize="15px" color={published ? "#7ca" : "#888"}>
     {published ? "公開中" : "ドラフト"}
   </Box>

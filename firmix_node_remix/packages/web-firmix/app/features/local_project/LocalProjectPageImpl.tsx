@@ -10,18 +10,18 @@ import {
 } from "web-firmix/app/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
 import { Box, Center, Stack } from "../../../styled-system/jsx";
-import { createFCE2 } from "../../common_styling/create_fce";
+import { createFCE } from "../../common_styling/create_fce";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";
 
-const BuildDateTimePart = createFCE2<{ timestamp: number | undefined }>(
+const BuildDateTimePart = createFCE<{ timestamp: number | undefined }>(
   ({ timestamp }) => {
     const timeText = useDateTimeTextWithElapsed(timestamp ?? 0, Date.now());
     return <Box>ファームウェアビルド日時: {timeText}</Box>;
   }
 );
 
-const BlankFillerPart = createFCE2(() => (
+const BlankFillerPart = createFCE(() => (
   <Center flexDirection="column">
     <IconIconifyZ spec="ph:folder-thin" fontSize="70px" />
     <Box textAlign="center">

@@ -1,12 +1,10 @@
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,
   LocalDevelopmentProject,
 } from "web-firmix/app/base/types_local_project";
 import { Box, HStack } from "../../../styled-system/jsx";
-import { createFCE2 } from "../../common_styling/create_fce";
+import { createFCE } from "../../common_styling/create_fce";
 import { H3, Img } from "../../common_styling/utility_components";
 import { flexAligned } from "../../common_styling/utility_styles";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
@@ -25,14 +23,14 @@ const local = {
   },
 };
 
-const ProjectResourceHeader = createFCE2(() => (
+const ProjectResourceHeader = createFCE(() => (
   <H3 css={flexAligned} gap="0">
     <IconIconifyZ spec="ph:files" fontSize="24px" />
     <Box fontSize="20px">プロジェクトリソース</Box>
   </H3>
 ));
 
-const AssetEntry = createFCX<{
+const AssetEntry = createFCE<{
   title: string;
   asset: LocalAssetBase;
   infoAdditional?: string;
@@ -46,7 +44,7 @@ const AssetEntry = createFCX<{
   )[asset.validity];
 
   return (
-    <div>
+    <Box>
       <HStack gap="2px">
         <IconIconifyZ spec={iconSpec} color={iconColor} />
         <span>
@@ -58,25 +56,23 @@ const AssetEntry = createFCX<{
           <div key={index}>{line}</div>
         ))}
       </Box>
-    </div>
+    </Box>
   );
 });
 
-const ThumbnailBox = createFCE2<{ thumbnailUrl: string }>(
-  ({ thumbnailUrl }) => (
-    <Box width="160px" height="120px">
-      <Img
-        src={thumbnailUrl}
-        alt="thumbnail"
-        width="100%"
-        height="100%"
-        objectFit="contain"
-      />
-    </Box>
-  )
-);
+const ThumbnailBox = createFCE<{ thumbnailUrl: string }>(({ thumbnailUrl }) => (
+  <Box width="160px" height="120px">
+    <Img
+      src={thumbnailUrl}
+      alt="thumbnail"
+      width="100%"
+      height="100%"
+      objectFit="contain"
+    />
+  </Box>
+));
 
-export const LocalProjectAssetsArea = createFCX<Props>(({ project }) => {
+export const LocalProjectAssetsArea = createFCE<Props>(({ project }) => {
   const { assetReadme, assetMetadata, assetThumbnail, assetFirmware } = project;
   const thumbnailInfoAdditional =
     local.extractThumbnailInfoAdditional(assetThumbnail);
