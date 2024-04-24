@@ -115,105 +115,111 @@ const StyledNavLink = styled(Link)`
   }
 `;
 
-export const NavItem = createFC<{
-  path: string;
-  title: string;
-  iconSpec: string;
-}>(({ path, title, iconSpec }) => {
-  // const { pagePath } = useSiteContext();
-  // const active = path === pagePath;
-  // const active = path === location.href;
-  const active = false;
-  return (
-    <li q={["nav-item", active && "active"]}>
-      <StyledNavLink to={path}>
-        <IconIconifyZ spec={iconSpec as any} q="icon" />
-        <span>{title}</span>
-      </StyledNavLink>
-    </li>
-  );
-});
-
-export const NavItem_Button = createFC<{
-  path: string;
-  title: string;
-  iconSpec: string;
-}>(({ path, title, iconSpec }) => {
-  const onClick = () => (location.href = path);
-  return (
-    <li>
-      <StyledNavItem onClick={onClick}>
-        <IconIconifyZ spec={iconSpec as any} q="icon" />
-        <span>{title}</span>
-      </StyledNavItem>
-    </li>
-  );
-});
-
-export const ToggleButtonLarge = createFCS(
-  (
-    {
-      checked,
-      setChecked,
-      text,
-    }: {
-      checked: boolean;
-      setChecked(): void;
-      text: string;
-    },
-    { Base }
-  ) => {
+export const NavItem = chakra(
+  createFC<{
+    path: string;
+    title: string;
+    iconSpec: string;
+  }>(({ path, title, iconSpec }) => {
+    // const { pagePath } = useSiteContext();
+    // const active = path === pagePath;
+    // const active = path === location.href;
+    const active = false;
     return (
-      <Base>
-        <input
-          type="checkbox"
-          value=""
-          checked={checked}
-          onChange={reflectInputChecked(setChecked)}
-        />
-        <div />
-        <span>{text}</span>
-      </Base>
+      <li q={["nav-item", active && "active"]}>
+        <StyledNavLink to={path}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </StyledNavLink>
+      </li>
     );
-  },
-  {
-    Base: styled.label`
-      position: relative;
-      cursor: pointer;
-      ${flexAligned(8)};
+  })
+);
 
-      > input {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-      }
+export const NavItem_Button = chakra(
+  createFC<{
+    path: string;
+    title: string;
+    iconSpec: string;
+  }>(({ path, title, iconSpec }) => {
+    const onClick = () => (location.href = path);
+    return (
+      <li>
+        <StyledNavItem onClick={onClick}>
+          <IconIconifyZ spec={iconSpec as any} q="icon" />
+          <span>{title}</span>
+        </StyledNavItem>
+      </li>
+    );
+  })
+);
 
-      > div {
+export const ToggleButtonLarge = chakra(
+  createFCS(
+    (
+      {
+        checked,
+        setChecked,
+        text,
+      }: {
+        checked: boolean;
+        setChecked(): void;
+        text: string;
+      },
+      { Base }
+    ) => {
+      return (
+        <Base>
+          <input
+            type="checkbox"
+            value=""
+            checked={checked}
+            onChange={reflectInputChecked(setChecked)}
+          />
+          <div />
+          <span>{text}</span>
+        </Base>
+      );
+    },
+    {
+      Base: styled.label`
         position: relative;
-        width: 60px;
-        height: 30px;
-        background: #ccc;
-        border-radius: 99px;
+        cursor: pointer;
+        ${flexAligned(8)};
 
-        &:before {
+        > input {
           position: absolute;
-          top: 2px;
-          left: 2px;
-          content: "";
-          width: 26px;
-          height: 26px;
-          background: #fff;
-          border-radius: 99px;
-          transition: left 0.5s;
+          width: 1px;
+          height: 1px;
         }
-      }
 
-      > input:checked + div {
-        background-color: #7ca;
-        &:before {
-          left: 32px;
+        > div {
+          position: relative;
+          width: 60px;
+          height: 30px;
+          background: #ccc;
+          border-radius: 99px;
+
+          &:before {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            content: "";
+            width: 26px;
+            height: 26px;
+            background: #fff;
+            border-radius: 99px;
+            transition: left 0.5s;
+          }
         }
-      }
-    `,
-  }
+
+        > input:checked + div {
+          background-color: #7ca;
+          &:before {
+            left: 32px;
+          }
+        }
+      `,
+    }
+  )
 );

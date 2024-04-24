@@ -1,7 +1,6 @@
 import { HStack } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
 import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { IconIconify } from "shared/components/IconIconify";
 
 const ProjectLinkCommon = createFCE2<{
@@ -44,7 +43,7 @@ export const LinkChildProjectListPage = createFCE2<{
   );
 });
 
-export const LinkParentProjectPage = createFCX<{
+export const LinkParentProjectPage = createFCE2<{
   projectId: string;
   smaller?: boolean;
 }>(({ projectId, smaller }) => {

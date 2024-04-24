@@ -1,119 +1,76 @@
-import { css } from "@linaria/core";
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
+import { Box, Flex, HStack, Spacer } from "@chakra-ui/react";
+import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
 import { ReactNode } from "react";
-import { flexAligned } from "shared/common/utility_styles";
 import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import { SiteVariationSelectionPart } from "shared/features/layout/SiteVariationSelectionPart";
 import { SideBar } from "web-firmix/app/features/layout/SideBar";
 
-const SiteTitle = createFCX(
-  () => {
-    return (
-      <div>
-        <IconIconifyZ spec="mdi:chip" q="site-icon" />
-        <h1>
-          Firmix <span q="beta">(beta)</span>
-        </h1>
-      </div>
-    );
-  },
-  css`
-    ${flexAligned(2)};
-    color: var(--cl-top-bar-text);
+const SiteTitle = createFCE2(() => {
+  return (
+    <HStack gap="2px" color="var(--cl-top-bar-text)">
+      <IconIconifyZ spec="mdi:chip" fontSize="44px" marginTop="3px" />
+      <HStack as="h1" gap={2}>
+        <Box as="span" fontSize="36px" fontWeight="bold">
+          Firmix
+        </Box>
+        <Box as="span" fontSize="28px" fontWeight="normal" marginTop="5px">
+          (beta)
+        </Box>
+      </HStack>
+    </HStack>
+  );
+});
 
-    > .site-icon {
-      font-size: 44px;
-      margin-top: 3px;
-    }
-    > h1 {
-      ${flexAligned(8)};
-      font-size: 36px;
-      font-weight: bold;
-      margin: 0;
+const TopBar = createFCE2(() => (
+  <HStack
+    gap={0}
+    padding="0 12px"
+    height="60px"
+    background="var(--cl-top-bar-fill)"
+  >
+    <SiteTitle />
+    <Spacer />
+    <SiteVariationSelectionPart siteVariant="base" />
+  </HStack>
+));
 
-      > .beta {
-        font-size: 28px;
-        font-weight: normal;
-        margin-top: 5px;
-      }
-    }
-  `
-);
+const MainRow = createFCE2<{ children: ReactNode }>(({ children }) => {
+  return (
+    <Flex>
+      <SideBar
+        q="side-bar"
+        position="sticky"
+        top="60px"
+        height="calc(100vh - 60px)"
+        flexShrink={0}
+      />
+      <Flex flexGrow={1} justifyContent="center">
+        <Box flexGrow={1} maxWidth="800px">
+          {children}
+        </Box>
+      </Flex>
+    </Flex>
+  );
+});
 
-const TopBar = createFCX(
-  () => (
-    <div>
-      <SiteTitle />
-      <SiteVariationSelectionPart siteVariant="base" />
-    </div>
-  ),
-  css`
-    background: var(--cl-top-bar-fill);
-    height: 60px;
-    padding: 0 12px;
-    ${flexAligned()};
-    justify-content: space-between;
-  `
-);
-
-const MainRow = createFCX<{ children: ReactNode }>(
-  ({ children }) => {
-    return (
-      <div>
-        <SideBar q="side-bar" />
-        <div q="main-column">
-          <div>{children}</div>
-        </div>
-      </div>
-    );
-  },
-  css`
-    display: flex;
-    > .side-bar {
-      position: sticky;
-      top: 60px;
-      height: calc(100vh - 60px);
-      flex-shrink: 0;
-    }
-    > .main-column {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      /* padding: 16px 0; */
-      > div {
-        flex-grow: 1;
-        max-width: 800px;
-      }
-    }
-  `
-);
-
-export const MainLayout = createFCX(
+export const MainLayout = createFCE2(
   ({ children }: { children: ReactNode }) => {
     return (
-      <div q={["main-layout-root"]}>
-        <TopBar q="site-top-bar" />
-        <MainRow q="main-row">{children}</MainRow>
-      </div>
+      <Flex
+        flexDirection="column"
+        minHeight="100vh"
+        background="var(--cl-page-background)"
+        color="var(--cl-foreground-text)"
+      >
+        <TopBar
+          position="sticky"
+          width="100%"
+          top={0}
+          zIndex={100}
+          flexShrink={0}
+        />
+        <MainRow flexGrow={1} children={children} />
+      </Flex>
     );
-  },
-  css`
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: var(--cl-page-background);
-    color: var(--cl-foreground-text);
-
-    > .site-top-bar {
-      position: sticky;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-      flex-shrink: 0;
-    }
-
-    > .main-row {
-      flex-grow: 1;
-    }
-  `
+  }
 );

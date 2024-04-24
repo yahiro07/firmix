@@ -1,6 +1,4 @@
-import { css } from "@linaria/core";
-
-export const styleTextLinkInheritColor = css`
+export const styleTextLinkInheritColor = `
   color: inherit;
   text-decoration: none;
   &:hover {
@@ -8,14 +6,10 @@ export const styleTextLinkInheritColor = css`
   }
 `;
 
-export const cssTransitionCommon = css`
-  transition: all 0.1s linear;
-`;
-
-export const uiStyleClickable = css`
+export const uiStyleClickable = `
   cursor: pointer;
   &:hover {
     opacity: 0.7;
   }
-  ${cssTransitionCommon};
+  transition: all 0.1s linear;
 `;

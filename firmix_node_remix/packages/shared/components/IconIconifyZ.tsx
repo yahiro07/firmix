@@ -1,4 +1,5 @@
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { Box } from "@chakra-ui/react";
+import { createFCE } from "auxiliaries/utils_fe_react/create_fce";
 
 export const iconShapes = {
   "lucide:package": (
@@ -186,10 +187,13 @@ const iconShape_missingFallback = (
 
 type IconSpec = keyof typeof iconShapes;
 
-export const IconIconifyZ = createFC<{ spec: IconSpec }>(({ spec }) => {
-  const el = iconShapes[spec] ?? iconShape_missingFallback;
-  return {
-    ...el,
-    props: { ...el.props, xmlns: `http://www.w3.org/2000/svg` },
-  };
-});
+export const IconIconifyZ = createFCE<{ spec: IconSpec }>(
+  ({ spec, ...props }) => {
+    const el = iconShapes[spec] ?? iconShape_missingFallback;
+    const svgNode = {
+      ...el,
+      props: { ...el.props, xmlns: `http://www.w3.org/2000/svg` },
+    };
+    return <Box {...props} children={svgNode} />;
+  }
+);

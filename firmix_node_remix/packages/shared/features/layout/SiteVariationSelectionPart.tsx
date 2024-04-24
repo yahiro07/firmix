@@ -1,36 +1,38 @@
-import { css } from "@linaria/core";
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-import { flexAligned, flexCentered } from "../../common/utility_styles";
+import { Center, HStack } from "@chakra-ui/react";
+import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
 
-export const SiteVariationSelectionPart = createFCX<{
-  siteVariant: "base" | "kfx";
-}>(
-  ({ siteVariant }) => {
-    const baseActive = siteVariant === "base";
-    const kfxActive = siteVariant === "kfx";
-    return (
-      <div>
-        <a href="https://firmix.nector.me" q={baseActive && "--active"}>
-          Base
-        </a>
-        <a href="https://firmix-kfx.nector.me" q={kfxActive && "--active"}>
-          KFX
-        </a>
-      </div>
-    );
-  },
-  css`
-    ${flexAligned(6)};
-    > a {
-      background: #fff;
-      width: 100px;
-      padding: 5px 6px;
-      ${flexCentered()};
-      font-size: 1.1rem;
-
-      &.--active {
-        background: #cea;
-      }
-    }
-  `
+const LinkButton = createFCE2<{ to: string; text: string; active: boolean }>(
+  ({ to, text, active }) => (
+    <Center
+      as="a"
+      href={to}
+      background={active ? "#cea" : "#fff"}
+      width="100px"
+      padding="5px 6px"
+      fontSize="1.1rem"
+    >
+      {text}
+    </Center>
+  )
 );
+
+export const SiteVariationSelectionPart = createFCE2<{
+  siteVariant: "base" | "kfx";
+}>(({ siteVariant }) => {
+  const baseActive = siteVariant === "base";
+  const kfxActive = siteVariant === "kfx";
+  return (
+    <HStack gap="6px">
+      <LinkButton
+        to="https://firmix.nector.me"
+        text="Base"
+        active={baseActive}
+      />
+      <LinkButton
+        to="https://firmix-kfx.nector.me"
+        text="KFX"
+        active={kfxActive}
+      />
+    </HStack>
+  );
+});
