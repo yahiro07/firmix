@@ -8,16 +8,12 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { fallbackValues } from "web-firmix/app/base/fallback_values";
 import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl";
 import { SiteContextValue } from "web-firmix/app/common/site_context";
 import { MainLayout } from "web-firmix/app/islands/MainLayout";
 import { SiteContextProvider } from "web-firmix/app/islands/SiteContextProvider";
 import { getEnvVariable } from "./central/base/envs";
-
-import { useContext } from "react";
-import { ServerStyleContext } from "./context";
 import styles from "./root.css?url";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
@@ -39,18 +35,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return { siteContextValue, envVariablesExposed };
 }
 
-const baseTheme = extendTheme({
-  config: {
-    initialColorMode: "system",
-    useSystemColorMode: true,
-  },
-});
-
 export function Layout({ children }: { children: React.ReactNode }) {
   const data = useLoaderData<typeof loader>();
-
-  const serverStyleData = useContext(ServerStyleContext);
-
   return (
     <html lang="en">
       <head>
@@ -75,20 +61,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <Meta />
         <Links />
-        {serverStyleData?.map(({ key, ids, css }) => (
-          <style
-            key={key}
-            data-emotion={`${key} ${ids.join(" ")}`}
-            dangerouslySetInnerHTML={{ __html: css }}
-          />
-        ))}
       </head>
       <body>
-        <ChakraProvider theme={baseTheme}>
-          <SiteContextProvider value={data.siteContextValue}>
-            {children}
-          </SiteContextProvider>
-        </ChakraProvider>
+        <SiteContextProvider value={data.siteContextValue}>
+          {children}
+        </SiteContextProvider>
         <ScrollRestoration />
         <script
           dangerouslySetInnerHTML={{
