@@ -21,11 +21,15 @@ Kermite(自作キーボードエコシステム)のカスタムファームウ�
 ## 構成
 
 ### 開発環境
-React, TypeScript, Remix, MongoDB
+- React, TypeScript, Remix, MongoDB (共通)  
+- ChakraUI (Firmix)  
+- Linaria (KFX)
+
+CSS周りはFirmixではChakraUI,KFXではLinariaを使っています。どちらが実装がやりやすいかを比較検討中です。
 
 ### 運用環境
 
-VPS(MongoDB), Cloud Run
+- VPS(MongoDB), GCP Cloud Run
 
 ## ドキュメント
 
