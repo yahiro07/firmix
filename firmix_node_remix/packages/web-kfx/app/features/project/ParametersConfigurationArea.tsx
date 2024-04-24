@@ -1,13 +1,6 @@
 import { css } from "@linaria/core";
 import { raiseError } from "auxiliaries/utils/error_util";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-
-import { flexHorizontal, flexVertical } from "shared/common/utility_styles";
-import {
-  Button,
-  FormLabel,
-  FormTextInput,
-} from "shared/components/CommonControls";
 import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,
@@ -15,6 +8,15 @@ import {
 } from "web-kfx/app/base/types_dto";
 import { ConfigurationEditItem } from "web-kfx/app/base/types_project_edit";
 import { firmixCore_firmwareConfiguration } from "web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
+import {
+  flexHorizontal,
+  flexVertical,
+} from "../../common_styling/utility_styles";
+import {
+  Button,
+  FormLabel,
+  FormTextInput,
+} from "../../components/CommonControls";
 
 type Props = {
   configurationSourceItems: ConfigurationSourceItemWrapper[];

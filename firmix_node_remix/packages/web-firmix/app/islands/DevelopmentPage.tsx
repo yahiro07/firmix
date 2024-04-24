@@ -1,4 +1,7 @@
-import { css } from "@linaria/core";
+import { Box, chakra, Flex } from "@chakra-ui/react";
+import { css as emotionCss } from "@emotion/css";
+import styled from "@emotion/styled";
+
 import { useState } from "auxiliaries/fe-deps-react";
 import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper";
 import {
@@ -6,8 +9,7 @@ import {
   idbKeyValSet,
 } from "auxiliaries/utils_fe/browser_storage_adapter";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexVertical } from "shared/common/utility_styles";
-import { ButtonSmall } from "shared/components/CommonControls";
+import { ButtonSmall } from "../components/CommonControls";
 
 export const DevelopmentPage = createFC(() => {
   const [text, setText] = useState("");
@@ -61,7 +63,7 @@ export const DevelopmentPage = createFC(() => {
   };
 
   return (
-    <div q={style}>
+    <div>
       <div>
         <h3>directoryHandleの永続化実験</h3>
         <div>
@@ -77,15 +79,26 @@ export const DevelopmentPage = createFC(() => {
           <ButtonSmall onClick={handleClick3}>fetch</ButtonSmall>
         </div>
       </div>
+      <div>
+        <Flex color="red">Hello Remix with Chakra UI and Vite!</Flex>
+        <MyLabel>foo</MyLabel>
+        <MyLabel2>bar</MyLabel2>
+        <MyLabel3 text="buzz" />
+      </div>
     </div>
   );
 });
 
-const style = css`
-  padding: 16px;
-  ${flexVertical(16)};
-  button {
-    padding: 2px 6px;
-    margin-right: 8px;
-  }
+const MyLabel = chakra(Box, {
+  baseStyle: {
+    color: "green",
+  },
+});
+
+const MyLabel2 = styled.div`
+  color: blue;
 `;
+
+const MyLabel3 = ({ text }: { text: string }) => (
+  <div q={emotionCss`color: orange`}>{text}</div>
+);

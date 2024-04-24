@@ -4,8 +4,8 @@ import { styled } from "@linaria/react";
 import { Link } from "@remix-run/react";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { reflectInputChecked } from "auxiliaries/utils_fe_react/form_helper";
-import { flexAligned, flexVertical } from "shared/common/utility_styles";
-import { IconIconifyZ } from "shared/components/IconIconifyZ";
+import { flexAligned, flexVertical } from "../common_styling/utility_styles";
+import { IconIconifyZ } from "./IconIconifyZ";
 
 export const Button = styled.button`
   padding: 0.5rem;

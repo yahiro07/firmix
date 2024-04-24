@@ -1,46 +1,39 @@
-import { css } from "@linaria/core";
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-import { flexVertical } from "shared/common/utility_styles";
+import { Stack } from "@chakra-ui/react";
+import { rpcClient } from "web-firmix/app/common/rpc_client";
+import { createFCE2 } from "../../common_styling/create_fce";
 import {
   ButtonSmall,
   ToggleButtonLarge,
-} from "shared/components/CommonControls";
-import { rpcClient } from "web-firmix/app/common/rpc_client";
+} from "../../components/CommonControls";
 
-export const ProjectOperationPart = createFCX<{
+export const ProjectOperationPart = createFCE2<{
   projectId: string;
   published: boolean;
   automated: boolean;
-}>(
-  ({ projectId, published, automated }) => {
-    const handleTogglePublicity = async () => {
-      await rpcClient.setProjectPublicity({ projectId, published: !published });
-      location.reload();
-    };
-    const handleDeleteProject = async () => {
-      let message = `プロジェクトを削除します。よろしいですか。`;
-      if (automated) {
-        message += `このプロジェクトはAPI経由で更新されています。CIによる投稿処理もあわせて削除してください。`;
-      }
-      const ok = globalThis.confirm(message);
-      if (ok) {
-        await rpcClient.deleteProject({ projectId });
-        location.href = "/self-projects";
-      }
-    };
-    return (
-      <div>
-        <ToggleButtonLarge
-          checked={published}
-          setChecked={handleTogglePublicity}
-          text={published ? "公開中" : "ドラフト"}
-        />
-        <ButtonSmall onClick={handleDeleteProject}>削除</ButtonSmall>
-      </div>
-    );
-  },
-  css`
-    ${flexVertical(12)};
-    align-items: flex-end;
-  `
-);
+}>(({ projectId, published, automated }) => {
+  const handleTogglePublicity = async () => {
+    await rpcClient.setProjectPublicity({ projectId, published: !published });
+    location.reload();
+  };
+  const handleDeleteProject = async () => {
+    let message = `プロジェクトを削除します。よろしいですか。`;
+    if (automated) {
+      message += `このプロジェクトはAPI経由で更新されています。CIによる投稿処理もあわせて削除してください。`;
+    }
+    const ok = globalThis.confirm(message);
+    if (ok) {
+      await rpcClient.deleteProject({ projectId });
+      location.href = "/self-projects";
+    }
+  };
+  return (
+    <Stack gap="3" alignItems="flex-end">
+      <ToggleButtonLarge
+        checked={published}
+        setChecked={handleTogglePublicity}
+        text={published ? "公開中" : "ドラフト"}
+      />
+      <ButtonSmall onClick={handleDeleteProject}>削除</ButtonSmall>
+    </Stack>
+  );
+});

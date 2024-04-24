@@ -1,9 +1,9 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexVertical } from "shared/common/utility_styles";
 import { ProjectListItemDto } from "web-kfx/app/base/types_dto";
 import { HomeTargetSelectionBar } from "web-kfx/app/features/project_list/HomeTargetSelectionBar";
 import { ProjectListItemCard } from "web-kfx/app/features/project_list/ProjectListItemCard";
+import { flexVertical } from "../common_styling/utility_styles";
 
 type Props = {
   projects: ProjectListItemDto[];

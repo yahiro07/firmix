@@ -6,8 +6,10 @@
 
 import { PassThrough } from "node:stream";
 
+import createEmotionCache from "@emotion/cache";
+import { CacheProvider as EmotionCacheProvider } from "@emotion/react";
+import createEmotionServer from "@emotion/server/create-instance";
 import type { AppLoadContext, EntryContext } from "@remix-run/node";
-import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
@@ -47,28 +49,35 @@ function handleBotRequest(
 ) {
   return new Promise((resolve, reject) => {
     let shellRendered = false;
+    const emotionCache = createEmotionCache({ key: "css" });
+
     const { pipe, abort } = renderToPipeableStream(
-      <RemixServer
-        context={remixContext}
-        url={request.url}
-        abortDelay={ABORT_DELAY}
-      />,
+      <EmotionCacheProvider value={emotionCache}>
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />
+      </EmotionCacheProvider>,
       {
         onAllReady() {
           shellRendered = true;
-          const body = new PassThrough();
-          const stream = createReadableStreamFromReadable(body);
+          const reactBody = new PassThrough();
+          const emotionServer = createEmotionServer(emotionCache);
+          const bodyWithStyles = emotionServer.renderStylesToNodeStream();
+          reactBody.pipe(bodyWithStyles);
 
           responseHeaders.set("Content-Type", "text/html");
 
           resolve(
-            new Response(stream, {
+            // @ts-ignore
+            new Response(bodyWithStyles, {
               headers: responseHeaders,
               status: responseStatusCode,
             })
           );
 
-          pipe(body);
+          pipe(reactBody);
         },
         onShellError(error: unknown) {
           reject(error);
@@ -97,28 +106,35 @@ function handleBrowserRequest(
 ) {
   return new Promise((resolve, reject) => {
     let shellRendered = false;
+    const emotionCache = createEmotionCache({ key: "css" });
+
     const { pipe, abort } = renderToPipeableStream(
-      <RemixServer
-        context={remixContext}
-        url={request.url}
-        abortDelay={ABORT_DELAY}
-      />,
+      <EmotionCacheProvider value={emotionCache}>
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />
+      </EmotionCacheProvider>,
       {
         onShellReady() {
           shellRendered = true;
-          const body = new PassThrough();
-          const stream = createReadableStreamFromReadable(body);
+          const reactBody = new PassThrough();
+          const emotionServer = createEmotionServer(emotionCache);
+          const bodyWithStyles = emotionServer.renderStylesToNodeStream();
+          reactBody.pipe(bodyWithStyles);
 
           responseHeaders.set("Content-Type", "text/html");
 
           resolve(
-            new Response(stream, {
+            // @ts-ignore
+            new Response(bodyWithStyles, {
               headers: responseHeaders,
               status: responseStatusCode,
             })
           );
 
-          pipe(body);
+          pipe(reactBody);
         },
         onShellError(error: unknown) {
           reject(error);

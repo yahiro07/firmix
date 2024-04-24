@@ -1,144 +1,101 @@
-import { css } from "@linaria/core";
+import { Box, Card, Flex, HStack, Img, Spacer, Stack } from "@chakra-ui/react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import {
-  flexAligned,
-  flexHorizontal,
-  flexVertical,
-} from "shared/common/utility_styles";
-import { Card, LinkButton } from "shared/components/CommonControls";
 import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { LinkChildProjectListPage } from "web-firmix/app/features/project/project_common_parts";
 import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts";
+import { createFCE2 } from "../../common_styling/create_fce";
+import { prefab } from "../../common_styling/prefab";
+import { LinkButton } from "../../components/CommonControls";
 
 type Props = {
   project: ProjectListItemDto;
   showPublicity: boolean;
 };
 
+const ThumbnailBox = createFCE2<{ imageUrl: string }>(({ imageUrl }) => (
+  <Box width="200px" aspectRatio={1.3333}>
+    <Img
+      src={imageUrl}
+      alt="thumbnail"
+      width="100%"
+      height="100%"
+      objectFit="cover"
+    />
+  </Box>
+));
+
+const ProjectNameLabel = prefab(<Box as="h3" fontSize="22px" />);
+
+const VariationNameLabel = prefab(<Box as="h4" fontSize="18px" />);
+
+const AuthorInfo = createFCE2<{ userName: string; avatarUrl: string }>(
+  ({ userName, avatarUrl }) => (
+    <HStack gap={1}>
+      <Img src={avatarUrl} alt="avatar" width="24px" />
+      <span>{userName}</span>
+    </HStack>
+  )
+);
+
+const PublicityLabel = createFCE2<{ published: boolean }>(({ published }) => (
+  <Box fontSize="15px" color={published ? "#7ca" : "#888"}>
+    {published ? "公開中" : "ドラフト"}
+  </Box>
+));
+
 export const ProjectListItemCard = createFC<Props>(
   ({ project, showPublicity }) => {
     const { ProjectTagsList } = projectHeadingArea_parts;
     const detailPagePath = `/project/${project.projectId}`;
     return (
-      <Card q={style}>
-        <div q="content-row">
-          <div q="thumbnail-box">
-            <img src={project.thumbnailUrl} alt="thumbnail" />
-          </div>
-          <div q="introduction">
-            <div q="head-row">
-              <h3>{project.projectName}</h3>
-              <p
+      <Card padding="20px" minHeight="100px">
+        <Flex gap={4}>
+          <ThumbnailBox
+            imageUrl={project.thumbnailUrl}
+            alignSelf="flex-start"
+            flexShrink={0}
+          />
+          <Stack flexGrow={1} gap={1}>
+            <HStack gap={5} alignItems="flex-start">
+              <ProjectNameLabel
+                marginTop="-4px"
+                children={project.projectName}
+              />
+              <Spacer />
+              <PublicityLabel
                 if={showPublicity}
-                q={["publicity", project.published && "--active"]}
-              >
-                {project.published ? "公開中" : "ドラフト"}
-              </p>
-              <LinkButton to={detailPagePath} q="button-to-detail">
-                詳細
-              </LinkButton>
-            </div>
-            <h4 if={project.variationName}>{project.variationName}</h4>
-
-            <div>{project.introduction}</div>
+                published={project.published}
+                flexShrink={0}
+              />
+              <LinkButton
+                to={detailPagePath}
+                marginBottom="-16px"
+                children="詳細"
+              />
+            </HStack>
+            <VariationNameLabel
+              if={project.variationName}
+              children={project.variationName}
+            />
+            <Box whiteSpace="pre-wrap" children={project.introduction} />
             <LinkChildProjectListPage
               project={project}
-              q="link-derived"
               if={project.numChildProjects > 0}
               smaller
+              marginLeft="3px"
             />
-
-            <div q="foot-row">
-              <div q="author">
-                <img src={project.userAvatarUrl} alt="avatar" />
-                <span>{project.userName}</span>
-              </div>
-              <ProjectTagsList tags={project.tags} q="tags" />
-            </div>
-          </div>
-        </div>
+            <Spacer />
+            <HStack alignItems="flex-end">
+              <AuthorInfo
+                userName={project.userName}
+                avatarUrl={project.userAvatarUrl}
+              />
+              <Spacer />
+              <ProjectTagsList tags={project.tags} />
+            </HStack>
+          </Stack>
+        </Flex>
       </Card>
     );
   }
 );
-
-const style = css`
-  min-height: 100px;
-  padding: 20px;
-  /* ${flexVertical(12)}; */
-
-  > .content-row {
-    ${flexHorizontal(16)};
-    > .thumbnail-box {
-      align-self: flex-start;
-      flex-shrink: 0;
-      width: 200px;
-      aspect-ratio: 1.3333;
-      > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
-    > .introduction {
-      flex-grow: 1;
-      white-space: pre-wrap;
-      ${flexVertical(4)};
-
-      > .head-row {
-        position: relative;
-        ${flexAligned()};
-
-        > h3 {
-          margin-top: -4px;
-          font-size: 22px;
-        }
-
-        > .publicity {
-          flex-shrink: 0;
-          font-size: 15px;
-          margin-left: auto;
-          margin-right: 100px;
-          color: #888;
-          &.--active {
-            color: #7ca;
-          }
-        }
-
-        > .button-to-detail {
-          position: absolute;
-          top: 0;
-          right: 0;
-          flex-shrink: 0;
-          margin-left: auto;
-        }
-      }
-
-      > h4 {
-        font-size: 18px;
-      }
-
-      > .link-derived {
-        align-self: flex-start;
-        margin-top: 4px;
-      }
-
-      > .foot-row {
-        margin-top: auto;
-        ${flexAligned(16)};
-
-        > .author {
-          ${flexAligned(4)}
-          > img {
-            width: 24px;
-          }
-        }
-
-        > .tags {
-          margin-left: auto;
-        }
-      }
-    }
-  }
-`;

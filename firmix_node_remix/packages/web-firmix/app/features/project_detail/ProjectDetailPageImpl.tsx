@@ -1,4 +1,4 @@
-import { css } from "@linaria/core";
+import { Box } from "@chakra-ui/react";
 import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
 import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper";
 import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link";
@@ -6,7 +6,6 @@ import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { ProjectDetailDto } from "web-firmix/app/base/types_dto";
 import { rpcClient } from "web-firmix/app/common/rpc_client";
 import { useSiteContext } from "web-firmix/app/common/site_context";
-import { ParametersConfigurationArea } from "web-firmix/app/features/project/ParametersConfigurationArea";
 import {
   LinkChildProjectListPage,
   LinkParentProjectPage,
@@ -15,6 +14,7 @@ import { ProjectHeadingArea } from "web-firmix/app/features/project/ProjectHeadi
 import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
 import { ProjectOperationPart } from "web-firmix/app/features/project_detail/ProjectOperationPart";
 import { firmixPresenter_firmwarePatching } from "../../cardinal/firmix_presenter_firmware_patching/mod";
+import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";
 
 type Props = {
   project: ProjectDetailDto;
@@ -47,7 +47,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
   );
 
   return (
-    <div q={style}>
+    <Box padding="16px" background="var(--cl-content-background)">
       <ProjectHeadingArea
         projectName={project.projectName}
         variationName={project.variationName}
@@ -66,7 +66,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
           />
         }
       />
-      <div q="info-area">
+      <Box q="info-area" padding="0 8px">
         <div>ターゲットMCU: {project.targetMcu}</div>
         <div>ファームウェア更新日時: {firmwareUpdateAtText}</div>
         <div>ファームウェアリビジョン: {project.firmwareRevision}</div>
@@ -79,34 +79,21 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         <LinkChildProjectListPage
           project={project}
           if={project.numChildProjects > 0}
-          q="link-derived"
+          marginTop="8px"
+          marginLeft="3px"
         />
         <LinkParentProjectPage
           projectId={project.parentProjectId}
           if={!!project.parentProjectId}
-          q="link-parent"
+          marginTop="8px"
+          marginLeft="3px"
         />
-      </div>
+      </Box>
       <ProjectReadmeArea readmeFileContent={project.readmeFileContent} />
-      <ParametersConfigurationArea
-        submitEditItems={submitEditItems}
-        submitButtonLabel="UF2ダウンロード"
+      <FirmwareDownloadButtonArea
+        label="UF2ダウンロード"
+        handler={submitEditItems}
       />
-    </div>
+    </Box>
   );
 });
-
-const style = css`
-  padding: 16px;
-  background: var(--cl-content-background);
-  /* min-height: 100%; */
-  > .info-area {
-    padding: 0 8px;
-    > .link-parent,
-    > .link-derived {
-      margin-left: 3px;
-      margin-top: 8px;
-      display: inline-flex;
-    }
-  }
-`;

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "auxiliaries/fe-deps-react";
+import { FC, ReactNode } from "react";
 
 export function createFC<P extends object>(
   baseFC: FC<P & { children?: ReactNode }>

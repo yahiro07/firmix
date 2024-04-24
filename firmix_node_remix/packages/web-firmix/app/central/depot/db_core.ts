@@ -11,7 +11,7 @@ export async function connectToMongoDb(): Promise<Db> {
   const mongoDatabaseName = getEnvVariable("MONGO_DATABASE_NAME");
   const client = new MongoClient(mongoUrl);
   await client.connect();
-  console.log("connected to db");
+  console.log(`connected to db: ${mongoDatabaseName}`);
   mongoGlobal.client = client;
   const db = client.db(mongoDatabaseName);
   return db;

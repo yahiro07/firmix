@@ -1,4 +1,4 @@
-import { css } from "@linaria/core";
+import { Box } from "@chakra-ui/react";
 import { useMemo } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import Markdown from "react-markdown";
@@ -14,18 +14,10 @@ export const ProjectReadmeArea = createFC<Props>(({ readmeFileContent }) => {
     return readmeFileContent.replace(/^# .*\n$/m, "");
   }, [readmeFileContent]);
   return (
-    <div q={style}>
-      <div q="base-plane">
-        <Markdown remarkPlugins={[remarkGfm]} className="markdown-body">
-          {modContent}
-        </Markdown>
-      </div>
-    </div>
+    <Box padding="10px">
+      <Markdown remarkPlugins={[remarkGfm]} className="markdown-body">
+        {modContent}
+      </Markdown>
+    </Box>
   );
 });
-
-const style = css`
-  > .base-plane {
-    padding: 10px;
-  }
-`;
