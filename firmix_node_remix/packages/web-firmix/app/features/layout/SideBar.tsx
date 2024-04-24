@@ -1,11 +1,11 @@
-import { Stack } from "@chakra-ui/react";
 import { appConfig } from "web-firmix/app/base/app_config";
 import { useSiteContext } from "web-firmix/app/common/site_context";
 import { LoginUserBox } from "web-firmix/app/features/layout/LoginUserBox";
-import { createFCE2 } from "../../common_styling/create_fce";
+import { Stack } from "../../../styled-system/jsx";
+import { createFCE } from "../../common_styling/create_fce";
 import { Nav, NavItem, NavItem_Button } from "../../components/CommonControls";
 
-export const SideBar = createFCE2(() => {
+export const SideBar = createFCE(() => {
   const { loginUser } = useSiteContext();
   const loggedIn = !!loginUser;
   return (
@@ -54,11 +54,7 @@ export const SideBar = createFCE2(() => {
           if={loggedIn}
         />
       </Nav>
-      <LoginUserBox
-        user={loginUser!}
-        if={loginUser ?? undefined}
-        q="login-user-box"
-      />
+      <LoginUserBox user={loginUser!} if={loginUser ?? undefined} />
     </Stack>
   );
 });

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box } from "../../styled-system/jsx";
 import { createFCE } from "../common_styling/create_fce";
 
 export const iconShapes = {
@@ -187,13 +187,11 @@ const iconShape_missingFallback = (
 
 type IconSpec = keyof typeof iconShapes;
 
-export const IconIconifyZ = createFCE<{ spec: IconSpec }>(
-  ({ spec, ...props }) => {
-    const el = iconShapes[spec] ?? iconShape_missingFallback;
-    const svgNode = {
-      ...el,
-      props: { ...el.props, xmlns: `http://www.w3.org/2000/svg` },
-    };
-    return <Box {...props} children={svgNode} />;
-  }
-);
+export const IconIconifyZ = createFCE<{ spec: IconSpec }>(({ spec }) => {
+  const el = iconShapes[spec] ?? iconShape_missingFallback;
+  const svgNode = {
+    ...el,
+    props: { ...el.props, xmlns: `http://www.w3.org/2000/svg` },
+  };
+  return <Box children={svgNode} />;
+});

@@ -1,12 +1,12 @@
-import { Stack } from "@chakra-ui/react";
 import { rpcClient } from "web-firmix/app/common/rpc_client";
-import { createFCE2 } from "../../common_styling/create_fce";
+import { Stack } from "../../../styled-system/jsx";
+import { createFCE } from "../../common_styling/create_fce";
 import {
   ButtonSmall,
   ToggleButtonLarge,
 } from "../../components/CommonControls";
 
-export const ProjectOperationPart = createFCE2<{
+export const ProjectOperationPart = createFCE<{
   projectId: string;
   published: boolean;
   automated: boolean;

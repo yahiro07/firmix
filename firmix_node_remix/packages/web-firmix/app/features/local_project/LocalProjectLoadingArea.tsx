@@ -1,6 +1,6 @@
-import { HStack, Spacer } from "@chakra-ui/react";
 import { useEffect } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { HStack, Spacer } from "../../../styled-system/jsx";
 import { ButtonSmall } from "../../components/CommonControls";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
@@ -40,7 +40,7 @@ export const LocalProjectLoadingArea = createFC<Props>(
         <ButtonSmall onClick={handleSelectFolder} if={!loaded}>
           フォルダ選択
         </ButtonSmall>
-        <HStack if={loaded} q="folder" gap="1" fontSize="18px">
+        <HStack if={loaded} gap="1" fontSize="18px">
           <IconIconifyZ spec="mdi:folder" />
           <span>{loadedFolderName}</span>
         </HStack>

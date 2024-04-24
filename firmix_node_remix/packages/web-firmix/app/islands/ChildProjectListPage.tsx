@@ -1,4 +1,3 @@
-import { Box, Stack } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import {
@@ -6,6 +5,7 @@ import {
   ProjectListItemDto,
 } from "web-firmix/app/base/types_dto";
 import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard";
+import { Box, HStack, Stack } from "../../styled-system/jsx";
 import { styleObj_TextLinkInheritColor } from "../common_styling/common_styles";
 
 type Props = {
@@ -19,17 +19,12 @@ export const ChildProjectListPage = createFC<Props>(
     const parentPagePath = `/project/${project.projectId}`;
     return (
       <Stack gap={3} padding="16px 0">
-        <header>
-          <Box
-            as={Link}
-            to={parentPagePath}
-            q="link"
-            sx={styleObj_TextLinkInheritColor}
-          >
-            {project.projectName}
-          </Box>
+        <HStack gap={0}>
+          <Link to={parentPagePath}>
+            <Box {...styleObj_TextLinkInheritColor}>{project.projectName}</Box>
+          </Link>
           &nbsp;の派生プロジェクトです。
-        </header>
+        </HStack>
         <Stack gap={4}>
           {childProjects.map((project) => (
             <ProjectListItemCard

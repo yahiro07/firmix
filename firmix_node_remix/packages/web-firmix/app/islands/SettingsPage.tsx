@@ -1,7 +1,8 @@
-import { HStack, Input, Stack } from "@chakra-ui/react";
 import { useState } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { rpcClient } from "web-firmix/app/common/rpc_client";
+import { HStack, Stack } from "../../styled-system/jsx";
+import { Input } from "../common_styling/utility_components";
 import { ButtonSmall } from "../components/CommonControls";
 import { IconIconifyZ } from "../components/IconIconifyZ";
 
@@ -43,7 +44,6 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
           height="32px"
         />
         <ButtonSmall
-          q="btn-eye"
           disabled={!apiKey}
           onClick={toggleExhibit}
           width="32px"
@@ -54,7 +54,6 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
           <IconIconifyZ spec="fa-solid:eye-slash" if={!exhibit} />
         </ButtonSmall>
         <ButtonSmall
-          q="btn-op"
           onClick={handleOperationButton}
           height="32px"
           padding="0 8px"

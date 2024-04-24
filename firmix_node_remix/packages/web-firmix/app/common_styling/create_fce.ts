@@ -1,18 +1,20 @@
-import { BoxProps } from "@chakra-ui/react";
 import { FC } from "react";
+import { BoxProps } from "../../styled-system/jsx";
 import { isCssProperty } from "./is-valid-prop";
 
-export function createFCE<P extends object>(
+export function createFCE_Plain<P extends object>(
   baseFC: FC<P & BoxProps>
 ): FC<P & BoxProps> {
   return baseFC;
 }
 
-export function createFCE2<P extends object>(baseFC: FC<P>): FC<P & BoxProps> {
+export function createFCE<P extends object>(baseFC: FC<P>): FC<P & BoxProps> {
   return (props) => {
     const _props = props as any;
 
-    const cssPropKeys = Object.keys(props).filter((key) => isCssProperty(key));
+    const cssPropKeys = Object.keys(props).filter(
+      (key) => isCssProperty(key) || key.match(/^on[A-Z]/)
+    );
 
     if (cssPropKeys.length > 0) {
       const cssProps = Object.fromEntries(

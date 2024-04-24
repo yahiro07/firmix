@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/react";
 import { useMemo } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Box } from "../../../styled-system/jsx";
 
 type Props = {
   readmeFileContent: string;
