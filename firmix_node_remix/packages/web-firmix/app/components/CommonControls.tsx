@@ -1,9 +1,8 @@
 import { Link } from "@remix-run/react";
-import { createFCS } from "auxiliaries/utils_fe_react/fcs";
 import { reflectInputChecked } from "auxiliaries/utils_fe_react/form_helper";
-import { HStack, styled } from "../../styled-system/jsx";
+import { Box, HStack, styled } from "../../styled-system/jsx";
 import { createFCE2 } from "../common_styling/create_fce";
-import { Li } from "../common_styling/utility_components";
+import { Input, Label, Li } from "../common_styling/utility_components";
 import { IconIconifyZ } from "./IconIconifyZ";
 
 export const Button = styled("button", {
@@ -137,69 +136,54 @@ export const NavItem_Button = createFCE2<{
   );
 });
 
-export const ToggleButtonLarge = styled(
-  createFCS(
-    ({
-      checked,
-      setChecked,
-      text,
-    }: {
-      checked: boolean;
-      setChecked(): void;
-      text: string;
-    }) =>
-      // { Base }
-      {
-        return (
-          <div>
-            <input
-              type="checkbox"
-              value=""
-              checked={checked}
-              onChange={reflectInputChecked(setChecked)}
-            />
-            <div />
-            <span>{text}</span>
-          </div>
-        );
-      },
-    {
-      // Base: styled.label`
-      //   position: relative;
-      //   cursor: pointer;
-      //   display: flex;
-      //   align-items: center;
-      //   gap: 8px;
-      //   > input {
-      //     position: absolute;
-      //     width: 1px;
-      //     height: 1px;
-      //   }
-      //   > div {
-      //     position: relative;
-      //     width: 60px;
-      //     height: 30px;
-      //     background: #ccc;
-      //     border-radius: 99px;
-      //     &:before {
-      //       position: absolute;
-      //       top: 2px;
-      //       left: 2px;
-      //       content: "";
-      //       width: 26px;
-      //       height: 26px;
-      //       background: #fff;
-      //       border-radius: 99px;
-      //       transition: left 0.5s;
-      //     }
-      //   }
-      //   > input:checked + div {
-      //     background-color: #7ca;
-      //     &:before {
-      //       left: 32px;
-      //     }
-      //   }
-      // `,
-    }
-  )
+export const ToggleButtonLarge = createFCE2(
+  ({
+    checked,
+    setChecked,
+    text,
+  }: {
+    checked: boolean;
+    setChecked(): void;
+    text: string;
+  }) => {
+    return (
+      <Label
+        position="relative"
+        cursor="pointer"
+        display="flex"
+        alignItems="center"
+        gap="8px"
+      >
+        <Input
+          type="checkbox"
+          value=""
+          checked={checked}
+          onChange={reflectInputChecked(setChecked)}
+          position="absolute"
+          width="1px"
+          height="1px"
+        />
+        <Box
+          position="relative"
+          width="60px"
+          height="30px"
+          background={checked ? "#7ca" : "#ccc"}
+          borderRadius="99px"
+          transition="background 0.5s"
+        >
+          <Box
+            position="absolute"
+            top="2px"
+            left={checked ? "32px" : "2px"}
+            width="26px"
+            height="26px"
+            background="#fff"
+            borderRadius="99px"
+            transition="left 0.5s"
+          />
+        </Box>
+        <span>{text}</span>
+      </Label>
+    );
+  }
 );

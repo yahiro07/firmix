@@ -20,3 +20,5 @@ export const H4 = styled.h4;
 export const Img = styled.img;
 
 export const Input = styled.input;
+
+export const Label = styled.label;
