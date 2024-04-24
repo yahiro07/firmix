@@ -1,7 +1,6 @@
 import { Box, chakra, Flex } from "@chakra-ui/react";
 import { css as emotionCss } from "@emotion/css";
 import styled from "@emotion/styled";
-import { css } from "@linaria/core";
 
 import { useState } from "auxiliaries/fe-deps-react";
 import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper";
@@ -10,7 +9,6 @@ import {
   idbKeyValSet,
 } from "auxiliaries/utils_fe/browser_storage_adapter";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexVertical } from "../common_styling/utility_styles";
 import { ButtonSmall } from "../components/CommonControls";
 
 export const DevelopmentPage = createFC(() => {
@@ -65,7 +63,7 @@ export const DevelopmentPage = createFC(() => {
   };
 
   return (
-    <div q={style}>
+    <div>
       <div>
         <h3>directoryHandleの永続化実験</h3>
         <div>
@@ -104,12 +102,3 @@ const MyLabel2 = styled.div`
 const MyLabel3 = ({ text }: { text: string }) => (
   <div q={emotionCss`color: orange`}>{text}</div>
 );
-
-const style = css`
-  padding: 16px;
-  ${flexVertical(16)};
-  button {
-    padding: 2px 6px;
-    margin-right: 8px;
-  }
-`;
