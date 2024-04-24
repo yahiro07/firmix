@@ -7,36 +7,12 @@ import { createFCS } from "auxiliaries/utils_fe_react/fcs";
 import { reflectInputChecked } from "auxiliaries/utils_fe_react/form_helper";
 import { flexAligned, flexVertical } from "../common_styling/utility_styles";
 import { IconIconifyZ } from "./IconIconifyZ";
-// import { flexAligned, flexVertical } from "../common/utility_styles";
-// import { IconIconifyZ } from "./IconIconifyZ";
-// import { flexAligned, flexVertical } from "shared/common/utility_styles";
-// import { IconIconifyZ } from "shared/components/IconIconifyZ";
-
-// export const Button0 = styled.button`
-//   padding: 0.5rem;
-//   padding-top: 0.625rem;
-//   padding-bottom: 0.625rem;
-//   padding-left: 1.25rem;
-//   padding-right: 1.25rem;
-//   margin-bottom: 0.5rem;
-//   font-size: 0.875rem;
-//   line-height: 1.25rem;
-//   font-weight: 500;
-//   color: #ffffff;
-//   background-color: #6366f1;
-//   border: none;
-
-//   &:hover {
-//     opacity: 0.8;
-//   }
-//   &:disabled {
-//     opacity: 0.3;
-//   }
-// `;
 
 export const Button = chakra("button", {
   baseStyle: {
-    display: "block",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     padding: "0.6rem 1.2rem",
     fontWeight: "500",
     color: "#fff",
@@ -49,7 +25,9 @@ export const Button = chakra("button", {
 
 export const LinkButton = chakra(Link, {
   baseStyle: {
-    display: "block",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     padding: "0.6rem 1.2rem",
     fontWeight: "500",
     color: "#fff",
@@ -60,7 +38,18 @@ export const LinkButton = chakra(Link, {
   },
 });
 
-export const ButtonSmall = chakra(styled.button``);
+export const ButtonSmall = chakra("button", {
+  baseStyle: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "0.9em",
+    background: "#ddd",
+    padding: "4px 10px",
+    "&:hover": { opacity: 0.8 },
+    "&:disabled": { opacity: 0.3 },
+  },
+});
 
 // export const Card: FC<BoxProps> = (props) => (
 //   <Box {...props} background="#fff" boxShadow="0 2px 2px #0004" />
