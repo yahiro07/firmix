@@ -1,15 +1,29 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { chakra } from "@chakra-ui/react";
-import styled from "@emotion/styled";
 import { Link } from "@remix-run/react";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { createFCS } from "auxiliaries/utils_fe_react/fcs";
 import { reflectInputChecked } from "auxiliaries/utils_fe_react/form_helper";
-import { flexAligned, flexVertical } from "../common_styling/utility_styles";
+import { HStack, styled } from "../../styled-system/jsx";
+import { createFCE2 } from "../common_styling/create_fce";
+import { Li } from "../common_styling/utility_components";
 import { IconIconifyZ } from "./IconIconifyZ";
 
-export const Button = chakra("button", {
-  baseStyle: {
+export const Button = styled("button", {
+  base: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "0.6rem 1.2rem",
+    fontWeight: "500",
+    color: "#fff",
+    backgroundColor: "#6366f1",
+    whiteSpace: "noWrap",
+    cursor: "pointer",
+    "&:hover": { opacity: 0.8 },
+    "&:disabled": { opacity: 0.3 },
+  },
+});
+
+export const LinkButton = styled(Link, {
+  base: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -23,29 +37,15 @@ export const Button = chakra("button", {
   },
 });
 
-export const LinkButton = chakra(Link, {
-  baseStyle: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "0.6rem 1.2rem",
-    fontWeight: "500",
-    color: "#fff",
-    backgroundColor: "#6366f1",
-    whiteSpace: "noWrap",
-    "&:hover": { opacity: 0.8 },
-    "&:disabled": { opacity: 0.3 },
-  },
-});
-
-export const ButtonSmall = chakra("button", {
-  baseStyle: {
+export const ButtonSmall = styled("button", {
+  base: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     fontSize: "0.9em",
     background: "#ddd",
     padding: "4px 10px",
+    cursor: "pointer",
     "&:hover": { opacity: 0.8 },
     "&:disabled": { opacity: 0.3 },
   },
@@ -59,160 +59,147 @@ export const ButtonSmall = chakra("button", {
 //   <Box background="#fff" boxShadow="0 2px 2px #0004" />
 // );
 
-export const Card = chakra(styled.div`
-  background: #fff;
-  box-shadow: 0 2px 2px #0004;
-`);
+export const Card = styled("div", {
+  base: {
+    background: "#fff",
+    boxShadow: "0 2px 2px #0004",
+  },
+});
 
-export const FormLabel = chakra(styled.label``);
+export const FormLabel = styled("label");
 
-export const FormTextInput = chakra(styled.input`
-  padding: 0.625rem;
-  border-width: 1px;
-  border-color: #d1d5db;
-  color: #111827;
-  background-color: #f9fafb;
-`);
+export const FormTextInput = styled("input", {
+  base: {
+    padding: "0.625rem",
+    borderWidth: "1px",
+    borderColor: "#d1d5db",
+    color: "#111827",
+    backgroundColor: "#f9fafb",
+  },
+});
 
-export const Nav = chakra(styled.ul`
-  ${flexVertical(16)};
-`);
+export const Nav = styled("ul", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+  },
+});
 
-const StyledNavItem = styled("div")`
-  font-size: 20px;
-  ${flexAligned(8)};
-  cursor: pointer;
-  > .icon {
-    font-size: 24px;
-  }
-  &[data-current] {
-    font-weight: 500;
-  }
-  &:hover {
-    opacity: 0.7;
-  }
-`;
+const NavItemCore = createFCE2<{
+  title: string;
+  iconSpec: string;
+  active?: boolean;
+}>(({ title, iconSpec, active }) => (
+  <HStack
+    gap="2"
+    fontSize="20px"
+    cursor="pointer"
+    fontWeight={(active && "500") || "normal"}
+    _hover={{ opacity: 0.7 }}
+  >
+    <IconIconifyZ spec={iconSpec as any} fontSize="24px" />
+    <span>{title}</span>
+  </HStack>
+));
 
-const StyledNavLink = styled(Link)`
-  font-size: 20px;
-  ${flexAligned(8)};
-  cursor: pointer;
-  > .icon {
-    font-size: 24px;
-  }
-  &[data-current] {
-    font-weight: 500;
-  }
-  &:hover {
-    opacity: 0.7;
-  }
-`;
+export const NavItem = createFCE2<{
+  path: string;
+  title: string;
+  iconSpec: string;
+}>(({ path, title, iconSpec }) => {
+  // const { pagePath } = useSiteContext();
+  // const active = path === pagePath;
+  // const active = path === location.href;
+  const active = false;
+  return (
+    <Li>
+      <Link to={path}>
+        <NavItemCore title={title} iconSpec={iconSpec} active={active} />
+      </Link>
+    </Li>
+  );
+});
 
-export const NavItem = chakra(
-  createFC<{
-    path: string;
-    title: string;
-    iconSpec: string;
-  }>(({ path, title, iconSpec }) => {
-    // const { pagePath } = useSiteContext();
-    // const active = path === pagePath;
-    // const active = path === location.href;
-    const active = false;
-    return (
-      <li q={["nav-item", active && "active"]}>
-        <StyledNavLink to={path}>
-          <IconIconifyZ spec={iconSpec as any} q="icon" />
-          <span>{title}</span>
-        </StyledNavLink>
-      </li>
-    );
-  })
-);
+export const NavItem_Button = createFCE2<{
+  path: string;
+  title: string;
+  iconSpec: string;
+}>(({ path, title, iconSpec }) => {
+  const onClick = () => {
+    console.log("onClick", path);
+    location.href = path;
+  };
+  return (
+    <Li>
+      <NavItemCore title={title} iconSpec={iconSpec} onClick={onClick} />
+    </Li>
+  );
+});
 
-export const NavItem_Button = chakra(
-  createFC<{
-    path: string;
-    title: string;
-    iconSpec: string;
-  }>(({ path, title, iconSpec }) => {
-    const onClick = () => (location.href = path);
-    return (
-      <li>
-        <StyledNavItem onClick={onClick}>
-          <IconIconifyZ spec={iconSpec as any} q="icon" />
-          <span>{title}</span>
-        </StyledNavItem>
-      </li>
-    );
-  })
-);
-
-export const ToggleButtonLarge = chakra(
+export const ToggleButtonLarge = styled(
   createFCS(
-    (
+    ({
+      checked,
+      setChecked,
+      text,
+    }: {
+      checked: boolean;
+      setChecked(): void;
+      text: string;
+    }) =>
+      // { Base }
       {
-        checked,
-        setChecked,
-        text,
-      }: {
-        checked: boolean;
-        setChecked(): void;
-        text: string;
+        return (
+          <div>
+            <input
+              type="checkbox"
+              value=""
+              checked={checked}
+              onChange={reflectInputChecked(setChecked)}
+            />
+            <div />
+            <span>{text}</span>
+          </div>
+        );
       },
-      { Base }
-    ) => {
-      return (
-        <Base>
-          <input
-            type="checkbox"
-            value=""
-            checked={checked}
-            onChange={reflectInputChecked(setChecked)}
-          />
-          <div />
-          <span>{text}</span>
-        </Base>
-      );
-    },
     {
-      Base: styled.label`
-        position: relative;
-        cursor: pointer;
-        ${flexAligned(8)};
-
-        > input {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-        }
-
-        > div {
-          position: relative;
-          width: 60px;
-          height: 30px;
-          background: #ccc;
-          border-radius: 99px;
-
-          &:before {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            content: "";
-            width: 26px;
-            height: 26px;
-            background: #fff;
-            border-radius: 99px;
-            transition: left 0.5s;
-          }
-        }
-
-        > input:checked + div {
-          background-color: #7ca;
-          &:before {
-            left: 32px;
-          }
-        }
-      `,
+      // Base: styled.label`
+      //   position: relative;
+      //   cursor: pointer;
+      //   display: flex;
+      //   align-items: center;
+      //   gap: 8px;
+      //   > input {
+      //     position: absolute;
+      //     width: 1px;
+      //     height: 1px;
+      //   }
+      //   > div {
+      //     position: relative;
+      //     width: 60px;
+      //     height: 30px;
+      //     background: #ccc;
+      //     border-radius: 99px;
+      //     &:before {
+      //       position: absolute;
+      //       top: 2px;
+      //       left: 2px;
+      //       content: "";
+      //       width: 26px;
+      //       height: 26px;
+      //       background: #fff;
+      //       border-radius: 99px;
+      //       transition: left 0.5s;
+      //     }
+      //   }
+      //   > input:checked + div {
+      //     background-color: #7ca;
+      //     &:before {
+      //       left: 32px;
+      //     }
+      //   }
+      // `,
     }
   )
 );

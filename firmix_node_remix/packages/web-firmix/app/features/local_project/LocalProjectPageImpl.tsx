@@ -1,6 +1,5 @@
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 
-import { Box, Center, Stack } from "@chakra-ui/react";
 import { useDateTimeTextWithElapsed } from "shared/fe_modules/display_data_hooks";
 import { LocalProjectAssetsArea } from "web-firmix/app/features/local_project/LocalProjectAssetsArea";
 import { LocalProjectLoadingArea } from "web-firmix/app/features/local_project/LocalProjectLoadingArea";
@@ -10,6 +9,7 @@ import {
   ProjectHeadingArea,
 } from "web-firmix/app/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
+import { Box, Center, Stack } from "../../../styled-system/jsx";
 import { createFCE2 } from "../../common_styling/create_fce";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";
@@ -88,6 +88,7 @@ export const LocalProjectPageImpl = createFC<{ loggedIn: boolean }>(
         <FirmwareDownloadButtonArea
           label="UF2ダウンロード"
           handler={submitEditItems}
+          if={project}
         />
       </Stack>
     );

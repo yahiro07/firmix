@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box } from "../../styled-system/jsx";
 import { createFCE } from "../common_styling/create_fce";
 
 export const iconShapes = {

@@ -1,7 +1,7 @@
 export const styleObj_TextLinkInheritColor = {
   color: "inherit",
   textDecoration: "none",
-  "&:hover": {
+  _hover: {
     textDecoration: "underline",
   },
 };

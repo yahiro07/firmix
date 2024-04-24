@@ -1,11 +1,12 @@
-import { Box, Card, Flex, HStack, Img, Spacer, Stack } from "@chakra-ui/react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { LinkChildProjectListPage } from "web-firmix/app/features/project/project_common_parts";
 import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts";
+import { Box, Flex, HStack, Spacer, Stack } from "../../../styled-system/jsx";
 import { createFCE2 } from "../../common_styling/create_fce";
 import { prefab } from "../../common_styling/prefab";
-import { LinkButton } from "../../components/CommonControls";
+import { H3, H4, Img } from "../../common_styling/utility_components";
+import { Card, LinkButton } from "../../components/CommonControls";
 
 type Props = {
   project: ProjectListItemDto;
@@ -24,9 +25,9 @@ const ThumbnailBox = createFCE2<{ imageUrl: string }>(({ imageUrl }) => (
   </Box>
 ));
 
-const ProjectNameLabel = prefab(<Box as="h3" fontSize="22px" />);
+const ProjectNameLabel = prefab(<H3 fontSize="22px" />);
 
-const VariationNameLabel = prefab(<Box as="h4" fontSize="18px" />);
+const VariationNameLabel = prefab(<H4 fontSize="18px" />);
 
 const AuthorInfo = createFCE2<{ userName: string; avatarUrl: string }>(
   ({ userName, avatarUrl }) => (

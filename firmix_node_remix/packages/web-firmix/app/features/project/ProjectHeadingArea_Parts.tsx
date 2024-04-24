@@ -1,8 +1,10 @@
-import { Box, BoxProps, HStack, Img } from "@chakra-ui/react";
 import { FC } from "react";
 import { ProjectRepositoryInfo } from "shared/foreign/types";
+import { Box, BoxProps, HStack } from "../../../styled-system/jsx";
 import { styleObj_TextLinkInheritColor } from "../../common_styling/common_styles";
 import { createFCE2 } from "../../common_styling/create_fce";
+import { H2, H3, Img, StyledA } from "../../common_styling/utility_components";
+import { flexAligned } from "../../common_styling/utility_styles";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
 const ProjectTitlePart = createFCE2<{
@@ -10,19 +12,19 @@ const ProjectTitlePart = createFCE2<{
   variationName: string;
 }>(({ projectName, variationName }) => {
   return (
-    <div>
-      <HStack as="h2" gap="2px" fontSize="32px">
+    <Box>
+      <H2 css={flexAligned} gap="2px" fontSize="32px">
         <IconIconifyZ
           spec="icon-park-twotone:chip"
           fontSize="36px"
           marginTop="3px"
         />
         <span>{projectName}</span>
-      </HStack>
-      <Box as="h3" fontSize="28px" if={variationName}>
+      </H2>
+      <H3 fontSize="28px" if={variationName}>
         {variationName}
-      </Box>
-    </div>
+      </H3>
+    </Box>
   );
 });
 
@@ -35,7 +37,6 @@ const ProjectTagsList: FC<BoxProps & { tags: string[] }> = ({
       {tags.map((tag) => (
         <Box
           key={tag}
-          q="tag"
           fontSize="14px"
           background="#bbb"
           padding="0 8px 1px"
@@ -54,17 +55,16 @@ const RepositoryInfoPart = createFCE2<{
   repositoryInfo: ProjectRepositoryInfo;
 }>(({ repositoryInfo }) => {
   return (
-    <HStack
-      as="a"
+    <StyledA
       href={repositoryInfo.repositoryUrl}
       target="_blank"
       rel="noreferrer"
-      gap="1px"
-      sx={styleObj_TextLinkInheritColor}
     >
-      <IconIconifyZ spec="mdi:github" fontSize="30px" marginTop="4px" />
-      <Box fontSize="18px">{repositoryInfo.repositoryProjectPath}</Box>
-    </HStack>
+      <HStack gap="1px" css={styleObj_TextLinkInheritColor}>
+        <IconIconifyZ spec="mdi:github" fontSize="30px" marginTop="4px" />
+        <Box fontSize="18px">{repositoryInfo.repositoryProjectPath}</Box>
+      </HStack>
+    </StyledA>
   );
 });
 

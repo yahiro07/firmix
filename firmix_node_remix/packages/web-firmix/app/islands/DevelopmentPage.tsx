@@ -1,7 +1,3 @@
-import { Box, chakra, Flex } from "@chakra-ui/react";
-import { css as emotionCss } from "@emotion/css";
-import styled from "@emotion/styled";
-
 import { useState } from "auxiliaries/fe-deps-react";
 import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper";
 import {
@@ -9,6 +5,8 @@ import {
   idbKeyValSet,
 } from "auxiliaries/utils_fe/browser_storage_adapter";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { css } from "../../styled-system/css";
+import { Box, Flex, styled } from "../../styled-system/jsx";
 import { ButtonSmall } from "../components/CommonControls";
 
 export const DevelopmentPage = createFC(() => {
@@ -81,24 +79,29 @@ export const DevelopmentPage = createFC(() => {
       </div>
       <div>
         <Flex color="red">Hello Remix with Chakra UI and Vite!</Flex>
-        <MyLabel>foo</MyLabel>
-        <MyLabel2>bar</MyLabel2>
-        <MyLabel3 text="buzz" />
+        <MyLabel>label</MyLabel>
+        <MyLabel2 text="label2" />
+        <MyLabel3 text="label3" />
+        <MyLabel4 text="lebel4" />
       </div>
     </div>
   );
 });
 
-const MyLabel = chakra(Box, {
-  baseStyle: {
+const MyLabel = styled("div", {
+  base: {
     color: "green",
   },
 });
 
-const MyLabel2 = styled.div`
-  color: blue;
-`;
+const MyLabel2 = ({ text }: { text: string }) => (
+  <div className={css({ color: "orange" })}>{text}</div>
+);
 
 const MyLabel3 = ({ text }: { text: string }) => (
-  <div q={emotionCss`color: orange`}>{text}</div>
+  <Box color="purple">{text}</Box>
+);
+
+const MyLabel4 = ({ text }: { text: string }) => (
+  <Box css={{ color: "navy" }}>{text}</Box>
 );

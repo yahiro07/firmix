@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
 import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper";
 import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link";
@@ -13,6 +12,7 @@ import {
 import { ProjectHeadingArea } from "web-firmix/app/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
 import { ProjectOperationPart } from "web-firmix/app/features/project_detail/ProjectOperationPart";
+import { Box } from "../../../styled-system/jsx";
 import { firmixPresenter_firmwarePatching } from "../../cardinal/firmix_presenter_firmware_patching/mod";
 import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";
 
@@ -66,7 +66,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
           />
         }
       />
-      <Box q="info-area" padding="0 8px">
+      <Box padding="0 8px">
         <div>ターゲットMCU: {project.targetMcu}</div>
         <div>ファームウェア更新日時: {firmwareUpdateAtText}</div>
         <div>ファームウェアリビジョン: {project.firmwareRevision}</div>

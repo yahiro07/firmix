@@ -1,7 +1,9 @@
-import { Box, Flex, HStack, Spacer } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { SideBar } from "web-firmix/app/features/layout/SideBar";
+import { Box, Flex, HStack, Spacer } from "../../styled-system/jsx";
 import { createFCE2 } from "../common_styling/create_fce";
+import { H1 } from "../common_styling/utility_components";
+import { flexAligned } from "../common_styling/utility_styles";
 import { IconIconifyZ } from "../components/IconIconifyZ";
 import { SiteVariationSelectionPart } from "../features/layout/SiteVariationSelectionPart";
 
@@ -9,14 +11,14 @@ const SiteTitle = createFCE2(() => {
   return (
     <HStack gap="2px" color="var(--cl-top-bar-text)">
       <IconIconifyZ spec="mdi:chip" fontSize="44px" marginTop="3px" />
-      <HStack as="h1" gap={2}>
-        <Box as="span" fontSize="36px" fontWeight="bold">
+      <H1 css={flexAligned} gap={2}>
+        <Box fontSize="36px" fontWeight="bold">
           Firmix
         </Box>
-        <Box as="span" fontSize="28px" fontWeight="normal" marginTop="5px">
+        <Box fontSize="28px" fontWeight="normal" marginTop="5px">
           (beta)
         </Box>
-      </HStack>
+      </H1>
     </HStack>
   );
 });
@@ -38,7 +40,6 @@ const MainRow = createFCE2<{ children: ReactNode }>(({ children }) => {
   return (
     <Flex>
       <SideBar
-        q="side-bar"
         position="sticky"
         top="60px"
         height="calc(100vh - 60px)"

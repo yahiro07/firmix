@@ -1,6 +1,7 @@
-import { HStack, Img } from "@chakra-ui/react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { LoginUser } from "web-firmix/app/base/types_dto_internal";
+import { HStack } from "../../../styled-system/jsx";
+import { Img } from "../../common_styling/utility_components";
 
 type Props = {
   user: LoginUser;

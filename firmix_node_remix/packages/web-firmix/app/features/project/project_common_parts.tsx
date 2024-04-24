@@ -1,6 +1,6 @@
-import { HStack } from "@chakra-ui/react";
-import { Link } from "@remix-run/react";
+import { HStack } from "../../../styled-system/jsx";
 import { createFCE2 } from "../../common_styling/create_fce";
+import { StyledLink } from "../../common_styling/utility_components";
 import { IconIconify } from "../../components/IconIconify";
 
 const ProjectLinkCommon = createFCE2<{
@@ -10,20 +10,17 @@ const ProjectLinkCommon = createFCE2<{
   text: string;
   smaller?: boolean;
 }>(({ pagePath, iconSpec, iconYOffset, text, smaller }) => (
-  <HStack
-    as={Link}
-    to={pagePath}
-    display="inline-flex"
-    gap="2px"
-    color="#666"
-    fontSize={smaller ? "0.9em" : "1.0em"}
-    sx={{
-      "&:hover": { textDecoration: "underline" },
-    }}
-  >
-    <IconIconify spec={iconSpec} marginTop={iconYOffset} />
-    <span>{text}</span>
-  </HStack>
+  <StyledLink to={pagePath}>
+    <HStack
+      gap="2px"
+      color="#666"
+      fontSize={smaller ? "0.9em" : "1.0em"}
+      _hover={{ textDecoration: "underline" }}
+    >
+      <IconIconify spec={iconSpec} marginTop={iconYOffset} />
+      <span>{text}</span>
+    </HStack>
+  </StyledLink>
 ));
 
 export const LinkChildProjectListPage = createFCE2<{

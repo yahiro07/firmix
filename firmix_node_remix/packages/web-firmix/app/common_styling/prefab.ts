@@ -1,5 +1,5 @@
-import { BoxProps } from "@chakra-ui/react";
 import { FC } from "react";
+import { BoxProps } from "../../styled-system/jsx";
 
 export function prefab(jsxNode: JSX.Element): FC<BoxProps> {
   return (props) => {

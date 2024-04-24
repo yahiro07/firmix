@@ -1,12 +1,14 @@
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 
-import { Box, HStack, Img } from "@chakra-ui/react";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,
   LocalDevelopmentProject,
 } from "web-firmix/app/base/types_local_project";
+import { Box, HStack } from "../../../styled-system/jsx";
 import { createFCE2 } from "../../common_styling/create_fce";
+import { H3, Img } from "../../common_styling/utility_components";
+import { flexAligned } from "../../common_styling/utility_styles";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
 type Props = {
@@ -24,10 +26,10 @@ const local = {
 };
 
 const ProjectResourceHeader = createFCE2(() => (
-  <HStack as="h3" gap="0">
+  <H3 css={flexAligned} gap="0">
     <IconIconifyZ spec="ph:files" fontSize="24px" />
     <Box fontSize="20px">プロジェクトリソース</Box>
-  </HStack>
+  </H3>
 ));
 
 const AssetEntry = createFCX<{
