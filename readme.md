@@ -22,10 +22,10 @@ Kermite(自作キーボードエコシステム)のカスタムファームウ�
 
 ### 開発環境
 - React, TypeScript, Remix, MongoDB (共通)  
-- ChakraUI (Firmix)  
+- Panda CSS (Firmix)  
 - Linaria (KFX)
 
-CSS周りはFirmixではChakraUI,KFXではLinariaを使っています。どちらが実装がやりやすいかを比較検討中です。
+CSS周りはFirmixではPanda CSS,KFXではLinariaを使っています。どちらが実装がやりやすいかを比較検討中です。
 
 ### 運用環境
 
