@@ -1,10 +1,10 @@
-export const styleTextLinkInheritColor = `
-  color: inherit;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+export const styleObj_TextLinkInheritColor = {
+  color: "inherit",
+  textDecoration: "none",
+  "&:hover": {
+    textDecoration: "underline",
+  },
+};
 
 export const uiStyleClickable = `
   cursor: pointer;
