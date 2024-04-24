@@ -1,4 +1,4 @@
-import { VStack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
 import { Nav, NavItem, NavItem_Button } from "shared/components/CommonControls";
 import { appConfig } from "web-firmix/app/base/app_config";
@@ -9,8 +9,7 @@ export const SideBar = createFCE2(() => {
   const { loginUser } = useSiteContext();
   const loggedIn = !!loginUser;
   return (
-    <VStack
-      alignItems="flex-start"
+    <Stack
       gap={4}
       width="260px"
       p="20px 16px"
@@ -60,6 +59,6 @@ export const SideBar = createFCE2(() => {
         if={loginUser ?? undefined}
         q="login-user-box"
       />
-    </VStack>
+    </Stack>
   );
 });

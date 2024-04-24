@@ -1,6 +1,5 @@
-import { css } from "@linaria/core";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexVertical } from "shared/common/utility_styles";
+import { Stack } from "@chakra-ui/react";
+import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
 import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard";
 
@@ -9,14 +8,14 @@ type Props = {
   showPublicity: boolean;
 };
 
-export const ProjectListPage = createFC<Props>(
+export const ProjectListPage = createFCE2<Props>(
   ({ projects, showPublicity }) => {
     return (
-      <div q={style}>
+      <Stack gap={3} padding="16px 0">
         <div q="site-instruction">
           電子工作の作品を投稿して、ファームウェアを配布できるWebサービスです。
         </div>
-        <div q="list">
+        <Stack gap={4}>
           {projects.map((project) => (
             <ProjectListItemCard
               key={project.projectId}
@@ -24,17 +23,8 @@ export const ProjectListPage = createFC<Props>(
               showPublicity={showPublicity}
             />
           ))}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
     );
   }
 );
-
-const style = css`
-  padding: 16px 0;
-  ${flexVertical(16)};
-
-  > .list {
-    ${flexVertical(16)};
-  }
-`;
