@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react";
-import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
 import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard";
+import { createFCE2 } from "../common_styling/create_fce";
 
 type Props = {
   projects: ProjectListItemDto[];

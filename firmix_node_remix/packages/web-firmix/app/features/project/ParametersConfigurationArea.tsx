@@ -1,8 +1,10 @@
+import { Button } from "@chakra-ui/react";
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-
-import { flexHorizontal, flexVertical } from "shared/common/utility_styles";
-import { Button } from "shared/components/CommonControls";
+import {
+  flexHorizontal,
+  flexVertical,
+} from "../../common_styling/utility_styles";
 
 type Props = {
   submitEditItems(): void;

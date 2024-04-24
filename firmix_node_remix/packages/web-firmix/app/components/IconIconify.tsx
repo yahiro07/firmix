@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
+import { createFCE2 } from "../common_styling/create_fce";
 
 type Props = {
   spec: string;

@@ -5,8 +5,12 @@ import { Link } from "@remix-run/react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import { createFCS } from "auxiliaries/utils_fe_react/fcs";
 import { reflectInputChecked } from "auxiliaries/utils_fe_react/form_helper";
-import { flexAligned, flexVertical } from "shared/common/utility_styles";
-import { IconIconifyZ } from "shared/components/IconIconifyZ";
+import { flexAligned, flexVertical } from "../common_styling/utility_styles";
+import { IconIconifyZ } from "./IconIconifyZ";
+// import { flexAligned, flexVertical } from "../common/utility_styles";
+// import { IconIconifyZ } from "./IconIconifyZ";
+// import { flexAligned, flexVertical } from "shared/common/utility_styles";
+// import { IconIconifyZ } from "shared/components/IconIconifyZ";
 
 // export const Button0 = styled.button`
 //   padding: 0.5rem;

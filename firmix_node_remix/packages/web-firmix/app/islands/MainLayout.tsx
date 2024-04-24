@@ -1,9 +1,9 @@
 import { Box, Flex, HStack, Spacer } from "@chakra-ui/react";
-import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
 import { ReactNode } from "react";
-import { IconIconifyZ } from "shared/components/IconIconifyZ";
-import { SiteVariationSelectionPart } from "shared/features/layout/SiteVariationSelectionPart";
 import { SideBar } from "web-firmix/app/features/layout/SideBar";
+import { createFCE2 } from "../common_styling/create_fce";
+import { IconIconifyZ } from "../components/IconIconifyZ";
+import { SiteVariationSelectionPart } from "../features/layout/SiteVariationSelectionPart";
 
 const SiteTitle = createFCE2(() => {
   return (

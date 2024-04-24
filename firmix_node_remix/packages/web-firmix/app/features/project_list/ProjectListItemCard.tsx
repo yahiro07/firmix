@@ -1,12 +1,11 @@
-import { Box, Flex, HStack, Img, Spacer, Stack } from "@chakra-ui/react";
+import { Box, Card, Flex, HStack, Img, Spacer, Stack } from "@chakra-ui/react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
-import { prefab } from "auxiliaries/utils_fe_react/prefab";
-
-import { Card, LinkButton } from "shared/components/CommonControls";
 import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
 import { LinkChildProjectListPage } from "web-firmix/app/features/project/project_common_parts";
 import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts";
+import { createFCE2 } from "../../common_styling/create_fce";
+import { prefab } from "../../common_styling/prefab";
+import { LinkButton } from "../../components/CommonControls";
 
 type Props = {
   project: ProjectListItemDto;

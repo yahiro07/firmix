@@ -1,12 +1,11 @@
-import { Box, BoxProps, HStack } from "@chakra-ui/react";
+import { Box, BoxProps, Button, HStack } from "@chakra-ui/react";
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { FC } from "react";
-import { styleTextLinkInheritColor } from "shared/common/common_styles";
-import { flexAligned, flexVertical } from "shared/common/utility_styles";
-import { Button } from "shared/components/CommonControls";
-import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import { ProjectRepositoryInfo } from "shared/foreign/types";
+import { styleTextLinkInheritColor } from "../../common_styling/common_styles";
+import { flexAligned, flexVertical } from "../../common_styling/utility_styles";
+import { IconIconifyZ } from "../../components/IconIconifyZ";
 
 const ProjectTitlePart = createFCX<{
   projectName: string;

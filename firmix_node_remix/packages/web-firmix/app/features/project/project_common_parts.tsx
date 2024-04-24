@@ -1,7 +1,7 @@
 import { HStack } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
-import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
-import { IconIconify } from "shared/components/IconIconify";
+import { createFCE2 } from "../../common_styling/create_fce";
+import { IconIconify } from "../../components/IconIconify";
 
 const ProjectLinkCommon = createFCE2<{
   pagePath: string;

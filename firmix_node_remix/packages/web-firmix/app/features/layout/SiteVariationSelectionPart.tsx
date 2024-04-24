@@ -1,5 +1,5 @@
 import { Center, HStack } from "@chakra-ui/react";
-import { createFCE2 } from "auxiliaries/utils_fe_react/create_fce";
+import { createFCE2 } from "../../common_styling/create_fce";
 
 const LinkButton = createFCE2<{ to: string; text: string; active: boolean }>(
   ({ to, text, active }) => (

@@ -10,8 +10,8 @@ import {
   idbKeyValSet,
 } from "auxiliaries/utils_fe/browser_storage_adapter";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexVertical } from "shared/common/utility_styles";
-import { ButtonSmall } from "shared/components/CommonControls";
+import { flexVertical } from "../common_styling/utility_styles";
+import { ButtonSmall } from "../components/CommonControls";
 
 export const DevelopmentPage = createFC(() => {
   const [text, setText] = useState("");

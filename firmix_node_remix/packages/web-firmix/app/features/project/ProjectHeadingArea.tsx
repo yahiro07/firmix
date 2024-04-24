@@ -1,9 +1,9 @@
 import { css } from "@linaria/core";
 import { ReactNode } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexVertical } from "shared/common/utility_styles";
 import { useRepositoryDisplayInfo } from "shared/foreign/repository_info_helper";
 import { projectHeadingArea_parts } from "web-firmix/app/features/project/ProjectHeadingArea_Parts";
+import { flexVertical } from "../../common_styling/utility_styles";
 
 type Props = {
   projectName: string;

@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { createFCE } from "auxiliaries/utils_fe_react/create_fce";
+import { createFCE } from "../common_styling/create_fce";
 
 export const iconShapes = {
   "lucide:package": (
