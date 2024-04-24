@@ -1,12 +1,12 @@
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-import { flexAligned } from "shared/common/utility_styles";
-import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,
   LocalDevelopmentProject,
 } from "web-kfx/app/base/types_local_project";
+import { flexAligned } from "../../common_styling/utility_styles";
+import { IconIconifyZ } from "../../components/IconIconifyZ";
 
 type Props = {
   project: LocalDevelopmentProject;

@@ -1,10 +1,10 @@
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
 import { ReactNode } from "react";
-import { flexAligned } from "shared/common/utility_styles";
-import { IconIconifyZ } from "shared/components/IconIconifyZ";
-import { SiteVariationSelectionPart } from "shared/features/layout/SiteVariationSelectionPart";
 import { SideBar } from "web-kfx/app/features/layout/SideBar";
+import { flexAligned } from "../common_styling/utility_styles";
+import { IconIconifyZ } from "../components/IconIconifyZ";
+import { SiteVariationSelectionPart } from "../features/layout/SiteVariationSelectionPart";
 
 const SiteTitle = createFCX(
   () => {

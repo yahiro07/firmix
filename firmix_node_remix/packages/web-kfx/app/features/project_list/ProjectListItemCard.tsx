@@ -1,14 +1,14 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { ProjectListItemDto } from "web-kfx/app/base/types_dto";
+import { LinkChildProjectListPage } from "web-kfx/app/features/project/project_common_parts";
+import { projectHeadingArea_parts } from "web-kfx/app/features/project/ProjectHeadingArea_Parts";
 import {
   flexAligned,
   flexHorizontal,
   flexVertical,
-} from "shared/common/utility_styles";
-import { Card, LinkButton } from "shared/components/CommonControls";
-import { ProjectListItemDto } from "web-kfx/app/base/types_dto";
-import { LinkChildProjectListPage } from "web-kfx/app/features/project/project_common_parts";
-import { projectHeadingArea_parts } from "web-kfx/app/features/project/ProjectHeadingArea_Parts";
+} from "../../common_styling/utility_styles";
+import { Card, LinkButton } from "../../components/CommonControls";
 
 type Props = {
   project: ProjectListItemDto;

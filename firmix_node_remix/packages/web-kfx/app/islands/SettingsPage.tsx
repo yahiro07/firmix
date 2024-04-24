@@ -1,14 +1,14 @@
 import { css } from "@linaria/core";
 import { useState } from "auxiliaries/fe-deps-react";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { rpcClient } from "web-kfx/app/common/rpc_client";
 import {
   flexAligned,
   flexCentered,
   flexVertical,
-} from "shared/common/utility_styles";
-import { ButtonSmall } from "shared/components/CommonControls";
-import { IconIconifyZ } from "shared/components/IconIconifyZ";
-import { rpcClient } from "web-kfx/app/common/rpc_client";
+} from "../common_styling/utility_styles";
+import { ButtonSmall } from "../components/CommonControls";
+import { IconIconifyZ } from "../components/IconIconifyZ";
 
 type Props = {
   apiKey: string | undefined;

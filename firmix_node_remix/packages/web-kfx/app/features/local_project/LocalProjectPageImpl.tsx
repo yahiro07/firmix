@@ -1,7 +1,5 @@
 import { css } from "@linaria/core";
 import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { flexCentered, flexVertical } from "shared/common/utility_styles";
-import { IconIconifyZ } from "shared/components/IconIconifyZ";
 import { useDateTimeTextWithElapsed } from "shared/fe_modules/display_data_hooks";
 import { LocalProjectAssetsArea } from "web-kfx/app/features/local_project/LocalProjectAssetsArea";
 import { LocalProjectLoadingArea } from "web-kfx/app/features/local_project/LocalProjectLoadingArea";
@@ -12,6 +10,11 @@ import {
   ProjectHeadingArea,
 } from "web-kfx/app/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "web-kfx/app/features/project/ProjectReadmeArea";
+import {
+  flexCentered,
+  flexVertical,
+} from "../../common_styling/utility_styles";
+import { IconIconifyZ } from "../../components/IconIconifyZ";
 
 type Props = {
   loggedIn: boolean;

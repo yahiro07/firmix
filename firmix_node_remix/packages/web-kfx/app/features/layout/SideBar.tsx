@@ -1,10 +1,10 @@
 import { css } from "@linaria/core";
 import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-import { flexVertical } from "shared/common/utility_styles";
-import { Nav, NavItem, NavItem_Button } from "shared/components/CommonControls";
 import { appConfig } from "web-kfx/app/base/app_config";
 import { useSiteContext } from "web-kfx/app/common/site_context";
 import { LoginUserBox } from "web-kfx/app/features/layout/LoginUserBox";
+import { flexVertical } from "../../common_styling/utility_styles";
+import { Nav, NavItem, NavItem_Button } from "../../components/CommonControls";
 
 export const SideBar = createFCX(
   () => {
