@@ -1,10 +1,9 @@
 {
-  "name": "web-firmix",
+  "name": "@mx/web-kfx",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "prepare": "panda codegen",
     "build": "remix vite:build",
     "dev": "remix vite:dev",
     "dev:inspect": "NODE_OPTIONS=--inspect remix vite:dev",

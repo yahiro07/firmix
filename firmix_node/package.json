@@ -5,6 +5,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "dotenv-cli": "^7.4.1",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "eslint": "^8.56.0",
