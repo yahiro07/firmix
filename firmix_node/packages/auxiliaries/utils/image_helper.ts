@@ -1,5 +1,5 @@
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { raiseError } from "auxiliaries/utils/error_util";
+import { decodeBinaryBase64 } from "../base_env_adapters/base64";
+import { raiseError } from "../utils/error_util";
 
 export function imageHelper_extractImageDataUrl(imageDataUrl: string) {
   const m = imageDataUrl.match(/^data:(\w+\/\w+);base64,(.*)$/);

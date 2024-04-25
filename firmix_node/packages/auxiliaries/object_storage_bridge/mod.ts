@@ -1,5 +1,5 @@
 import * as s3 from "@aws-sdk/client-s3";
-import { raiseError } from "auxiliaries/utils/error_util";
+import { raiseError } from "../utils/error_util";
 
 type ObjectStorageBridge = {
   uploadBinaryFile(path: string, bytes: Uint8Array): Promise<void>;

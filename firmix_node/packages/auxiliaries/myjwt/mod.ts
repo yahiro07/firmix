@@ -3,8 +3,8 @@
 import {
   decodeTextBase64,
   encodeTextBase64,
-} from "auxiliaries/base_env_adapters/base64";
-import { makeHmacSha256 } from "auxiliaries/base_env_adapters/crypto";
+} from "../base_env_adapters/base64";
+import { makeHmacSha256 } from "../base_env_adapters/crypto";
 
 type Payload = {
   exp?: number; //in milliseconds since epic

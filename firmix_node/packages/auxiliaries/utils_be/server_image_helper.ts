@@ -1,6 +1,6 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { imageHelper_getImageDataMimeType } from "auxiliaries/utils/image_helper";
 import sizeOf from "image-size";
+import { raiseError } from "../utils/error_util";
+import { imageHelper_getImageDataMimeType } from "../utils/image_helper";
 
 export const serverImageHelper = {
   async getImageSize(imageDataBytes: Uint8Array) {
@@ -20,9 +20,8 @@ export const serverImageHelper = {
     if (!mimeType) {
       raiseError(`invalid or unsupported image file format`);
     }
-    const { width, height } = await serverImageHelper.getImageSize(
-      imageFileBytes
-    );
+    const { width, height } =
+      await serverImageHelper.getImageSize(imageFileBytes);
     const fileSize = imageFileBytes.byteLength;
     return { fileSize, width, height, mimeType };
   },
