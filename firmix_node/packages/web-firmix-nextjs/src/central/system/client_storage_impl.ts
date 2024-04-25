@@ -6,6 +6,7 @@ import { myJwt_create, myJwt_verify } from "@mx/auxiliaries/myjwt/mod";
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { copyObjectMembers } from "@mx/auxiliaries/utils/utils_general";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { cookies } from "next/headers";
 import { appConfig } from "../../base/app_config";
 import { fallbackValues } from "../../base/fallback_values";
@@ -29,16 +30,17 @@ function createClientStorageImpl(): ClientStorageImpl {
   const jwtSecret = getEnvVariable("JWT_SECRET");
   const cookieNameLoginUserToken = "fr0_login_user_token";
 
-  const cookieStore = cookies();
-
   const ck = {
     getCookie(name: string) {
+      const cookieStore = cookies();
       return cookieStore.get(name)?.value;
     },
     setCookie(cookie: ResponseCookie) {
+      const cookieStore = cookies();
       cookieStore.set(cookie);
     },
-    deleteCookie(...args: Parameters<typeof cookieStore.delete>) {
+    deleteCookie(...args: Parameters<ReadonlyRequestCookies["delete"]>) {
+      const cookieStore = cookies();
       cookieStore.delete(...args);
     },
   };

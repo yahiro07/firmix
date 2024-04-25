@@ -1,3 +1,4 @@
+"use client";
 import { ProjectListItemDto } from "@mx/web-firmix-nextjs/src/base/types_dto";
 import { ProjectListItemCard } from "@mx/web-firmix-nextjs/src/features/project_list/ProjectListItemCard";
 import { Stack } from "../../styled-system/jsx";
