@@ -3,7 +3,7 @@ import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import {
   BinaryFileEntryWithTimestamp,
   TextFileEntry,
-} from "web-kfx/app/base/types_local_project";
+} from "@mx/web-kfx/app/base/types_local_project";
 
 export function createLocalDirectoryReader(
   rootDirHandle: FileSystemDirectoryHandle

@@ -10,14 +10,14 @@ import {
   deleteCookie,
   getCookies,
   setCookie,
-} from "@mx/shared/system/cookie";
-import { appConfig } from "web-kfx/app/base/app_config";
-import { fallbackValues } from "web-kfx/app/base/fallback_values";
-import { CoactiveState } from "web-kfx/app/base/types_dto";
-import { LoginUserClue } from "web-kfx/app/base/types_dto_internal";
-import { getEnvVariable } from "web-kfx/app/central/base/envs";
-import { serverConfig } from "web-kfx/app/central/base/server_config";
-import { CookieOutputJob } from "web-kfx/app/central/base/types_client_storage";
+} from "@mx/auxiliaries/utils_be/cookie";
+import { appConfig } from "@mx/web-kfx/app/base/app_config";
+import { fallbackValues } from "@mx/web-kfx/app/base/fallback_values";
+import { CoactiveState } from "@mx/web-kfx/app/base/types_dto";
+import { LoginUserClue } from "@mx/web-kfx/app/base/types_dto_internal";
+import { getEnvVariable } from "@mx/web-kfx/app/central/base/envs";
+import { serverConfig } from "@mx/web-kfx/app/central/base/server_config";
+import { CookieOutputJob } from "@mx/web-kfx/app/central/base/types_client_storage";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);

@@ -1,7 +1,7 @@
 import {
   FirmwareFormat,
   InputFirmwareFormat,
-} from "web-kfx/app/base/types_app_common";
+} from "@mx/web-kfx/app/base/types_app_common";
 
 export type LoginUserClue = {
   userId: string;

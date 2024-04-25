@@ -1,20 +1,20 @@
 import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
-import { produce } from "immer";
 import {
   BinaryFileEntryWithTimestamp,
   LocalDevelopmentProject,
-} from "web-kfx/app/base/types_local_project";
+} from "@mx/web-kfx/app/base/types_local_project";
 import {
   ConfigurationEditItem,
   FirmwareContainer,
   PatchingDataBlob,
-} from "web-kfx/app/base/types_project_edit";
-import { firmixCore_firmwareConfiguration } from "web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
-import { firmixCore_firmwarePatching } from "web-kfx/app/cardinal/firmix_core_firmware_patching/mod";
-import { createLocalDirectoryReader } from "web-kfx/app/cardinal/firmix_presenter_common_modules/local_directory_reader";
-import { localAssetBuilder } from "web-kfx/app/cardinal/firmix_presenter_local_project_edit/local_asset_builder";
+} from "@mx/web-kfx/app/base/types_project_edit";
+import { firmixCore_firmwareConfiguration } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
+import { firmixCore_firmwarePatching } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_patching/mod";
+import { createLocalDirectoryReader } from "@mx/web-kfx/app/cardinal/firmix_presenter_common_modules/local_directory_reader";
+import { localAssetBuilder } from "@mx/web-kfx/app/cardinal/firmix_presenter_local_project_edit/local_asset_builder";
+import { produce } from "immer";
 
 type FirmixPresenter_LocalProjectEdit = {
   loadLocalDevelopmentProject(

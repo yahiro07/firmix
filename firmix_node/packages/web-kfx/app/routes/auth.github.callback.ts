@@ -1,12 +1,12 @@
-import { apiOAuthGithub_getUserData } from "@mx/shared/foreign/api_oauth_github";
+import { apiOAuthGithub_getUserData } from "@mx/auxiliaries/oauth_fetcher/api_oauth_github";
+import { serverShell } from "@mx/web-kfx/app/central/server_shell";
+import { clientStorageImpl } from "@mx/web-kfx/app/central/system/client_storage_impl";
+import { oauthClientGithub } from "@mx/web-kfx/app/central/user_auth/oauth_clients";
 import {
   createGetHandler,
   getRequestSourceUrl,
   responseRedirect,
 } from "@mx/web-kfx/app/system/route_helper";
-import { serverShell } from "web-kfx/app/central/server_shell";
-import { clientStorageImpl } from "web-kfx/app/central/system/client_storage_impl";
-import { oauthClientGithub } from "web-kfx/app/central/user_auth/oauth_clients";
 
 export const loader = createGetHandler(async ({ request }) => {
   const reqUrl = getRequestSourceUrl(request);

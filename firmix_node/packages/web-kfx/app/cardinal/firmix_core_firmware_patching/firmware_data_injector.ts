@@ -10,8 +10,8 @@ import {
   ConfigurationEditItem,
   FirmwarePatchingBlob,
   PatchingManifest,
-} from "web-kfx/app/base/types_project_edit";
-import { firmixCore_firmwareConfiguration } from "web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
+} from "@mx/web-kfx/app/base/types_project_edit";
+import { firmixCore_firmwareConfiguration } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
 
 export const firmwareDataInjector = {
   patchFirmwareBinary(

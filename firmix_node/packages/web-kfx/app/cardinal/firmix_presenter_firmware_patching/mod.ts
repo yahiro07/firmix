@@ -3,8 +3,8 @@ import { serverFetchHelper } from "@mx/auxiliaries/utils_be/server_fetch_helper"
 import {
   ConfigurationEditItem,
   PatchingManifest,
-} from "web-kfx/app/base/types_project_edit";
-import { firmwareDataInjector } from "web-kfx/app/cardinal/firmix_core_firmware_patching/firmware_data_injector";
+} from "@mx/web-kfx/app/base/types_project_edit";
+import { firmwareDataInjector } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_patching/firmware_data_injector";
 
 type ProjectPartial = PatchingManifest & {
   projectId: string;

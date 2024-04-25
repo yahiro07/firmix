@@ -1,5 +1,5 @@
 import { formatZodErrorToLines } from "@mx/auxiliaries/utils/zod_helper";
-import { ProjectMetadataJsonFileContent } from "web-kfx/app/base/types_project_metadata";
+import { ProjectMetadataJsonFileContent } from "@mx/web-kfx/app/base/types_project_metadata";
 import { z } from "zod";
 
 const customDataItemCommon = {

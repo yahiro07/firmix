@@ -1,8 +1,8 @@
-import { ProjectRealm } from "web-kfx/app/base/types_app_common";
+import { ProjectRealm } from "@mx/web-kfx/app/base/types_app_common";
 import {
   CustomDataEntry,
   EditUiItem,
-} from "web-kfx/app/base/types_core_entity";
+} from "@mx/web-kfx/app/base/types_core_entity";
 
 export type ProjectMetadataEditUiItemInput = {
   key: string;

@@ -1,5 +1,5 @@
-import { ProjectEntity } from "web-kfx/app/base/types_db_entity";
-import { getEnvVariable } from "web-kfx/app/central/base/envs";
+import { ProjectEntity } from "@mx/web-kfx/app/base/types_db_entity";
+import { getEnvVariable } from "@mx/web-kfx/app/central/base/envs";
 
 export const projectHelper = {
   getThumbnailImageUrl(project: ProjectEntity): string {

@@ -1,9 +1,9 @@
-import { ConfigurationSourceItemWrapper } from "web-kfx/app/base/types_dto";
+import { ConfigurationSourceItemWrapper } from "@mx/web-kfx/app/base/types_dto";
 import {
   FirmwareContainer,
   ImageFileContainer,
-} from "web-kfx/app/base/types_project_edit";
-import { ProjectMetadataInput } from "web-kfx/app/base/types_project_metadata";
+} from "@mx/web-kfx/app/base/types_project_edit";
+import { ProjectMetadataInput } from "@mx/web-kfx/app/base/types_project_metadata";
 
 export type TextFileEntry = {
   // type: "text";

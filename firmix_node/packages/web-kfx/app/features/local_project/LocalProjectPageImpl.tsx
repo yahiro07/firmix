@@ -1,15 +1,15 @@
 import { css } from "@linaria/core";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { useDateTimeTextWithElapsed } from "@mx/shared/fe_modules/display_data_hooks";
-import { LocalProjectAssetsArea } from "web-kfx/app/features/local_project/LocalProjectAssetsArea";
-import { LocalProjectLoadingArea } from "web-kfx/app/features/local_project/LocalProjectLoadingArea";
-import { useLocalProjectPageStore } from "web-kfx/app/features/local_project/local_project_page_store";
-import { ParametersConfigurationArea } from "web-kfx/app/features/project/ParametersConfigurationArea";
+import { LocalProjectAssetsArea } from "@mx/web-kfx/app/features/local_project/LocalProjectAssetsArea";
+import { LocalProjectLoadingArea } from "@mx/web-kfx/app/features/local_project/LocalProjectLoadingArea";
+import { useLocalProjectPageStore } from "@mx/web-kfx/app/features/local_project/local_project_page_store";
+import { ParametersConfigurationArea } from "@mx/web-kfx/app/features/project/ParametersConfigurationArea";
 import {
   LocalProjectHeadingAreaDummy,
   ProjectHeadingArea,
-} from "web-kfx/app/features/project/ProjectHeadingArea";
-import { ProjectReadmeArea } from "web-kfx/app/features/project/ProjectReadmeArea";
+} from "@mx/web-kfx/app/features/project/ProjectHeadingArea";
+import { ProjectReadmeArea } from "@mx/web-kfx/app/features/project/ProjectReadmeArea";
 import {
   flexCentered,
   flexVertical,

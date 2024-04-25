@@ -1,13 +1,16 @@
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
-import { specifyGithubAvatarUrlSize } from "@mx/shared/foreign/avatar_size_modifier";
-import { ProjectRealm } from "web-kfx/app/base/types_app_common";
-import { ProjectEntity, UserEntity } from "web-kfx/app/base/types_db_entity";
+import { specifyGithubAvatarUrlSize } from "@mx/shared/github/avatar_size_modifier";
+import { ProjectRealm } from "@mx/web-kfx/app/base/types_app_common";
+import {
+  ProjectEntity,
+  UserEntity,
+} from "@mx/web-kfx/app/base/types_db_entity";
 import {
   ProjectDetailDto,
   ProjectListItemDto,
-} from "web-kfx/app/base/types_dto";
-import { storehouse } from "web-kfx/app/central/depot/storehouse";
-import { projectHelper } from "web-kfx/app/central/domain_helpers/project_helper";
+} from "@mx/web-kfx/app/base/types_dto";
+import { storehouse } from "@mx/web-kfx/app/central/depot/storehouse";
+import { projectHelper } from "@mx/web-kfx/app/central/domain_helpers/project_helper";
 
 type ProjectUserAggregateResult = ProjectEntity & {
   user: UserEntity;

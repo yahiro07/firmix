@@ -1,5 +1,5 @@
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
-import { getEnvVariable } from "web-kfx/app/central/base/envs";
+import { getEnvVariable } from "@mx/web-kfx/app/central/base/envs";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);

@@ -5,9 +5,9 @@ import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,
   ConfigurationSourceItem_Error,
-} from "web-kfx/app/base/types_dto";
-import { ConfigurationEditItem } from "web-kfx/app/base/types_project_edit";
-import { firmixCore_firmwareConfiguration } from "web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
+} from "@mx/web-kfx/app/base/types_dto";
+import { ConfigurationEditItem } from "@mx/web-kfx/app/base/types_project_edit";
+import { firmixCore_firmwareConfiguration } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
 import {
   flexHorizontal,
   flexVertical,

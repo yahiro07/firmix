@@ -1,8 +1,8 @@
+import { serverShell } from "@mx/web-kfx/app/central/server_shell";
+import { clientStorageImpl } from "@mx/web-kfx/app/central/system/client_storage_impl";
+import { ChildProjectListPage } from "@mx/web-kfx/app/islands/ChildProjectListPage";
 import { createLoader, createPage } from "@mx/web-kfx/app/system/route_helper";
 import { useLoaderData } from "@remix-run/react";
-import { serverShell } from "web-kfx/app/central/server_shell";
-import { clientStorageImpl } from "web-kfx/app/central/system/client_storage_impl";
-import { ChildProjectListPage } from "web-kfx/app/islands/ChildProjectListPage";
 
 export const loader = createLoader(async ({ request, params }) => {
   const projectId = params.projectId!;

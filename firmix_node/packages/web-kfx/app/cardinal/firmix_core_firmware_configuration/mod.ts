@@ -1,11 +1,11 @@
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { padZeros, seqNumbers } from "@mx/auxiliaries/utils/utils_array";
-import { CustomDataItem } from "web-kfx/app/base/types_core_entity";
+import { CustomDataItem } from "@mx/web-kfx/app/base/types_core_entity";
 import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,
-} from "web-kfx/app/base/types_dto";
-import { PatchingManifest } from "web-kfx/app/base/types_project_edit";
+} from "@mx/web-kfx/app/base/types_dto";
+import { PatchingManifest } from "@mx/web-kfx/app/base/types_project_edit";
 
 export const firmixCore_firmwareConfiguration = {
   buildConfigurationSourceItems(

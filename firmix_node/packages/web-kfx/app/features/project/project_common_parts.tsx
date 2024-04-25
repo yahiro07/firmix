@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
+import { createFCX } from "@mx/web-kfx/app/common/fcx";
 import { Link } from "@remix-run/react";
 import { flexAligned } from "../../common_styling/utility_styles";
 import { IconIconify } from "../../components/IconIconify";

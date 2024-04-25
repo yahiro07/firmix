@@ -1,10 +1,10 @@
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { InputFirmwareFormat } from "@mx/web-kfx/app/base/types_app_common";
+import { serverShell } from "@mx/web-kfx/app/central/server_shell";
 import {
   createPostHandler,
   responseJson,
 } from "@mx/web-kfx/app/system/route_helper";
-import { InputFirmwareFormat } from "web-kfx/app/base/types_app_common";
-import { serverShell } from "web-kfx/app/central/server_shell";
 
 export const action = createPostHandler(async ({ request }) => {
   const authHeaderValue = request.headers.get("Authorization");

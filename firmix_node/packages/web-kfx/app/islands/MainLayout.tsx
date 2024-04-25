@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
-import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
+import { createFCX } from "@mx/web-kfx/app/common/fcx";
+import { SideBar } from "@mx/web-kfx/app/features/layout/SideBar";
 import { ReactNode } from "react";
-import { SideBar } from "web-kfx/app/features/layout/SideBar";
 import { flexAligned } from "../common_styling/utility_styles";
 import { IconIconifyZ } from "../components/IconIconifyZ";
 import { SiteVariationSelectionPart } from "../features/layout/SiteVariationSelectionPart";

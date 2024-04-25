@@ -9,11 +9,11 @@ import {
 import { downloadBinaryFileBlob } from "@mx/auxiliaries/utils_fe/downloading_link";
 import { ensureFileHandlePermission } from "@mx/auxiliaries/utils_fe/local_filesystem_helper";
 import { useEffectAsync } from "@mx/auxiliaries/utils_fe_react/hooks";
-import { LocalProjectSubmissionPayload } from "web-kfx/app/base/types_dto_internal";
-import { LocalDevelopmentProject } from "web-kfx/app/base/types_local_project";
-import { ConfigurationEditItem } from "web-kfx/app/base/types_project_edit";
-import { firmixPresenter_localProjectEdit } from "web-kfx/app/cardinal/firmix_presenter_local_project_edit/mod";
-import { rpcClient } from "web-kfx/app/common/rpc_client";
+import { LocalProjectSubmissionPayload } from "@mx/web-kfx/app/base/types_dto_internal";
+import { LocalDevelopmentProject } from "@mx/web-kfx/app/base/types_local_project";
+import { ConfigurationEditItem } from "@mx/web-kfx/app/base/types_project_edit";
+import { firmixPresenter_localProjectEdit } from "@mx/web-kfx/app/cardinal/firmix_presenter_local_project_edit/mod";
+import { rpcClient } from "@mx/web-kfx/app/common/rpc_client";
 
 const localProjectStorage =
   createLocalStorageAdapter<LocalDevelopmentProject>("fr0_local_project");

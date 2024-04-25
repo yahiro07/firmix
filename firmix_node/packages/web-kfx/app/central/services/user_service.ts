@@ -1,12 +1,12 @@
+import { OAuthLoginSourceUserInfo } from "@mx/auxiliaries/oauth_fetcher/types_oauth";
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { pickObjectMembers } from "@mx/auxiliaries/utils/utils_general";
 import { generateIdTimeSequential } from "@mx/auxiliaries/utils_be/id_generator";
-import { OAuthLoginSourceUserInfo } from "@mx/shared/base/types_oauth";
-import { UserEntity } from "web-kfx/app/base/types_db_entity";
-import { LoginUserClue } from "web-kfx/app/base/types_dto_internal";
-import { CookieOutputJob } from "web-kfx/app/central/base/types_client_storage";
-import { storehouse } from "web-kfx/app/central/depot/storehouse";
-import { userHelper } from "web-kfx/app/central/domain_helpers/user_helper";
+import { UserEntity } from "@mx/web-kfx/app/base/types_db_entity";
+import { LoginUserClue } from "@mx/web-kfx/app/base/types_dto_internal";
+import { CookieOutputJob } from "@mx/web-kfx/app/central/base/types_client_storage";
+import { storehouse } from "@mx/web-kfx/app/central/depot/storehouse";
+import { userHelper } from "@mx/web-kfx/app/central/domain_helpers/user_helper";
 
 export function createUserService() {
   return {

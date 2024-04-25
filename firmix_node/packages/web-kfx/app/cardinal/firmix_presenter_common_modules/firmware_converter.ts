@@ -4,13 +4,13 @@ import {
   numberToHexString,
   parseIntCheckedZeroOrPositiveInteger,
 } from "@mx/auxiliaries/utils/utils_number";
+import { ProjectMetadataFirmwareSpec } from "@mx/web-kfx/app/base/types_project_metadata";
 import {
   convertBinToUf2,
   convertHexToBin,
   getUf2FamilyId,
   readHexBaseAddress,
 } from "uf2gen";
-import { ProjectMetadataFirmwareSpec } from "web-kfx/app/base/types_project_metadata";
 
 export function convertFirmwareBytesToUF2(
   firmwareFileBytes: Uint8Array,

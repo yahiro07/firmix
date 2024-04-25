@@ -1,8 +1,8 @@
 import { encodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
-import { ConfigurationEditItem } from "web-kfx/app/base/types_project_edit";
-import { firmixPresenter_firmwarePatching } from "web-kfx/app/cardinal/firmix_presenter_firmware_patching/mod";
-import { storehouse } from "web-kfx/app/central/depot/storehouse";
-import { projectHelper } from "web-kfx/app/central/domain_helpers/project_helper";
+import { ConfigurationEditItem } from "@mx/web-kfx/app/base/types_project_edit";
+import { firmixPresenter_firmwarePatching } from "@mx/web-kfx/app/cardinal/firmix_presenter_firmware_patching/mod";
+import { storehouse } from "@mx/web-kfx/app/central/depot/storehouse";
+import { projectHelper } from "@mx/web-kfx/app/central/domain_helpers/project_helper";
 
 export function createFirmwareService() {
   return {

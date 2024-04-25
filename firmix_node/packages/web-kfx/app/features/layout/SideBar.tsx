@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
-import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
-import { appConfig } from "web-kfx/app/base/app_config";
-import { useSiteContext } from "web-kfx/app/common/site_context";
-import { LoginUserBox } from "web-kfx/app/features/layout/LoginUserBox";
+import { appConfig } from "@mx/web-kfx/app/base/app_config";
+import { createFCX } from "@mx/web-kfx/app/common/fcx";
+import { useSiteContext } from "@mx/web-kfx/app/common/site_context";
+import { LoginUserBox } from "@mx/web-kfx/app/features/layout/LoginUserBox";
 import { flexVertical } from "../../common_styling/utility_styles";
 import { Nav, NavItem, NavItem_Button } from "../../components/CommonControls";
 

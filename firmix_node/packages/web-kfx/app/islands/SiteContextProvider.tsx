@@ -1,5 +1,8 @@
 import { FC, ReactNode } from "@mx/auxiliaries/fe-deps-react";
-import { SiteContextValue, siteContext } from "web-kfx/app/common/site_context";
+import {
+  SiteContextValue,
+  siteContext,
+} from "@mx/web-kfx/app/common/site_context";
 
 export const SiteContextProvider: FC<{
   value: SiteContextValue;

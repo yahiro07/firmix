@@ -8,15 +8,15 @@ import {
   LocalAsset_Readme,
   LocalAsset_Thumbnail,
   TextFileEntry,
-} from "web-kfx/app/base/types_local_project";
+} from "@mx/web-kfx/app/base/types_local_project";
 import {
   FirmwareContainer,
   ImageFileContainer,
-} from "web-kfx/app/base/types_project_edit";
-import { ProjectMetadataFirmwareSpec } from "web-kfx/app/base/types_project_metadata";
-import { firmixCore_projectLoader } from "web-kfx/app/cardinal/firmix_core_project_loader/mod";
-import { convertFirmwareBytesToUF2 } from "web-kfx/app/cardinal/firmix_presenter_common_modules/firmware_converter";
-import { imageFileLoader } from "web-kfx/app/cardinal/firmix_presenter_common_modules/image_file_loader";
+} from "@mx/web-kfx/app/base/types_project_edit";
+import { ProjectMetadataFirmwareSpec } from "@mx/web-kfx/app/base/types_project_metadata";
+import { firmixCore_projectLoader } from "@mx/web-kfx/app/cardinal/firmix_core_project_loader/mod";
+import { convertFirmwareBytesToUF2 } from "@mx/web-kfx/app/cardinal/firmix_presenter_common_modules/firmware_converter";
+import { imageFileLoader } from "@mx/web-kfx/app/cardinal/firmix_presenter_common_modules/image_file_loader";
 
 export const localAssetBuilder = {
   buildAssetReadme(readmeFile: TextFileEntry | undefined): LocalAsset_Readme {

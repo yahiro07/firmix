@@ -1,8 +1,8 @@
 import { encodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
-import { BinaryFileEntry } from "web-kfx/app/base/types_local_project";
-import { ImageFileContainer } from "web-kfx/app/base/types_project_edit";
+import { BinaryFileEntry } from "@mx/web-kfx/app/base/types_local_project";
+import { ImageFileContainer } from "@mx/web-kfx/app/base/types_project_edit";
 
 export const imageFileLoader = {
   async loadBinaryImageFile(

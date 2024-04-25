@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
 import { ReactNode } from "@mx/auxiliaries/fe-deps-react";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { useRepositoryDisplayInfo } from "@mx/shared/foreign/repository_info_helper";
-import { projectHeadingArea_parts } from "web-kfx/app/features/project/ProjectHeadingArea_Parts";
+import { useRepositoryDisplayInfo } from "@mx/shared/github/repository_info_helper";
+import { projectHeadingArea_parts } from "@mx/web-kfx/app/features/project/ProjectHeadingArea_Parts";
 import { flexVertical } from "../../common_styling/utility_styles";
 
 type Props = {

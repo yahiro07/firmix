@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
-import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
-import { rpcClient } from "web-kfx/app/common/rpc_client";
+import { createFCX } from "@mx/web-kfx/app/common/fcx";
+import { rpcClient } from "@mx/web-kfx/app/common/rpc_client";
 import { flexVertical } from "../../common_styling/utility_styles";
 import {
   ButtonSmall,

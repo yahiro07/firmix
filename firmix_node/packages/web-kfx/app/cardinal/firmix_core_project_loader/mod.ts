@@ -1,14 +1,14 @@
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { pickObjectMembers } from "@mx/auxiliaries/utils/utils_general";
-import { appConfig } from "web-kfx/app/base/app_config";
-import { ImageAssetAttrs } from "web-kfx/app/base/types_app_common";
+import { appConfig } from "@mx/web-kfx/app/base/app_config";
+import { ImageAssetAttrs } from "@mx/web-kfx/app/base/types_app_common";
 import {
   ProjectBoardJsonFileContent,
   ProjectMetadataInput,
   ProjectMetadataJsonFileContent,
-} from "web-kfx/app/base/types_project_metadata";
-import { validateSchemaProjectBoardFileContent } from "web-kfx/app/cardinal/firmix_core_firmware_patching/board_input_validator";
-import { validateSchemaMetadataFileContent } from "web-kfx/app/cardinal/firmix_core_firmware_patching/matada_input_validator";
+} from "@mx/web-kfx/app/base/types_project_metadata";
+import { validateSchemaProjectBoardFileContent } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_patching/board_input_validator";
+import { validateSchemaMetadataFileContent } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_patching/matada_input_validator";
 
 export const firmixCore_projectLoader = {
   loadProjectMetadataFile_json(

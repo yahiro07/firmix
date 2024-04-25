@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { ProjectListItemDto } from "web-kfx/app/base/types_dto";
-import { LinkChildProjectListPage } from "web-kfx/app/features/project/project_common_parts";
-import { projectHeadingArea_parts } from "web-kfx/app/features/project/ProjectHeadingArea_Parts";
+import { ProjectListItemDto } from "@mx/web-kfx/app/base/types_dto";
+import { LinkChildProjectListPage } from "@mx/web-kfx/app/features/project/project_common_parts";
+import { projectHeadingArea_parts } from "@mx/web-kfx/app/features/project/ProjectHeadingArea_Parts";
 import {
   flexAligned,
   flexHorizontal,

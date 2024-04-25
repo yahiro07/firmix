@@ -5,17 +5,20 @@ import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { executeInline } from "@mx/auxiliaries/utils/utils_general";
 import { generateIdTimeSequential } from "@mx/auxiliaries/utils_be/id_generator";
 import { serverImageHelper } from "@mx/auxiliaries/utils_be/server_image_helper";
-import { InputFirmwareFormat } from "web-kfx/app/base/types_app_common";
-import { ProjectEntity, UserEntity } from "web-kfx/app/base/types_db_entity";
+import { InputFirmwareFormat } from "@mx/web-kfx/app/base/types_app_common";
+import {
+  ProjectEntity,
+  UserEntity,
+} from "@mx/web-kfx/app/base/types_db_entity";
 import {
   LocalProjectSubmissionPayload,
   ProjectSubmissionArgument,
-} from "web-kfx/app/base/types_dto_internal";
-import { ProjectMetadataInput } from "web-kfx/app/base/types_project_metadata";
-import { firmixCore_projectLoader } from "web-kfx/app/cardinal/firmix_core_project_loader/mod";
-import { convertFirmwareBytesToUF2 } from "web-kfx/app/cardinal/firmix_presenter_common_modules/firmware_converter";
-import { objectStorageBridge } from "web-kfx/app/central/depot/object_storage_bridge_instance";
-import { storehouse } from "web-kfx/app/central/depot/storehouse";
+} from "@mx/web-kfx/app/base/types_dto_internal";
+import { ProjectMetadataInput } from "@mx/web-kfx/app/base/types_project_metadata";
+import { firmixCore_projectLoader } from "@mx/web-kfx/app/cardinal/firmix_core_project_loader/mod";
+import { convertFirmwareBytesToUF2 } from "@mx/web-kfx/app/cardinal/firmix_presenter_common_modules/firmware_converter";
+import { objectStorageBridge } from "@mx/web-kfx/app/central/depot/object_storage_bridge_instance";
+import { storehouse } from "@mx/web-kfx/app/central/depot/storehouse";
 
 export function createProjectService() {
   const m = {

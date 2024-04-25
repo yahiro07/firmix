@@ -3,9 +3,9 @@ import {
   getDocumentCookieValue,
   setDocumentCookie,
 } from "@mx/auxiliaries/utils_fe/document_cookie_helper";
-import { appConfig } from "web-kfx/app/base/app_config";
-import { fallbackValues } from "web-kfx/app/base/fallback_values";
-import { CoactiveState } from "web-kfx/app/base/types_dto";
+import { appConfig } from "@mx/web-kfx/app/base/app_config";
+import { fallbackValues } from "@mx/web-kfx/app/base/fallback_values";
+import { CoactiveState } from "@mx/web-kfx/app/base/types_dto";
 
 export const coactiveStateWriter = {
   setValue(attrs: Partial<CoactiveState>) {

@@ -1,5 +1,5 @@
 import { createObjectStorageBridge } from "@mx/auxiliaries/object_storage_bridge/mod";
-import { getEnvVariable } from "web-kfx/app/central/base/envs";
+import { getEnvVariable } from "@mx/web-kfx/app/central/base/envs";
 
 export const objectStorageBridge = createObjectStorageBridge({
   s3_access_key_id: getEnvVariable("S3_ACCESS_KEY_ID"),

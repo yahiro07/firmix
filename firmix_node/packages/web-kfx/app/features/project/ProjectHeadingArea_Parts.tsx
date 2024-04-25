@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
-import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
-import { ProjectRepositoryInfo } from "@mx/shared/foreign/types";
+import { ProjectRepositoryInfo } from "@mx/shared/github/types_github";
+import { createFCX } from "@mx/web-kfx/app/common/fcx";
 import { styleTextLinkInheritColor } from "../../common_styling/common_styles";
 import { flexAligned, flexVertical } from "../../common_styling/utility_styles";
 import { Button } from "../../components/CommonControls";

@@ -1,7 +1,10 @@
 import { ServerRpcRouterWithContext } from "@mx/auxiliaries/chibi_rpc/types";
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
-import { AppRpcContext, AppRpcSignatures } from "web-kfx/app/base/types_rpc";
-import { serverShell } from "web-kfx/app/central/server_shell";
+import {
+  AppRpcContext,
+  AppRpcSignatures,
+} from "@mx/web-kfx/app/base/types_rpc";
+import { serverShell } from "@mx/web-kfx/app/central/server_shell";
 
 export const appRpcRouter: ServerRpcRouterWithContext<
   AppRpcSignatures,

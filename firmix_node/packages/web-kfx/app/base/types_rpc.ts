@@ -1,5 +1,5 @@
-import { LocalProjectSubmissionPayload } from "web-kfx/app/base/types_dto_internal";
-import { ConfigurationEditItem } from "web-kfx/app/base/types_project_edit";
+import { LocalProjectSubmissionPayload } from "@mx/web-kfx/app/base/types_dto_internal";
+import { ConfigurationEditItem } from "@mx/web-kfx/app/base/types_project_edit";
 
 type AsyncFn<P, R> = (payload: P) => Promise<R>;
 

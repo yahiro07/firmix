@@ -1,9 +1,9 @@
 import { css } from "@linaria/core";
-import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
 import { uiSystem } from "@mx/shared/common/ui_system";
-import { ProjectRealm } from "web-kfx/app/base/types_app_common";
-import { coactiveStateWriter } from "web-kfx/app/common/coactive_state_writer";
-import { useSiteContext } from "web-kfx/app/common/site_context";
+import { ProjectRealm } from "@mx/web-kfx/app/base/types_app_common";
+import { coactiveStateWriter } from "@mx/web-kfx/app/common/coactive_state_writer";
+import { createFCX } from "@mx/web-kfx/app/common/fcx";
+import { useSiteContext } from "@mx/web-kfx/app/common/site_context";
 import { uiStyleClickable } from "../../common_styling/common_styles";
 import { flexAligned } from "../../common_styling/utility_styles";
 

@@ -1,8 +1,8 @@
 import { css } from "@linaria/core";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { ProjectListItemDto } from "web-kfx/app/base/types_dto";
-import { HomeTargetSelectionBar } from "web-kfx/app/features/project_list/HomeTargetSelectionBar";
-import { ProjectListItemCard } from "web-kfx/app/features/project_list/ProjectListItemCard";
+import { ProjectListItemDto } from "@mx/web-kfx/app/base/types_dto";
+import { HomeTargetSelectionBar } from "@mx/web-kfx/app/features/project_list/HomeTargetSelectionBar";
+import { ProjectListItemCard } from "@mx/web-kfx/app/features/project_list/ProjectListItemCard";
 import { flexVertical } from "../common_styling/utility_styles";
 
 type Props = {

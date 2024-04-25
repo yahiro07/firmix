@@ -1,5 +1,5 @@
 import { formatZodErrorToLines } from "@mx/auxiliaries/utils/zod_helper";
-import { ProjectBoardJsonFileContent } from "web-kfx/app/base/types_project_metadata";
+import { ProjectBoardJsonFileContent } from "@mx/web-kfx/app/base/types_project_metadata";
 import { z } from "zod";
 
 const schemaProjectBoardFileContent = z.object({

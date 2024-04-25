@@ -1,9 +1,9 @@
+import { serverShell } from "@mx/web-kfx/app/central/server_shell";
+import { clientStorageImpl } from "@mx/web-kfx/app/central/system/client_storage_impl";
+import { ProjectDetailPage } from "@mx/web-kfx/app/islands/ProjectDetailPage";
 import { createLoader, createPage } from "@mx/web-kfx/app/system/route_helper";
 import { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { serverShell } from "web-kfx/app/central/server_shell";
-import { clientStorageImpl } from "web-kfx/app/central/system/client_storage_impl";
-import { ProjectDetailPage } from "web-kfx/app/islands/ProjectDetailPage";
 
 export const loader = createLoader(async ({ request, params }) => {
   const loginUserClue = clientStorageImpl.readCookieLoginUserClue(request);

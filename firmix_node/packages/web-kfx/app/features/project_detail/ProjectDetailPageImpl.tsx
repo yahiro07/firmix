@@ -7,20 +7,20 @@ import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import {
   ConfigurationSourceItem,
   ProjectDetailDto,
-} from "web-kfx/app/base/types_dto";
-import { ConfigurationEditItem } from "web-kfx/app/base/types_project_edit";
-import { firmixCore_firmwareConfiguration } from "web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
-import { firmixPresenter_firmwarePatching } from "web-kfx/app/cardinal/firmix_presenter_firmware_patching/mod";
-import { rpcClient } from "web-kfx/app/common/rpc_client";
-import { useSiteContext } from "web-kfx/app/common/site_context";
-import { ParametersConfigurationArea } from "web-kfx/app/features/project/ParametersConfigurationArea";
+} from "@mx/web-kfx/app/base/types_dto";
+import { ConfigurationEditItem } from "@mx/web-kfx/app/base/types_project_edit";
+import { firmixCore_firmwareConfiguration } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
+import { firmixPresenter_firmwarePatching } from "@mx/web-kfx/app/cardinal/firmix_presenter_firmware_patching/mod";
+import { rpcClient } from "@mx/web-kfx/app/common/rpc_client";
+import { useSiteContext } from "@mx/web-kfx/app/common/site_context";
+import { ParametersConfigurationArea } from "@mx/web-kfx/app/features/project/ParametersConfigurationArea";
 import {
   LinkChildProjectListPage,
   LinkParentProjectPage,
-} from "web-kfx/app/features/project/project_common_parts";
-import { ProjectHeadingArea } from "web-kfx/app/features/project/ProjectHeadingArea";
-import { ProjectReadmeArea } from "web-kfx/app/features/project/ProjectReadmeArea";
-import { ProjectOperationPart } from "web-kfx/app/features/project_detail/ProjectOperationPart";
+} from "@mx/web-kfx/app/features/project/project_common_parts";
+import { ProjectHeadingArea } from "@mx/web-kfx/app/features/project/ProjectHeadingArea";
+import { ProjectReadmeArea } from "@mx/web-kfx/app/features/project/ProjectReadmeArea";
+import { ProjectOperationPart } from "@mx/web-kfx/app/features/project_detail/ProjectOperationPart";
 
 type Props = {
   project: ProjectDetailDto;
