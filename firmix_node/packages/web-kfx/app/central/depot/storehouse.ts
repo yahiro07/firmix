@@ -1,6 +1,6 @@
-import { createMzDbDataMigrator } from "auxiliaries/mz_data_migrator/mod";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { createMongoGeneralCabinet } from "shared/central/mongo_general_cabinet";
+import { createMzDbDataMigrator } from "@mx/auxiliaries/mz_data_migrator/mod";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { createMongoGeneralCabinet } from "@mx/shared/central/mongo_general_cabinet";
 import { getEnvVariable } from "../base/envs";
 import { connectToMongoDb, getCollections } from "./db_core";
 import { migrationDefinition } from "./migrations";

@@ -1,5 +1,5 @@
-import { encodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { filePathHelper } from "auxiliaries/utils/file_path_helper";
+import { encodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
 import {
   BinaryFileEntry,
   BinaryFileEntryWithTimestamp,
@@ -78,9 +78,8 @@ export const localAssetBuilder = {
     let thumbnailContainer: ImageFileContainer;
 
     try {
-      thumbnailContainer = await imageFileLoader.loadBinaryImageFile(
-        thumbnailFile
-      );
+      thumbnailContainer =
+        await imageFileLoader.loadBinaryImageFile(thumbnailFile);
     } catch (error: any) {
       console.error(error);
       return {

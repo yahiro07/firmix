@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
-import { ReactNode } from "auxiliaries/fe-deps-react";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { useRepositoryDisplayInfo } from "shared/foreign/repository_info_helper";
+import { ReactNode } from "@mx/auxiliaries/fe-deps-react";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
+import { useRepositoryDisplayInfo } from "@mx/shared/foreign/repository_info_helper";
 import { projectHeadingArea_parts } from "web-kfx/app/features/project/ProjectHeadingArea_Parts";
 import { flexVertical } from "../../common_styling/utility_styles";
 

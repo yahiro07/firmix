@@ -3,7 +3,7 @@
 // import { Resvg } from "@resvg/resvg-js";
 import * as fs from "fs/promises";
 // import satori from "satori";
-import { createLoader } from "shared/system/route_helper";
+import { createLoader } from "@mx/web-firmix/app/system/route_helper";
 import { ProjectDetailDto } from "../base/types_dto";
 import { serverShell } from "../central/server_shell";
 

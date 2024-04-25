@@ -1,12 +1,12 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { pickObjectMembers } from "auxiliaries/utils/utils_general";
-import { generateIdTimeSequential } from "auxiliaries/utils_be/id_generator";
-import { OAuthLoginSourceUserInfo } from "shared/base/types_oauth";
-import { UserEntity } from "web-firmix/app/base/types_db_entity";
-import { LoginUserClue } from "web-firmix/app/base/types_dto_internal";
-import { CookieOutputJob } from "web-firmix/app/central/base/types_client_storage";
-import { storehouse } from "web-firmix/app/central/depot/storehouse";
-import { userHelper } from "web-firmix/app/central/domain_helpers/user_helper";
+import { OAuthLoginSourceUserInfo } from "@mx/auxiliaries/oauth_fetcher/types_oauth";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { pickObjectMembers } from "@mx/auxiliaries/utils/utils_general";
+import { generateIdTimeSequential } from "@mx/auxiliaries/utils_be/id_generator";
+import { UserEntity } from "@mx/web-firmix/app/base/types_db_entity";
+import { LoginUserClue } from "@mx/web-firmix/app/base/types_dto_internal";
+import { CookieOutputJob } from "@mx/web-firmix/app/central/base/types_client_storage";
+import { storehouse } from "@mx/web-firmix/app/central/depot/storehouse";
+import { userHelper } from "@mx/web-firmix/app/central/domain_helpers/user_helper";
 
 export function createUserService() {
   return {

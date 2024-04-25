@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
+import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,

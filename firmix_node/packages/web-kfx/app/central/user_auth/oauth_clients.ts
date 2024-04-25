@@ -1,4 +1,4 @@
-import { createOAuth2Client } from "auxiliaries/oauth_client/oauth_client";
+import { createOAuth2Client } from "@mx/auxiliaries/oauth_client/oauth_client";
 import { getEnvVariable } from "web-kfx/app/central/base/envs";
 
 export const oauthClientGithub = createOAuth2Client({

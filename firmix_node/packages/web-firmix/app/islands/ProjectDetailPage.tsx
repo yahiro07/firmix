@@ -1,6 +1,6 @@
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { ProjectDetailDto } from "web-firmix/app/base/types_dto";
-import { ProjectDetailPageImpl } from "web-firmix/app/features/project_detail/ProjectDetailPageImpl";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
+import { ProjectDetailDto } from "@mx/web-firmix/app/base/types_dto";
+import { ProjectDetailPageImpl } from "@mx/web-firmix/app/features/project_detail/ProjectDetailPageImpl";
 
 type Props = {
   project: ProjectDetailDto;

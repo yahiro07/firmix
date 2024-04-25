@@ -1,14 +1,14 @@
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { useCallback } from "auxiliaries/fe-deps-react";
-import { useReasyState } from "auxiliaries/reasy/reasy_state_local";
-import { raiseError } from "auxiliaries/utils/error_util";
+import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { useCallback } from "@mx/auxiliaries/fe-deps-react";
+import { useReasyState } from "@mx/auxiliaries/reasy/reasy_state_local";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import {
   createIndexedDbStorageAdapter,
   createLocalStorageAdapter,
-} from "auxiliaries/utils_fe/browser_storage_adapter";
-import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link";
-import { ensureFileHandlePermission } from "auxiliaries/utils_fe/local_filesystem_helper";
-import { useEffectAsync } from "auxiliaries/utils_fe_react/hooks";
+} from "@mx/auxiliaries/utils_fe/browser_storage_adapter";
+import { downloadBinaryFileBlob } from "@mx/auxiliaries/utils_fe/downloading_link";
+import { ensureFileHandlePermission } from "@mx/auxiliaries/utils_fe/local_filesystem_helper";
+import { useEffectAsync } from "@mx/auxiliaries/utils_fe_react/hooks";
 import { LocalProjectSubmissionPayload } from "web-kfx/app/base/types_dto_internal";
 import { LocalDevelopmentProject } from "web-kfx/app/base/types_local_project";
 import { ConfigurationEditItem } from "web-kfx/app/base/types_project_edit";

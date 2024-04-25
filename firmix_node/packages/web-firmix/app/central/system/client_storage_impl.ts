@@ -1,23 +1,23 @@
 import {
   decodeTextBase64,
   encodeTextBase64,
-} from "auxiliaries/base_env_adapters/base64";
-import { myJwt_create, myJwt_verify } from "auxiliaries/myjwt/mod";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { copyObjectMembers } from "auxiliaries/utils/utils_general";
+} from "@mx/auxiliaries/base_env_adapters/base64";
+import { myJwt_create, myJwt_verify } from "@mx/auxiliaries/myjwt/mod";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { copyObjectMembers } from "@mx/auxiliaries/utils/utils_general";
 import {
   Cookie,
   deleteCookie,
   getCookies,
   setCookie,
-} from "shared/system/cookie";
-import { appConfig } from "web-firmix/app/base/app_config";
-import { fallbackValues } from "web-firmix/app/base/fallback_values";
-import { CoactiveState } from "web-firmix/app/base/types_dto";
-import { LoginUserClue } from "web-firmix/app/base/types_dto_internal";
-import { getEnvVariable } from "web-firmix/app/central/base/envs";
-import { serverConfig } from "web-firmix/app/central/base/server_config";
-import { CookieOutputJob } from "web-firmix/app/central/base/types_client_storage";
+} from "@mx/auxiliaries/utils_be/cookie";
+import { appConfig } from "@mx/web-firmix/app/base/app_config";
+import { fallbackValues } from "@mx/web-firmix/app/base/fallback_values";
+import { CoactiveState } from "@mx/web-firmix/app/base/types_dto";
+import { LoginUserClue } from "@mx/web-firmix/app/base/types_dto_internal";
+import { getEnvVariable } from "@mx/web-firmix/app/central/base/envs";
+import { serverConfig } from "@mx/web-firmix/app/central/base/server_config";
+import { CookieOutputJob } from "@mx/web-firmix/app/central/base/types_client_storage";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);

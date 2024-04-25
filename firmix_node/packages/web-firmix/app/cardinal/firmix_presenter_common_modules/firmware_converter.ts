@@ -1,16 +1,16 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { filePathHelper } from "auxiliaries/utils/file_path_helper";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
 import {
   numberToHexString,
   parseIntCheckedZeroOrPositiveInteger,
-} from "auxiliaries/utils/utils_number";
+} from "@mx/auxiliaries/utils/utils_number";
 import {
   convertBinToUf2,
   convertHexToBin,
   getUf2FamilyId,
   readHexBaseAddress,
 } from "uf2gen";
-import { ProjectMetadataFirmwareSpec } from "web-firmix/app/base/types_project_metadata";
+import { ProjectMetadataFirmwareSpec } from "../../base/types_project_metadata";
 
 export function convertFirmwareBytesToUF2(
   firmwareFileBytes: Uint8Array,

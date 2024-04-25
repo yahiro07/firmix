@@ -1,5 +1,8 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { createPostHandler, responseJson } from "shared/system/route_helper";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import {
+  createPostHandler,
+  responseJson,
+} from "@mx/web-kfx/app/system/route_helper";
 import { InputFirmwareFormat } from "web-kfx/app/base/types_app_common";
 import { serverShell } from "web-kfx/app/central/server_shell";
 

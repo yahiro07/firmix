@@ -1,5 +1,5 @@
-import "auxiliaries/typings/file_system_access";
-import { raiseError } from "auxiliaries/utils/error_util";
+import "@mx/auxiliaries/typings/file_system_access";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import {
   BinaryFileEntryWithTimestamp,
   TextFileEntry,

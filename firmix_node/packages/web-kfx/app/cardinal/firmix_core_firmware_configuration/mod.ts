@@ -1,5 +1,5 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { padZeros, seqNumbers } from "auxiliaries/utils/utils_array";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { padZeros, seqNumbers } from "@mx/auxiliaries/utils/utils_array";
 import { CustomDataItem } from "web-kfx/app/base/types_core_entity";
 import {
   ConfigurationSourceItem,

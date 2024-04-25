@@ -1,16 +1,16 @@
 import {
   decodeTextBase64,
   encodeTextBase64,
-} from "auxiliaries/base_env_adapters/base64";
-import { myJwt_create, myJwt_verify } from "auxiliaries/myjwt/mod";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { copyObjectMembers } from "auxiliaries/utils/utils_general";
+} from "@mx/auxiliaries/base_env_adapters/base64";
+import { myJwt_create, myJwt_verify } from "@mx/auxiliaries/myjwt/mod";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { copyObjectMembers } from "@mx/auxiliaries/utils/utils_general";
 import {
   Cookie,
   deleteCookie,
   getCookies,
   setCookie,
-} from "shared/system/cookie";
+} from "@mx/shared/system/cookie";
 import { appConfig } from "web-kfx/app/base/app_config";
 import { fallbackValues } from "web-kfx/app/base/fallback_values";
 import { CoactiveState } from "web-kfx/app/base/types_dto";

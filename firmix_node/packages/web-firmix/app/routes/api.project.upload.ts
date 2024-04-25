@@ -1,7 +1,10 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { createPostHandler, responseJson } from "shared/system/route_helper";
-import { InputFirmwareFormat } from "web-firmix/app/base/types_app_common";
-import { serverShell } from "web-firmix/app/central/server_shell";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { InputFirmwareFormat } from "@mx/web-firmix/app/base/types_app_common";
+import { serverShell } from "@mx/web-firmix/app/central/server_shell";
+import {
+  createPostHandler,
+  responseJson,
+} from "@mx/web-firmix/app/system/route_helper";
 
 export const action = createPostHandler(async ({ request }) => {
   const authHeaderValue = request.headers.get("Authorization");

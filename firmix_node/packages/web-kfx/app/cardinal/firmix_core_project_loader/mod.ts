@@ -1,5 +1,5 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { pickObjectMembers } from "auxiliaries/utils/utils_general";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { pickObjectMembers } from "@mx/auxiliaries/utils/utils_general";
 import { appConfig } from "web-kfx/app/base/app_config";
 import { ImageAssetAttrs } from "web-kfx/app/base/types_app_common";
 import {

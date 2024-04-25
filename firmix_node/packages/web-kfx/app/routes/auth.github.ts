@@ -1,7 +1,7 @@
 import {
   createGetHandler,
   getRequestSourceUrl,
-} from "shared/system/route_helper";
+} from "@mx/web-kfx/app/system/route_helper";
 import { oauthClientGithub } from "web-kfx/app/central/user_auth/oauth_clients";
 
 export const loader = createGetHandler(async ({ request }) => {

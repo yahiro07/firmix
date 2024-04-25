@@ -1,8 +1,8 @@
-import { encodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { filePathHelper } from "auxiliaries/utils/file_path_helper";
-import { BinaryFileEntry } from "web-firmix/app/base/types_local_project";
-import { ImageFileContainer } from "web-firmix/app/base/types_project_edit";
+import { encodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
+import { BinaryFileEntry } from "@mx/web-firmix/app/base/types_local_project";
+import { ImageFileContainer } from "@mx/web-firmix/app/base/types_project_edit";
 
 export const imageFileLoader = {
   async loadBinaryImageFile(

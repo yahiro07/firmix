@@ -1,5 +1,5 @@
-import { createRpcClient } from "auxiliaries/chibi_rpc/client";
-import { AppRpcSignatures } from "web-firmix/app/base/types_rpc";
+import { createRpcClient } from "@mx/auxiliaries/chibi_rpc/client";
+import { AppRpcSignatures } from "@mx/web-firmix/app/base/types_rpc";
 
 export const rpcClient = createRpcClient<AppRpcSignatures>("/api/rpc", {
   commonErrorHandler(errorMessage) {

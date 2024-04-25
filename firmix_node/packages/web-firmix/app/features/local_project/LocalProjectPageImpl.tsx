@@ -1,14 +1,14 @@
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 
-import { useDateTimeTextWithElapsed } from "shared/fe_modules/display_data_hooks";
-import { LocalProjectAssetsArea } from "web-firmix/app/features/local_project/LocalProjectAssetsArea";
-import { LocalProjectLoadingArea } from "web-firmix/app/features/local_project/LocalProjectLoadingArea";
-import { useLocalProjectPageStore } from "web-firmix/app/features/local_project/local_project_page_store";
+import { useDateTimeTextWithElapsed } from "@mx/shared/fe_modules/display_data_hooks";
+import { LocalProjectAssetsArea } from "@mx/web-firmix/app/features/local_project/LocalProjectAssetsArea";
+import { LocalProjectLoadingArea } from "@mx/web-firmix/app/features/local_project/LocalProjectLoadingArea";
+import { useLocalProjectPageStore } from "@mx/web-firmix/app/features/local_project/local_project_page_store";
 import {
   LocalProjectHeadingAreaDummy,
   ProjectHeadingArea,
-} from "web-firmix/app/features/project/ProjectHeadingArea";
-import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
+} from "@mx/web-firmix/app/features/project/ProjectHeadingArea";
+import { ProjectReadmeArea } from "@mx/web-firmix/app/features/project/ProjectReadmeArea";
 import { Box, Center, Stack } from "../../../styled-system/jsx";
 import { createFCE } from "../../common_styling/create_fce";
 import { IconIconifyZ } from "../../components/IconIconifyZ";

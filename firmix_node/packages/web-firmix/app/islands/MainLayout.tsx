@@ -1,5 +1,5 @@
+import { SideBar } from "@mx/web-firmix/app/features/layout/SideBar";
 import { ReactNode } from "react";
-import { SideBar } from "web-firmix/app/features/layout/SideBar";
 import { Box, Flex, HStack, Spacer } from "../../styled-system/jsx";
 import { createFCE } from "../common_styling/create_fce";
 import { H1 } from "../common_styling/utility_components";

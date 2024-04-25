@@ -1,13 +1,12 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { filePathHelper } from "auxiliaries/utils/file_path_helper";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
 import {
   BinaryFileEntryWithTimestamp,
   LocalDevelopmentProject,
-} from "web-firmix/app/base/types_local_project";
-import { FirmwareContainer } from "web-firmix/app/base/types_project_edit";
-
-import { createLocalDirectoryReader } from "web-firmix/app/cardinal/firmix_presenter_common_modules/local_directory_reader";
-import { localAssetBuilder } from "web-firmix/app/cardinal/firmix_presenter_local_project_edit/local_asset_builder";
+} from "@mx/web-firmix/app/base/types_local_project";
+import { FirmwareContainer } from "@mx/web-firmix/app/base/types_project_edit";
+import { createLocalDirectoryReader } from "@mx/web-firmix/app/cardinal/firmix_presenter_common_modules/local_directory_reader";
+import { localAssetBuilder } from "@mx/web-firmix/app/cardinal/firmix_presenter_local_project_edit/local_asset_builder";
 
 type FirmixPresenter_LocalProjectEdit = {
   loadLocalDevelopmentProject(
@@ -27,9 +26,8 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
       const readmeFile = await dirReader.readTextFile("readme.md");
       const thumbnailPngFile = await dirReader.readBinaryFile("thumbnail.png");
       const thumbnailJpgFile = await dirReader.readBinaryFile("thumbnail.jpg");
-      const thumbnailJpegFile = await dirReader.readBinaryFile(
-        "thumbnail.jpeg"
-      );
+      const thumbnailJpegFile =
+        await dirReader.readBinaryFile("thumbnail.jpeg");
 
       const assetMetadata = localAssetBuilder.buildAssetMetadata(
         metadataFile,
@@ -46,9 +44,8 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
           firmwareFile = await dirReader.readBinaryFile(firmwareFilePath);
           const firmwareFolderPath =
             filePathHelper.getFolderPath(firmwareFilePath);
-          firmwareDirectoryHandle = await dirReader.getSubDirectoryHandle(
-            firmwareFolderPath
-          );
+          firmwareDirectoryHandle =
+            await dirReader.getSubDirectoryHandle(firmwareFolderPath);
         }
       } catch (error) {
         console.error(error);

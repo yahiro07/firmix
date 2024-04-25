@@ -1,6 +1,6 @@
-import { useState } from "auxiliaries/fe-deps-react";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { rpcClient } from "web-firmix/app/common/rpc_client";
+import { useState } from "@mx/auxiliaries/fe-deps-react";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
+import { rpcClient } from "@mx/web-firmix/app/common/rpc_client";
 import { HStack, Stack } from "../../styled-system/jsx";
 import { Input } from "../common_styling/utility_components";
 import { ButtonSmall } from "../components/CommonControls";

@@ -1,4 +1,4 @@
-import { raiseError } from "auxiliaries/utils/error_util";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { getEnvVariable } from "web-kfx/app/central/base/envs";
 
 if (typeof window !== "undefined") {

@@ -1,18 +1,18 @@
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { useCallback } from "auxiliaries/fe-deps-react";
-import { useReasyState } from "auxiliaries/reasy/reasy_state_local";
-import { raiseError } from "auxiliaries/utils/error_util";
+import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { useCallback } from "@mx/auxiliaries/fe-deps-react";
+import { useReasyState } from "@mx/auxiliaries/reasy/reasy_state_local";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import {
   createIndexedDbStorageAdapter,
   createLocalStorageAdapter,
-} from "auxiliaries/utils_fe/browser_storage_adapter";
-import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link";
-import { ensureFileHandlePermission } from "auxiliaries/utils_fe/local_filesystem_helper";
-import { useEffectAsync } from "auxiliaries/utils_fe_react/hooks";
-import { LocalProjectSubmissionPayload } from "web-firmix/app/base/types_dto_internal";
-import { LocalDevelopmentProject } from "web-firmix/app/base/types_local_project";
-import { firmixPresenter_localProjectEdit } from "web-firmix/app/cardinal/firmix_presenter_local_project_edit/mod";
-import { rpcClient } from "web-firmix/app/common/rpc_client";
+} from "@mx/auxiliaries/utils_fe/browser_storage_adapter";
+import { downloadBinaryFileBlob } from "@mx/auxiliaries/utils_fe/downloading_link";
+import { ensureFileHandlePermission } from "@mx/auxiliaries/utils_fe/local_filesystem_helper";
+import { useEffectAsync } from "@mx/auxiliaries/utils_fe_react/hooks";
+import { LocalProjectSubmissionPayload } from "@mx/web-firmix/app/base/types_dto_internal";
+import { LocalDevelopmentProject } from "@mx/web-firmix/app/base/types_local_project";
+import { firmixPresenter_localProjectEdit } from "@mx/web-firmix/app/cardinal/firmix_presenter_local_project_edit/mod";
+import { rpcClient } from "@mx/web-firmix/app/common/rpc_client";
 
 const localProjectStorage =
   createLocalStorageAdapter<LocalDevelopmentProject>("fr0_local_project");

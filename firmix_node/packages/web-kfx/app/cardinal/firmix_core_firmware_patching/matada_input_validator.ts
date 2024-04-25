@@ -1,4 +1,4 @@
-import { formatZodErrorToLines } from "auxiliaries/utils/zod_helper";
+import { formatZodErrorToLines } from "@mx/auxiliaries/utils/zod_helper";
 import { ProjectMetadataJsonFileContent } from "web-kfx/app/base/types_project_metadata";
 import { z } from "zod";
 

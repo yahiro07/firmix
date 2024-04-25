@@ -1,4 +1,4 @@
-import { rpcClient } from "web-firmix/app/common/rpc_client";
+import { rpcClient } from "@mx/web-firmix/app/common/rpc_client";
 import { Stack } from "../../../styled-system/jsx";
 import { createFCE } from "../../common_styling/create_fce";
 import {

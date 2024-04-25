@@ -1,9 +1,9 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { filePathHelper } from "auxiliaries/utils/file_path_helper";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
 import {
   numberToHexString,
   parseIntCheckedZeroOrPositiveInteger,
-} from "auxiliaries/utils/utils_number";
+} from "@mx/auxiliaries/utils/utils_number";
 import {
   convertBinToUf2,
   convertHexToBin,

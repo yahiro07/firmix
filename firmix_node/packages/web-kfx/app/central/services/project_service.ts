@@ -1,10 +1,10 @@
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { generateHashMd5 } from "auxiliaries/base_env_adapters/crypto";
-import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { executeInline } from "auxiliaries/utils/utils_general";
-import { generateIdTimeSequential } from "auxiliaries/utils_be/id_generator";
-import { serverImageHelper } from "auxiliaries/utils_be/server_image_helper";
+import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { generateHashMd5 } from "@mx/auxiliaries/base_env_adapters/crypto";
+import { getDateTimeText_yyyyMMddHHmmss } from "@mx/auxiliaries/utils/date_time_helper";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { executeInline } from "@mx/auxiliaries/utils/utils_general";
+import { generateIdTimeSequential } from "@mx/auxiliaries/utils_be/id_generator";
+import { serverImageHelper } from "@mx/auxiliaries/utils_be/server_image_helper";
 import { InputFirmwareFormat } from "web-kfx/app/base/types_app_common";
 import { ProjectEntity, UserEntity } from "web-kfx/app/base/types_db_entity";
 import {
@@ -99,9 +99,8 @@ export function createProjectService() {
 
       const childProjectIds = existingProject?.childProjectIds ?? [];
 
-      const imageAttrs = await serverImageHelper.loadImageFileAssetAttrs(
-        thumbnailFileBytes
-      );
+      const imageAttrs =
+        await serverImageHelper.loadImageFileAssetAttrs(thumbnailFileBytes);
       firmixCore_projectLoader.validateOnlineThumbnailOnServer(imageAttrs);
 
       const firmwareFormatValid = ["uf2", "bin", "hex"].includes(

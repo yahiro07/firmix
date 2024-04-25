@@ -1,7 +1,7 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { pickObjectMembers } from "auxiliaries/utils/utils_general";
-import { generateIdTimeSequential } from "auxiliaries/utils_be/id_generator";
-import { OAuthLoginSourceUserInfo } from "shared/base/types_oauth";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { pickObjectMembers } from "@mx/auxiliaries/utils/utils_general";
+import { generateIdTimeSequential } from "@mx/auxiliaries/utils_be/id_generator";
+import { OAuthLoginSourceUserInfo } from "@mx/shared/base/types_oauth";
 import { UserEntity } from "web-kfx/app/base/types_db_entity";
 import { LoginUserClue } from "web-kfx/app/base/types_dto_internal";
 import { CookieOutputJob } from "web-kfx/app/central/base/types_client_storage";

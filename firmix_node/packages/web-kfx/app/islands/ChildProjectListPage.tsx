@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { Link } from "@remix-run/react";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
 import {
   ProjectDetailDto,
   ProjectListItemDto,

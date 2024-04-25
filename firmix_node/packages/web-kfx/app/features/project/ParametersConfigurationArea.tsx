@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import {
   ConfigurationSourceItem,
   ConfigurationSourceItemWrapper,

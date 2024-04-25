@@ -1,11 +1,11 @@
 import { css } from "@linaria/core";
-import { useState } from "auxiliaries/fe-deps-react";
-import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper";
+import { useState } from "@mx/auxiliaries/fe-deps-react";
+import { serverFetchHelper } from "@mx/auxiliaries/utils_be/server_fetch_helper";
 import {
   idbKeyValGet,
   idbKeyValSet,
-} from "auxiliaries/utils_fe/browser_storage_adapter";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+} from "@mx/auxiliaries/utils_fe/browser_storage_adapter";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { flexVertical } from "../common_styling/utility_styles";
 import { ButtonSmall } from "../components/CommonControls";
 

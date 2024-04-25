@@ -1,5 +1,5 @@
-import { ProjectListItemDto } from "web-firmix/app/base/types_dto";
-import { ProjectListItemCard } from "web-firmix/app/features/project_list/ProjectListItemCard";
+import { ProjectListItemDto } from "@mx/web-firmix/app/base/types_dto";
+import { ProjectListItemCard } from "@mx/web-firmix/app/features/project_list/ProjectListItemCard";
 import { Stack } from "../../styled-system/jsx";
 import { createFCE } from "../common_styling/create_fce";
 

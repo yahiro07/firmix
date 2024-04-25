@@ -1,8 +1,8 @@
-import { copyObjectMembers } from "auxiliaries/utils/utils_general";
+import { copyObjectMembers } from "@mx/auxiliaries/utils/utils_general";
 import {
   getDocumentCookieValue,
   setDocumentCookie,
-} from "auxiliaries/utils_fe/document_cookie_helper";
+} from "@mx/auxiliaries/utils_fe/document_cookie_helper";
 import { appConfig } from "web-kfx/app/base/app_config";
 import { fallbackValues } from "web-kfx/app/base/fallback_values";
 import { CoactiveState } from "web-kfx/app/base/types_dto";

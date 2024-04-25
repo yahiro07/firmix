@@ -1,6 +1,6 @@
-import { appConfig } from "web-firmix/app/base/app_config";
-import { useSiteContext } from "web-firmix/app/common/site_context";
-import { LoginUserBox } from "web-firmix/app/features/layout/LoginUserBox";
+import { appConfig } from "@mx/web-firmix/app/base/app_config";
+import { useSiteContext } from "@mx/web-firmix/app/common/site_context";
+import { LoginUserBox } from "@mx/web-firmix/app/features/layout/LoginUserBox";
 import { Stack } from "../../../styled-system/jsx";
 import { createFCE } from "../../common_styling/create_fce";
 import { Nav, NavItem, NavItem_Button } from "../../components/CommonControls";

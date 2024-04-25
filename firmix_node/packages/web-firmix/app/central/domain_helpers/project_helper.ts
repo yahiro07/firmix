@@ -1,5 +1,5 @@
-import { ProjectEntity } from "web-firmix/app/base/types_db_entity";
-import { getEnvVariable } from "web-firmix/app/central/base/envs";
+import { ProjectEntity } from "@mx/web-firmix/app/base/types_db_entity";
+import { getEnvVariable } from "@mx/web-firmix/app/central/base/envs";
 
 export const projectHelper = {
   getThumbnailImageUrl(project: ProjectEntity): string {

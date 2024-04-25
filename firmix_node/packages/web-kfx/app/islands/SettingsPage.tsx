@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
-import { useState } from "auxiliaries/fe-deps-react";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { useState } from "@mx/auxiliaries/fe-deps-react";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { rpcClient } from "web-kfx/app/common/rpc_client";
 import {
   flexAligned,

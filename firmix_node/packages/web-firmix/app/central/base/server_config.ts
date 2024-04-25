@@ -1,5 +1,5 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { getEnvVariable } from "web-firmix/app/central/base/envs";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { getEnvVariable } from "@mx/web-firmix/app/central/base/envs";
 
 if (typeof window !== "undefined") {
   raiseError(`invalid import, this code must not loaded in frontend`);

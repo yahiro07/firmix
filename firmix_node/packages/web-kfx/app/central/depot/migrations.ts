@@ -1,4 +1,4 @@
-import { IMzDbDataMigrationDefinition } from "auxiliaries/mz_data_migrator/types";
+import { IMzDbDataMigrationDefinition } from "@mx/auxiliaries/mz_data_migrator/types";
 import { Db } from "mongodb";
 import { getCollections } from "./db_core";
 

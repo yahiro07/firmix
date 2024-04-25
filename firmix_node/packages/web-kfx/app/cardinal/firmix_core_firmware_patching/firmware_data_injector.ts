@@ -1,11 +1,11 @@
-import { firmwareBinaryModifier_patchUf2FileContent } from "auxiliaries/firmware_manipulation_helper/firmware_binary_modifier_uf2";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { sumArrayNumbers } from "auxiliaries/utils/utils_array";
+import { firmwareBinaryModifier_patchUf2FileContent } from "@mx/auxiliaries/firmware_manipulation_helper/firmware_binary_modifier_uf2";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { sumArrayNumbers } from "@mx/auxiliaries/utils/utils_array";
 import {
   convertTextToBinaryBytes,
   stringifyBytesHex,
-} from "auxiliaries/utils/utils_binary";
-import { generateRandomId } from "auxiliaries/utils_be/id_generator";
+} from "@mx/auxiliaries/utils/utils_binary";
+import { generateRandomId } from "@mx/auxiliaries/utils_be/id_generator";
 import {
   ConfigurationEditItem,
   FirmwarePatchingBlob,

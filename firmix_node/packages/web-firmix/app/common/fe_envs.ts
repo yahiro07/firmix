@@ -1,4 +1,4 @@
-import { raiseError } from "auxiliaries/utils/error_util";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
 
 type FeEnvVariables = {
   ENV_TYPE: "development" | "production";

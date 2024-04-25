@@ -1,5 +1,5 @@
+import { createLoader, createPage } from "@mx/web-kfx/app/system/route_helper";
 import { useLoaderData } from "@remix-run/react";
-import { createLoader, createPage } from "shared/system/route_helper";
 import { clientStorageImpl } from "web-kfx/app/central/system/client_storage_impl";
 import { LocalProjectPage } from "web-kfx/app/islands/LocalProjectPage";
 

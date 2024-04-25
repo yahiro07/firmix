@@ -1,6 +1,6 @@
 import { confirm } from "@inquirer/prompts";
-import { createMzDbDataMigrator } from "auxiliaries/mz_data_migrator/mod";
-import { raiseError } from "auxiliaries/utils/error_util";
+import { createMzDbDataMigrator } from "@mx/auxiliaries/mz_data_migrator/mod";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { getEnvVariable } from "../base/envs";
 import { connectToMongoDb, mongoGlobal } from "../depot/db_core";
 import { migrationDefinition } from "../depot/migrations";

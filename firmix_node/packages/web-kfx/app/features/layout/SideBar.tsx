@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
+import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
 import { appConfig } from "web-kfx/app/base/app_config";
 import { useSiteContext } from "web-kfx/app/common/site_context";
 import { LoginUserBox } from "web-kfx/app/features/layout/LoginUserBox";

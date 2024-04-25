@@ -1,4 +1,4 @@
-import { createObjectStorageBridge } from "auxiliaries/object_storage_bridge/mod";
+import { createObjectStorageBridge } from "@mx/auxiliaries/object_storage_bridge/mod";
 import { getEnvVariable } from "web-kfx/app/central/base/envs";
 
 export const objectStorageBridge = createObjectStorageBridge({

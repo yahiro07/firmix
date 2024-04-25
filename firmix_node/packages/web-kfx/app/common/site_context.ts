@@ -1,4 +1,4 @@
-import { createContext, useContext } from "auxiliaries/fe-deps-react";
+import { createContext, useContext } from "@mx/auxiliaries/fe-deps-react";
 import { CoactiveState } from "web-kfx/app/base/types_dto";
 import { LoginUser } from "web-kfx/app/base/types_dto_internal";
 

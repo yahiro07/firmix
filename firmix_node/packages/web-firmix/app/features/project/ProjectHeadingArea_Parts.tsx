@@ -1,5 +1,5 @@
+import { ProjectRepositoryInfo } from "@mx/shared/github/types_github";
 import { FC } from "react";
-import { ProjectRepositoryInfo } from "shared/foreign/types";
 import { Box, BoxProps, HStack } from "../../../styled-system/jsx";
 import { styleObj_TextLinkInheritColor } from "../../common_styling/common_styles";
 import { createFCE } from "../../common_styling/create_fce";

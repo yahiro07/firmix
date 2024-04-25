@@ -1,10 +1,10 @@
-import { handleServerRpc } from "auxiliaries/chibi_rpc/server";
-import { raiseError } from "auxiliaries/utils/error_util";
+import { handleServerRpc } from "@mx/auxiliaries/chibi_rpc/server";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import {
   createPostHandler,
   readRequestBody,
   responseJson,
-} from "shared/system/route_helper";
+} from "@mx/web-kfx/app/system/route_helper";
 import { AppRpcContext } from "web-kfx/app/base/types_rpc";
 import { appRpcRouter } from "web-kfx/app/central/rpc_router";
 import { clientStorageImpl } from "web-kfx/app/central/system/client_storage_impl";

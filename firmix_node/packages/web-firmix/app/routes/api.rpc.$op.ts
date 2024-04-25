@@ -1,13 +1,13 @@
-import { handleServerRpc } from "auxiliaries/chibi_rpc/server";
-import { raiseError } from "auxiliaries/utils/error_util";
+import { handleServerRpc } from "@mx/auxiliaries/chibi_rpc/server";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { AppRpcContext } from "@mx/web-firmix/app/base/types_rpc";
+import { appRpcRouter } from "@mx/web-firmix/app/central/rpc_router";
+import { clientStorageImpl } from "@mx/web-firmix/app/central/system/client_storage_impl";
 import {
   createPostHandler,
   readRequestBody,
   responseJson,
-} from "shared/system/route_helper";
-import { AppRpcContext } from "web-firmix/app/base/types_rpc";
-import { appRpcRouter } from "web-firmix/app/central/rpc_router";
-import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl";
+} from "@mx/web-firmix/app/system/route_helper";
 
 export const action = createPostHandler(async ({ request, params }) => {
   const op = params.op;

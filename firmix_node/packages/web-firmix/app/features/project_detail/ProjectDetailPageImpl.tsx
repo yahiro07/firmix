@@ -1,17 +1,17 @@
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper";
-import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
-import { ProjectDetailDto } from "web-firmix/app/base/types_dto";
-import { rpcClient } from "web-firmix/app/common/rpc_client";
-import { useSiteContext } from "web-firmix/app/common/site_context";
+import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { getDateTimeText_yyyyMMddHHmmss } from "@mx/auxiliaries/utils/date_time_helper";
+import { downloadBinaryFileBlob } from "@mx/auxiliaries/utils_fe/downloading_link";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
+import { ProjectDetailDto } from "@mx/web-firmix/app/base/types_dto";
+import { rpcClient } from "@mx/web-firmix/app/common/rpc_client";
+import { useSiteContext } from "@mx/web-firmix/app/common/site_context";
 import {
   LinkChildProjectListPage,
   LinkParentProjectPage,
-} from "web-firmix/app/features/project/project_common_parts";
-import { ProjectHeadingArea } from "web-firmix/app/features/project/ProjectHeadingArea";
-import { ProjectReadmeArea } from "web-firmix/app/features/project/ProjectReadmeArea";
-import { ProjectOperationPart } from "web-firmix/app/features/project_detail/ProjectOperationPart";
+} from "@mx/web-firmix/app/features/project/project_common_parts";
+import { ProjectHeadingArea } from "@mx/web-firmix/app/features/project/ProjectHeadingArea";
+import { ProjectReadmeArea } from "@mx/web-firmix/app/features/project/ProjectReadmeArea";
+import { ProjectOperationPart } from "@mx/web-firmix/app/features/project_detail/ProjectOperationPart";
 import { Box } from "../../../styled-system/jsx";
 import { firmixPresenter_firmwarePatching } from "../../cardinal/firmix_presenter_firmware_patching/mod";
 import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";

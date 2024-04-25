@@ -2,7 +2,7 @@ import {
   LocalAssetBase,
   LocalAsset_Thumbnail,
   LocalDevelopmentProject,
-} from "web-firmix/app/base/types_local_project";
+} from "@mx/web-firmix/app/base/types_local_project";
 import { Box, HStack } from "../../../styled-system/jsx";
 import { createFCE } from "../../common_styling/create_fce";
 import { H3, Img } from "../../common_styling/utility_components";

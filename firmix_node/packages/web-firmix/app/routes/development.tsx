@@ -1,5 +1,5 @@
-import { createPage } from "shared/system/route_helper";
-import { DevelopmentPage } from "web-firmix/app/islands/DevelopmentPage";
+import { DevelopmentPage } from "@mx/web-firmix/app/islands/DevelopmentPage";
+import { createPage } from "@mx/web-firmix/app/system/route_helper";
 
 export default createPage(() => {
   return <DevelopmentPage />;

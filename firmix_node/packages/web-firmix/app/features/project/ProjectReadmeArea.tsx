@@ -1,5 +1,5 @@
-import { useMemo } from "auxiliaries/fe-deps-react";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { useMemo } from "@mx/auxiliaries/fe-deps-react";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Box } from "../../../styled-system/jsx";

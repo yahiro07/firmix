@@ -1,7 +1,4 @@
-import {
-  FirmwareFormat,
-  ThumbnailMimeTypes,
-} from "web-firmix/app/base/types_app_common";
+import { FirmwareFormat, ThumbnailMimeTypes } from "./types_app_common";
 
 export type FirmwareContainer = {
   kind: FirmwareFormat;

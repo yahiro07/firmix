@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
-import { createFCX } from "auxiliaries/utils_fe_react/fcx";
-import { uiSystem } from "shared/common/ui_system";
+import { createFCX } from "@mx/auxiliaries/utils_fe_react/fcx";
+import { uiSystem } from "@mx/shared/common/ui_system";
 import { ProjectRealm } from "web-kfx/app/base/types_app_common";
 import { coactiveStateWriter } from "web-kfx/app/common/coactive_state_writer";
 import { useSiteContext } from "web-kfx/app/common/site_context";

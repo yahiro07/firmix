@@ -1,5 +1,5 @@
-import { filePathHelper } from "auxiliaries/utils/file_path_helper";
-import { serverFetchHelper } from "auxiliaries/utils_be/server_fetch_helper";
+import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
+import { serverFetchHelper } from "@mx/auxiliaries/utils_be/server_fetch_helper";
 
 type ProjectPartial = {
   projectId: string;

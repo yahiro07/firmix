@@ -1,5 +1,5 @@
-import { raiseError } from "auxiliaries/utils/error_util";
-import { specifyGithubAvatarUrlSize } from "shared/foreign/avatar_size_modifier";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { specifyGithubAvatarUrlSize } from "@mx/shared/foreign/avatar_size_modifier";
 import { ProjectRealm } from "web-kfx/app/base/types_app_common";
 import { ProjectEntity, UserEntity } from "web-kfx/app/base/types_db_entity";
 import {

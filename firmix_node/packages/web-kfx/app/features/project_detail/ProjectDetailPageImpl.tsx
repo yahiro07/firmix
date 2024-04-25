@@ -1,9 +1,9 @@
 import { css } from "@linaria/core";
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { useMemo } from "auxiliaries/fe-deps-react";
-import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper";
-import { downloadBinaryFileBlob } from "auxiliaries/utils_fe/downloading_link";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { useMemo } from "@mx/auxiliaries/fe-deps-react";
+import { getDateTimeText_yyyyMMddHHmmss } from "@mx/auxiliaries/utils/date_time_helper";
+import { downloadBinaryFileBlob } from "@mx/auxiliaries/utils_fe/downloading_link";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import {
   ConfigurationSourceItem,
   ProjectDetailDto,

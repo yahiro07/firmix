@@ -1,9 +1,12 @@
+import { serverShell } from "@mx/web-firmix/app/central/server_shell";
+import { clientStorageImpl } from "@mx/web-firmix/app/central/system/client_storage_impl";
+import { ProjectDetailPage } from "@mx/web-firmix/app/islands/ProjectDetailPage";
+import {
+  createLoader,
+  createPage,
+} from "@mx/web-firmix/app/system/route_helper";
 import { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { createLoader, createPage } from "shared/system/route_helper";
-import { serverShell } from "web-firmix/app/central/server_shell";
-import { clientStorageImpl } from "web-firmix/app/central/system/client_storage_impl";
-import { ProjectDetailPage } from "web-firmix/app/islands/ProjectDetailPage";
 
 export const loader = createLoader(async ({ request, params }) => {
   const loginUserClue = clientStorageImpl.readCookieLoginUserClue(request);

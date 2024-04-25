@@ -1,7 +1,7 @@
-import { encodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { storehouse } from "web-firmix/app/central/depot/storehouse";
-import { projectHelper } from "web-firmix/app/central/domain_helpers/project_helper";
-import { firmixPresenter_firmwarePatching } from "../../cardinal/firmix_presenter_firmware_patching/mod";
+import { encodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { firmixPresenter_firmwarePatching } from "@mx/web-firmix/app/cardinal/firmix_presenter_firmware_patching/mod";
+import { storehouse } from "@mx/web-firmix/app/central/depot/storehouse";
+import { projectHelper } from "@mx/web-firmix/app/central/domain_helpers/project_helper";
 
 export function createFirmwareService() {
   return {

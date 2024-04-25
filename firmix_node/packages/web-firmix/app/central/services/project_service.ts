@@ -1,21 +1,24 @@
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { generateHashMd5 } from "auxiliaries/base_env_adapters/crypto";
-import { getDateTimeText_yyyyMMddHHmmss } from "auxiliaries/utils/date_time_helper";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { executeInline } from "auxiliaries/utils/utils_general";
-import { generateIdTimeSequential } from "auxiliaries/utils_be/id_generator";
-import { serverImageHelper } from "auxiliaries/utils_be/server_image_helper";
-import { InputFirmwareFormat } from "web-firmix/app/base/types_app_common";
-import { ProjectEntity, UserEntity } from "web-firmix/app/base/types_db_entity";
+import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { generateHashMd5 } from "@mx/auxiliaries/base_env_adapters/crypto";
+import { getDateTimeText_yyyyMMddHHmmss } from "@mx/auxiliaries/utils/date_time_helper";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { executeInline } from "@mx/auxiliaries/utils/utils_general";
+import { generateIdTimeSequential } from "@mx/auxiliaries/utils_be/id_generator";
+import { serverImageHelper } from "@mx/auxiliaries/utils_be/server_image_helper";
+import { InputFirmwareFormat } from "@mx/web-firmix/app/base/types_app_common";
+import {
+  ProjectEntity,
+  UserEntity,
+} from "@mx/web-firmix/app/base/types_db_entity";
 import {
   LocalProjectSubmissionPayload,
   ProjectSubmissionArgument,
-} from "web-firmix/app/base/types_dto_internal";
-import { ProjectMetadataInput } from "web-firmix/app/base/types_project_metadata";
-import { firmixCore_projectLoader } from "web-firmix/app/cardinal/firmix_core_project_loader/mod";
-import { convertFirmwareBytesToUF2 } from "web-firmix/app/cardinal/firmix_presenter_common_modules/firmware_converter";
-import { objectStorageBridge } from "web-firmix/app/central/depot/object_storage_bridge_instance";
-import { storehouse } from "web-firmix/app/central/depot/storehouse";
+} from "@mx/web-firmix/app/base/types_dto_internal";
+import { ProjectMetadataInput } from "@mx/web-firmix/app/base/types_project_metadata";
+import { firmixCore_projectLoader } from "@mx/web-firmix/app/cardinal/firmix_core_project_loader/mod";
+import { convertFirmwareBytesToUF2 } from "@mx/web-firmix/app/cardinal/firmix_presenter_common_modules/firmware_converter";
+import { objectStorageBridge } from "@mx/web-firmix/app/central/depot/object_storage_bridge_instance";
+import { storehouse } from "@mx/web-firmix/app/central/depot/storehouse";
 
 export function createProjectService() {
   const m = {
@@ -99,9 +102,8 @@ export function createProjectService() {
 
       const childProjectIds = existingProject?.childProjectIds ?? [];
 
-      const imageAttrs = await serverImageHelper.loadImageFileAssetAttrs(
-        thumbnailFileBytes
-      );
+      const imageAttrs =
+        await serverImageHelper.loadImageFileAssetAttrs(thumbnailFileBytes);
       firmixCore_projectLoader.validateOnlineThumbnailOnServer(imageAttrs);
 
       const firmwareFormatValid = ["uf2", "bin", "hex"].includes(

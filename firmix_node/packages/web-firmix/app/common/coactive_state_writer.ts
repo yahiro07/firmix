@@ -1,11 +1,11 @@
-import { copyObjectMembers } from "auxiliaries/utils/utils_general";
+import { copyObjectMembers } from "@mx/auxiliaries/utils/utils_general";
 import {
   getDocumentCookieValue,
   setDocumentCookie,
-} from "auxiliaries/utils_fe/document_cookie_helper";
-import { appConfig } from "web-firmix/app/base/app_config";
-import { fallbackValues } from "web-firmix/app/base/fallback_values";
-import { CoactiveState } from "web-firmix/app/base/types_dto";
+} from "@mx/auxiliaries/utils_fe/document_cookie_helper";
+import { appConfig } from "@mx/web-firmix/app/base/app_config";
+import { fallbackValues } from "@mx/web-firmix/app/base/fallback_values";
+import { CoactiveState } from "@mx/web-firmix/app/base/types_dto";
 
 export const coactiveStateWriter = {
   setValue(attrs: Partial<CoactiveState>) {

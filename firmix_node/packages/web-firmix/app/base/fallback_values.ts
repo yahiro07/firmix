@@ -1,4 +1,4 @@
-import { CoactiveState } from "web-firmix/app/base/types_dto";
+import { CoactiveState } from "./types_dto";
 
 const typed = <T>(value: T) => value;
 

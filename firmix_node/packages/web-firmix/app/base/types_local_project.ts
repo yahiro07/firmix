@@ -1,8 +1,5 @@
-import {
-  FirmwareContainer,
-  ImageFileContainer,
-} from "web-firmix/app/base/types_project_edit";
-import { ProjectMetadataInput } from "web-firmix/app/base/types_project_metadata";
+import { FirmwareContainer, ImageFileContainer } from "./types_project_edit";
+import { ProjectMetadataInput } from "./types_project_metadata";
 
 export type TextFileEntry = {
   // type: "text";

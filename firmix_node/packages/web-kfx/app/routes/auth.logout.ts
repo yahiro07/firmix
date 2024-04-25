@@ -1,4 +1,7 @@
-import { createGetHandler, responseRedirect } from "shared/system/route_helper";
+import {
+  createGetHandler,
+  responseRedirect,
+} from "@mx/web-kfx/app/system/route_helper";
 import { serverShell } from "web-kfx/app/central/server_shell";
 import { clientStorageImpl } from "web-kfx/app/central/system/client_storage_impl";
 

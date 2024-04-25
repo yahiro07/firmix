@@ -1,6 +1,6 @@
-import { decodeBinaryBase64 } from "auxiliaries/base_env_adapters/base64";
-import { raiseError } from "auxiliaries/utils/error_util";
-import { filePathHelper } from "auxiliaries/utils/file_path_helper";
+import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
+import { filePathHelper } from "@mx/auxiliaries/utils/file_path_helper";
 import { produce } from "immer";
 import {
   BinaryFileEntryWithTimestamp,
@@ -39,9 +39,8 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
       const readmeFile = await dirReader.readTextFile("readme.md");
       const thumbnailPngFile = await dirReader.readBinaryFile("thumbnail.png");
       const thumbnailJpgFile = await dirReader.readBinaryFile("thumbnail.jpg");
-      const thumbnailJpegFile = await dirReader.readBinaryFile(
-        "thumbnail.jpeg"
-      );
+      const thumbnailJpegFile =
+        await dirReader.readBinaryFile("thumbnail.jpeg");
 
       const assetMetadata = localAssetBuilder.buildAssetMetadata(
         metadataFile,
@@ -58,9 +57,8 @@ export const firmixPresenter_localProjectEdit: FirmixPresenter_LocalProjectEdit 
           firmwareFile = await dirReader.readBinaryFile(firmwareFilePath);
           const firmwareFolderPath =
             filePathHelper.getFolderPath(firmwareFilePath);
-          firmwareDirectoryHandle = await dirReader.getSubDirectoryHandle(
-            firmwareFolderPath
-          );
+          firmwareDirectoryHandle =
+            await dirReader.getSubDirectoryHandle(firmwareFolderPath);
         }
       } catch (error) {
         console.error(error);

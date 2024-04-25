@@ -1,5 +1,5 @@
-import { useEffect } from "auxiliaries/fe-deps-react";
-import { createFC } from "auxiliaries/utils_fe_react/create_fc";
+import { useEffect } from "@mx/auxiliaries/fe-deps-react";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { HStack, Spacer } from "../../../styled-system/jsx";
 import { ButtonSmall } from "../../components/CommonControls";
 import { IconIconifyZ } from "../../components/IconIconifyZ";

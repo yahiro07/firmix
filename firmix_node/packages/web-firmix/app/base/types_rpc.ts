@@ -1,4 +1,4 @@
-import { LocalProjectSubmissionPayload } from "web-firmix/app/base/types_dto_internal";
+import { LocalProjectSubmissionPayload } from "./types_dto_internal";
 
 type AsyncFn<P, R> = (payload: P) => Promise<R>;
 
