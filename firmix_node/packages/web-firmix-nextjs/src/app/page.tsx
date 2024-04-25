@@ -1,11 +1,11 @@
-import { Box } from "../../styled-system/jsx";
+import { serverShell } from "../central/server_shell";
+import { clientStorageImpl } from "../central/system/client_storage_impl";
+import { ProjectListPage } from "../screens/ProjectListPage";
 
-export default function Home() {
-  return (
-    <main>
-      <Box color="red">hello</Box>
-      <div>foo</div>
-      <div if={false}>bar</div>
-    </main>
+export default async function Home() {
+  const loginUserClue = clientStorageImpl.readCookieLoginUserClue();
+  const projects = await serverShell.projectListService.getProjectList_recent(
+    loginUserClue?.userId ?? ""
   );
+  return <ProjectListPage projects={projects} showPublicity={false} />;
 }
