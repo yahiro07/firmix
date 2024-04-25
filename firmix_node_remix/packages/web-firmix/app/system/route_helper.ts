@@ -1,5 +1,5 @@
+import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { raiseError } from "auxiliaries/utils/error_util";
 import { ReactNode } from "react";
 
 export function createGetHandler(

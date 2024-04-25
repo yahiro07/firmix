@@ -5,7 +5,7 @@
 // https://github.com/golang/go/blob/master/src/net/http/cookie.go
 // This module is browser compatible.
 
-import { raiseError } from "auxiliaries/utils/error_util";
+import { raiseError } from "../utils/error_util";
 
 function assert(cond: boolean, message?: string) {
   if (!cond) raiseError(message ?? "assertion failed");

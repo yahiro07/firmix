@@ -1,6 +1,5 @@
 {
   "name": "@mx/auxiliaries",
-  "version": "0.0.0",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.554.0",
     "mongodb": "^6.5.0",

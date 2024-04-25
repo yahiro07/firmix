@@ -1,5 +1,5 @@
-import { useMemo } from "auxiliaries/fe-deps-react";
-import { getDateTimeTextWithElapsed } from "auxiliaries/utils/date_time_helper";
+import { useMemo } from "@mx/auxiliaries/fe-deps-react";
+import { getDateTimeTextWithElapsed } from "@mx/auxiliaries/utils/date_time_helper";
 
 export function useDateTimeTextWithElapsed(
   timestamp: number,
