@@ -30,6 +30,24 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={inter.className}>
         <SiteContextProvider value={siteContextValue}>
           <MainLayout>{children}</MainLayout>
