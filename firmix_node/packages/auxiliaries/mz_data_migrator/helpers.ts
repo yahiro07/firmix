@@ -29,13 +29,13 @@ export namespace mzDataMigrator_internalHelpers {
       .toString()
       .replaceAll(/\s+/g, " ")
       .replaceAll(/\r?\n/g, "")
-      .replaceAll(/__vite_ssr_import_[^\.]+\./g, "");
+      .replaceAll(/__vite_ssr_import_[^.]+\./g, "");
     //devで実行したときに、他のファイルからimportした変数が__vite_ssr_import_0__のような名前になり、
     //productionで実行したときと関数のテキストに差異が出てハッシュが合わなくなる問題がある
     //一旦devで__vite_ssr_import_0__.を削る対応を入れるが、他の要因でもハッシュ値が合わなくなる可能性がある
     //マイグレーションスクリプトも一旦ビルドしてから実行するようにすればこの問題を回避できそう
     const hash = getTextMd5(fnStr);
-    // console.log({ fnStr, hash });
+    console.log({ fnStr, hash });
     return hash;
   }
 }
