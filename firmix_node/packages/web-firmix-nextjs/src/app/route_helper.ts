@@ -6,10 +6,24 @@ export function createPage(
   return fn;
 }
 
-export function createGetHandler(
-  fn: (request: Request) => Response | Promise<Response>
+function createCommonRequestHandler(
+  fn: (args: {
+    request: Request;
+    params: Params;
+  }) => Response | Promise<Response>
 ) {
-  return fn;
+  return (request: Request, { params }: { params: Params }) => {
+    return fn({ request, params });
+  };
+}
+
+export const createGetHandler = createCommonRequestHandler;
+export const createPostHandler = createCommonRequestHandler;
+
+export async function readRequestBody<T = object>(req: Request): Promise<T> {
+  const buf = await req.arrayBuffer();
+  const text = new TextDecoder().decode(buf);
+  return JSON.parse(text);
 }
 
 export function responseRedirect(destPath: string) {

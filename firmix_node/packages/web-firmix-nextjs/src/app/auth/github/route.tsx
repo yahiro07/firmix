@@ -5,7 +5,7 @@ import {
   responseRedirect,
 } from "../../route_helper";
 
-export const GET = createGetHandler((request) => {
+export const GET = createGetHandler(({ request }) => {
   const reqUrl = getRequestSourceUrl(request);
   const url = oauthClientGithub.getAuthUrl(reqUrl);
   return responseRedirect(url);

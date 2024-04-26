@@ -8,7 +8,7 @@ import {
   responseRedirect,
 } from "../../../route_helper";
 
-export const GET = createGetHandler(async (request) => {
+export const GET = createGetHandler(async ({ request }) => {
   const reqUrl = getRequestSourceUrl(request);
   const accessToken = await oauthClientGithub.getAccessToken(reqUrl);
   const loginSource = await apiOAuthGithub_getUserData(accessToken);
