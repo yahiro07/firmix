@@ -13,8 +13,6 @@
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": false,
     "jsx": "react-jsx",
-    "jsxImportSource": "jsxq",
-    "baseUrl": ".",
-    "paths": { "@mx/*": ["packages/*"] }
+    "jsxImportSource": "jsxq"
   }
 }
