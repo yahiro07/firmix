@@ -1,0 +1,30 @@
+{
+  "name": "@mx/web-firmix-nextjs",
+  "private": true,
+  "scripts": {
+    "prepare": "panda codegen",
+    "dev": "next dev",
+    "__build": "next build",
+    "build": " next build --experimental-build-mode compile",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "jsxq": "^0.1.3",
+    "mongodb": "^6.5.0",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "@mx/auxiliaries": "*",
+    "@mx/shared": "*"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.37.2",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "typescript": "^5"
+  }
+}

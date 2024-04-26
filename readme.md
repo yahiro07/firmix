@@ -21,15 +21,21 @@ Kermite(自作キーボードエコシステム)のカスタムファームウ�
 ## 構成
 
 ### 開発環境
-- React, TypeScript, Remix, MongoDB (共通)  
-- Panda CSS (Firmix)  
-- Linaria (KFX)
+React, TypeScript, MongoDBを共通で使っています。
 
-CSS周りはFirmixではPanda CSS,KFXではLinariaを使っています。どちらが実装がやりやすいかを比較検討中です。
+フレームワークとCSS in JSライブラリの構成を模索中です。
+
+|パッケージ|対象サイト|構成|リリースURL
+|--|--|--|--|
+|web-firmix|Firmix|Remix, Panda CSS| firmix.nector.me |
+|web-firmix-nextjs|Firmix|NextJS, Panda CSS| -- |
+|web-kfx|KFX|Remix, Linaria| firmix-kfx.nector.me |
+
+Firmix(Base)のサイトの実装が2つあり、RemixとNextJSのどちらで今後開発進めていくかまだ決まっていません。
 
 ### 運用環境
 
-- VPS(MongoDB), GCP Cloud Run
+VPS(MongoDB), GCP Cloud Run
 
 ## ドキュメント
 

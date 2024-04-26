@@ -1,7 +1,7 @@
 import { Collection } from "mongodb";
 import { checkNonNull } from "../utils/error_util";
 
-type MongoGeneralCabinet<T extends object> = {
+export type MongoGeneralCabinet<T extends object> = {
   insert(entity: T): Promise<void>;
   upsert(entity: T): Promise<void>;
   get(id: string): Promise<T>;
