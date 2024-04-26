@@ -13,7 +13,9 @@
     "mongodb": "^6.5.0",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "@mx/auxiliaries": "*",
+    "@mx/shared": "*"
   },
   "devDependencies": {
     "@pandacss/dev": "^0.37.2",
