@@ -55,10 +55,14 @@ export function createMzDbDataMigrator(): IMzDbDataMigrator {
       }
     },
     async applyCommonSetup() {
-      const key = getFunctionBodyTextHash(def.commonSetup);
+      const key = def.commonSetup.key;
       const revision = await colRevision.findOne({ kind: "common", key });
       if (!revision) {
-        await m.applyMigrationRevision("common", key, def.commonSetup);
+        await m.applyMigrationRevision(
+          "common",
+          key,
+          def.commonSetup.operation
+        );
         return true;
       }
       return false;
@@ -84,7 +88,7 @@ export function createMzDbDataMigrator(): IMzDbDataMigrator {
       return newMigrationSteps.length > 0;
     },
     async checkMigrationCommon() {
-      const key = getFunctionBodyTextHash(def.commonSetup);
+      const key = def.commonSetup.key;
       const revision = await colRevision.findOne({ kind: "common", key });
       if (!revision) {
         raiseError(
@@ -112,7 +116,11 @@ export function createMzDbDataMigrator(): IMzDbDataMigrator {
     setup(_def, isDevelopment) {
       local.checkInputMigrationSteps(_def.migrationsSteps);
       if (isDevelopment) {
+        //ローカル開発環境では、マイグレーションキーに処理内容の関数を文字列化したもののハッシュ値を付与する
+        //開発時にはマイグレーションキーを変更しなくても処理内容だけ書き換えて処理が実行されるようにする
         def = produce(_def, (draft) => {
+          draft.commonSetup.key +=
+            "_" + getFunctionBodyTextHash(draft.commonSetup.operation);
           for (const m of draft.migrationsSteps) {
             if (!m.locked) {
               m.key += "_" + getFunctionBodyTextHash(m.operation);
@@ -142,7 +150,7 @@ export function createMzDbDataMigrator(): IMzDbDataMigrator {
       db = _db;
       colRevision ??= await m.getDbRevisionCollection();
       await m.checkMigrationSteps(def.migrationsSteps);
-      // await m.checkMigrationCommon();  //文字列ベースのマイグレーション適用済みチェックが上手く機能しないため一旦無効化
+      await m.checkMigrationCommon();
     },
     async clearInternalMigrationRecords() {
       colRevision ??= await m.getDbRevisionCollection();
