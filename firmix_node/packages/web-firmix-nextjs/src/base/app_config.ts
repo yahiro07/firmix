@@ -1,5 +1,5 @@
 export const appConfig = {
-  versionCode: "240426a nextjs",
+  versionCode: "240426b nextjs",
   isDevelopment:
     typeof Window === "undefined"
       ? process.env.ENV_TYPE === "development"
