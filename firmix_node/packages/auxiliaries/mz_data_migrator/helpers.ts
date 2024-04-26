@@ -35,7 +35,7 @@ export namespace mzDataMigrator_internalHelpers {
     //一旦devで__vite_ssr_import_0__.を削る対応を入れるが、他の要因でもハッシュ値が合わなくなる可能性がある
     //マイグレーションスクリプトも一旦ビルドしてから実行するようにすればこの問題を回避できそう
     const hash = getTextMd5(fnStr);
-    console.log({ fnStr, hash });
+    // console.log({ fnStr, hash });
     return hash;
   }
 }
