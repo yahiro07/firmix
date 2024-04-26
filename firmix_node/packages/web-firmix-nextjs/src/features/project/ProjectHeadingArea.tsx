@@ -43,7 +43,10 @@ export const ProjectHeadingArea = createFC<Props>(
           variationName={variationName}
         />
         {repositoryInfo && (
-          <RepositoryInfoPart repositoryInfo={repositoryInfo} />
+          <RepositoryInfoPart
+            repositoryInfo={repositoryInfo}
+            alignSelf="flex-start"
+          />
         )}
         {authorInfo && (
           <AuthorPart

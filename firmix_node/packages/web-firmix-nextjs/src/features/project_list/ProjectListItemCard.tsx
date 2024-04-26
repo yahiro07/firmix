@@ -84,6 +84,7 @@ export const ProjectListItemCard = createFC<Props>(
               if={project.numChildProjects > 0}
               smaller
               marginLeft="3px"
+              alignSelf="flex-start"
             />
             <Spacer />
             <HStack alignItems="flex-end">

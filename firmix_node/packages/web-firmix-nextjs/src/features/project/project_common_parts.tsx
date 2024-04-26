@@ -10,7 +10,7 @@ const ProjectLinkCommon = createFCE<{
   text: string;
   smaller?: boolean;
 }>(({ pagePath, iconSpec, iconYOffset, text, smaller }) => (
-  <StyledLink href={pagePath}>
+  <StyledLink href={pagePath} display="inline-flex">
     <HStack
       gap="2px"
       color="#666"
