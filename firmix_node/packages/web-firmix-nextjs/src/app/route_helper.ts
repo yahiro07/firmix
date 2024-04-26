@@ -1,9 +1,13 @@
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { storehouse_ensureDbConnected } from "../central/depot/storehouse";
 
 export function createPage(
   fn: (args: { params: Params }) => JSX.Element | Promise<JSX.Element>
 ) {
-  return fn;
+  return async (args: { params: Params }) => {
+    await storehouse_ensureDbConnected();
+    return fn(args);
+  };
 }
 
 function createCommonRequestHandler(
@@ -12,7 +16,8 @@ function createCommonRequestHandler(
     params: Params;
   }) => Response | Promise<Response>
 ) {
-  return (request: Request, { params }: { params: Params }) => {
+  return async (request: Request, { params }: { params: Params }) => {
+    await storehouse_ensureDbConnected();
     return fn({ request, params });
   };
 }
