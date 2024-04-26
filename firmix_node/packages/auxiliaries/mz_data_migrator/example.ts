@@ -1,21 +1,24 @@
-import { Db, MongoClient } from "mongodb";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { MongoClient } from "mongodb";
 import { createMzDbDataMigrator } from "./mod";
 import { IMzDbDataMigrationDefinition } from "./types";
 
 //This is an example code representing how to use maDataMigrator
 
-async function setupIndices(db: Db) {
-  //common setup function executed before migration steps.
-  //if the content of this functions has changed, it is executed once after that.
-  const userCollection = db.collection("user");
-  const projectCollection = db.collection("project");
-  await userCollection.createIndex({ userId: -1 }, { unique: true });
-  await projectCollection.createIndex({ projectId: -1 }, { unique: true });
-  await projectCollection.createIndex({ userId: 1 });
-}
-
 const migrationDefinition: IMzDbDataMigrationDefinition = {
-  commonSetup: setupIndices,
+  commonSetup: {
+    key: "001",
+    async operation(db) {
+      //common setup function executed before migration steps.
+      //this process is expected to be idempotent.
+      //(i.e. resulting the same state no matter how many times it is executed.)
+      const userCollection = db.collection("user");
+      const projectCollection = db.collection("project");
+      await userCollection.createIndex({ userId: -1 }, { unique: true });
+      await projectCollection.createIndex({ projectId: -1 }, { unique: true });
+      await projectCollection.createIndex({ userId: 1 });
+    },
+  },
   migrationsSteps: [
     {
       key: "000_initial_data",
