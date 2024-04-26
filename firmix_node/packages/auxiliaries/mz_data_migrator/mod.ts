@@ -142,7 +142,7 @@ export function createMzDbDataMigrator(): IMzDbDataMigrator {
       db = _db;
       colRevision ??= await m.getDbRevisionCollection();
       await m.checkMigrationSteps(def.migrationsSteps);
-      await m.checkMigrationCommon();
+      // await m.checkMigrationCommon();  //文字列ベースのマイグレーション適用済みチェックが上手く機能しないため一旦無効化
     },
     async clearInternalMigrationRecords() {
       colRevision ??= await m.getDbRevisionCollection();
