@@ -9,3 +9,5 @@ build/
 .vscode/settings.json
 
 styled-system/
+
+.docker-data/
