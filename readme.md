@@ -35,9 +35,14 @@ Firmix(Base)のサイトの実装が2つあり、RemixとNextJSのどちらで�
 
 ### 運用環境
 
-VPS(MongoDB), GCP Cloud Run
+|要素|インフラ|備考|
+|--|--|--|
+|DB|VPS|MongoDB 6.0|
+|オブジェクトストレージ|Cloudflare R2||
+|アプリサーバ|GCP Cloud Run||
 
-## ドキュメント
+Node.jsのサーバをCloud Runで実行しています。VPSに配置したMongoDBにアクセスしています。画像やファームウェアのバイナリなどのアセットはCloudflare R2で保持しています。
 
-準備中です
+## ローカル開発
 
+[./firmix_nodejs/readme.md](./firmix_nodejs/readme.md)に、環境構築とローカルサーバーの実行方法をまとめてあります。
