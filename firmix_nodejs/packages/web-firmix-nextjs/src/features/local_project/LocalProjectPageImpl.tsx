@@ -9,21 +9,21 @@ import {
   ProjectHeadingArea,
 } from "@mx/web-firmix-nextjs/src/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "@mx/web-firmix-nextjs/src/features/project/ProjectReadmeArea";
+import { css } from "../../../styled-system/css";
 import { Box, Center, Stack } from "../../../styled-system/jsx";
-import { createFCE } from "../../common_styling/create_fce";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";
 
-const BuildDateTimePart = createFCE<{ timestamp: number | undefined }>(
+const BuildDateTimePart = createFC<{ timestamp: number | undefined }>(
   ({ timestamp }) => {
     const timeText = useDateTimeTextWithElapsed(timestamp ?? 0, Date.now());
     return <Box>ファームウェアビルド日時: {timeText}</Box>;
   }
 );
 
-const BlankFillerPart = createFCE(() => (
+const BlankFillerPart = createFC(() => (
   <Center flexDirection="column">
-    <IconIconifyZ spec="ph:folder-thin" fontSize="70px" />
+    <IconIconifyZ spec="ph:folder-thin" q={css({ fontSize: "70px" })} />
     <Box textAlign="center">
       ローカルプロジェクトのフォルダを
       <br />
@@ -78,13 +78,13 @@ export const LocalProjectPageImpl = createFC<{ loggedIn: boolean }>(
         <BuildDateTimePart
           timestamp={project?.assetFirmware.lastModified}
           if={project?.assetFirmware.validity === "valid"}
-          margin="0 8px"
+          q={css({ margin: "0 8px" })}
         />
         <ProjectReadmeArea
           readmeFileContent={project?.assetReadme.fileContent!}
           if={project?.assetReadme.fileContent}
         />
-        <BlankFillerPart flexGrow={1} if={!project} />
+        <BlankFillerPart q={css({ flexGrow: 1 })} if={!project} />
         <FirmwareDownloadButtonArea
           label="UF2ダウンロード"
           handler={submitEditItems}

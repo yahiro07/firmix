@@ -1,8 +1,8 @@
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { Center, HStack } from "../../../styled-system/jsx";
-import { createFCE } from "../../common_styling/create_fce";
 import { StyledA } from "../../common_styling/utility_components";
 
-const LinkButton = createFCE<{ to: string; text: string; active: boolean }>(
+const LinkButton = createFC<{ to: string; text: string; active: boolean }>(
   ({ to, text, active }) => (
     <StyledA href={to}>
       <Center
@@ -17,7 +17,7 @@ const LinkButton = createFCE<{ to: string; text: string; active: boolean }>(
   )
 );
 
-export const SiteVariationSelectionPart = createFCE<{
+export const SiteVariationSelectionPart = createFC<{
   siteVariant: "base" | "kfx";
 }>(({ siteVariant }) => {
   const baseActive = siteVariant === "base";
