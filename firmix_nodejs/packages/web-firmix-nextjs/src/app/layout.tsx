@@ -32,6 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
