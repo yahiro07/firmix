@@ -2,7 +2,6 @@
   "name": "@mx/web-firmix-nextjs",
   "private": true,
   "scripts": {
-    "prepare": "panda codegen",
     "dev": "next dev",
     "__build": "next build",
     "build": " next build --experimental-build-mode compile",
