@@ -28,7 +28,7 @@ React, TypeScript, MongoDBを共通で使っています。
 |パッケージ|対象サイト|構成|リリースURL
 |--|--|--|--|
 |web-firmix|Firmix|Remix, Panda CSS| -- |
-|web-firmix-nextjs|Firmix|NextJS, Panda CSS| firmix.nector.me |
+|web-firmix-nextjs|Firmix|Next.js, Panda CSS| firmix.nector.me |
 |web-kfx|KFX|Remix, Linaria| firmix-kfx.nector.me |
 
 Firmix(Base)のサイトの実装が2つあり、RemixとNextJSのどちらで今後開発を進めていくかまだ決まっていません。
