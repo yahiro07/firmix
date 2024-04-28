@@ -1,23 +1,29 @@
-import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { ProjectRepositoryInfo } from "@mx/shared/github/types_github";
 import { FC } from "react";
-import { css } from "../../../styled-system/css";
-import { Box, BoxProps, HStack } from "../../../styled-system/jsx";
+
+import { Box, BoxProps } from "@mui/system";
 import { styleObj_TextLinkInheritColor } from "../../common_styling/common_styles";
-import { H2, H3, Img, StyledA } from "../../common_styling/utility_components";
+import { createFCE } from "../../common_styling/create_fce";
+import {
+  H2,
+  H3,
+  HStack,
+  Img,
+  StyledA,
+} from "../../common_styling/utility_components";
 import { flexAligned } from "../../common_styling/utility_styles";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
-const ProjectTitlePart = createFC<{
+const ProjectTitlePart = createFCE<{
   projectName: string;
   variationName: string;
 }>(({ projectName, variationName }) => {
   return (
     <Box>
-      <H2 css={flexAligned} gap="2px" fontSize="32px">
+      <H2 sx={flexAligned} gap="2px" fontSize="32px">
         <IconIconifyZ
           spec="icon-park-twotone:chip"
-          q={css({ fontSize: "36px", marginTop: "3px" })}
+          sx={{ fontSize: "36px", marginTop: "3px" }}
         />
         <span>{projectName}</span>
       </H2>
@@ -33,12 +39,12 @@ const ProjectTagsList: FC<BoxProps & { tags: string[] }> = ({
   ...props
 }) => {
   return (
-    <HStack gap={2} {...props}>
+    <HStack gap="8px" {...props}>
       {tags.map((tag) => (
         <Box
           key={tag}
           fontSize="14px"
-          background="#bbb"
+          bgcolor="#bbb"
           padding="0 8px 1px"
           borderRadius="99px"
           color="#fff"
@@ -51,7 +57,7 @@ const ProjectTagsList: FC<BoxProps & { tags: string[] }> = ({
   );
 };
 
-const RepositoryInfoPart = createFC<{
+const RepositoryInfoPart = createFCE<{
   repositoryInfo: ProjectRepositoryInfo;
 }>(({ repositoryInfo }) => {
   return (
@@ -60,10 +66,10 @@ const RepositoryInfoPart = createFC<{
       target="_blank"
       rel="noreferrer"
     >
-      <HStack gap="1px" css={styleObj_TextLinkInheritColor}>
+      <HStack gap="1px" sx={styleObj_TextLinkInheritColor}>
         <IconIconifyZ
           spec="mdi:github"
-          q={css({ fontSize: "30px", marginTop: "4px" })}
+          sx={{ fontSize: "30px", marginTop: "4px" }}
         />
         <Box fontSize="18px">{repositoryInfo.repositoryProjectPath}</Box>
       </HStack>
@@ -71,7 +77,7 @@ const RepositoryInfoPart = createFC<{
   );
 });
 
-const AuthorPart = createFC<{ userName: string; avatarUrl: string }>(
+const AuthorPart = createFCE<{ userName: string; avatarUrl: string }>(
   ({ userName, avatarUrl }) => {
     return (
       <HStack gap="4px">

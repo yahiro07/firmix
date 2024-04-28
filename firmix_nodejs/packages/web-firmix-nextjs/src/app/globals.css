@@ -1,11 +1,11 @@
-@layer reset, base, tokens, recipes, utilities;
+@layer base, mui;
 
 @layer base {
-  /* * {
+  * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  } */
+  }
 
   body,
   h2,

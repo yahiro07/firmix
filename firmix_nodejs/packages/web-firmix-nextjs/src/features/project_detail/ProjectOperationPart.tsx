@@ -1,6 +1,6 @@
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { rpcClient } from "@mx/web-firmix-nextjs/src/common/rpc_client";
-import { Stack } from "../../../styled-system/jsx";
+import { VStack } from "../../common_styling/utility_components";
 import {
   ButtonSmall,
   ToggleButtonLarge,
@@ -27,13 +27,13 @@ export const ProjectOperationPart = createFC<{
     }
   };
   return (
-    <Stack gap="3" alignItems="flex-end">
+    <VStack gap="12px" alignItems="flex-end">
       <ToggleButtonLarge
         checked={published}
         setChecked={handleTogglePublicity}
         text={published ? "公開中" : "ドラフト"}
       />
       <ButtonSmall onClick={handleDeleteProject}>削除</ButtonSmall>
-    </Stack>
+    </VStack>
   );
 });

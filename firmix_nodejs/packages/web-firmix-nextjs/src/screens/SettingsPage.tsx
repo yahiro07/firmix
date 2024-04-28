@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "@mx/auxiliaries/fe-deps-react";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { HStack, Stack } from "../../styled-system/jsx";
 import { rpcClient } from "../common/rpc_client";
-import { Input } from "../common_styling/utility_components";
+import { HStack, Input, VStack } from "../common_styling/utility_components";
 import { ButtonSmall } from "../components/CommonControls";
 import { IconIconifyZ } from "../components/IconIconifyZ";
 
@@ -29,10 +28,10 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
   };
 
   return (
-    <Stack
-      gap={3}
-      padding={5}
-      background="var(--cl-content-background)"
+    <VStack
+      gap="12px"
+      padding="20px"
+      bgcolor="var(--cl-content-background)"
       height="100%"
     >
       <h3>APIアクセスキー</h3>
@@ -68,6 +67,6 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
         <br />
         Github Actionで利用する際にはSecretsに格納してください。
       </div>
-    </Stack>
+    </VStack>
   );
 });

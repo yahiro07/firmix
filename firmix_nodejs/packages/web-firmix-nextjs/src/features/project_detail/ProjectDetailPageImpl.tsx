@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
 import { getDateTimeText_yyyyMMddHHmmss } from "@mx/auxiliaries/utils/date_time_helper";
 import { downloadBinaryFileBlob } from "@mx/auxiliaries/utils_fe/downloading_link";
@@ -12,8 +13,6 @@ import {
 import { ProjectHeadingArea } from "@mx/web-firmix-nextjs/src/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "@mx/web-firmix-nextjs/src/features/project/ProjectReadmeArea";
 import { ProjectOperationPart } from "@mx/web-firmix-nextjs/src/features/project_detail/ProjectOperationPart";
-import { css } from "../../../styled-system/css";
-import { Box } from "../../../styled-system/jsx";
 import { firmixPresenter_firmwarePatching } from "../../cardinal/firmix_presenter_firmware_patching/mod";
 import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";
 
@@ -48,7 +47,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
   );
 
   return (
-    <Box padding="16px" background="var(--cl-content-background)">
+    <Box padding="16px" bgcolor="var(--cl-content-background)">
       <ProjectHeadingArea
         projectName={project.projectName}
         variationName={project.variationName}
@@ -80,18 +79,18 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         <LinkChildProjectListPage
           project={project}
           if={project.numChildProjects > 0}
-          q={css({
+          sx={{
             marginTop: "8px",
             marginLeft: "3px",
-          })}
+          }}
         />
         <LinkParentProjectPage
           projectId={project.parentProjectId}
           if={!!project.parentProjectId}
-          q={css({
+          sx={{
             marginTop: "8px",
             marginLeft: "3px",
-          })}
+          }}
         />
       </Box>
       <ProjectReadmeArea readmeFileContent={project.readmeFileContent} />
