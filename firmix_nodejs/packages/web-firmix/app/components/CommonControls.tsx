@@ -1,7 +1,8 @@
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { reflectInputChecked } from "@mx/auxiliaries/utils_fe_react/form_helper";
 import { Link } from "@remix-run/react";
+import { css } from "../../styled-system/css";
 import { Box, HStack, styled } from "../../styled-system/jsx";
-import { createFCE } from "../common_styling/create_fce";
 import { Input, Label, Li } from "../common_styling/utility_components";
 import { IconIconifyZ } from "./IconIconifyZ";
 
@@ -85,24 +86,26 @@ export const Nav = styled("ul", {
   },
 });
 
-const NavItemCore = createFCE<{
+const NavItemCore = createFC<{
   title: string;
   iconSpec: string;
   active?: boolean;
-}>(({ title, iconSpec, active }) => (
+  onClick?(): void;
+}>(({ title, iconSpec, active, onClick }) => (
   <HStack
     gap="2"
     fontSize="20px"
     cursor="pointer"
     fontWeight={(active && "500") || "normal"}
     _hover={{ opacity: 0.7 }}
+    onClick={onClick}
   >
-    <IconIconifyZ spec={iconSpec as any} fontSize="24px" />
+    <IconIconifyZ spec={iconSpec as any} q={css({ fontSize: "24px" })} />
     <span>{title}</span>
   </HStack>
 ));
 
-export const NavItem = createFCE<{
+export const NavItem = createFC<{
   path: string;
   title: string;
   iconSpec: string;
@@ -120,7 +123,7 @@ export const NavItem = createFCE<{
   );
 });
 
-export const NavItem_Button = createFCE<{
+export const NavItem_Button = createFC<{
   path: string;
   title: string;
   iconSpec: string;
@@ -136,7 +139,7 @@ export const NavItem_Button = createFCE<{
   );
 });
 
-export const ToggleButtonLarge = createFCE(
+export const ToggleButtonLarge = createFC(
   ({
     checked,
     setChecked,

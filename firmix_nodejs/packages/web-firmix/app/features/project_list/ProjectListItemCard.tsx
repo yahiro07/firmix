@@ -2,8 +2,8 @@ import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { ProjectListItemDto } from "@mx/web-firmix/app/base/types_dto";
 import { LinkChildProjectListPage } from "@mx/web-firmix/app/features/project/project_common_parts";
 import { projectHeadingArea_parts } from "@mx/web-firmix/app/features/project/ProjectHeadingArea_Parts";
+import { css } from "../../../styled-system/css";
 import { Box, Flex, HStack, Spacer, Stack } from "../../../styled-system/jsx";
-import { createFCE } from "../../common_styling/create_fce";
 import { prefab } from "../../common_styling/prefab";
 import { H3, H4, Img } from "../../common_styling/utility_components";
 import { Card, LinkButton } from "../../components/CommonControls";
@@ -13,7 +13,7 @@ type Props = {
   showPublicity: boolean;
 };
 
-const ThumbnailBox = createFCE<{ imageUrl: string }>(({ imageUrl }) => (
+const ThumbnailBox = createFC<{ imageUrl: string }>(({ imageUrl }) => (
   <Box width="200px" aspectRatio={1.3333}>
     <Img
       src={imageUrl}
@@ -29,7 +29,7 @@ const ProjectNameLabel = prefab(<H3 fontSize="22px" />);
 
 const VariationNameLabel = prefab(<H4 fontSize="18px" />);
 
-const AuthorInfo = createFCE<{ userName: string; avatarUrl: string }>(
+const AuthorInfo = createFC<{ userName: string; avatarUrl: string }>(
   ({ userName, avatarUrl }) => (
     <HStack gap={1}>
       <Img src={avatarUrl} alt="avatar" width="24px" />
@@ -38,7 +38,7 @@ const AuthorInfo = createFCE<{ userName: string; avatarUrl: string }>(
   )
 );
 
-const PublicityLabel = createFCE<{ published: boolean }>(({ published }) => (
+const PublicityLabel = createFC<{ published: boolean }>(({ published }) => (
   <Box fontSize="15px" color={published ? "#7ca" : "#888"}>
     {published ? "公開中" : "ドラフト"}
   </Box>
@@ -53,8 +53,7 @@ export const ProjectListItemCard = createFC<Props>(
         <Flex gap={4}>
           <ThumbnailBox
             imageUrl={project.thumbnailUrl}
-            alignSelf="flex-start"
-            flexShrink={0}
+            q={css({ alignSelf: "flex-start", flexShrink: 0 })}
           />
           <Stack flexGrow={1} gap={1}>
             <HStack gap={5} alignItems="flex-start">
@@ -66,7 +65,7 @@ export const ProjectListItemCard = createFC<Props>(
               <PublicityLabel
                 if={showPublicity}
                 published={project.published}
-                flexShrink={0}
+                q={css({ flexShrink: 0 })}
               />
               <LinkButton
                 to={detailPagePath}
@@ -83,7 +82,7 @@ export const ProjectListItemCard = createFC<Props>(
               project={project}
               if={project.numChildProjects > 0}
               smaller
-              marginLeft="3px"
+              q={css({ marginLeft: "3px" })}
             />
             <Spacer />
             <HStack alignItems="flex-end">

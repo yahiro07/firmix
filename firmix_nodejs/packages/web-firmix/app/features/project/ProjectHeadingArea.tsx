@@ -2,6 +2,7 @@ import { ReactNode } from "@mx/auxiliaries/fe-deps-react";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { useRepositoryDisplayInfo } from "@mx/shared/github/repository_info_helper";
 import { projectHeadingArea_parts } from "@mx/web-firmix/app/features/project/ProjectHeadingArea_Parts";
+import { css } from "../../../styled-system/css";
 import { Stack } from "../../../styled-system/jsx";
 
 type Props = {
@@ -49,8 +50,10 @@ export const ProjectHeadingArea = createFC<Props>(
           <AuthorPart
             userName={authorInfo.userName}
             avatarUrl={authorInfo.userAvatarUrl}
-            marginLeft="2px"
-            marginBottom="8px"
+            q={css({
+              marginLeft: "2px",
+              marginTop: "8px",
+            })}
           />
         )}
         {/* <div if={!repositoryInfo} /> */}
