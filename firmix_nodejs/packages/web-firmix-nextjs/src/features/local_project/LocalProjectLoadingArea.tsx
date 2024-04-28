@@ -1,6 +1,6 @@
 import { useEffect } from "@mx/auxiliaries/fe-deps-react";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { HStack, Spacer } from "../../../styled-system/jsx";
+import { HStack, Spacer } from "../../common_styling/utility_components";
 import { ButtonSmall } from "../../components/CommonControls";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
@@ -36,11 +36,11 @@ export const LocalProjectLoadingArea = createFC<Props>(
     };
 
     return (
-      <HStack gap="2" padding="2">
+      <HStack gap="8px" padding="8px">
         <ButtonSmall onClick={handleSelectFolder} if={!loaded}>
           フォルダ選択
         </ButtonSmall>
-        <HStack if={loaded} gap="1" fontSize="18px">
+        <HStack if={loaded} gap="4px" fontSize="18px">
           <IconIconifyZ spec="mdi:folder" />
           <span>{loadedFolderName}</span>
         </HStack>

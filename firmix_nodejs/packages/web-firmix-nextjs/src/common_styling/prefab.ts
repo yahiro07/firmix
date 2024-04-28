@@ -1,7 +1,7 @@
+import { BoxProps } from "@mui/system";
 import { FC } from "react";
-import { BoxProps } from "../../styled-system/jsx";
 
-export function prefab(jsxNode: JSX.Element): FC<BoxProps> {
+export function prefab<P = {}>(jsxNode: JSX.Element): FC<BoxProps & P> {
   return (props) => {
     return {
       ...jsxNode,

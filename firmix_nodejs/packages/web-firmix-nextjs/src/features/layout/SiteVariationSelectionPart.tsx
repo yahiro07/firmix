@@ -1,12 +1,15 @@
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { Center, HStack } from "../../../styled-system/jsx";
-import { StyledA } from "../../common_styling/utility_components";
+import {
+  Center,
+  HStack,
+  StyledA,
+} from "../../common_styling/utility_components";
 
 const LinkButton = createFC<{ to: string; text: string; active: boolean }>(
   ({ to, text, active }) => (
     <StyledA href={to}>
       <Center
-        background={active ? "#cea" : "#fff"}
+        bgcolor={active ? "#cea" : "#fff"}
         width="100px"
         padding="5px 6px"
         fontSize="1.1rem"

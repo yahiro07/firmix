@@ -1,11 +1,11 @@
-import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { Box } from "../../styled-system/jsx";
+import { Box } from "@mui/system";
+import { createFCE } from "../common_styling/create_fce";
 
 type Props = {
   spec: string;
 };
 
-export const IconIconify = createFC<Props>(({ spec }) => {
+export const IconIconify = createFCE<Props>(({ spec }) => {
   return (
     <Box display="inline-flex">
       {/* @ts-ignore */}

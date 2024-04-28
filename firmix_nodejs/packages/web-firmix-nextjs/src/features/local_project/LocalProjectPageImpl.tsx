@@ -9,21 +9,23 @@ import {
   ProjectHeadingArea,
 } from "@mx/web-firmix-nextjs/src/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "@mx/web-firmix-nextjs/src/features/project/ProjectReadmeArea";
-import { css } from "../../../styled-system/css";
-import { Box, Center, Stack } from "../../../styled-system/jsx";
+
+import { Box } from "@mui/system";
+import { createFCE } from "../../common_styling/create_fce";
+import { Center, VStack } from "../../common_styling/utility_components";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";
 
-const BuildDateTimePart = createFC<{ timestamp: number | undefined }>(
+const BuildDateTimePart = createFCE<{ timestamp: number | undefined }>(
   ({ timestamp }) => {
     const timeText = useDateTimeTextWithElapsed(timestamp ?? 0, Date.now());
     return <Box>ファームウェアビルド日時: {timeText}</Box>;
   }
 );
 
-const BlankFillerPart = createFC(() => (
+const BlankFillerPart = createFCE(() => (
   <Center flexDirection="column">
-    <IconIconifyZ spec="ph:folder-thin" q={css({ fontSize: "70px" })} />
+    <IconIconifyZ spec="ph:folder-thin" sx={{ fontSize: "70px" }} />
     <Box textAlign="center">
       ローカルプロジェクトのフォルダを
       <br />
@@ -48,9 +50,9 @@ export const LocalProjectPageImpl = createFC<{ loggedIn: boolean }>(
     const metadataInput = project?.assetMetadata.metadataInput;
 
     return (
-      <Stack
+      <VStack
         height="100%"
-        background="var(--cl-content-background)"
+        bgcolor="var(--cl-content-background)"
         padding="16px"
         gap="0"
       >
@@ -78,19 +80,19 @@ export const LocalProjectPageImpl = createFC<{ loggedIn: boolean }>(
         <BuildDateTimePart
           timestamp={project?.assetFirmware.lastModified}
           if={project?.assetFirmware.validity === "valid"}
-          q={css({ margin: "0 8px" })}
+          sx={{ margin: "0 8px" }}
         />
         <ProjectReadmeArea
           readmeFileContent={project?.assetReadme.fileContent!}
           if={project?.assetReadme.fileContent}
         />
-        <BlankFillerPart q={css({ flexGrow: 1 })} if={!project} />
+        <BlankFillerPart sx={{ flexGrow: 1 }} if={!project} />
         <FirmwareDownloadButtonArea
           label="UF2ダウンロード"
           handler={submitEditItems}
           if={project}
         />
-      </Stack>
+      </VStack>
     );
   }
 );
