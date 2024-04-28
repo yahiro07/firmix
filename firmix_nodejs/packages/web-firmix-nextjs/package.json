@@ -7,9 +7,14 @@
     "__build": "next build",
     "build": " next build --experimental-build-mode compile",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material-nextjs": "^5.15.11",
+    "@mui/system": "^5.15.15",
     "jsxq": "^0.1.3",
     "mongodb": "^6.5.0",
     "next": "14.2.3",
@@ -19,7 +24,6 @@
     "@mx/shared": "*"
   },
   "devDependencies": {
-    "@pandacss/dev": "^0.37.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
