@@ -1,11 +1,11 @@
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { Stack } from "../../../styled-system/jsx";
 import { appConfig } from "../../base/app_config";
 import { useSiteContext } from "../../common/site_context";
-import { createFCE } from "../../common_styling/create_fce";
 import { Nav, NavItem, NavItem_Button } from "../../components/CommonControls";
 import { LoginUserBox } from "./LoginUserBox";
 
-export const SideBar = createFCE(() => {
+export const SideBar = createFC(() => {
   const { loginUser } = useSiteContext();
   const loggedIn = !!loginUser;
   return (
