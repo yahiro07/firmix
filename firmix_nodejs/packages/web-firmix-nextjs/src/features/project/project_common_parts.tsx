@@ -1,9 +1,10 @@
-import { HStack } from "../../../styled-system/jsx";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
+
 import { createFCE } from "../../common_styling/create_fce";
-import { StyledLink } from "../../common_styling/utility_components";
+import { HStack, StyledLink } from "../../common_styling/utility_components";
 import { IconIconify } from "../../components/IconIconify";
 
-const ProjectLinkCommon = createFCE<{
+const ProjectLinkCommon = createFC<{
   pagePath: string;
   iconSpec: string;
   iconYOffset: string;
@@ -15,9 +16,11 @@ const ProjectLinkCommon = createFCE<{
       gap="2px"
       color="#666"
       fontSize={smaller ? "0.9em" : "1.0em"}
-      _hover={{ textDecoration: "underline" }}
+      sx={{
+        "&:hover": { textDecoration: "underline" },
+      }}
     >
-      <IconIconify spec={iconSpec} marginTop={iconYOffset} />
+      <IconIconify spec={iconSpec} sx={{ marginTop: iconYOffset }} />
       <span>{text}</span>
     </HStack>
   </StyledLink>

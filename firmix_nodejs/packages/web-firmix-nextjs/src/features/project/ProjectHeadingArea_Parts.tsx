@@ -1,9 +1,16 @@
 import { ProjectRepositoryInfo } from "@mx/shared/github/types_github";
 import { FC } from "react";
-import { Box, BoxProps, HStack } from "../../../styled-system/jsx";
+
+import { Box, BoxProps } from "@mui/system";
 import { styleObj_TextLinkInheritColor } from "../../common_styling/common_styles";
 import { createFCE } from "../../common_styling/create_fce";
-import { H2, H3, Img, StyledA } from "../../common_styling/utility_components";
+import {
+  H2,
+  H3,
+  HStack,
+  Img,
+  StyledA,
+} from "../../common_styling/utility_components";
 import { flexAligned } from "../../common_styling/utility_styles";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
@@ -13,11 +20,10 @@ const ProjectTitlePart = createFCE<{
 }>(({ projectName, variationName }) => {
   return (
     <Box>
-      <H2 css={flexAligned} gap="2px" fontSize="32px">
+      <H2 sx={flexAligned} gap="2px" fontSize="32px">
         <IconIconifyZ
           spec="icon-park-twotone:chip"
-          fontSize="36px"
-          marginTop="3px"
+          sx={{ fontSize: "36px", marginTop: "3px" }}
         />
         <span>{projectName}</span>
       </H2>
@@ -33,12 +39,12 @@ const ProjectTagsList: FC<BoxProps & { tags: string[] }> = ({
   ...props
 }) => {
   return (
-    <HStack gap={2} {...props}>
+    <HStack gap="8px" {...props}>
       {tags.map((tag) => (
         <Box
           key={tag}
           fontSize="14px"
-          background="#bbb"
+          bgcolor="#bbb"
           padding="0 8px 1px"
           borderRadius="99px"
           color="#fff"
@@ -60,8 +66,11 @@ const RepositoryInfoPart = createFCE<{
       target="_blank"
       rel="noreferrer"
     >
-      <HStack gap="1px" css={styleObj_TextLinkInheritColor}>
-        <IconIconifyZ spec="mdi:github" fontSize="30px" marginTop="4px" />
+      <HStack gap="1px" sx={styleObj_TextLinkInheritColor}>
+        <IconIconifyZ
+          spec="mdi:github"
+          sx={{ fontSize: "30px", marginTop: "4px" }}
+        />
         <Box fontSize="18px">{repositoryInfo.repositoryProjectPath}</Box>
       </HStack>
     </StyledA>

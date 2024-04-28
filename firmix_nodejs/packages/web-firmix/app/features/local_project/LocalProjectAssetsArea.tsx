@@ -1,10 +1,11 @@
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import {
   LocalAssetBase,
   LocalAsset_Thumbnail,
   LocalDevelopmentProject,
 } from "@mx/web-firmix/app/base/types_local_project";
+import { css } from "../../../styled-system/css";
 import { Box, HStack } from "../../../styled-system/jsx";
-import { createFCE } from "../../common_styling/create_fce";
 import { H3, Img } from "../../common_styling/utility_components";
 import { flexAligned } from "../../common_styling/utility_styles";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
@@ -23,14 +24,14 @@ const local = {
   },
 };
 
-const ProjectResourceHeader = createFCE(() => (
+const ProjectResourceHeader = createFC(() => (
   <H3 css={flexAligned} gap="0">
-    <IconIconifyZ spec="ph:files" fontSize="24px" />
+    <IconIconifyZ spec="ph:files" q={css({ fontSize: "24px" })} />
     <Box fontSize="20px">プロジェクトリソース</Box>
   </H3>
 ));
 
-const AssetEntry = createFCE<{
+const AssetEntry = createFC<{
   title: string;
   asset: LocalAssetBase;
   infoAdditional?: string;
@@ -46,7 +47,7 @@ const AssetEntry = createFCE<{
   return (
     <Box>
       <HStack gap="2px">
-        <IconIconifyZ spec={iconSpec} color={iconColor} />
+        <IconIconifyZ spec={iconSpec} q={css({ color: iconColor })} />
         <span>
           {title}: {asset.filePath} {infoAdditional}
         </span>
@@ -60,7 +61,7 @@ const AssetEntry = createFCE<{
   );
 });
 
-const ThumbnailBox = createFCE<{ thumbnailUrl: string }>(({ thumbnailUrl }) => (
+const ThumbnailBox = createFC<{ thumbnailUrl: string }>(({ thumbnailUrl }) => (
   <Box width="160px" height="120px">
     <Img
       src={thumbnailUrl}
@@ -72,7 +73,7 @@ const ThumbnailBox = createFCE<{ thumbnailUrl: string }>(({ thumbnailUrl }) => (
   </Box>
 ));
 
-export const LocalProjectAssetsArea = createFCE<Props>(({ project }) => {
+export const LocalProjectAssetsArea = createFC<Props>(({ project }) => {
   const { assetReadme, assetMetadata, assetThumbnail, assetFirmware } = project;
   const thumbnailInfoAdditional =
     local.extractThumbnailInfoAdditional(assetThumbnail);
@@ -93,10 +94,12 @@ export const LocalProjectAssetsArea = createFCE<Props>(({ project }) => {
       <ThumbnailBox
         thumbnailUrl={thumbnailUrl!}
         if={thumbnailUrl}
-        position="absolute"
-        top="0"
-        right="0"
-        margin="2"
+        q={css({
+          position: "absolute",
+          top: "0",
+          right: "0",
+          margin: "2",
+        })}
       />
     </Box>
   );

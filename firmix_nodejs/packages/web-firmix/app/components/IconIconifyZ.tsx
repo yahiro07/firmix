@@ -1,5 +1,5 @@
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { Box } from "../../styled-system/jsx";
-import { createFCE } from "../common_styling/create_fce";
 
 export const iconShapes = {
   "lucide:package": (
@@ -187,7 +187,7 @@ const iconShape_missingFallback = (
 
 type IconSpec = keyof typeof iconShapes;
 
-export const IconIconifyZ = createFCE<{ spec: IconSpec }>(({ spec }) => {
+export const IconIconifyZ = createFC<{ spec: IconSpec }>(({ spec }) => {
   const el = iconShapes[spec] ?? iconShape_missingFallback;
   const svgNode = {
     ...el,

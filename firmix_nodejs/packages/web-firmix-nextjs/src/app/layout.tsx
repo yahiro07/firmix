@@ -1,3 +1,4 @@
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { fallbackValues } from "../base/fallback_values";
@@ -49,9 +50,11 @@ export default async function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <SiteContextProvider value={siteContextValue}>
-          <MainLayout>{children}</MainLayout>
-        </SiteContextProvider>
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <SiteContextProvider value={siteContextValue}>
+            <MainLayout>{children}</MainLayout>
+          </SiteContextProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

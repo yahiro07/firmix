@@ -1,4 +1,5 @@
 "use client";
+import { Box, styled } from "@mui/system";
 import { useState } from "@mx/auxiliaries/fe-deps-react";
 import { serverFetchHelper } from "@mx/auxiliaries/utils_be/server_fetch_helper";
 import {
@@ -6,8 +7,7 @@ import {
   idbKeyValSet,
 } from "@mx/auxiliaries/utils_fe/browser_storage_adapter";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { css } from "../../styled-system/css";
-import { Box, Flex, styled } from "../../styled-system/jsx";
+import { Flex } from "../common_styling/utility_components";
 import { ButtonSmall } from "../components/CommonControls";
 
 export const DevelopmentPage = createFC(() => {
@@ -83,26 +83,19 @@ export const DevelopmentPage = createFC(() => {
         <MyLabel>label</MyLabel>
         <MyLabel2 text="label2" />
         <MyLabel3 text="label3" />
-        <MyLabel4 text="lebel4" />
       </div>
     </div>
   );
 });
 
-const MyLabel = styled("div", {
-  base: {
-    color: "green",
-  },
-});
+const MyLabel = styled("div")`
+  color: green;
+`;
 
 const MyLabel2 = ({ text }: { text: string }) => (
-  <div className={css({ color: "orange" })}>{text}</div>
+  <Box sx={{ color: "orange" }}>{text}</Box>
 );
 
 const MyLabel3 = ({ text }: { text: string }) => (
   <Box color="purple">{text}</Box>
-);
-
-const MyLabel4 = ({ text }: { text: string }) => (
-  <Box css={{ color: "navy" }}>{text}</Box>
 );

@@ -1,12 +1,12 @@
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { rpcClient } from "@mx/web-firmix/app/common/rpc_client";
 import { Stack } from "../../../styled-system/jsx";
-import { createFCE } from "../../common_styling/create_fce";
 import {
   ButtonSmall,
   ToggleButtonLarge,
 } from "../../components/CommonControls";
 
-export const ProjectOperationPart = createFCE<{
+export const ProjectOperationPart = createFC<{
   projectId: string;
   published: boolean;
   automated: boolean;

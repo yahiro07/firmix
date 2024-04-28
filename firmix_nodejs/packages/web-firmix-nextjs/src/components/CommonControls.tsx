@@ -1,108 +1,120 @@
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { reflectInputChecked } from "@mx/auxiliaries/utils_fe_react/form_helper";
 import Link from "next/link";
-import { Box, HStack, styled } from "../../styled-system/jsx";
-import { createFCE } from "../common_styling/create_fce";
-import { Input, Label, Li } from "../common_styling/utility_components";
+
+import { Box, BoxProps, styled } from "@mui/system";
+import { ComponentProps, FC } from "react";
+import { prefab } from "../common_styling/prefab";
+import { HStack, Label, Li } from "../common_styling/utility_components";
 import { IconIconifyZ } from "./IconIconifyZ";
 
-export const Button = styled("button", {
-  base: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "0.6rem 1.2rem",
-    fontWeight: "500",
-    color: "#fff",
-    backgroundColor: "#6366f1",
-    whiteSpace: "noWrap",
-    cursor: "pointer",
-    "&:hover": { opacity: 0.8 },
-    "&:disabled": { opacity: 0.3 },
-  },
-});
+export const Button = prefab<JSX.IntrinsicElements["button"]>(
+  <Box
+    component="button"
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "0.6rem 1.2rem",
+      fontWeight: "500",
+      color: "#fff",
+      backgroundColor: "#6366f1",
+      border: "none",
+      whiteSpace: "noWrap",
+      cursor: "pointer",
+      "&:hover": { opacity: 0.8 },
+      "&:disabled": { opacity: 0.3 },
+    }}
+  />
+);
 
-export const LinkButton = styled(Link, {
-  base: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "0.6rem 1.2rem",
-    fontWeight: "500",
-    color: "#fff",
-    backgroundColor: "#6366f1",
-    whiteSpace: "noWrap",
-    "&:hover": { opacity: 0.8 },
-    "&:disabled": { opacity: 0.3 },
-  },
-});
+export const LinkButton: FC<BoxProps & ComponentProps<typeof Link>> = (
+  props
+) => (
+  <Box
+    component={Link}
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "0.6rem 1.2rem",
+      fontWeight: "500",
+      color: "#fff",
+      backgroundColor: "#6366f1",
+      border: "none",
+      whiteSpace: "noWrap",
+      "&:hover": { opacity: 0.8 },
+      "&:disabled": { opacity: 0.3 },
+    }}
+    {...props}
+  />
+);
 
-export const ButtonSmall = styled("button", {
-  base: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "0.9em",
-    background: "#ddd",
-    padding: "4px 10px",
-    cursor: "pointer",
-    "&:hover": { opacity: 0.8 },
-    "&:disabled": { opacity: 0.3 },
-  },
-});
+export const ButtonSmall = prefab<JSX.IntrinsicElements["button"]>(
+  <Box
+    component="button"
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontSize: "0.9em",
+      background: "#ddd",
+      border: "none",
+      padding: "4px 10px",
+      cursor: "pointer",
+      "&:hover": { opacity: 0.8 },
+      "&:disabled": { opacity: 0.3 },
+    }}
+  />
+);
 
-// export const Card: FC<BoxProps> = (props) => (
-//   <Box {...props} background="#fff" boxShadow="0 2px 2px #0004" />
-// );
+export const Card = prefab(<Box bgcolor="#fff" boxShadow="0 2px 2px #0004" />);
 
-// export const Card = prefab(
-//   <Box background="#fff" boxShadow="0 2px 2px #0004" />
-// );
+export const FormLabel = styled("label")``;
 
-export const Card = styled("div", {
-  base: {
-    background: "#fff",
-    boxShadow: "0 2px 2px #0004",
-  },
-});
+export const FormTextInput = prefab(
+  <Box
+    component="input"
+    sx={{
+      padding: "0.625rem",
+      borderWidth: "1px",
+      borderColor: "#d1d5db",
+      color: "#111827",
+      backgroundColor: "#f9fafb",
+    }}
+  />
+);
 
-export const FormLabel = styled("label");
+export const Nav = prefab(
+  <Box
+    component="ul"
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      gap: "16px",
+    }}
+  />
+);
 
-export const FormTextInput = styled("input", {
-  base: {
-    padding: "0.625rem",
-    borderWidth: "1px",
-    borderColor: "#d1d5db",
-    color: "#111827",
-    backgroundColor: "#f9fafb",
-  },
-});
-
-export const Nav = styled("ul", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-  },
-});
-
-const NavItemCore = createFCE<{
+const NavItemCore = createFC<{
   title: string;
   iconSpec: string;
   active?: boolean;
-}>(({ title, iconSpec, active }) => (
+  onClick?(): void;
+}>(({ title, iconSpec, active, onClick }) => (
   <HStack
-    gap="2"
+    gap="8px"
     fontSize="20px"
-    cursor="pointer"
     fontWeight={(active && "500") || "normal"}
-    _hover={{ opacity: 0.7 }}
+    sx={{ cursor: "pointer", "&:hover": { opacity: 0.7 } }}
+    onClick={onClick}
   >
-    <IconIconifyZ spec={iconSpec as any} fontSize="24px" />
+    <IconIconifyZ spec={iconSpec as any} sx={{ fontSize: "24px" }} />
     <span>{title}</span>
   </HStack>
 ));
 
-export const NavItem = createFCE<{
+export const NavItem = createFC<{
   path: string;
   title: string;
   iconSpec: string;
@@ -120,7 +132,7 @@ export const NavItem = createFCE<{
   );
 });
 
-export const NavItem_Button = createFCE<{
+export const NavItem_Button = createFC<{
   path: string;
   title: string;
   iconSpec: string;
@@ -136,7 +148,7 @@ export const NavItem_Button = createFCE<{
   );
 });
 
-export const ToggleButtonLarge = createFCE(
+export const ToggleButtonLarge = createFC(
   ({
     checked,
     setChecked,
@@ -149,12 +161,13 @@ export const ToggleButtonLarge = createFCE(
     return (
       <Label
         position="relative"
-        cursor="pointer"
         display="flex"
         alignItems="center"
         gap="8px"
+        sx={{ cursor: "pointer" }}
       >
-        <Input
+        <Box
+          component="input"
           type="checkbox"
           value=""
           checked={checked}
@@ -167,9 +180,11 @@ export const ToggleButtonLarge = createFCE(
           position="relative"
           width="60px"
           height="30px"
-          background={checked ? "#7ca" : "#ccc"}
           borderRadius="99px"
-          transition="background 0.5s"
+          bgcolor={checked ? "#7ca" : "#ccc"}
+          sx={{
+            transition: "background 0.5s",
+          }}
         >
           <Box
             position="absolute"
@@ -177,9 +192,11 @@ export const ToggleButtonLarge = createFCE(
             left={checked ? "32px" : "2px"}
             width="26px"
             height="26px"
-            background="#fff"
             borderRadius="99px"
-            transition="left 0.5s"
+            bgcolor="#fff"
+            sx={{
+              transition: "left 0.5s",
+            }}
           />
         </Box>
         <span>{text}</span>

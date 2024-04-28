@@ -12,6 +12,7 @@ import {
 import { ProjectHeadingArea } from "@mx/web-firmix/app/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "@mx/web-firmix/app/features/project/ProjectReadmeArea";
 import { ProjectOperationPart } from "@mx/web-firmix/app/features/project_detail/ProjectOperationPart";
+import { css } from "../../../styled-system/css";
 import { Box } from "../../../styled-system/jsx";
 import { firmixPresenter_firmwarePatching } from "../../cardinal/firmix_presenter_firmware_patching/mod";
 import { FirmwareDownloadButtonArea } from "../project/FirmwareDownloadButton";
@@ -79,14 +80,18 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         <LinkChildProjectListPage
           project={project}
           if={project.numChildProjects > 0}
-          marginTop="8px"
-          marginLeft="3px"
+          q={css({
+            marginTop: "8px",
+            marginLeft: "3px",
+          })}
         />
         <LinkParentProjectPage
           projectId={project.parentProjectId}
           if={!!project.parentProjectId}
-          marginTop="8px"
-          marginLeft="3px"
+          q={css({
+            marginTop: "8px",
+            marginLeft: "3px",
+          })}
         />
       </Box>
       <ProjectReadmeArea readmeFileContent={project.readmeFileContent} />

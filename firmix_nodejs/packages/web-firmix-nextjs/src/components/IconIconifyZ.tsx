@@ -1,4 +1,4 @@
-import { Box } from "../../styled-system/jsx";
+import { Box } from "@mui/system";
 import { createFCE } from "../common_styling/create_fce";
 
 export const iconShapes = {

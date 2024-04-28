@@ -1,7 +1,7 @@
-import { Stack } from "../../../styled-system/jsx";
 import { appConfig } from "../../base/app_config";
 import { useSiteContext } from "../../common/site_context";
 import { createFCE } from "../../common_styling/create_fce";
+import { VStack } from "../../common_styling/utility_components";
 import { Nav, NavItem, NavItem_Button } from "../../components/CommonControls";
 import { LoginUserBox } from "./LoginUserBox";
 
@@ -9,12 +9,11 @@ export const SideBar = createFCE(() => {
   const { loginUser } = useSiteContext();
   const loggedIn = !!loginUser;
   return (
-    <Stack
-      gap={4}
+    <VStack
+      gap="16px"
       width="260px"
       p="20px 16px"
-      background="var(--cl-side-bar-fill)"
-      // borderRight="solid 1px var(--cl-side-bar-edge)"
+      bgcolor="var(--cl-side-bar-fill)"
     >
       <Nav>
         <NavItem path="/" iconSpec="lucide:package" title="プロジェクト一覧" />
@@ -55,6 +54,6 @@ export const SideBar = createFCE(() => {
         />
       </Nav>
       <LoginUserBox user={loginUser!} if={loginUser ?? undefined} />
-    </Stack>
+    </VStack>
   );
 });

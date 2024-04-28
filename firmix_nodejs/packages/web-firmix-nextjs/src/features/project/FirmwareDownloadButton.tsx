@@ -1,5 +1,5 @@
+import { Box } from "@mui/system";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { Box } from "../../../styled-system/jsx";
 import { Button } from "../../components/CommonControls";
 
 type Props = {

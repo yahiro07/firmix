@@ -2,7 +2,7 @@ import { ReactNode } from "@mx/auxiliaries/fe-deps-react";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { useRepositoryDisplayInfo } from "@mx/shared/github/repository_info_helper";
 import { projectHeadingArea_parts } from "@mx/web-firmix-nextjs/src/features/project/ProjectHeadingArea_Parts";
-import { Stack } from "../../../styled-system/jsx";
+import { VStack } from "../../common_styling/utility_components";
 
 type Props = {
   projectName: string;
@@ -37,7 +37,7 @@ export const ProjectHeadingArea = createFC<Props>(
       AuthorPart,
     } = projectHeadingArea_parts;
     return (
-      <Stack gap="1" padding="8px" position="relative">
+      <VStack gap="4px" padding="8px" position="relative">
         <ProjectTitlePart
           projectName={projectName}
           variationName={variationName}
@@ -45,21 +45,20 @@ export const ProjectHeadingArea = createFC<Props>(
         {repositoryInfo && (
           <RepositoryInfoPart
             repositoryInfo={repositoryInfo}
-            alignSelf="flex-start"
+            sx={{ alignSelf: "flex-start" }}
           />
         )}
         {authorInfo && (
           <AuthorPart
             userName={authorInfo.userName}
             avatarUrl={authorInfo.userAvatarUrl}
-            marginLeft="2px"
-            marginBottom="8px"
+            sx={{ marginLeft: "2px", marginBottom: "8px" }}
           />
         )}
         {/* <div if={!repositoryInfo} /> */}
         <ProjectTagsList tags={tags} />
-        <Stack
-          gap="4"
+        <VStack
+          gap="8px"
           position="absolute"
           alignItems="flex-end"
           right={0}
@@ -67,8 +66,8 @@ export const ProjectHeadingArea = createFC<Props>(
           padding="8px"
         >
           {operationUiAdditional}
-        </Stack>
-      </Stack>
+        </VStack>
+      </VStack>
     );
   }
 );

@@ -1,9 +1,10 @@
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
+import { css } from "../../../styled-system/css";
 import { HStack } from "../../../styled-system/jsx";
-import { createFCE } from "../../common_styling/create_fce";
 import { StyledLink } from "../../common_styling/utility_components";
 import { IconIconify } from "../../components/IconIconify";
 
-const ProjectLinkCommon = createFCE<{
+const ProjectLinkCommon = createFC<{
   pagePath: string;
   iconSpec: string;
   iconYOffset: string;
@@ -17,13 +18,13 @@ const ProjectLinkCommon = createFCE<{
       fontSize={smaller ? "0.9em" : "1.0em"}
       _hover={{ textDecoration: "underline" }}
     >
-      <IconIconify spec={iconSpec} marginTop={iconYOffset} />
+      <IconIconify spec={iconSpec} q={css({ marginTop: iconYOffset })} />
       <span>{text}</span>
     </HStack>
   </StyledLink>
 ));
 
-export const LinkChildProjectListPage = createFCE<{
+export const LinkChildProjectListPage = createFC<{
   project: { projectId: string; numChildProjects: number };
   smaller?: boolean;
 }>(({ project, smaller }) => {
@@ -40,7 +41,7 @@ export const LinkChildProjectListPage = createFCE<{
   );
 });
 
-export const LinkParentProjectPage = createFCE<{
+export const LinkParentProjectPage = createFC<{
   projectId: string;
   smaller?: boolean;
 }>(({ projectId, smaller }) => {
