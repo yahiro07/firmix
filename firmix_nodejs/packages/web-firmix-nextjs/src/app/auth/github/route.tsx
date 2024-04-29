@@ -6,9 +6,12 @@ import {
 } from "../../route_helper";
 
 export const GET = createGetHandler(({ request }) => {
-  console.log({ request });
   const reqUrl = getRequestSourceUrl_NextJS(request);
   const url = oauthClientGithub.getAuthUrl(reqUrl);
-  console.log(`auth github`, { reqUrl, url });
+  console.log(`auth github`, {
+    reqUrl,
+    destUrl: url,
+    headers: [...request.headers.entries()].map((k, v) => `${k}:${v}`),
+  });
   return responseRedirect(url);
 });

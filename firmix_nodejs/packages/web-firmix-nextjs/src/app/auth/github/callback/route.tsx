@@ -10,7 +10,6 @@ import {
 
 export const GET = createGetHandler(async ({ request }) => {
   const reqUrl = getRequestSourceUrl_NextJS(request);
-  console.log(`auth github callback`, { reqUrl });
   const accessToken = await oauthClientGithub.getAccessToken(reqUrl);
   const loginSource = await apiOAuthGithub_getUserData(accessToken);
   const storageJob = await serverShell.userService.login(loginSource);
