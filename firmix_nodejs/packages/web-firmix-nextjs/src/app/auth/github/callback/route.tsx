@@ -4,12 +4,12 @@ import { clientStorageImpl } from "@mx/web-firmix-nextjs/src/central/system/clie
 import { oauthClientGithub } from "@mx/web-firmix-nextjs/src/central/user_auth/oauth_clients";
 import {
   createGetHandler,
-  getRequestSourceUrl,
+  getRequestSourceUrl_NextJS,
   responseRedirect,
 } from "../../../route_helper";
 
 export const GET = createGetHandler(async ({ request }) => {
-  const reqUrl = getRequestSourceUrl(request);
+  const reqUrl = getRequestSourceUrl_NextJS(request);
   console.log(`auth github callback`, { reqUrl });
   const accessToken = await oauthClientGithub.getAccessToken(reqUrl);
   const loginSource = await apiOAuthGithub_getUserData(accessToken);
