@@ -60,7 +60,7 @@ jobs:
             https://firmix.nector.me/api/project/upload
 ```
 
-PythonとPlatformIOを導入して、`pio run`でプロジェクトをビルドした後、`curl`でFirmixのAPIを叩いてコンテンツを送信しています。
+PythonとPlatformIOをインストールして、`pio run`でプロジェクトをビルドした後、`curl`でFirmixのエンドポイントを指定してコンテンツを送信しています。
 
 ## アップロードAPIの詳細
 
@@ -71,7 +71,7 @@ POST https://firmix.nector.me/api/project/uploads
 
 |キー|値|
 |:--|:--|
-|Authorization| token Firmixのアクセスキー |
+|Authorization| token APIアクセスキー |
 |Content-Type| multipart/form-data |
 
 AuthorizationヘッダでAPIキーを指定します。
@@ -82,9 +82,9 @@ AuthorizationヘッダでAPIキーを指定します。
 
 |識別子|値|
 |:--|:--|
-|readme| readme.md |
-|thumbnail| thumbnail.(png\|jpg) | 
-|project| firmix.project.json | 
+|readme| readmeファイルのパス |
+|thumbnail| サムネイルファイルのパス | 
+|project| メタデータファイルのパス | 
 |firmware| ファームウェアファイルのパス | 
 
 
@@ -98,6 +98,5 @@ curl -X POST -H "Authorization: token <APIアクセスキー>" \
 
 ### APIの動作
 
-アップロードAPIは対象のプロジェクトをメタデータに含まれるのGUIDによって識別しています。
-APIではメタデータからGUIDを抽出し、そのGUIDを持つプロジェクトがすでにDBに存在する場合には、これを更新する動作となります。対象のプロジェクトが存在しない場合は新規投稿として扱います。
-GUIDが一致するプロジェクトがあり、そのプロジェクトの所有者が自分以外のユーザーの場合にはエラーになります。
+アップロードAPIは対象のプロジェクトをメタデータに含まれるGUIDによって識別しています。
+APIではメタデータからGUIDを抽出し、そのGUIDを持つプロジェクトがすでにDBに存在する場合には、これを更新する動作となります。対象のプロジェクトが存在しない場合は新規投稿として扱います。GUIDが一致するプロジェクトがあり、所有者が自分以外の場合にはエラーとなります。
