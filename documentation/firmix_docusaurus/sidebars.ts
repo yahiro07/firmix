@@ -26,7 +26,7 @@ const sidebars: SidebarsConfig = {
         "project/structure",
         "project/metadata",
         "project/local-dev",
-        "project/ci",
+        "project/automation",
       ],
       collapsed: false,
       link: { type: "generated-index" },
