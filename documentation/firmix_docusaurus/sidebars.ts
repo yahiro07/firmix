@@ -22,6 +22,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "開発者向け情報",
       items: [
+        "project/pages",
         "project/structure",
         "project/metadata",
         "project/local-dev",
