@@ -8,5 +8,6 @@ import {
 export const GET = createGetHandler(({ request }) => {
   const reqUrl = getRequestSourceUrl(request);
   const url = oauthClientGithub.getAuthUrl(reqUrl);
+  console.log(`auth github`, { reqUrl, url });
   return responseRedirect(url);
 });
