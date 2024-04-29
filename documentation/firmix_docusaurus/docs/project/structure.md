@@ -7,14 +7,16 @@ Firmixのプロジェクトは以下のようなフォルダ構成になって�
 ```
 my-project/
 ├── platformio.ini
-├── project.fm1.json
+├── firmix.project.json
 ├── readme.md
 ├── src/
 │   └── main.cpp
 └── thumbnail.jpg
 ```
 
-このうち、Firmixに参照しているファイルは、以下のものです。
+実際のプロジェクトの例は[こちら](https://github.com/yahiro07/firmix_projects/blob/main/firmix/blink_xiao_rp2040)を参照してください。
+
+このフォルダ構成で、Firmixが参照するファイルは以下のものです。
 
 ### readme.md
 
@@ -26,7 +28,7 @@ my-project/
 これはメタデータファイルで定義されたタイトルがページの一番上に表示されるので、ページ内でタイトルが重複して表示されるのを防ぐためです。
 
 
-### project.fm1.json
+### firmix.project.json
 
 プロジェクトのメタデータファイルです。  
 プロジェクトに関する情報や設定をここに記述します。
