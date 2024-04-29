@@ -1,5 +1,5 @@
 export const appConfig = {
-  versionCode: "firmix-nextjs-240426c",
+  versionCode: "firmix-nextjs-240429a",
   isDevelopment:
     typeof Window === "undefined"
       ? process.env.ENV_TYPE === "development"
