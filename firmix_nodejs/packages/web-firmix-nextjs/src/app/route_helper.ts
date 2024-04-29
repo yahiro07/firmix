@@ -13,7 +13,7 @@ export function createPage(
 
 function createCommonRequestHandler(
   fn: (args: {
-    request: NextRequest;
+    request: Request;
     params: Params;
   }) => Response | Promise<Response>
 ) {
@@ -36,16 +36,12 @@ export function responseRedirect(destPath: string) {
   return new Response(null, { status: 302, headers: { location: destPath } });
 }
 
-export function getRequestSourceUrl_NextJS(req: NextRequest) {
-  const url = req.nextUrl.toString();
-  // const { url } = req;
-  if (
-    url.startsWith("http://") &&
-    req.headers.get("x-forwarded-proto") === "https"
-  ) {
-    return url.replace("http://", "https://");
-  }
-  return url;
+export function getRequestSourceUrl(req: Request) {
+  const protocol =
+    req.headers.get("x-forwarded-proto") ?? req.url.split("://")[0];
+  const host = req.headers.get(`x-forwarded-host`) ?? req.headers.get("host");
+  const url = new URL(req.url);
+  return `${protocol}://${host}${url.pathname}${url.search}`;
 }
 
 export function responseJson(content: object) {
