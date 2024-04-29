@@ -5,7 +5,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 const config: Config = {
   title: "Firmix",
   tagline: "ファームウェア置き場のWebサービスです",
-  favicon: "img/favicon.ico",
+  favicon: "img/iconfinder/285636_book_icon.ico",
 
   // Set the production url of your site here
   url: "https://firmix.nector.me",
