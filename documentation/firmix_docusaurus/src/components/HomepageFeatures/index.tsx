@@ -4,21 +4,21 @@ import styles from "./styles.module.css";
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<"svg">>;
+  imageUrl: string;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: "ファームウェア書き込み",
-    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
+    imageUrl: "/img/iconfinder/8703947_flash_bolt_lightening_icon.png",
     description: (
       <>ブラウザから自分のボードに簡単にファームウェアを書き込めます。</>
     ),
   },
   {
     title: "統一されたパッケージ",
-    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    imageUrl: "/img/iconfinder/8644341_empty_box_package_icon.png",
     description: (
       <>
         プロジェクトの形式が統一されているので、配布形態の違いで迷うことがありません。
@@ -27,7 +27,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "ローカルフォルダ連携",
-    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
+    imageUrl: "/img/iconfinder/8703953_folder_file_document_icon.png",
     description: (
       <>
         PCのローカルプロジェクトフォルダから、簡単にプロジェクトを投稿できます。
@@ -36,11 +36,11 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, imageUrl, description }: FeatureItem) {
   return (
     <div className={clsx("col col--4")}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <img src={imageUrl} className={styles.featureImg} />
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
