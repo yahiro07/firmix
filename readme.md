@@ -1,16 +1,26 @@
 # Firmix
 
 マイコンのファームウェアを投稿して公開するためのWebサービスです。
-マイコンを使った作品の概要とファームウェアのバイナリを投稿して、誰でも簡単に作品を再現できるようにすることを目的としています。
+
+マイコンを使った作品の概要とファームウェアのバイナリを投稿して、電子工作の作品を誰でも簡単に再現できるようにしています。
+
+<img src="./documentation/firmix_docusaurus/static/img/self/img0517.jpg" style="max-width:360px"><br/>
+
+
+電子工作界隈でよく使われているRP2040やESP32などのMCUをサポートし、これらのファームウェアをブラウザから簡単にボードに書き込める環境を提供することを目標としています。
+
+作品の紹介とファームウェアの配布を中心に据えた電子工作のハブサイトというコンセプトで開発を進めています。
+
+以下のURLでサイトを公開しています。
 
 https://firmix.nector.me
+
 
 ## バリエーション
 
 ### Firmix (Base)
 
 電子工作の作品を投稿してファームウェアを公開するための、基本的な機能を実装しています。  
-なるべくシンプルな構成にしています。
 
 
 ### Firmix KFX
@@ -18,31 +28,20 @@ https://firmix.nector.me
 Kermite(自作キーボードエコシステム)のカスタムファームウェアを配布するために作っているバージョンです。  
 ファームウェアダウロード時に設定値を書き換えるバイナリパッチングの機能を追加しています。
 
-## 構成
 
-### 開発環境
-React, TypeScript, MongoDBを共通で使っています。
+## ドキュメント
 
-フレームワークとCSS in JSライブラリの構成を模索中です。
+https://docs-firmix.nector.me
 
-|パッケージ|対象サイト|構成|リリースURL
-|--|--|--|--|
-|web-firmix|Firmix|Remix, Panda CSS| -- |
-|web-firmix-nextjs|Firmix|Next.js, MUI System| firmix.nector.me |
-|web-kfx|KFX|Remix, Linaria| firmix-kfx.nector.me |
+仕様がある程度固まっているFirmix(Base)についてのドキュメントです。
 
-Firmix(Base)のサイトの実装が2つあり、RemixとNextJSのどちらで今後開発を進めていくかまだ決まっていません。
+KFXのドキュメントはまだありませんが、基本的な使い方はFirmix(Base)と同様です。
 
-### 運用環境
 
-|要素|インフラ|備考|
-|--|--|--|
-|DB|VPS|MongoDB 6.0|
-|オブジェクトストレージ|Cloudflare R2||
-|アプリサーバ|GCP Cloud Run||
+## 開発環境
 
-Node.jsのサーバをCloud Runで実行しています。VPSに配置したMongoDBにアクセスしています。画像やファームウェアのバイナリなどのアセットはCloudflare R2で保持しています。
+[こちら](./firmix_nodejs/readme.md)に、環境構築とローカルサーバーの実行方法をまとめています。
 
-## ローカル開発
+## ライセンス
 
-[./firmix_nodejs/readme.md](./firmix_nodejs/readme.md)に、環境構築とローカルサーバーの実行方法をまとめてあります。
+MITライセンスです。
