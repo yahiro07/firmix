@@ -13,7 +13,7 @@
 
 以下のURLでサイトを公開しています。
 
-https://firmix.nector.me
+[https://firmix.nector.me](https://firmix.nector.me)
 
 
 ## バリエーション
@@ -31,7 +31,7 @@ Kermite(自作キーボードエコシステム)のカスタムファームウ�
 
 ## ドキュメント
 
-https://docs-firmix.nector.me
+[https://docs-firmix.nector.me](https://docs-firmix.nector.me)
 
 仕様がある程度固まっているFirmix(Base)についてのドキュメントです。
 
