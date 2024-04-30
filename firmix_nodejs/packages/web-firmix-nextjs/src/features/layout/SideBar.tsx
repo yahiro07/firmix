@@ -2,7 +2,12 @@ import { appConfig } from "../../base/app_config";
 import { useSiteContext } from "../../common/site_context";
 import { createFCE } from "../../common_styling/create_fce";
 import { VStack } from "../../common_styling/utility_components";
-import { Nav, NavItem, NavItem_Button } from "../../components/CommonControls";
+import {
+  Nav,
+  NavItem,
+  NavItem_Button,
+  NavItem_External,
+} from "../../components/CommonControls";
 import { LoginUserBox } from "./LoginUserBox";
 
 export const SideBar = createFCE(() => {
@@ -39,6 +44,11 @@ export const SideBar = createFCE(() => {
           iconSpec="carbon:debug"
           title="development"
           if={appConfig.isDevelopment}
+        />
+        <NavItem_External
+          url="https://docs-firmix.nector.me"
+          iconSpec="__tabler:book"
+          title="ドキュメント"
         />
         <NavItem_Button
           path="/auth/github"
