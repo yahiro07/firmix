@@ -25,6 +25,30 @@ Firmix(Base)のサイトの実装が2つあり、RemixとNextJSのどちらで�
 
 Node.jsのサーバをCloud Runで実行しています。VPSに配置したMongoDBにアクセスしています。画像やファームウェアのバイナリなどのアセットはCloudflare R2で保持しています。
 
+### ブランチ
+
+#### main
+
+メインブランチです。機能を実装したときにはこのブランチに向けてPRを出してください。
+
+#### release-firmix
+
+Firmix(Base)のリリース用のブランチです。メインブランチをマージしてリリースします。  
+Cloud Buildのトリガーが走り、Cloud Runにデプロイされます。  
+`web-firmix-nextjs`パッケージがデプロイされ、https://firmix.nector.me に反映されます。
+
+#### release-firmix-kfx
+
+KFXのリリース用のブランチです。メインブランチをマージしてリリースします。 
+Cloud Buildのトリガーが走り、Cloud Runにデプロイされます。  
+`web-firmix-kfx`パッケージがデプロイされ、https://firmix-kfx.nector.me に反映されます。
+
+
+#### release-docs-firmix
+
+ドキュメントサイトのリリース用のブランチです。メインブランチをマージしてリリースします。    
+Cloudflare Pagesでビルドが走り、ドキュメントサイトが更新されます。 
+`<Firmixのトップディレクトリ>/documentation/firmix_docusaurus`パッケージがデプロイされ、https://docs-firmix.nector.me に反映されます。
 
 
 ## 開発環境
