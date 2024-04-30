@@ -1,0 +1,14 @@
+.base {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+input {
+  width: 300px;
+}
+
+input,
+button {
+  height: 28px;
+}

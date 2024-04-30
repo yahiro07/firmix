@@ -1,6 +1,59 @@
-# 環境構築
+# Firmix Node.js Project
+
+## 構成
+
+### 言語とライブラリ
+React, TypeScript, MongoDBを共通で使っています。
+
+フレームワークとCSS in JSライブラリの構成を模索中です。
+
+|パッケージ|対象サイト|構成|リリースURL
+|--|--|--|--|
+|web-firmix|Firmix|Remix, Panda CSS| -- |
+|web-firmix-nextjs|Firmix|Next.js, MUI System| firmix.nector.me |
+|web-kfx|KFX|Remix, Linaria| firmix-kfx.nector.me |
+
+Firmix(Base)のサイトの実装が2つあり、RemixとNextJSのどちらで今後開発を進めていくかまだ決まっていません。
+
+### 運用環境
+
+|要素|インフラ|備考|
+|--|--|--|
+|DB|VPS|MongoDB 6.0|
+|オブジェクトストレージ|Cloudflare R2||
+|アプリサーバ|GCP Cloud Run||
+
+Node.jsのサーバをCloud Runで実行しています。VPSに配置したMongoDBにアクセスしています。画像やファームウェアのバイナリなどのアセットはCloudflare R2で保持しています。
+
+### ブランチ
+
+#### main
+
+メインブランチです。機能を実装したときにはこのブランチに向けてPRを出してください。
+
+#### release-firmix
+
+Firmix(Base)のリリース用のブランチです。メインブランチをマージしてリリースします。  
+Cloud Buildのトリガーが走り、Cloud Runにデプロイされます。  
+`web-firmix-nextjs`パッケージがデプロイされ、https://firmix.nector.me に反映されます。
+
+#### release-firmix-kfx
+
+KFXのリリース用のブランチです。メインブランチをマージしてリリースします。 
+Cloud Buildのトリガーが走り、Cloud Runにデプロイされます。  
+`web-firmix-kfx`パッケージがデプロイされ、https://firmix-kfx.nector.me に反映されます。
+
+
+#### release-docs-firmix
+
+ドキュメントサイトのリリース用のブランチです。メインブランチをマージしてリリースします。    
+Cloudflare Pagesでビルドが走り、ドキュメントサイトが更新されます。 
+`<Firmixのトップディレクトリ>/documentation/firmix_docusaurus`パッケージがデプロイされ、https://docs-firmix.nector.me に反映されます。
+
 
 ## 開発環境
+
+以下ではローカル開発に必要な環境構築についてまとめています。
 
 Node.jsが必要です。バージョンは`18`以降を推奨します。  
 ローカルマシンでMongoDBを動かす場合にDockerの使用を推奨しているので、必要な場合適宜導入してください。
