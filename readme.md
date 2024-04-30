@@ -4,7 +4,7 @@
 
 マイコンを使った作品の概要とファームウェアのバイナリを投稿して、電子工作の作品を誰でも簡単に再現できるようにしています。
 
-<img src="./documentation/firmix_docusaurus/static/img/self/img0517.jpg" style="max-width:360px"><br/>
+<img src="./documentation/firmix_docusaurus/static/img/self/img0517.jpg" width="360px"><br/>
 
 
 電子工作界隈でよく使われているRP2040やESP32などのMCUをサポートし、これらのファームウェアをブラウザから簡単にボードに書き込める環境を提供することを目標としています。
