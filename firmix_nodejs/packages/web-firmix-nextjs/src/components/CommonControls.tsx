@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Box, BoxProps, styled } from "@mui/system";
 import { ComponentProps, FC } from "react";
 import { prefab } from "../common_styling/prefab";
-import { HStack, Label, Li } from "../common_styling/utility_components";
+import { HStack, Label } from "../common_styling/utility_components";
 import { IconIconifyZ } from "./IconIconifyZ";
 
 export const Button = prefab<JSX.IntrinsicElements["button"]>(
@@ -87,7 +87,7 @@ export const FormTextInput = prefab(
 
 export const Nav = prefab(
   <Box
-    component="ul"
+    component="nav"
     sx={{
       display: "flex",
       flexDirection: "column",
@@ -124,11 +124,9 @@ export const NavItem = createFC<{
   // const active = path === location.href;
   const active = false;
   return (
-    <Li>
-      <Link href={path}>
-        <NavItemCore title={title} iconSpec={iconSpec} active={active} />
-      </Link>
-    </Li>
+    <Link href={path}>
+      <NavItemCore title={title} iconSpec={iconSpec} active={active} />
+    </Link>
   );
 });
 
@@ -141,11 +139,7 @@ export const NavItem_Button = createFC<{
     console.log("onClick", path);
     location.href = path;
   };
-  return (
-    <Li>
-      <NavItemCore title={title} iconSpec={iconSpec} onClick={onClick} />
-    </Li>
-  );
+  return <NavItemCore title={title} iconSpec={iconSpec} onClick={onClick} />;
 });
 
 export const ToggleButtonLarge = createFC(
