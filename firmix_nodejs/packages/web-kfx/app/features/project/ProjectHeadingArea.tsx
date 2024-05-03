@@ -1,9 +1,9 @@
-import { css } from "@linaria/core";
 import { ReactNode } from "@mx/auxiliaries/fe-deps-react";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { useRepositoryDisplayInfo } from "@mx/shared/github/repository_info_helper";
 import { projectHeadingArea_parts } from "@mx/web-kfx/app/features/project/ProjectHeadingArea_Parts";
-import { flexVertical } from "../../common_styling/utility_styles";
+import { css } from "../../../styled-system/css";
+import { Stack } from "../../../styled-system/jsx";
 
 type Props = {
   projectName: string;
@@ -18,11 +18,7 @@ type Props = {
 };
 
 export const LocalProjectHeadingAreaDummy = createFC(() => {
-  return (
-    <div q={style}>
-      メタデータファイルが存在しないか、内容にエラーがあります。
-    </div>
-  );
+  return <div>メタデータファイルが存在しないか、内容にエラーがあります。</div>;
 });
 
 export const ProjectHeadingArea = createFC<Props>(
@@ -42,7 +38,7 @@ export const ProjectHeadingArea = createFC<Props>(
       AuthorPart,
     } = projectHeadingArea_parts;
     return (
-      <div q={style}>
+      <Stack gap="1" padding="8px" position="relative">
         <ProjectTitlePart
           projectName={projectName}
           variationName={variationName}
@@ -54,33 +50,25 @@ export const ProjectHeadingArea = createFC<Props>(
           <AuthorPart
             userName={authorInfo.userName}
             avatarUrl={authorInfo.userAvatarUrl}
-            q="author"
+            q={css({
+              marginLeft: "2px",
+              marginTop: "8px",
+            })}
           />
         )}
-        {/* <div q="repository-info" if={!repositoryInfo} /> */}
-        <ProjectTagsList tags={tags} q="tags" />
-        <div q="control-area">{operationUiAdditional}</div>
-      </div>
+        {/* <div if={!repositoryInfo} /> */}
+        <ProjectTagsList tags={tags} />
+        <Stack
+          gap="4"
+          position="absolute"
+          alignItems="flex-end"
+          right={0}
+          top={0}
+          padding="8px"
+        >
+          {operationUiAdditional}
+        </Stack>
+      </Stack>
     );
   }
 );
-
-const style = css`
-  padding: 8px;
-  position: relative;
-
-  ${flexVertical(4)};
-
-  > .control-area {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 8px;
-    ${flexVertical(16)};
-    align-items: flex-end;
-  }
-  > .author {
-    margin-left: 2px;
-    margin-bottom: 8px;
-  }
-`;

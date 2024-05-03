@@ -19,7 +19,7 @@ const localProjectStorage =
   createLocalStorageAdapter<LocalDevelopmentProject>("kfx_local_project");
 const projectDirectoryHandleStorage =
   createIndexedDbStorageAdapter<FileSystemDirectoryHandle>(
-    "fr0_local_project_directory_handle"
+    "kfx_local_project_directory_handle"
   );
 
 export type LocalProjectPageStore = {

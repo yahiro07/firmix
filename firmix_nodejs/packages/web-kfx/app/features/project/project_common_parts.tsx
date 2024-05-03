@@ -1,66 +1,58 @@
-import { css } from "@linaria/core";
-import { createFCX } from "@mx/web-kfx/app/common/fcx";
-import { Link } from "@remix-run/react";
-import { flexAligned } from "../../common_styling/utility_styles";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
+import { css } from "../../../styled-system/css";
+import { HStack } from "../../../styled-system/jsx";
+import { StyledLink } from "../../common_styling/utility_components";
 import { IconIconify } from "../../components/IconIconify";
 
-export const LinkChildProjectListPage = createFCX<{
+const ProjectLinkCommon = createFC<{
+  pagePath: string;
+  iconSpec: string;
+  iconYOffset: string;
+  text: string;
+  smaller?: boolean;
+}>(({ pagePath, iconSpec, iconYOffset, text, smaller }) => (
+  <StyledLink to={pagePath}>
+    <HStack
+      gap="2px"
+      color="#666"
+      fontSize={smaller ? "0.9em" : "1.0em"}
+      _hover={{ textDecoration: "underline" }}
+    >
+      <IconIconify spec={iconSpec} q={css({ marginTop: iconYOffset })} />
+      <span>{text}</span>
+    </HStack>
+  </StyledLink>
+));
+
+export const LinkChildProjectListPage = createFC<{
   project: { projectId: string; numChildProjects: number };
   smaller?: boolean;
-}>(
-  ({ project, smaller }) => {
-    const { projectId, numChildProjects } = project;
-    const pagePath = `/derived/${projectId}`;
-    return (
-      <Link to={pagePath} q={smaller && "--smaller"}>
-        <IconIconify spec="fa:code-fork" q="icon" />
-        <span>{numChildProjects}件の派生プロジェクト</span>
-      </Link>
-    );
-  },
-  css`
-    ${flexAligned(2)};
-    color: #666;
-    &.--smaller {
-      font-size: 0.9em;
-    }
+}>(({ project, smaller }) => {
+  const { projectId, numChildProjects } = project;
+  const pagePath = `/derived/${projectId}`;
+  return (
+    <ProjectLinkCommon
+      pagePath={pagePath}
+      iconSpec="fa:code-fork"
+      iconYOffset="1px"
+      text={`${numChildProjects}件の派生プロジェクト`}
+      smaller={smaller}
+    />
+  );
+});
 
-    > .icon {
-      margin-top: 1px;
-    }
-
-    &:hover {
-      text-decoration: underline;
-    }
-  `
-);
-
-export const LinkParentProjectPage = createFCX<{
+export const LinkParentProjectPage = createFC<{
   projectId: string;
   smaller?: boolean;
-}>(
-  ({ projectId, smaller }) => {
-    const pagePath = `/project/${projectId}`;
-    return (
-      <Link to={pagePath} q={smaller && "--smaller"}>
-        <IconIconify spec="material-symbols:trip-origin" q="icon" />
-        <span>派生元プロジェクト</span>
-      </Link>
-    );
-  },
-  css`
-    ${flexAligned(2)};
-    color: #666;
-    &.--smaller {
-      font-size: 0.9em;
-    }
-
-    > .icon {
-      margin-top: 1px;
-    }
-
-    &:hover {
-      text-decoration: underline;
-    }
-  `
-);
+}>(({ projectId, smaller }) => {
+  const pagePath = `/project/${projectId}`;
+  return (
+    <ProjectLinkCommon
+      pagePath={pagePath}
+      iconSpec="material-symbols:trip-origin"
+      iconYOffset="0"
+      text="派生元プロジェクト"
+      smaller={smaller}
+    />
+  );
+});

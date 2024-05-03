@@ -1,118 +1,89 @@
-import { css } from "@linaria/core";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { ProjectRepositoryInfo } from "@mx/shared/github/types_github";
-import { createFCX } from "@mx/web-kfx/app/common/fcx";
-import { styleTextLinkInheritColor } from "../../common_styling/common_styles";
-import { flexAligned, flexVertical } from "../../common_styling/utility_styles";
+import { FC } from "react";
+import { css } from "../../../styled-system/css";
+import { Box, BoxProps, HStack } from "../../../styled-system/jsx";
+import { styleObj_TextLinkInheritColor } from "../../common_styling/common_styles";
+import { H2, H3, Img, StyledA } from "../../common_styling/utility_components";
+import { flexAligned } from "../../common_styling/utility_styles";
 import { Button } from "../../components/CommonControls";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
-const ProjectTitlePart = createFCX<{
+const ProjectTitlePart = createFC<{
   projectName: string;
   variationName: string;
-}>(
-  ({ projectName, variationName }) => {
-    return (
-      <div>
-        <h2>
-          <IconIconifyZ spec="icon-park-twotone:chip" q="title-icon" />
-          <span>{projectName}</span>
-        </h2>
-        <h3 if={variationName}>{variationName}</h3>
-      </div>
-    );
-  },
-  css`
-    > h2 {
-      ${flexAligned(2)};
-      font-size: 32px;
-      > .title-icon {
-        margin-top: 3px;
-        font-size: 36px;
-      }
-    }
-    > h3 {
-      font-size: 28px;
-    }
-  `
-);
+}>(({ projectName, variationName }) => {
+  return (
+    <Box>
+      <H2 css={flexAligned} gap="2px" fontSize="32px">
+        <IconIconifyZ
+          spec="icon-park-twotone:chip"
+          q={css({ fontSize: "36px", marginTop: "3px" })}
+        />
+        <span>{projectName}</span>
+      </H2>
+      <H3 fontSize="28px" if={variationName}>
+        {variationName}
+      </H3>
+    </Box>
+  );
+});
 
-const ProjectTagsList = createFCX<{ tags: string[] }>(
-  ({ tags }) => {
-    return (
-      <div>
-        {tags.map((tag) => (
-          <div key={tag} q="tag">
-            {tag}
-          </div>
-        ))}
-      </div>
-    );
-  },
-  css`
-    ${flexAligned(8)};
-    > .tag {
-      font-size: 14px;
-      padding: 0 8px 1px;
-      border-radius: 20px;
-      background: #bbb;
-      color: #fff;
-      white-space: nowrap;
-    }
-  `
-);
-
-const RepositoryInfoPart = createFCX<{ repositoryInfo: ProjectRepositoryInfo }>(
-  ({ repositoryInfo }) => {
-    return (
-      <div q="repository-info">
-        <a
-          href={repositoryInfo.repositoryUrl}
-          target="_blank"
-          q="repository"
-          rel="noreferrer"
+const ProjectTagsList: FC<BoxProps & { tags: string[] }> = ({
+  tags,
+  ...props
+}) => {
+  return (
+    <HStack gap={2} {...props}>
+      {tags.map((tag) => (
+        <Box
+          key={tag}
+          fontSize="14px"
+          background="#bbb"
+          padding="0 8px 1px"
+          borderRadius="99px"
+          color="#fff"
+          whiteSpace="nowrap"
         >
-          <IconIconifyZ spec="mdi:github" q="github-icon" />
-          <span>{repositoryInfo.repositoryProjectPath}</span>
-        </a>
-      </div>
-    );
-  },
-  css`
-    font-size: 18px;
-    ${flexVertical(2)};
-    align-items: flex-start;
-    > .repository {
-      > .github-icon {
-        font-size: 30px;
-        margin-top: 4px;
-      }
-      ${flexAligned(1)};
-    }
-    > a {
-      ${styleTextLinkInheritColor};
-    }
-  `
-);
+          {tag}
+        </Box>
+      ))}
+    </HStack>
+  );
+};
 
-const AuthorPart = createFCX<{ userName: string; avatarUrl: string }>(
+const RepositoryInfoPart = createFC<{
+  repositoryInfo: ProjectRepositoryInfo;
+}>(({ repositoryInfo }) => {
+  return (
+    <StyledA
+      href={repositoryInfo.repositoryUrl}
+      target="_blank"
+      rel="noreferrer"
+    >
+      <HStack gap="1px" css={styleObj_TextLinkInheritColor}>
+        <IconIconifyZ
+          spec="mdi:github"
+          q={css({ fontSize: "30px", marginTop: "4px" })}
+        />
+        <Box fontSize="18px">{repositoryInfo.repositoryProjectPath}</Box>
+      </HStack>
+    </StyledA>
+  );
+});
+
+const AuthorPart = createFC<{ userName: string; avatarUrl: string }>(
   ({ userName, avatarUrl }) => {
     return (
-      <div>
-        <img src={avatarUrl} alt="avatar" />
-        <div>{userName}</div>
-      </div>
+      <HStack gap="4px">
+        <Img src={avatarUrl} alt="avatar" width="26px" />
+        <Box fontSize="18px">{userName}</Box>
+      </HStack>
     );
-  },
-  css`
-    font-size: 18px;
-    > img {
-      width: 26px;
-    }
-    ${flexAligned(4)};
-  `
+  }
 );
 
-const EditorButton = createFCX<{ active: boolean; onClick(): void }>(
+const EditorButton = createFC<{ active: boolean; onClick(): void }>(
   ({ active, onClick }) => {
     return (
       <Button q={active && "--active"} onClick={onClick}>
@@ -120,13 +91,13 @@ const EditorButton = createFCX<{ active: boolean; onClick(): void }>(
         <span>エディタ</span>
       </Button>
     );
-  },
-  css`
-    ${flexAligned()};
-    &.--active {
-      background: var(--cl-button-edit-active);
-    }
-  `
+  }
+  // css`
+  //   ${flexAligned()};
+  //   &.--active {
+  //     background: var(--cl-button-edit-active);
+  //   }
+  // `
 );
 
 export const projectHeadingArea_parts = {
