@@ -1,0 +1,72 @@
+@layer base, mui;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body,
+  h2,
+  h3,
+  h4,
+  p,
+  span {
+    font-family: "M Plus 2", sans-serif;
+  }
+
+  :root {
+    --cl-page-background: #eee;
+    --cl-foreground-text: #333;
+    --cl-top-bar-fill: #68f;
+    --cl-top-bar-text: #fff;
+    --cl-side-bar-fill: #ccc;
+    --cl-side-bar-edge: #aaa;
+    --cl-content-background: #fff;
+    --cl-button-edit-active: #7dd1d7;
+  }
+
+  ul,
+  li {
+    list-style: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  div.markdown-body,
+  body,
+  button,
+  input,
+  textarea,
+  select,
+  option {
+    /* font-family: "M PLUS 1p", sans-serif; */
+    font-family: "M PLUS 2", sans-serif !important;
+    /* font-family: "Murecho", sans-serif; */
+    /* font-family: "Sawarabi Gothic", sans-serif; */
+  }
+
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5,
+  body h6 {
+    font-weight: 500 !important;
+    margin: 0;
+  }
+
+  body {
+    line-height: 1.5;
+  }
+}

@@ -1,0 +1,13 @@
+node_modules
+
+.cache/
+build/
+.env
+.env.production.local
+
+.local/
+.vscode/settings.json
+
+styled-system/
+
+.docker-data/
