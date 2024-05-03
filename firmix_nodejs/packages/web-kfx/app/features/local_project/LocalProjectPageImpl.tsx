@@ -98,6 +98,9 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
         pinNumbersMap={
           project?.assetMetadata.metadataInput?.pinNumbersMap ?? {}
         }
+        boardLabel={
+          project?.assetMetadata.metadataInput?.targetBoardLabel ?? ""
+        }
         if={project?.configurationSourceItems}
       />
     </Stack>

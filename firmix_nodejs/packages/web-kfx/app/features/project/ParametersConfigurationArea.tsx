@@ -7,7 +7,7 @@ import {
 } from "@mx/web-kfx/app/base/types_dto";
 import { ConfigurationEditItem } from "@mx/web-kfx/app/base/types_project_edit";
 import { firmixCore_firmwareConfiguration } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
-import { HStack, Stack } from "../../../styled-system/jsx";
+import { Box, HStack, Stack } from "../../../styled-system/jsx";
 import { H3, Hr } from "../../common_styling/utility_components";
 import {
   Button,
@@ -22,6 +22,7 @@ type Props = {
   submit2?(editItems: ConfigurationEditItem[]): void;
   submit2Label?: string;
   pinNumbersMap: Record<string, number>;
+  boardLabel: string;
 };
 
 export const ParametersConfigurationArea = createFC<Props>(
@@ -32,6 +33,7 @@ export const ParametersConfigurationArea = createFC<Props>(
     submit2,
     submit2Label,
     pinNumbersMap,
+    boardLabel,
   }) => {
     const errorConfigurations = configurationSourceItemsRaw.filter(
       (it) => it.dataKind === "error"
@@ -105,14 +107,20 @@ export const ParametersConfigurationArea = createFC<Props>(
             ))}
           </Stack>
         )}
-        <HStack gap="8px" marginTop="8px">
-          <Button onClick={() => handleDownload(2)} if={!hasError && submit2}>
-            {submit2Label}
-          </Button>
-          <Button onClick={() => handleDownload(1)} if={!hasError}>
-            {submitButtonLabel}
-          </Button>
-        </HStack>
+        <Stack gap="12px">
+          <HStack if={boardLabel}>
+            <span>ボード:&nbsp;</span>
+            <Box fontWeight="bold">{boardLabel}</Box>
+          </HStack>
+          <HStack gap="8px">
+            <Button onClick={() => handleDownload(2)} if={!hasError && submit2}>
+              {submit2Label}
+            </Button>
+            <Button onClick={() => handleDownload(1)} if={!hasError}>
+              {submitButtonLabel}
+            </Button>
+          </HStack>
+        </Stack>
       </Stack>
     );
   }
