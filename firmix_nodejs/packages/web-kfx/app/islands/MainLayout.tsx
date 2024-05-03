@@ -1,119 +1,83 @@
-import { css } from "@linaria/core";
-import { createFCX } from "@mx/web-kfx/app/common/fcx";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { SideBar } from "@mx/web-kfx/app/features/layout/SideBar";
 import { ReactNode } from "react";
+import { css } from "../../styled-system/css";
+import { Box, Flex, HStack, Spacer } from "../../styled-system/jsx";
+import { H1 } from "../common_styling/utility_components";
 import { flexAligned } from "../common_styling/utility_styles";
 import { IconIconifyZ } from "../components/IconIconifyZ";
 import { SiteVariationSelectionPart } from "../features/layout/SiteVariationSelectionPart";
 
-const SiteTitle = createFCX(
-  () => {
-    return (
-      <div>
-        <IconIconifyZ spec="mdi:chip" q="site-icon" />
-        <h1>
-          Firmix KFX<span q="beta">(beta)</span>
-        </h1>
-      </div>
-    );
-  },
-  css`
-    ${flexAligned(2)};
-    color: var(--cl-top-bar-text);
+const SiteTitle = createFC(() => {
+  return (
+    <HStack gap="2px" color="var(--cl-top-bar-text)">
+      <IconIconifyZ
+        spec="mdi:chip"
+        q={css({ fontSize: "44px", marginTop: "3px" })}
+      />
+      <H1 css={flexAligned} gap={2}>
+        <Box fontSize="36px" fontWeight="bold">
+          Firmix FKX
+        </Box>
+        <Box fontSize="28px" fontWeight="normal" marginTop="5px">
+          (beta)
+        </Box>
+      </H1>
+    </HStack>
+  );
+});
 
-    > .site-icon {
-      font-size: 44px;
-      margin-top: 3px;
-    }
-    > h1 {
-      ${flexAligned(8)};
-      font-size: 36px;
-      font-weight: bold;
-      margin: 0;
+const TopBar = createFC(() => (
+  <HStack
+    gap={0}
+    padding="0 12px"
+    height="60px"
+    background="var(--cl-top-bar-fill)"
+  >
+    <SiteTitle />
+    <Spacer />
+    <SiteVariationSelectionPart siteVariant="kfx" />
+  </HStack>
+));
 
-      > .beta {
-        font-size: 28px;
-        font-weight: normal;
-        margin-top: 5px;
-      }
-    }
-  `
-);
+const MainRow = createFC<{ children: ReactNode }>(({ children }) => {
+  return (
+    <Flex>
+      <SideBar
+        q={css({
+          position: "sticky",
+          top: "60px",
+          height: "calc(100vh - 60px)",
+          flexShrink: "0",
+        })}
+      />
+      <Flex flexGrow={1} justifyContent="center">
+        <Box flexGrow={1} maxWidth="800px">
+          {children}
+        </Box>
+      </Flex>
+    </Flex>
+  );
+});
 
-const TopBar = createFCX(
-  () => (
-    <div>
-      <SiteTitle />
-      <SiteVariationSelectionPart siteVariant="kfx" />
-    </div>
-  ),
-  css`
-    background: var(--cl-top-bar-fill);
-    height: 60px;
-    padding: 0 12px;
-    ${flexAligned()};
-    justify-content: space-between;
-  `
-);
-
-const MainRow = createFCX<{ children: ReactNode }>(
-  ({ children }) => {
-    return (
-      <div>
-        <SideBar q="side-bar" />
-        <div q="main-column">
-          <div>{children}</div>
-        </div>
-      </div>
-    );
-  },
-  css`
-    display: flex;
-    > .side-bar {
-      position: sticky;
-      top: 60px;
-      height: calc(100vh - 60px);
-      flex-shrink: 0;
-    }
-    > .main-column {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      /* padding: 16px 0; */
-      > div {
-        flex-grow: 1;
-        max-width: 800px;
-      }
-    }
-  `
-);
-
-export const MainLayout = createFCX(
-  ({ children }: { children: ReactNode }) => {
-    return (
-      <div q={["main-layout-root"]}>
-        <TopBar q="site-top-bar" />
-        <MainRow q="main-row">{children}</MainRow>
-      </div>
-    );
-  },
-  css`
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: var(--cl-page-background);
-    color: var(--cl-foreground-text);
-
-    > .site-top-bar {
-      position: sticky;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-      flex-shrink: 0;
-    }
-
-    > .main-row {
-      flex-grow: 1;
-    }
-  `
-);
+export const MainLayout = createFC(({ children }: { children: ReactNode }) => {
+  return (
+    <Flex
+      flexDirection="column"
+      minHeight="100vh"
+      background="var(--cl-page-background)"
+      color="var(--cl-foreground-text)"
+    >
+      <TopBar
+        q={css({
+          position: "sticky",
+          width: "100%",
+          top: "0",
+          zIndex: "100",
+          flexShrink: "0",
+        })}
+      />
+      <MainRow children={children} q={css({ flexGrow: 1 })} />
+    </Flex>
+  );
+});
