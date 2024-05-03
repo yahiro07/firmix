@@ -1,93 +1,103 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { css } from "@linaria/core";
-import { styled } from "@linaria/react";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { reflectInputChecked } from "@mx/auxiliaries/utils_fe_react/form_helper";
-import { createFCX } from "@mx/web-kfx/app/common/fcx";
 import { Link } from "@remix-run/react";
-import { flexAligned, flexVertical } from "../common_styling/utility_styles";
+import { css } from "../../styled-system/css";
+import { Box, HStack, styled } from "../../styled-system/jsx";
+import { Input, Label, Li } from "../common_styling/utility_components";
 import { IconIconifyZ } from "./IconIconifyZ";
 
-export const Button = styled.button`
-  padding: 0.5rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  color: #ffffff;
-  background-color: #6366f1;
-  border: none;
+export const Button = styled("button", {
+  base: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "0.6rem 1.2rem",
+    fontWeight: "500",
+    color: "#fff",
+    backgroundColor: "#6366f1",
+    whiteSpace: "noWrap",
+    cursor: "pointer",
+    "&:hover": { opacity: 0.8 },
+    "&:disabled": { opacity: 0.3 },
+  },
+});
 
-  &:hover {
-    opacity: 0.8;
-  }
-  &:disabled {
-    opacity: 0.3;
-  }
-`;
+export const LinkButton = styled(Link, {
+  base: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "0.6rem 1.2rem",
+    fontWeight: "500",
+    color: "#fff",
+    backgroundColor: "#6366f1",
+    whiteSpace: "noWrap",
+    "&:hover": { opacity: 0.8 },
+    "&:disabled": { opacity: 0.3 },
+  },
+});
 
-export const LinkButton = styled(Link)`
-  padding: 0.5rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  color: #ffffff;
-  background-color: #6366f1;
-  border: none;
+export const ButtonSmall = styled("button", {
+  base: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "0.9em",
+    background: "#ddd",
+    padding: "4px 10px",
+    cursor: "pointer",
+    "&:hover": { opacity: 0.8 },
+    "&:disabled": { opacity: 0.3 },
+  },
+});
 
-  &:hover {
-    opacity: 0.8;
-  }
-  &:disabled {
-    opacity: 0.3;
-  }
-`;
+export const Card = styled("div", {
+  base: {
+    background: "#fff",
+    boxShadow: "0 2px 2px #0004",
+  },
+});
 
-export const ButtonSmall = styled.button``;
+export const FormLabel = styled("label");
 
-export const Card = styled.div`
-  background: #fff;
-  box-shadow: 0 2px 2px #0004;
-`;
+export const FormTextInput = styled("input", {
+  base: {
+    padding: "0.625rem",
+    borderWidth: "1px",
+    borderColor: "#d1d5db",
+    color: "#111827",
+    backgroundColor: "#f9fafb",
+  },
+});
 
-export const FormLabel = styled.label``;
+export const Nav = styled("ul", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+  },
+});
 
-export const FormTextInput = styled.input`
-  padding: 0.625rem;
-  border-width: 1px;
-  border-color: #d1d5db;
-  color: #111827;
-  background-color: #f9fafb;
-`;
+const NavItemCore = createFC<{
+  title: string;
+  iconSpec: string;
+  active?: boolean;
+  onClick?(): void;
+}>(({ title, iconSpec, active, onClick }) => (
+  <HStack
+    gap="2"
+    fontSize="20px"
+    cursor="pointer"
+    fontWeight={(active && "500") || "normal"}
+    _hover={{ opacity: 0.7 }}
+    onClick={onClick}
+  >
+    <IconIconifyZ spec={iconSpec as any} q={css({ fontSize: "24px" })} />
+    <span>{title}</span>
+  </HStack>
+));
 
-export const Nav = styled.ul`
-  ${flexVertical(16)};
-`;
-
-const styleNavItem = css`
-  font-size: 20px;
-  ${flexAligned(8)};
-  cursor: pointer;
-  > .icon {
-    font-size: 24px;
-  }
-  &[data-current] {
-    font-weight: 500;
-  }
-  &:hover {
-    opacity: 0.7;
-  }
-`;
-
-export const NavItem = createFCX<{
+export const NavItem = createFC<{
   path: string;
   title: string;
   iconSpec: string;
@@ -97,86 +107,78 @@ export const NavItem = createFCX<{
   // const active = path === location.href;
   const active = false;
   return (
-    <li q={["nav-item", active && "active"]}>
-      <Link to={path} q={styleNavItem}>
-        <IconIconifyZ spec={iconSpec as any} q="icon" />
-        <span>{title}</span>
+    <Li>
+      <Link to={path}>
+        <NavItemCore title={title} iconSpec={iconSpec} active={active} />
       </Link>
-    </li>
+    </Li>
   );
 });
 
-export const NavItem_Button = createFCX<{
+export const NavItem_Button = createFC<{
   path: string;
   title: string;
   iconSpec: string;
 }>(({ path, title, iconSpec }) => {
-  const onClick = () => (location.href = path);
+  const onClick = () => {
+    console.log("onClick", path);
+    location.href = path;
+  };
   return (
-    <li>
-      <div q={styleNavItem} onClick={onClick}>
-        <IconIconifyZ spec={iconSpec as any} q="icon" />
-        <span>{title}</span>
-      </div>
-    </li>
+    <Li>
+      <NavItemCore title={title} iconSpec={iconSpec} onClick={onClick} />
+    </Li>
   );
 });
 
-export const ToggleButtonLarge = createFCX<{
-  checked: boolean;
-  setChecked(): void;
-  text: string;
-}>(
-  ({ checked, setChecked, text }) => {
+export const ToggleButtonLarge = createFC(
+  ({
+    checked,
+    setChecked,
+    text,
+  }: {
+    checked: boolean;
+    setChecked(): void;
+    text: string;
+  }) => {
     return (
-      <label>
-        <input
+      <Label
+        position="relative"
+        cursor="pointer"
+        display="flex"
+        alignItems="center"
+        gap="8px"
+      >
+        <Input
           type="checkbox"
           value=""
           checked={checked}
           onChange={reflectInputChecked(setChecked)}
+          position="absolute"
+          width="1px"
+          height="1px"
         />
-        <div />
+        <Box
+          position="relative"
+          width="60px"
+          height="30px"
+          background={checked ? "#7ca" : "#ccc"}
+          borderRadius="99px"
+          transition="background 0.5s"
+        >
+          <Box
+            position="absolute"
+            top="2px"
+            left={checked ? "32px" : "2px"}
+            width="26px"
+            height="26px"
+            background="#fff"
+            borderRadius="99px"
+            transition="left 0.5s"
+          />
+        </Box>
         <span>{text}</span>
-      </label>
+      </Label>
     );
-  },
-  css`
-    position: relative;
-    cursor: pointer;
-    ${flexAligned(8)};
-
-    > input {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-    }
-
-    > div {
-      position: relative;
-      width: 60px;
-      height: 30px;
-      background: #ccc;
-      border-radius: 99px;
-
-      &:before {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        content: "";
-        width: 26px;
-        height: 26px;
-        background: #fff;
-        border-radius: 99px;
-        transition: left 0.5s;
-      }
-    }
-
-    > input:checked + div {
-      background-color: #7ca;
-      &:before {
-        left: 32px;
-      }
-    }
-  `
+  }
 );
