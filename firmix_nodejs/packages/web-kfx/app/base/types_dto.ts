@@ -28,7 +28,7 @@ export type ProjectDetailDto = {
   variationName: string;
   introduction: string;
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;
@@ -55,7 +55,7 @@ export type ProjectListItemDto = {
   variationName: string;
   introduction: string;
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;

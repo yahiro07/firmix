@@ -25,7 +25,7 @@ export type ProjectMetadataJsonFileContent = {
   variationName?: string;
   introductionLines: string[];
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;
@@ -41,7 +41,7 @@ export type ProjectMetadataInput = {
   variationName: string;
   introduction: string;
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   realm: ProjectRealm;
   tags: string[];
   repositoryUrl: string;

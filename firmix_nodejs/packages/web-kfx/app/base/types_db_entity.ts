@@ -25,7 +25,7 @@ export type ProjectEntity = {
   variationName: string;
   introduction: string;
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   realm: ProjectRealm;
   tags: string[];
   //Github上のプロジェクトフォルダのURL,リポジトリ内のサブ階層のフォルダパスを含む
