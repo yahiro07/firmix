@@ -4,6 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "prepare": "panda codegen",
     "build": "remix vite:build",
     "dev": "remix vite:dev",
     "dev:inspect": "NODE_OPTIONS=--inspect remix vite:dev",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
+    "@pandacss/dev": "^0.38.0",
     "@remix-run/dev": "^2.8.1",
     "@types/react": "^18.2.77",
     "@types/react-dom": "^18.2.25",
