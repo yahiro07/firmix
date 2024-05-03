@@ -96,7 +96,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
       <ProjectReadmeArea readmeFileContent={project.readmeFileContent} />
       <FirmwareDownloadButtonArea
         buttonLabel="UF2ダウンロード"
-        boardLabel={project.primaryTargetBoard}
+        boardLabel={project.targetBoardLabel}
         handler={submitEditItems}
       />
     </Box>

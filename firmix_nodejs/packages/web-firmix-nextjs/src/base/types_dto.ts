@@ -7,7 +7,7 @@ export type ProjectDetailDto = {
   variationName: string;
   introduction: string;
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   tags: string[];
   repositoryUrl: string;
   readmeFileContent: string;
@@ -31,7 +31,7 @@ export type ProjectListItemDto = {
   variationName: string;
   introduction: string;
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   tags: string[];
   repositoryUrl: string;
   thumbnailUrl: string;

@@ -335,7 +335,7 @@ const local = {
       childProjectIds: args.childProjectIds,
       introduction: metadataInput.introduction,
       targetMcu: metadataInput.targetMcu,
-      primaryTargetBoard: metadataInput.primaryTargetBoard,
+      targetBoardLabel: metadataInput.targetBoardLabel,
       tags: metadataInput.tags,
       repositoryUrl: metadataInput.repositoryUrl,
       readmeFileContent: args.readmeFileContent,
