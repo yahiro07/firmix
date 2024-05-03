@@ -1,4 +1,3 @@
-import { css } from "@linaria/core";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { useDateTimeTextWithElapsed } from "@mx/shared/fe_modules/display_data_hooks";
 import { LocalProjectAssetsArea } from "@mx/web-kfx/app/features/local_project/LocalProjectAssetsArea";
@@ -10,15 +9,31 @@ import {
   ProjectHeadingArea,
 } from "@mx/web-kfx/app/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "@mx/web-kfx/app/features/project/ProjectReadmeArea";
-import {
-  flexCentered,
-  flexVertical,
-} from "../../common_styling/utility_styles";
+import { css } from "../../../styled-system/css";
+import { Box, Center, Stack } from "../../../styled-system/jsx";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
 type Props = {
   loggedIn: boolean;
 };
+
+const BuildDateTimePart = createFC<{ timestamp: number | undefined }>(
+  ({ timestamp }) => {
+    const timeText = useDateTimeTextWithElapsed(timestamp ?? 0, Date.now());
+    return <Box>ファームウェアビルド日時: {timeText}</Box>;
+  }
+);
+
+const BlankFillerPart = createFC(() => (
+  <Center flexDirection="column">
+    <IconIconifyZ spec="ph:folder-thin" q={css({ fontSize: "70px" })} />
+    <Box textAlign="center">
+      ローカルプロジェクトのフォルダを
+      <br />
+      ドラッグ&ドロップして読み込みます
+    </Box>
+  </Center>
+));
 
 export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
   const {
@@ -35,12 +50,13 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
 
   const metadataInput = project?.assetMetadata.metadataInput;
 
-  const firmwareTimeText = useDateTimeTextWithElapsed(
-    project?.assetFirmware.lastModified ?? 0,
-    Date.now()
-  );
   return (
-    <div q={style}>
+    <Stack
+      height="100%"
+      background="var(--cl-content-background)"
+      padding="16px"
+      gap="0"
+    >
       <LocalProjectLoadingArea
         loadedFolderName={loadedFolderName}
         loadFolder={loadProjectFolder}
@@ -62,25 +78,17 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
 
       <LocalProjectAssetsArea project={project!} if={project} />
       {/* <div if={errorMessage}>{errorMessage}</div> */}
-      <div
-        q="firmware-timestamp"
+      <BuildDateTimePart
+        timestamp={project?.assetFirmware.lastModified}
         if={project?.assetFirmware.validity === "valid"}
-      >
-        ファームウェアビルド日時: {firmwareTimeText}
-      </div>
+        q={css({ margin: "0 8px" })}
+      />
       <ProjectReadmeArea
         q="readme"
         readmeFileContent={project?.assetReadme.fileContent!}
         if={project?.assetReadme.fileContent}
       />
-      <div q="blank-filler" if={!project}>
-        <IconIconifyZ spec="ph:folder-thin" q="folder-icon" />
-        <div q="text">
-          ローカルプロジェクトのフォルダを
-          <br />
-          ドラッグ&ドロップして読み込みます
-        </div>
-      </div>
+      <BlankFillerPart q={css({ flexGrow: 1 })} if={!project} />
       <ParametersConfigurationArea
         configurationSourceItems={project?.configurationSourceItems!}
         submitEditItems={submitEditItems}
@@ -92,30 +100,6 @@ export const LocalProjectPageImpl = createFC<Props>(({ loggedIn }) => {
         }
         if={project?.configurationSourceItems}
       />
-    </div>
+    </Stack>
   );
 });
-
-const style = css`
-  height: 100%;
-  background: var(--cl-content-background);
-  padding: 16px;
-
-  ${flexVertical()};
-  > .blank-filler {
-    flex-grow: 1;
-    ${flexCentered()};
-    flex-direction: column;
-    > .folder-icon {
-      font-size: 70px;
-    }
-    > .text {
-      text-align: center;
-    }
-  }
-  > .firmware-timestamp {
-    margin: 0 8px;
-  }
-  > .readme {
-  }
-`;

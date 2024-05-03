@@ -1,13 +1,6 @@
 dev:
 	npm run dev
 
-check:
-	npm run typecheck
-
-.PHONY: build
-build:
-	npm run build
-
 # debug_production_local:
 # 	npx dotenv -e .env.production.local npx remix-serve ./build/server/index.js
 

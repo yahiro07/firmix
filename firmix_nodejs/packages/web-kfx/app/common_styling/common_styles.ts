@@ -1,21 +1,23 @@
-import { css } from "@linaria/core";
+export const styleObj_TextLinkInheritColor = {
+  color: "inherit",
+  textDecoration: "none",
+  _hover: {
+    textDecoration: "underline",
+  },
+};
 
-export const styleTextLinkInheritColor = css`
-  color: inherit;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+export const styleObj_uiStyleClickable = {
+  cursor: "pointer",
+  " &:hover": {
+    opacity: 0.7,
+  },
+  transition: "all 0.1s linear",
+};
 
-export const cssTransitionCommon = css`
-  transition: all 0.1s linear;
-`;
-
-export const uiStyleClickable = css`
+export const uiStyleClickable = `
   cursor: pointer;
   &:hover {
     opacity: 0.7;
   }
-  ${cssTransitionCommon};
+  transition: all 0.1s linear;
 `;

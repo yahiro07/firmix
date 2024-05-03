@@ -1,12 +1,8 @@
-import { css } from "@linaria/core";
 import { useState } from "@mx/auxiliaries/fe-deps-react";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { rpcClient } from "@mx/web-kfx/app/common/rpc_client";
-import {
-  flexAligned,
-  flexCentered,
-  flexVertical,
-} from "../common_styling/utility_styles";
+import { HStack, Stack } from "../../styled-system/jsx";
+import { Input } from "../common_styling/utility_components";
 import { ButtonSmall } from "../components/CommonControls";
 import { IconIconifyZ } from "../components/IconIconifyZ";
 
@@ -32,49 +28,45 @@ export const SettingsPage = createFC<Props>(({ apiKey }: Props) => {
   };
 
   return (
-    <div q={style}>
+    <Stack
+      gap={3}
+      padding={5}
+      background="var(--cl-content-background)"
+      height="100%"
+    >
       <h3>APIアクセスキー</h3>
-      <div q="edit-row">
-        <input value={apiKey} readOnly type={exhibit ? "text" : "password"} />
-        <ButtonSmall q="btn-eye" disabled={!apiKey} onClick={toggleExhibit}>
+      <HStack gap={0}>
+        <Input
+          value={apiKey}
+          readOnly
+          type={exhibit ? "text" : "password"}
+          width="360px"
+          height="32px"
+        />
+        <ButtonSmall
+          disabled={!apiKey}
+          onClick={toggleExhibit}
+          width="32px"
+          height="32px"
+          marginLeft="1px"
+        >
           <IconIconifyZ spec="fa-solid:eye" if={exhibit} />
           <IconIconifyZ spec="fa-solid:eye-slash" if={!exhibit} />
         </ButtonSmall>
-        <ButtonSmall q="btn-op" onClick={handleOperationButton}>
+        <ButtonSmall
+          onClick={handleOperationButton}
+          height="32px"
+          padding="0 8px"
+          marginLeft="20px"
+        >
           {!apiKey ? "生成" : "破棄"}
         </ButtonSmall>
-      </div>
+      </HStack>
       <div>
         CIタスクからAPI経由でプロジェクトを投稿/更新するときに使用します。
         <br />
         Github Actionで利用する際にはSecretsに格納してください。
       </div>
-    </div>
+    </Stack>
   );
 });
-
-const style = css`
-  padding: 20px;
-  ${flexVertical(12)};
-  background: var(--cl-content-background);
-  height: 100%;
-
-  > .edit-row {
-    ${flexAligned()};
-    > input,
-    > button {
-      height: 32px;
-    }
-    > button {
-      ${flexCentered()};
-    }
-    > .btn-eye {
-      margin-left: 1px;
-      width: 32px;
-    }
-    > .btn-op {
-      margin-left: 20px;
-      padding: 0 8px;
-    }
-  }
-`;

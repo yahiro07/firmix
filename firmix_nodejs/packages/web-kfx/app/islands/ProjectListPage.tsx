@@ -1,9 +1,8 @@
-import { css } from "@linaria/core";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { ProjectListItemDto } from "@mx/web-kfx/app/base/types_dto";
-import { HomeTargetSelectionBar } from "@mx/web-kfx/app/features/project_list/HomeTargetSelectionBar";
 import { ProjectListItemCard } from "@mx/web-kfx/app/features/project_list/ProjectListItemCard";
-import { flexVertical } from "../common_styling/utility_styles";
+import { Stack } from "../../styled-system/jsx";
+import { HomeTargetSelectionBar } from "../features/project_list/HomeTargetSelectionBar";
 
 type Props = {
   projects: ProjectListItemDto[];
@@ -14,17 +13,14 @@ type Props = {
 export const ProjectListPage = createFC<Props>(
   ({ projects, showPublicity, showHomeTargetSelectionBar }) => {
     return (
-      <div q={style}>
+      <Stack gap={3} padding="16px 0">
         <div q="site-instruction">
           自作キーボードや電子工作の作品を投稿して、ファームウェアを配布できるWebサービスです。
           <br />
           このバージョン(KFX)では、自作キーボードエコシステムKermiteと連携する機能を搭載する予定です。
-          <br />
-          2024/4/13
-          大幅な構成変更を予定しており、その際に投稿データをリセットする場合があります。ご了承ください。
         </div>
         <HomeTargetSelectionBar if={showHomeTargetSelectionBar} />
-        <div q="list">
+        <Stack gap={4}>
           {projects.map((project) => (
             <ProjectListItemCard
               key={project.projectId}
@@ -32,17 +28,8 @@ export const ProjectListPage = createFC<Props>(
               showPublicity={showPublicity}
             />
           ))}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
     );
   }
 );
-
-const style = css`
-  padding: 16px 0;
-  ${flexVertical(16)};
-
-  > .list {
-    ${flexVertical(16)};
-  }
-`;

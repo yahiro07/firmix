@@ -1,25 +1,17 @@
-import { css } from "@linaria/core";
+import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import { LoginUser } from "@mx/web-kfx/app/base/types_dto_internal";
-import { createFCX } from "@mx/web-kfx/app/common/fcx";
-import { flexAligned } from "../../common_styling/utility_styles";
+import { HStack } from "../../../styled-system/jsx";
+import { Img } from "../../common_styling/utility_components";
 
 type Props = {
   user: LoginUser;
 };
 
-export const LoginUserBox = createFCX<Props>(
-  ({ user }) => {
-    return (
-      <div>
-        <img src={user.avatarUrl} alt="avatar" />
-        <div>{user.userName}</div>
-      </div>
-    );
-  },
-  css`
-    ${flexAligned(6)};
-    > img {
-      width: 24px;
-    }
-  `
-);
+export const LoginUserBox = createFC<Props>(({ user }) => {
+  return (
+    <HStack gap="6px">
+      <Img src={user.avatarUrl} alt="avatar" width="24px" />
+      <div>{user.userName}</div>
+    </HStack>
+  );
+});

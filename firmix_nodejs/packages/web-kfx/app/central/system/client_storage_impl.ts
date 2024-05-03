@@ -31,7 +31,7 @@ type ClientStorageImpl = {
 
 function createClientStorageImpl(): ClientStorageImpl {
   const jwtSecret = getEnvVariable("JWT_SECRET");
-  const cookieNameLoginUserToken = "fr0_login_user_token";
+  const cookieNameLoginUserToken = "kfx_login_user_token";
 
   const m = {
     readLoginUserClue(req: Request) {

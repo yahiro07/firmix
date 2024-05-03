@@ -1,4 +1,3 @@
-import { css } from "@linaria/core";
 import { decodeBinaryBase64 } from "@mx/auxiliaries/base_env_adapters/base64";
 import { useMemo } from "@mx/auxiliaries/fe-deps-react";
 import { getDateTimeText_yyyyMMddHHmmss } from "@mx/auxiliaries/utils/date_time_helper";
@@ -21,6 +20,8 @@ import {
 import { ProjectHeadingArea } from "@mx/web-kfx/app/features/project/ProjectHeadingArea";
 import { ProjectReadmeArea } from "@mx/web-kfx/app/features/project/ProjectReadmeArea";
 import { ProjectOperationPart } from "@mx/web-kfx/app/features/project_detail/ProjectOperationPart";
+import { css } from "../../../styled-system/css";
+import { Box } from "../../../styled-system/jsx";
 
 type Props = {
   project: ProjectDetailDto;
@@ -71,7 +72,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
   );
 
   return (
-    <div q={style}>
+    <Box padding="16px" background="var(--cl-content-background)">
       <ProjectHeadingArea
         projectName={project.projectName}
         variationName={project.variationName}
@@ -90,7 +91,7 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
           />
         }
       />
-      <div q="info-area">
+      <Box padding="0 8px">
         <div>ターゲットMCU: {project.targetMcu}</div>
         <div>ファームウェア更新日時: {firmwareUpdateAtText}</div>
         <div>ファームウェアリビジョン: {project.firmwareRevision}</div>
@@ -103,15 +104,21 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         <LinkChildProjectListPage
           project={project}
           if={project.numChildProjects > 0}
-          q="link-derived"
+          q={css({
+            marginTop: "8px",
+            marginLeft: "3px",
+          })}
         />
         <LinkParentProjectPage
           projectId={project.parentProjectId}
           if={!!project.parentProjectId}
-          q="link-parent"
+          q={css({
+            marginTop: "8px",
+            marginLeft: "3px",
+          })}
         />
         {hasError && <div>カスタムデータの定義にエラーがあります</div>}
-      </div>
+      </Box>
       <ProjectReadmeArea readmeFileContent={project.readmeFileContent} />
       <ParametersConfigurationArea
         configurationSourceItems={configurationSourceItems}
@@ -119,21 +126,6 @@ export const ProjectDetailPageImpl = createFC<Props>(({ project }: Props) => {
         submitButtonLabel="UF2ダウンロード"
         pinNumbersMap={project.pinNumbersMap}
       />
-    </div>
+    </Box>
   );
 });
-
-const style = css`
-  padding: 16px;
-  background: var(--cl-content-background);
-  /* min-height: 100%; */
-  > .info-area {
-    padding: 0 8px;
-    > .link-parent,
-    > .link-derived {
-      margin-left: 3px;
-      margin-top: 8px;
-      display: inline-flex;
-    }
-  }
-`;
