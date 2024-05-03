@@ -4,7 +4,7 @@ import { getCollections } from "./db_core";
 
 export const migrationDefinition: IMzDbDataMigrationDefinition = {
   commonSetup: {
-    key: "001",
+    key: "cs001",
     async operation(db: Db) {
       const { userCollection, projectCollection } = getCollections(db);
       // userCollection.dropIndexes();
@@ -24,9 +24,20 @@ export const migrationDefinition: IMzDbDataMigrationDefinition = {
   },
   migrationsSteps: [
     {
-      key: "m240412_initial_data",
+      key: "001_initial_data",
       locked: true,
       async operation(_db) {},
+    },
+    {
+      key: "002_change_primaryTargetBoard_to_targetBoardLabel",
+      locked: true,
+      async operation(db) {
+        const { projectCollection } = getCollections(db);
+        projectCollection.updateMany(
+          { targetBoardLabel: undefined },
+          { $rename: { primaryTargetBoard: "targetBoardLabel" } }
+        );
+      },
     },
   ],
 };
