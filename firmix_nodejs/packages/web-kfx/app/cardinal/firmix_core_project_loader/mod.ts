@@ -39,7 +39,7 @@ export const firmixCore_projectLoader = {
         "projectGuid",
         "projectName",
         "targetMcu",
-        "primaryTargetBoard",
+        "targetBoardLabel",
         "realm",
         "tags",
         "repositoryUrl",
