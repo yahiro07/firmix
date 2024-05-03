@@ -88,7 +88,10 @@ export const LocalProjectPageImpl = createFC<{ loggedIn: boolean }>(
         />
         <BlankFillerPart sx={{ flexGrow: 1 }} if={!project} />
         <FirmwareDownloadButtonArea
-          label="UF2ダウンロード"
+          buttonLabel="UF2ダウンロード"
+          boardLabel={
+            project?.assetMetadata.metadataInput?.targetBoardLabel ?? ""
+          }
           handler={submitEditItems}
           if={project}
         />
