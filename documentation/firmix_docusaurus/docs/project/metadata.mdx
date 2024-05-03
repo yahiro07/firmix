@@ -15,7 +15,7 @@ Firmixのプロジェクトの各属性値はテキストベースのメタデ�
     "ボード上のLEDを点滅させます。"
   ],
   "targetMcu": "RP2040",
-  "primaryTargetBoard": "Seeed Xiao RP2040",
+  "targetBoardLabel": "Seeed Xiao RP2040",
   "repositoryUrl": "https://github.com/yahiro07/firmix_projects/tree/main/firmix/blink_xiao_rp2040",
   "tags": ["RP2040", "サンプル"],
   "firmwareSpec": { "path": ".pio/build/generic/firmware.uf2" }
@@ -58,11 +58,11 @@ import { GuidGenerator } from "@site/src/components/GuidGenerator";
 上のリスト以外の値を指定するとエラーとなり投稿できません。  
 主に表示上の識別のためにこの値を使用しています。ファームウェアの管理の実装上ではマイコンの品種毎に固有の処理などはなくどのMCUでも同様に扱っています。
 
-### `primaryTargetBoard`
+### `targetBoardLabel`
 
-プロジェクトがメインターゲットとしているボード名を書き込みます。任意の文字列で32文字までです。
-
-(※)このフィールドは名前の変更を検討しています。`targetBoard`に変更される可能性が高いです。
+プロジェクトがターゲットとしているボード名を書き込みます。任意の文字列で32文字までです。  
+プロジェクトの詳細画面で、ファームウェアダウンロードボタンのそばに表示されます。
+誤ったボードにファームウェアを書き込んでしまうのを防ぐための表示です。
 
 ### `repositoryUrl` (オプション)
 

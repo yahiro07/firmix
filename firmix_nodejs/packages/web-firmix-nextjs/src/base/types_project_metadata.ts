@@ -14,7 +14,7 @@ export type ProjectMetadataJsonFileContent = {
   variationName?: string;
   introductionLines: string[];
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   tags: string[];
   repositoryUrl: string;
   firmwareSpec: ProjectMetadataFirmwareSpec;
@@ -27,7 +27,7 @@ export type ProjectMetadataInput = {
   variationName: string;
   introduction: string;
   targetMcu: string;
-  primaryTargetBoard: string;
+  targetBoardLabel: string;
   tags: string[];
   repositoryUrl: string;
   pinNumbersMap: Record<string, number>;

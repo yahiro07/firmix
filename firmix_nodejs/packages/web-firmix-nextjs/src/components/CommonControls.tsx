@@ -3,9 +3,10 @@ import { reflectInputChecked } from "@mx/auxiliaries/utils_fe_react/form_helper"
 import Link from "next/link";
 
 import { Box, BoxProps, styled } from "@mui/system";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, ReactNode } from "react";
 import { prefab } from "../common_styling/prefab";
-import { HStack, Label, Li } from "../common_styling/utility_components";
+import { HStack, Label, StyledA } from "../common_styling/utility_components";
+import { IconIconify } from "./IconIconify";
 import { IconIconifyZ } from "./IconIconifyZ";
 
 export const Button = prefab<JSX.IntrinsicElements["button"]>(
@@ -87,7 +88,7 @@ export const FormTextInput = prefab(
 
 export const Nav = prefab(
   <Box
-    component="ul"
+    component="nav"
     sx={{
       display: "flex",
       flexDirection: "column",
@@ -101,18 +102,30 @@ const NavItemCore = createFC<{
   iconSpec: string;
   active?: boolean;
   onClick?(): void;
-}>(({ title, iconSpec, active, onClick }) => (
-  <HStack
-    gap="8px"
-    fontSize="20px"
-    fontWeight={(active && "500") || "normal"}
-    sx={{ cursor: "pointer", "&:hover": { opacity: 0.7 } }}
-    onClick={onClick}
-  >
-    <IconIconifyZ spec={iconSpec as any} sx={{ fontSize: "24px" }} />
-    <span>{title}</span>
-  </HStack>
-));
+  iconAdditional?: ReactNode;
+}>(({ title, iconSpec, active, onClick, iconAdditional }) => {
+  const iconSpecDev = iconSpec.startsWith("__")
+    ? iconSpec.replace(/^__/, "")
+    : undefined;
+  return (
+    <HStack
+      gap="8px"
+      fontSize="20px"
+      fontWeight={(active && "500") || "normal"}
+      sx={{ cursor: "pointer", "&:hover": { opacity: 0.7 } }}
+      onClick={onClick}
+    >
+      {!iconSpecDev && (
+        <IconIconifyZ spec={iconSpec as any} sx={{ fontSize: "24px" }} />
+      )}
+      {iconSpecDev && (
+        <IconIconify spec={iconSpecDev} sx={{ fontSize: "24px" }} />
+      )}
+      <span>{title}</span>
+      {iconAdditional}
+    </HStack>
+  );
+});
 
 export const NavItem = createFC<{
   path: string;
@@ -124,11 +137,9 @@ export const NavItem = createFC<{
   // const active = path === location.href;
   const active = false;
   return (
-    <Li>
-      <Link href={path}>
-        <NavItemCore title={title} iconSpec={iconSpec} active={active} />
-      </Link>
-    </Li>
+    <Link href={path}>
+      <NavItemCore title={title} iconSpec={iconSpec} active={active} />
+    </Link>
   );
 });
 
@@ -141,10 +152,27 @@ export const NavItem_Button = createFC<{
     console.log("onClick", path);
     location.href = path;
   };
+  return <NavItemCore title={title} iconSpec={iconSpec} onClick={onClick} />;
+});
+
+export const NavItem_External = createFC<{
+  url: string;
+  title: string;
+  iconSpec: string;
+}>(({ url, title, iconSpec }) => {
   return (
-    <Li>
-      <NavItemCore title={title} iconSpec={iconSpec} onClick={onClick} />
-    </Li>
+    <StyledA href={url} target="_blank">
+      <NavItemCore
+        title={title}
+        iconSpec={iconSpec}
+        iconAdditional={
+          <IconIconify
+            spec="bx:link-external"
+            sx={{ fontSize: "24px", marginTop: "3px" }}
+          />
+        }
+      />
+    </StyledA>
   );
 });
 

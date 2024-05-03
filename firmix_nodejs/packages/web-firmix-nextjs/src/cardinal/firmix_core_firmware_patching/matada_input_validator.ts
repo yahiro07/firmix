@@ -23,7 +23,7 @@ const schemaMetadataFileContent = z.object({
     "nRF52840",
     "ESP32S3",
   ]),
-  primaryTargetBoard: z.string().max(32),
+  targetBoardLabel: z.string().max(32),
   tags: z.array(z.string().max(32)),
   repositoryUrl: z.string().max(256),
   dataEntries: z
