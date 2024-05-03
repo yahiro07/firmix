@@ -338,7 +338,7 @@ const local = {
       childProjectIds: args.childProjectIds,
       introduction: metadataInput.introduction,
       targetMcu: metadataInput.targetMcu,
-      primaryTargetBoard: metadataInput.primaryTargetBoard,
+      targetBoardLabel: metadataInput.targetBoardLabel,
       realm: metadataInput.realm,
       tags: metadataInput.tags,
       repositoryUrl: metadataInput.repositoryUrl,
