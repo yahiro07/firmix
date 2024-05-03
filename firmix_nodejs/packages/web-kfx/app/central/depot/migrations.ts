@@ -29,16 +29,16 @@ export const migrationDefinition: IMzDbDataMigrationDefinition = {
       locked: true,
       async operation(_db) {},
     },
-    // {
-    //   key: "002_change_primaryTargetBoard_to_targetBoardLabel",
-    //   locked: true,
-    //   async operation(db) {
-    //     const { projectCollection } = getCollections(db);
-    //     projectCollection.updateMany(
-    //       { targetBoardLabel: undefined },
-    //       { $rename: { primaryTargetBoard: "targetBoardLabel" } }
-    //     );
-    //   },
-    // },
+    {
+      key: "002_change_targetBoardLabel_to_targetBoardLabel",
+      locked: true,
+      async operation(db) {
+        const { projectCollection } = getCollections(db);
+        projectCollection.updateMany(
+          { targetBoardLabel: undefined },
+          { $rename: { primaryTargetBoard: "targetBoardLabel" } }
+        );
+      },
+    },
   ],
 };
