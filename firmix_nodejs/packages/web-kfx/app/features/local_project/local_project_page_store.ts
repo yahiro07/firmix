@@ -16,10 +16,10 @@ import { firmixPresenter_localProjectEdit } from "@mx/web-kfx/app/cardinal/firmi
 import { rpcClient } from "@mx/web-kfx/app/common/rpc_client";
 
 const localProjectStorage =
-  createLocalStorageAdapter<LocalDevelopmentProject>("fr0_local_project");
+  createLocalStorageAdapter<LocalDevelopmentProject>("kfx_local_project");
 const projectDirectoryHandleStorage =
   createIndexedDbStorageAdapter<FileSystemDirectoryHandle>(
-    "fr0_local_project_directory_handle"
+    "kfx_local_project_directory_handle"
   );
 
 export type LocalProjectPageStore = {

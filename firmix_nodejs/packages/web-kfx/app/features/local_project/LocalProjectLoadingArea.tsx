@@ -1,7 +1,6 @@
-import { css } from "@linaria/core";
 import { useEffect } from "@mx/auxiliaries/fe-deps-react";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
-import { flexAligned } from "../../common_styling/utility_styles";
+import { HStack, Spacer } from "../../../styled-system/jsx";
 import { ButtonSmall } from "../../components/CommonControls";
 import { IconIconifyZ } from "../../components/IconIconifyZ";
 
@@ -37,15 +36,15 @@ export const LocalProjectLoadingArea = createFC<Props>(
     };
 
     return (
-      <div q={style}>
+      <HStack gap="2" padding="2">
         <ButtonSmall onClick={handleSelectFolder} if={!loaded}>
           フォルダ選択
         </ButtonSmall>
-        <div if={loaded} q="folder">
+        <HStack if={loaded} gap="1" fontSize="18px">
           <IconIconifyZ spec="mdi:folder" />
           <span>{loadedFolderName}</span>
-        </div>
-        <div q="spacer" />
+        </HStack>
+        <Spacer />
         <ButtonSmall
           onClick={submitProject}
           if={loaded && loggedIn}
@@ -59,22 +58,10 @@ export const LocalProjectLoadingArea = createFC<Props>(
         <ButtonSmall onClick={closeFolder} if={loaded}>
           閉じる
         </ButtonSmall>
-      </div>
+      </HStack>
     );
   }
 );
-
-const style = css`
-  padding: 8px;
-  ${flexAligned(8)};
-  > .folder {
-    font-size: 18px;
-    ${flexAligned(4)};
-  }
-  > .spacer {
-    margin-left: auto;
-  }
-`;
 
 const local = {
   setupFolderDrop(

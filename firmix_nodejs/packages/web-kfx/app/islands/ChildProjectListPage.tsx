@@ -1,4 +1,3 @@
-import { css } from "@linaria/core";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import {
   ProjectDetailDto,
@@ -6,7 +5,8 @@ import {
 } from "@mx/web-kfx/app/base/types_dto";
 import { ProjectListItemCard } from "@mx/web-kfx/app/features/project_list/ProjectListItemCard";
 import { Link } from "@remix-run/react";
-import { flexVertical } from "../common_styling/utility_styles";
+import { Box, HStack, Stack } from "../../styled-system/jsx";
+import { styleObj_TextLinkInheritColor } from "../common_styling/common_styles";
 
 type Props = {
   project: ProjectDetailDto;
@@ -18,14 +18,14 @@ export const ChildProjectListPage = createFC<Props>(
   ({ project, childProjects, showPublicity }) => {
     const parentPagePath = `/project/${project.projectId}`;
     return (
-      <div q={style}>
-        <header>
-          <Link to={parentPagePath} q="link">
-            {project.projectName}
+      <Stack gap={3} padding="16px 0">
+        <HStack gap={0}>
+          <Link to={parentPagePath}>
+            <Box {...styleObj_TextLinkInheritColor}>{project.projectName}</Box>
           </Link>
           &nbsp;の派生プロジェクトです。
-        </header>
-        <div q="list">
+        </HStack>
+        <Stack gap={4}>
           {childProjects.map((project) => (
             <ProjectListItemCard
               key={project.projectId}
@@ -33,25 +33,8 @@ export const ChildProjectListPage = createFC<Props>(
               showPublicity={showPublicity}
             />
           ))}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
     );
   }
 );
-
-const style = css`
-  padding: 16px 0;
-  ${flexVertical(16)};
-
-  > header {
-    > a {
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  > .list {
-    ${flexVertical(16)};
-  }
-`;

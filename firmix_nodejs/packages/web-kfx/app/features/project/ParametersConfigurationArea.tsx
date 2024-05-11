@@ -1,4 +1,3 @@
-import { css } from "@linaria/core";
 import { raiseError } from "@mx/auxiliaries/utils/error_util";
 import { createFC } from "@mx/auxiliaries/utils_fe_react/create_fc";
 import {
@@ -8,10 +7,8 @@ import {
 } from "@mx/web-kfx/app/base/types_dto";
 import { ConfigurationEditItem } from "@mx/web-kfx/app/base/types_project_edit";
 import { firmixCore_firmwareConfiguration } from "@mx/web-kfx/app/cardinal/firmix_core_firmware_configuration/mod";
-import {
-  flexHorizontal,
-  flexVertical,
-} from "../../common_styling/utility_styles";
+import { Box, HStack, Stack } from "../../../styled-system/jsx";
+import { H3, Hr } from "../../common_styling/utility_components";
 import {
   Button,
   FormLabel,
@@ -25,6 +22,7 @@ type Props = {
   submit2?(editItems: ConfigurationEditItem[]): void;
   submit2Label?: string;
   pinNumbersMap: Record<string, number>;
+  boardLabel: string;
 };
 
 export const ParametersConfigurationArea = createFC<Props>(
@@ -35,6 +33,7 @@ export const ParametersConfigurationArea = createFC<Props>(
     submit2,
     submit2Label,
     pinNumbersMap,
+    boardLabel,
   }) => {
     const errorConfigurations = configurationSourceItemsRaw.filter(
       (it) => it.dataKind === "error"
@@ -78,9 +77,11 @@ export const ParametersConfigurationArea = createFC<Props>(
     };
 
     return (
-      <div q={style}>
-        <hr if={configurationSourceItems.length > 0} />
-        <h3 if={configurationSourceItems.length > 0}>パラメータ</h3>
+      <Stack padding="10px" gap="20px">
+        <Hr if={configurationSourceItems.length > 0} marginTop="20px" />
+        <H3 if={configurationSourceItems.length > 0} fontSize="1.3em">
+          パラメータ
+        </H3>
         {hasError && (
           <div>
             <div>カスタムデータの定義にエラーがあります</div>
@@ -94,51 +95,36 @@ export const ParametersConfigurationArea = createFC<Props>(
           </div>
         )}
         {!hasError && (
-          <div q="items">
+          <Stack gap="12px">
             {configurationSourceItems.map((item) => (
-              <div key={item.key} q="item">
+              <Stack key={item.key}>
                 <FormLabel>
                   {item.label}
                   {local.configurationSourceItem_getCountsText(item)}
                 </FormLabel>
                 <FormTextInput type="text" id={`${inputIdPrefix}${item.key}`} />
-              </div>
+              </Stack>
             ))}
-          </div>
+          </Stack>
         )}
-        <div q="buttons-row">
-          <Button onClick={() => handleDownload(2)} if={!hasError && submit2}>
-            {submit2Label}
-          </Button>
-          <Button onClick={() => handleDownload(1)} if={!hasError}>
-            {submitButtonLabel}
-          </Button>
-        </div>
-      </div>
+        <Stack gap="12px">
+          <HStack if={boardLabel}>
+            <span>ボード:&nbsp;</span>
+            <Box fontWeight="bold">{boardLabel}</Box>
+          </HStack>
+          <HStack gap="8px">
+            <Button onClick={() => handleDownload(2)} if={!hasError && submit2}>
+              {submit2Label}
+            </Button>
+            <Button onClick={() => handleDownload(1)} if={!hasError}>
+              {submitButtonLabel}
+            </Button>
+          </HStack>
+        </Stack>
+      </Stack>
     );
   }
 );
-
-const style = css`
-  padding: 10px;
-  ${flexVertical(20)};
-  > hr {
-    margin-top: 20px;
-  }
-  > h3 {
-    font-size: 1.3em;
-  }
-  > .items {
-    ${flexVertical(12)};
-    > .item {
-      ${flexVertical()};
-    }
-  }
-  > .buttons-row {
-    margin-top: 8px;
-    ${flexHorizontal(8)};
-  }
-`;
 
 const local = {
   configurationSourceItem_getCountsText(item: ConfigurationSourceItem): string {

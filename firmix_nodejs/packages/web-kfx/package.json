@@ -4,6 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "prepare": "panda codegen",
     "build": "remix vite:build",
     "dev": "remix vite:dev",
     "dev:inspect": "NODE_OPTIONS=--inspect remix vite:dev",
@@ -13,7 +14,6 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@linaria/react": "^6.1.0",
     "@inquirer/prompts": "^4.3.2",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
-    "@wyw-in-js/vite": "^0.5.0",
+    "@pandacss/dev": "^0.38.0",
     "@remix-run/dev": "^2.8.1",
     "@types/react": "^18.2.77",
     "@types/react-dom": "^18.2.25",

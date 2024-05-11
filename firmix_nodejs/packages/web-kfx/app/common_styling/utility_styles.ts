@@ -1,27 +1,19 @@
-export const flexVertical = (gap?: number) =>
-  `
-    display: flex;
-    flex-direction: column;
-    ${gap ? `gap: ${gap}px;` : ""}
-  `;
+export const flexVertical = {
+  display: "flex",
+  flexDirection: "column",
+};
 
-export const flexHorizontal = (gap?: number) =>
-  `
-    display: flex;
-    ${gap ? `gap: ${gap}px;` : ""}
-  `;
+export const flexHorizontal = {
+  display: "flex",
+};
 
-export const flexAligned = (gap?: number) =>
-  `
-    display: flex;
-    align-items: center;
-    ${gap ? `gap: ${gap}px;` : ""}
-  `;
+export const flexAligned = {
+  display: "flex",
+  alignItems: "center",
+};
 
-export const flexCentered = (gap?: number) =>
-  `
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    ${gap ? `gap: ${gap}px;` : ""}
-  `;
+export const flexCentered = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
